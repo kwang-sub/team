@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
     <style>
-        * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+        * {  font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
         body{padding-top: 50px;}
         #icons{position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
         padding-top: 10px; padding-left: 6%; padding-right: 6%; padding-bottom:10px; 
