@@ -115,12 +115,12 @@
 </head>
     <body>
         <div id="icons">
-            <a href="login" class="icon" id="user-icon"><img src="https://drive.google.com/uc?id=19vXoo3lrbxuLLn5YmPokmpcSovHDpXqg" height="20px"></a>
-            <a href="#" class="icon" id="heart-icon"><img src="https://drive.google.com/uc?id=1g_PTvcW3FHgsx-0co3kzg71KKqisB9B6" height="20px"></a>
+            <a href="login" class="icon" id="user-icon"><img src="resources/img/user.png" height="20px"></a>
+            <a href="#" class="icon" id="heart-icon"><img src="resources/img/like.png" height="20px"></a>
             <div class="icon" id="search-icon">
-                <img id="search-btn" src="https://drive.google.com/uc?id=1ekFsz_P2MZWoMUt0QyvZjPjAm2fx308R" height="20px">
+                <img id="search-btn" src="resources/img/search.png" height="20px">
                 <form id="search-form">
-                    <input  type="search" id="search-bar" name="search"><button id="search-bar-btn" style="background-color: white; border: white;" ><img src="https://drive.google.com/uc?id=1ekFsz_P2MZWoMUt0QyvZjPjAm2fx308R" height="20px" ></button>
+                    <input  type="search" id="search-bar" name="search" placeholder="search"><button id="search-bar-btn" style="background-color: white; border: white;" ><img src="resources/img/search.png" height="20px" ></button>
                 </form>
             </div>
             <div class="icon" id="area-icon" style="padding:0px;" >
@@ -133,7 +133,7 @@
         
         <div class="header navbar navbar-expand-lg navbar-light bg-white ">
             <div class="container">
-                <a class="navbar-brand" href="${contextPath}"><img src="https://drive.google.com/uc?id=19liz0I53xhs6UEJQ7PG_xpQEEbBq1tGw" style="width: 150px;"></a>
+                <a class="navbar-brand" href="${contextPath}"><img src="resources/img/logo.png" style="width: 150px;"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
