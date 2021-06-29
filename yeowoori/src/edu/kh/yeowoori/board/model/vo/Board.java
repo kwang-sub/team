@@ -6,14 +6,40 @@ import java.util.List;
 public class Board {
 	private int boardNo;
 	private String boardtitle;
-	private String memberName;
 	private String categoryName;
 	private String areaCategory;
+	private String memberNickname;
 	private int readCount;
 	private Timestamp createDate;
-	
+	private String boardContent;
+	private String memberContent;
+	private String memberProfile;
+	public String getMemberProfile() {
+		return memberProfile;
+	}
+
+	public void setMemberProfile(String memberProfile) {
+		this.memberProfile = memberProfile;
+	}
+
 	private List<String> filePath;
 	private List<String> fileName;
+	public String getBoardContent() {
+		return boardContent;
+	}
+
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
+	}
+
+	public String getMemberContent() {
+		return memberContent;
+	}
+
+	public void setMemberContent(String memberContent) {
+		this.memberContent = memberContent;
+	}
+
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
@@ -35,14 +61,6 @@ public class Board {
 		this.boardtitle = boardtitle;
 	}
 
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -57,6 +75,14 @@ public class Board {
 
 	public void setAreaCategory(String areaCategory) {
 		this.areaCategory = areaCategory;
+	}
+
+	public String getMemberNickname() {
+		return memberNickname;
+	}
+
+	public void setMemberNickname(String memberNickname) {
+		this.memberNickname = memberNickname;
 	}
 
 	public int getReadCount() {
@@ -93,10 +119,13 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", boardtitle=" + boardtitle + ", memberName=" + memberName
-				+ ", categoryName=" + categoryName + ", areaCategory=" + areaCategory + ", readCount=" + readCount
-				+ ", createDate=" + createDate + ", filePath=" + filePath + ", fileName=" + fileName + "]";
+		return "Board [boardNo=" + boardNo + ", boardtitle=" + boardtitle + ", categoryName=" + categoryName
+				+ ", areaCategory=" + areaCategory + ", memberNickname=" + memberNickname + ", readCount=" + readCount
+				+ ", createDate=" + createDate + ", boardContent=" + boardContent + ", memberContent=" + memberContent
+				+ ", memberProfile=" + memberProfile + ", filePath=" + filePath + ", fileName=" + fileName + "]";
 	}
+
+
 	
 	
 }

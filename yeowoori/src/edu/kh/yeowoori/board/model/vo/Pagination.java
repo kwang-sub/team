@@ -4,7 +4,7 @@ public class Pagination {
 	private int currentPage;  //목록상 현재 페이지
 	private int listCount; //게시글 전체수
 	
-	private int limit = 10; //한페이지에 보여질 게시글수
+	private int limit = 6; //한페이지에 보여질 게시글수
 	private int pageSize = 10; //보여질 페이지 번호 개수
 	
 	private int maxPage;	//게시글 목록의 마지막 페이지 번호
@@ -173,7 +173,9 @@ public class Pagination {
 		}
 		
 		nextPage = (currentPage+ pageSize-1) / pageSize * pageSize;
-		
+		if(nextPage>maxPage) {
+			nextPage=maxPage;
+		}
 		
 	}
 	

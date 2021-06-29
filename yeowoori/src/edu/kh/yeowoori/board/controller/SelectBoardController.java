@@ -47,6 +47,7 @@ public class SelectBoardController extends HttpServlet {
 				Pagination pagination = service.getPagination(cp,boardType);
 //				System.out.println(pagination);
 				List<Board> boardList = service.selectBoardList(pagination);
+				pagination.setLimit(6);
 				request.setAttribute("pagination", pagination);
 				request.setAttribute("boardList", boardList);
 				path = "/WEB-INF/views/board/boardList.jsp";
