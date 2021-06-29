@@ -140,7 +140,7 @@
                 <ul class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active menu"><a class="nav-link" href="#">공지</a></li>
-                        <li class="nav-item active menu"><a class="nav-link" href="#">여행</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list?type=1">여행</a></li>
                         <li class="nav-item active menu"><a class="nav-link" href="#">질문</a></li>
                         <li class="nav-item active menu"><a class="nav-link" href="#">같이 떠나요</a></li>
                     </ul>
