@@ -61,7 +61,7 @@ a {
 </style>
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<form class="category-btn" action="#" method="GET">
 		<div style="padding: 10px;"></div>
 		<h6 style="display: inline-block; font-weight: bold;">설정</h6>

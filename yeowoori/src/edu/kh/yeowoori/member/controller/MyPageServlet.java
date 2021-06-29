@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/member/mypage")
+@WebServlet("/member/myPage")
 public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String path = "/WEB-INF/views/member/mypage.jsp";
+		String path = "/WEB-INF/views/member/myPage.jsp";
 		RequestDispatcher view = request.getRequestDispatcher(path);
 		view.forward(request, response);
 		
