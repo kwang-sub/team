@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" scope="application"
+	value="${pageContext.servletContext.contextPath }"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,6 +19,8 @@
     <style>
         * {  font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
         body{padding-top: 50px;}
+        a{color:black;}
+        a:hover{color:#A66129;}
         #icons{position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
         padding-top: 10px; padding-left: 6%; padding-right: 6%; padding-bottom:10px; 
         background-color: white;
@@ -115,7 +119,26 @@
 </head>
     <body>
         <div id="icons">
-            <a href="login" class="icon" id="user-icon"><img src="resources/img/user.png" height="20px"></a>
+            <c:choose>
+            	<c:when test="${empty loginMember}">
+            		<a href="login" class="icon" id="user-icon"><img src="resources/img/user.png" height="20px"></a>
+            	</c:when>
+            	<c:otherwise>
+            		<div class="dropdownleft">
+					  <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    <span class="icon" id="user-icon"><img src="resources/img/user.png" height="20px"></span>
+					  </button>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					    <a class="dropdown-item" href="member/mypage">마이페이지</a>
+					    <a class="dropdown-item" href="logout">로그아웃</a>
+					  </div>
+					</div>
+            	</c:otherwise>
+            </c:choose>
+            
+            
+            
+            
             <a href="#" class="icon" id="heart-icon"><img src="resources/img/like.png" height="20px"></a>
             <div class="icon" id="search-icon">
                 <img id="search-btn" src="resources/img/search.png" height="20px">
@@ -123,12 +146,13 @@
                     <input  type="search" id="search-bar" name="search" placeholder="search"><button id="search-bar-btn" style="background-color: white; border: white;" ><img src="resources/img/search.png" height="20px" ></button>
                 </form>
             </div>
-            <div class="icon" id="area-icon" style="padding:0px;" >
-                <div style="background-color: black; width: 40px; text-align: center; border-radius: 5px; color: white; font-weight: 500; display: inline-block; font-size: 13px;">
-                    <span style="position: relative; top: 1px;">동남</span>
-                </div>
-            </div>
-            
+            <a href="#">
+	            <div class="icon" id="area-icon" style="padding:0px;" >
+	                <div style="background-color: black; width: 40px; text-align: center; border-radius: 5px; color: white; font-weight: 500; display: inline-block; font-size: 13px;">
+	                    <span style="position: relative; top: 1px;">동남</span>
+	                </div>
+	            </div>
+            </a>
         </div>
         
         <div class="header navbar navbar-expand-lg navbar-light bg-white ">
