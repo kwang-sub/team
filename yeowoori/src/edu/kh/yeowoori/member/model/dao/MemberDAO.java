@@ -1,6 +1,7 @@
 package edu.kh.yeowoori.member.model.dao;
 
 
+import static edu.kh.yeowoori.common.JDBCTemplate.close;
 import static edu.kh.yeowoori.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
@@ -65,5 +66,34 @@ public class MemberDAO {
 		}
 		
 		return loginMember;
+	}
+	
+	
+	/** 비밀번호 변경 결과 DAO
+	 * @param conn
+	 * @param currentPwd
+	 * @param newPwd1
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int changePwd(Connection conn, String currentPwd, String newPwd1, int memberNo) throws Exception {
+int result = 0;
+		
+		String sql = prop.getProperty("changePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newPwd1 );
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, currentPwd);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
