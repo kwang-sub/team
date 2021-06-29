@@ -124,8 +124,8 @@
             		<a href="login" class="icon" id="user-icon"><img src="resources/img/user.png" height="20px"></a>
             	</c:when>
             	<c:otherwise>
-            		<div class="dropdownleft">
-					  <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            		<div class="dropdownleft" style="float:right; margin:0px; padding:0px;">
+					  <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin:0px; padding:0px;">
 					    <span class="icon" id="user-icon"><img src="resources/img/user.png" height="20px"></span>
 					  </button>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
