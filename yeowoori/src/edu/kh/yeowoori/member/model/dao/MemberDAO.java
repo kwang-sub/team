@@ -49,15 +49,16 @@ public class MemberDAO {
 				
 				int memberNo = rs.getInt("MEMBER_NO");        
 			    String memberId = rs.getString("MEMBER_ID");      
-			    String memberName = rs.getString("MEMBER_NM");    
 			    String memberEmail = rs.getString("MEMBER_EMAIL"); 
 			    String memberContent = rs.getNString("MEMBER_CONTENT");
 			    String memberNickname = rs.getString("MEMBER_NICKNAME");
 			    Date enrollDate = rs.getDate("ENROLL_DATE");  
 			    String memberStatus = rs.getString("MEMBER_STATUS");   
 			    String memberGrade = rs.getString("MEMBER_GRADE"); 
+			    String memberProfile = rs.getString("MEMBER_PROFILE"); 
 			    
-			    loginMember = new Member(memberNo, memberId, memberName, memberEmail, memberContent, memberNickname, enrollDate, memberStatus, memberGrade);
+			    
+			    loginMember = new Member(memberNo, memberId,  memberEmail, memberContent, memberNickname, enrollDate, memberStatus, memberGrade, memberProfile);
 			}
 			
 		}finally {
@@ -81,6 +82,10 @@ public class MemberDAO {
 int result = 0;
 		
 		String sql = prop.getProperty("changePwd");
+		System.out.println("----------------");
+		System.out.println(currentPwd);
+		System.out.println(newPwd1);
+		System.out.println(memberNo);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

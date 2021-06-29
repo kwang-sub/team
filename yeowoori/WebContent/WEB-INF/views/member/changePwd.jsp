@@ -61,7 +61,7 @@ a {
 </style>
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<form class="category-btn" action="#" method="GET">
 		<div style="padding: 10px;"></div>
 		<h6 style="display: inline-block; font-weight: bold;">설정</h6>
@@ -92,7 +92,7 @@ a {
 						</div>
 						<div class="row mb-3 form-row">
 							<input type="password" class="form-control" id="currentpwd"
-								name="pwd1" maxlength="20" required>
+								name="currentPwd" maxlength="20" required>
 						</div>
 						<div class="col-md-6 offset-md-3">
 							<span>&nbsp;</span>
@@ -103,8 +103,8 @@ a {
 							<p>영어 소문자, 대문자, 특수문자 포함(8~12자)</p>
 						</div>
 						<div class="row mb-3 form-row">
-							<input type="password" class="form-control" id="newpwd1"
-								name="pwd1" maxlength="20" required>
+							<input type="password" class="form-control" id="newPwd1"
+								name="newPwd1" maxlength="20" required>
 						</div>
 
 						<div class="col-md-6 offset-md-3">
@@ -115,8 +115,8 @@ a {
 							<label for="pwd1">새 비밀번호 확인</label>
 						</div>
 						<div class=" form-row">
-							<input type="password" class="form-control" id="newpwd2"
-								name="pwd1" maxlength="20" required>
+							<input type="password" class="form-control" id="newPwd2"
+								name="newPwd2" maxlength="20" required>
 						</div>
 
 
@@ -130,6 +130,29 @@ a {
 			</div>
 		</div>
 	</div>
+	<script>
+		
+		// 비밀번호 유효성 검사
+		function pwdValidate(){
+			const regExp = /^[a-zA-Z0-9~!@#$%^&*()\-\+]{8,12}$/;
+			
+			const newPwd1 = $("#newPwd1").val().trim();
+			const newPwd2 = $("#newPwd2").val().trim();
+
+			// 새비밀번호가 유효하지 않거나
+			// 새비밀번호, 새비밀번호 확인이 같지 않는 경우
+			if(!regExp.test(newPwd1) || (newPwd1 != newPwd2)){
+				
+				swal({
+					"icon" : "error",
+					"title" : "비밀번호가 유효하지 않습니다."
+				});
+				
+				return false;
+			}
+		}
+	
+	</script>
 
 </body>
 </html>

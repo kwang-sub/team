@@ -28,7 +28,6 @@ public class ChangePwdServlet extends HttpServlet {
 	
 	// DB에 저장된 비밀번호를 변경하고 결과에 따른 화면 제어
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 		
 		// 인코딩 필터가 있으니까 post 문자 인코딩 변경은 신경쓰지 않아도 된다.
 		
