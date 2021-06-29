@@ -30,21 +30,38 @@ public class LoginServlet extends HttpServlet {
 		try {
 			Member loginMember = new MemberService().login(inputId, inputPw);
 			
+			String icon = null;
+			String title = null;
+			String text = null;
+			
 			if(loginMember != null) {
+				
+				icon = "success";
+				title = "로그인 성공";
+				text = loginMember.getMemberNickname()+"님 환영합니다.";
 				
 				session.setAttribute("loginMember", loginMember);
 				session.setMaxInactiveInterval(1800);
 				System.out.println(loginMember);
 				path = request.getContextPath();
 				
+				
+				
 			}else {
+				icon = "error";
+				title = "로그인 실패";
+				text = "아이디 또는 비밀번호가 일치하지 않습니다.";
 				path = "login";
 			}
+			session.setAttribute("icon", icon);
+			session.setAttribute("title", title);
+			session.setAttribute("text", text);
+			
 			response.sendRedirect(path);
 			
 			
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
