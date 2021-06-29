@@ -14,6 +14,8 @@ public class Board {
 	private String boardContent;
 	private String memberContent;
 	private String memberProfile;
+	
+	
 	public String getMemberProfile() {
 		return memberProfile;
 	}

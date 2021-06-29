@@ -123,7 +123,7 @@
 <body>
 
 
-
+	${boardList }
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include> 
     <div class="container">
         <form class="bg-white category-select" action="#" method="GET">
@@ -173,7 +173,9 @@
         	<c:otherwise>
         		<c:forEach items="${boardList }" var="board">
         		
+	                            
         		
+	                            
         		
         		
         			 <div class="col-sm-6 col-md-4 card-block">
@@ -182,11 +184,20 @@
 	                        <table class="userProple">
 	                            <th style="padding-right: 5px;">
 	                            
-	                            <!-- 유저프로필  -->
-	                            <c:if test="${empty board.memberProfile }">
+	                            
+	                            
+	                            <%-- 유저프로필 이상확인 필요!!!!!!!!!!!!!!!!! --%>
+	                            <c:choose>
+	                            	<c:when test="${!empty board.memberProfile }">
 	                            	
-	                                <img src="${contextPath}/resources/img/noimage.png" class=" rounded-circle" alt="">
-	                            </c:if>
+	                                <img src="${board.memberProfile}" class=" rounded-circle" alt="">
+	                            	</c:when>
+	                            	
+	                            	<c:otherwise>
+	                            		<img src="${contextPath}/resources/img/user.png" class=" rounded-circle" alt="">
+	                            	</c:otherwise>
+	                            </c:choose>
+	                            
 	                            </th>
 	                            <th>
 	                                    <div>${board.memberNickname }</div>
@@ -202,7 +213,10 @@
 			                    </a>
 	                    	</c:when>
 	                    	<c:otherwise>
+	                    		<a href="#">
+	                    		
 			                    <img src="${contextPath}/${board.filePath[0]}${board.fileName[0]}" class="card-img-top" alt="...">
+	                    		</a>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                    
