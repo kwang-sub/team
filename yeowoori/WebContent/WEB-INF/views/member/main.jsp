@@ -14,10 +14,9 @@
 		body{
 			padding-top: 60px;
 		}
-        
+        a{color:black;}
         .jumbotron{
             margin-top:50px ;
-           
             background-image: url(resources/img/지도-기본.png);
             background-size: 100% 100%;
             background-repeat: no-repeat;
@@ -130,7 +129,7 @@
     <div class="col-1">
     </div>
     <div class="col-10 jumbotron jumbotron-fluid con" id="jumbotron">
-        <a href="#">
+        <a href="#" style="color:black;">
             <div class="area northwest" id="northwest">
                 <br>
                 <div class="content">
@@ -144,7 +143,7 @@
             </div>
 
         </a>
-        <a href="#">
+        <a href="#" style="color:black;">
             <div class="area northeast" id="northeast">
                 <br>
                 <div class="content">
@@ -157,7 +156,7 @@
             </div>
 
         </a>
-        <a href="#">
+        <a href="#" style="color:black;">
             <div class="area southwest" id="southwest">
                 <br>
                 <div class="content">
@@ -170,7 +169,7 @@
             </div>
 
         </a>
-        <a href="#">
+        <a href="#" style="color:black;">
             <div class="area southeast" id="southeast">
                 <br>
                 <div class="content">
@@ -240,6 +239,6 @@
 
 
 
-
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>
