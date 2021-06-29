@@ -121,12 +121,12 @@
         <div id="icons">
             <c:choose>
             	<c:when test="${empty loginMember}">
-            		<a href="login" class="icon" id="user-icon"><img src="resources/img/user.png" height="20px"></a>
+            		<a href="login" class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></a>
             	</c:when>
             	<c:otherwise>
             		<div class="dropdownleft" style="float:right; margin:0px; padding:0px;">
 					  <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin:0px; padding:0px;">
-					    <span class="icon" id="user-icon"><img src="resources/img/user.png" height="20px"></span>
+					    <span class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></span>
 					  </button>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					    <a class="dropdown-item" href="member/mypage">마이페이지</a>
@@ -139,11 +139,11 @@
             
             
             
-            <a href="#" class="icon" id="heart-icon"><img src="resources/img/like.png" height="20px"></a>
+            <a href="#" class="icon" id="heart-icon"><img src="${contextPath}/resources/img/like.png" height="20px"></a>
             <div class="icon" id="search-icon">
-                <img id="search-btn" src="resources/img/search.png" height="20px">
+                <img id="search-btn" src="${contextPath}/resources/img/search.png" height="20px">
                 <form id="search-form">
-                    <input  type="search" id="search-bar" name="search" placeholder="search"><button id="search-bar-btn" style="background-color: white; border: white;" ><img src="resources/img/search.png" height="20px" ></button>
+                    <input  type="search" id="search-bar" name="search" placeholder="search"><button id="search-bar-btn" style="background-color: white; border: white;" ><img src="${contextPath}/resources/img/search.png" height="20px" ></button>
                 </form>
             </div>
             <a href="#">
@@ -157,7 +157,7 @@
         
         <div class="header navbar navbar-expand-lg navbar-light bg-white ">
             <div class="container">
-                <a class="navbar-brand" href="${contextPath}"><img src="resources/img/logo.png" style="width: 150px;"></a>
+                <a class="navbar-brand" href="${contextPath}"><img src="${contextPath}/resources/img/logo.png" style="width: 150px;"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
