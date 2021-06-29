@@ -30,6 +30,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper{
 		String value = null; // 
 		
 		switch(key) {
+		case "inputPw" :
 		case "memberPw" : 
 		case "pwd1" 	:
 		case "currentPwd" :

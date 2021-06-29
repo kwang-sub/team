@@ -6,30 +6,30 @@ public class Member {
 	private int memberNo;         
     private String memberId;     
     private String memberPw;     
-    private String memberName;     
     private String memberEmail;
     private String memberContent;
     private String memberNickname;
     private Date enrollDate;   
     private String memberStatus;   
     private String memberGrade;
+    private String memberProfile;
 	    
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(int memberNo, String memberId, String memberName, String memberEmail, String memberContent,
-			String memberNickname, Date enrollDate, String memberStatus, String memberGrade) {
+	public Member(int memberNo, String memberId, String memberEmail, String memberContent,
+			String memberNickname, Date enrollDate, String memberStatus, String memberGrade, String memberProfile) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
-		this.memberName = memberName;
 		this.memberEmail = memberEmail;
 		this.memberContent = memberContent;
 		this.memberNickname = memberNickname;
 		this.enrollDate = enrollDate;
 		this.memberStatus = memberStatus;
 		this.memberGrade = memberGrade;
+		this.memberProfile = memberProfile;
 	}
 
 	public int getMemberNo() {
@@ -56,13 +56,6 @@ public class Member {
 		this.memberPw = memberPw;
 	}
 
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
 
 	public String getMemberEmail() {
 		return memberEmail;
@@ -111,13 +104,21 @@ public class Member {
 	public void setMemberGrade(String memberGrade) {
 		this.memberGrade = memberGrade;
 	}
+	
+	public String getMemberProfile() {
+		return memberProfile;
+	}
+
+	public void setMemberProfile(String memberProfile) {
+		this.memberProfile = memberProfile;
+	}
 
 	@Override
 	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberName="
-				+ memberName + ", memberEmail=" + memberEmail + ", memberContent=" + memberContent + ", memberNickname="
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw 
+				+ ", memberEmail=" + memberEmail + ", memberContent=" + memberContent + ", memberNickname="
 				+ memberNickname + ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberGrade="
-				+ memberGrade + "]";
+				+ memberGrade + ", memberProfile=" + memberProfile +"]";
 	}
 
 	

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import edu.kh.yeowoori.wrapper.EncryptWrapper;
 
 
-@WebFilter(filterName = "encryptFilter", urlPatterns = {"/member/login", "/member/signUp", "/member/changePwd"})
+@WebFilter(filterName = "encryptFilter", urlPatterns = {"/login", "/member/signUp", "/member/changePwd"})
 public class EncryptFilter implements Filter {
 
   
