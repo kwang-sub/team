@@ -50,7 +50,7 @@ public class MemberDAO {
 				int memberNo = rs.getInt("MEMBER_NO");        
 			    String memberId = rs.getString("MEMBER_ID");      
 			    String memberEmail = rs.getString("MEMBER_EMAIL"); 
-			    String memberContent = rs.getNString("MEMBER_CONTENT");
+			    String memberContent = rs.getString("MEMBER_CONTENT");
 			    String memberNickname = rs.getString("MEMBER_NICKNAME");
 			    Date enrollDate = rs.getDate("ENROLL_DATE");  
 			    String memberStatus = rs.getString("MEMBER_STATUS");   

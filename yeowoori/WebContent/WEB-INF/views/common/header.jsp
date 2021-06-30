@@ -19,8 +19,12 @@
     <style>
         * {  font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
         body{padding-top: 50px;}
-        a{color:black;}
-        a:hover{color:#A66129;}
+        a{text-decoration: none; color:black;}
+        a:hover{text-decoration: none; color:#A66129;}
+        a:visited{
+            text-decoration: none;
+            color: black;
+        }
         #icons{position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
         padding-top: 10px; padding-left: 6%; padding-right: 6%; padding-bottom:10px; 
         background-color: white;
