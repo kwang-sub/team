@@ -115,12 +115,13 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw 
-				+ ", memberEmail=" + memberEmail + ", memberContent=" + memberContent + ", memberNickname="
-				+ memberNickname + ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberGrade="
-				+ memberGrade + ", memberProfile=" + memberProfile +"]";
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberEmail="
+				+ memberEmail + ", memberContent=" + memberContent + ", memberNickname=" + memberNickname
+				+ ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberGrade=" + memberGrade
+				+ ", memberProfile=" + memberProfile + "]";
 	}
 
+	
 	
 	
 	
