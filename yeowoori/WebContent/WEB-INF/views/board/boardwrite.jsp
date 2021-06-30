@@ -2,21 +2,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title></title>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-      
-          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
-
-        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-          <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-          <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+    <title>html문서 제목</title>
     <style>
         .content>form>div {
             height: 50px;
@@ -150,22 +140,49 @@
         .photobox {
             margin-left: 70px;
         }
+
+        .boardImg{
+  	cursor : pointer;
+		width: 200px;
+		height: 200px;
+		border : 1px solid #ced4da;
+		position : relative;
+	}
+	
+	.thubnail{
+		width: 300px;
+		height: 300px;
+	}
+	
+	.boardImg > img{
+		max-width : 100%;
+		max-height : 100%;
+		position: absolute;
+		top: 0;
+		bottom : 0;
+		left : 0;
+		right : 0;
+		margin : auto;
+	}
+	
+	
+	#fileArea{
+		display : none;
+	}
     </style>
-	
-	
 </head>
+
 <body>
 
-	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
-	   <div style="padding : 20px;"></div>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    <div style="padding : 20px;"></div>
     <div class="container">
         <div class="row">
             <div class="col-xs-1">
 
             </div>
             <div class="col-12 col-lg-12">
-                <form action="#">
+                <form action="#" onsubmit="return boardcheck();">
 
 
                     <div>
@@ -230,6 +247,39 @@
                         </span>
                         
                     </div>
+
+                    
+                        
+        
+                      
+        
+                        <div class="form-inline mb-2">
+                            <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
+                            <div class="mr-2 boardImg" id="contentImgArea">
+                                <img id="contentImg1">
+                            </div>
+        
+                            <div class="mr-2 boardImg" id="contentImgArea1">
+                                <img id="contentImg2">
+                            </div>
+        
+                            <div class="mr-2 boardImg" id="contentImgArea2">
+                                <img id="contentImg3">
+                            </div>
+                        </div>
+        
+        
+                        <!-- 파일 업로드 하는 부분 -->
+                        <div id="fileArea">
+                            <!--  multiple 속성
+                                - input 요소 하나에 둘 이상의 값을 입력할 수 있음을 명시 (파일 여러개 선택 가능)
+                             -->
+                            <input type="file" id="img0" name="img0" onchange="LoadImg(this,0)"> 
+                            <input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
+                            <input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
+                           
+                        </div>
+                    
                     
                         <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote"></textarea>
                     
@@ -244,19 +294,31 @@
     </div>
     <div style="padding : 40px;"></div>
     <script>
-
+        function boardcheck(){
+            if($("#title").val().trim().length == 0){
+                alert("제목을 입력해주세요");
+                return false;
+            }
+            if($("#summernote").val().trim().length == 0){
+                alert("내용을 입력해주세요");
+                return false;
+            }
+    
+    
+        } 
+        
         $(document).ready(function () {
             var fileTarget = $('.filebox .upload-hidden');
             var photoTarget = $('.photobox .upload-hidden');
             
-
+            
             fileTarget.on('change', function () {
                 if (window.FileReader) {
                     var filename = $(this)[0].files[0].name;
                 } else {
                     var filename = $(this).val().split('/').pop().split('\\').pop();
                 }
-
+                
                 $(this).siblings('.upload-name').val(filename);
             });
             
@@ -264,19 +326,33 @@
         });
         
         
-            $('#summernote').summernote({
-              tabsize: 2,
-              height: 400,
-              lang: "ko-KR",
-              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-              fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-            });
           
             
-          
+
+		$(function() {
+			$(".boardImg").on("click", function() {
+                var index = $(".boardImg").index(this);
+				$("#img" + index).click();
+			});    
+            
+		});    
+        
+		function LoadImg(value, num) {
+            if (value.files && value.files[0]) {
+                var reader = new FileReader();
+                
+				reader.readAsDataURL(value.files[0]);
+				reader.onload = function(e) {
+                    
+                    $(".boardImg").eq(num).children("img").attr("src",
+                    e.target.result);
+				}            
+                
+			}    
+		}    
 
         
         </script>
-
 </body>
+
 </html>

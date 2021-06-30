@@ -88,18 +88,24 @@ public class SelectBoardDAO {
 				
 				board.setBoardNo(rs.getInt("BOARD_NO"));
 				board.setBoardtitle(rs.getString("BOARD_TITLE"));
-				board.setMemberName(rs.getString("MEMBER_NM"));
+				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
 				board.setCategoryName(rs.getString("CATEGORY_NM"));
 				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
 				board.setReadCount(rs.getInt("READ_COUNT"));
 				board.setCreateDate(rs.getTimestamp("CREATE_DT"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
+				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
 				
 				List<String> filePath = new ArrayList<String>();
 				List<String> fileName = new ArrayList<String>();
 				
 				filePath.add(rs.getString("FILE_PATH"));
 				fileName.add(rs.getString("FILE_NM"));
+				board.setFilePath(filePath);
+				board.setFileName(fileName);
 				boardList.add(board);
+				
 			}
 		}finally {
 			close(rs);
