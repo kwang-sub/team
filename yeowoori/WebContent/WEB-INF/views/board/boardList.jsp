@@ -1,27 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
- <head>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>html문서 제목</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <style>
+        .card{
+            border: none;
+        }
         a{
             color : black;
         }
         .main{
             margin-top: 10px;
-        }
-        
-        
-        
-        <%-- 보더라인 none 적용 왜안되는지 확인해야됨--%>
-        
-        .card{
-            border: none;
         }
         
         .card-head{
@@ -60,7 +54,19 @@
        }
        .category-btn>button{
            margin-left: 25px;
+          
        }
+        #write-btn{
+            width: 50px;
+            height: 50px;
+            border: none;
+            background-color: #A66129;
+            color: white;
+            line-height: 20px;
+            font-size: 50px;
+            padding-bottom: 5px;
+            float: right;
+        }
        @media(max-width: 992px) { 
             .card-block{
                 margin-right: 100px;
@@ -106,14 +112,19 @@
 
             }
         }
-
+        
+        .pagination {
+			margin-left: auto; 
+			margin-right: auto;
+		}
 
     </style>
 </head>
 <body>
 
 
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	${boardList }
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include> 
     <div class="container">
         <form class="bg-white category-select" action="#" method="GET">
             
@@ -132,7 +143,6 @@
               </div>
               
         </form>
-        
         <form class="category-btn" action="#" method="GET">
             <div style="padding:10px;"></div>
             <button class="btn btn-light category-selected" name="category" value="전체">전체</button>
@@ -143,215 +153,145 @@
             <button class="btn btn-light category-unselected" name="category" value="기타">기타</button>
             <div style="padding : 20px"></div>
         </form>
+        
+        <div class="" style="height: 35px;">
+            <form action="${contextPath}/boardwrite" method="GET">
+    
+                <button id="write-btn" class="rounded-circle">+</button>
+            </form>
 
+        </div>
         <div class="row main">
-
-            <div class="col-sm-6 col-md-4 card-block">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-head">
-                        <table class="userProple">
-                            <th style="padding-right: 5px;">
-                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class=" rounded-circle" alt="">
-                            </th>
-                            <th>
-                                    <div>유저닉네임</div>
-                                    <div style="font-weight: 400; font-size: 14px;">유저가 설정한 한줄 소개</div>
-                            </th>
-                        </table>
-                    </div>
-                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl-12" style="padding-top: 3px; padding-bottom: 5px;">
-                                <span style="padding-left: 5px;">
-                                    <img src="https://drive.google.com/uc?id=1qxz-wF69nTfWlkXBZ70xkWTjO_yjeblU" style="height: 20px; width: auto;">
-                                    <span style="margin-left: 5px; padding-top: 10px;">15</span>
-                                </span>
-                                <span style="float: right; padding-right: 5px;">
-                                        <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" style="height: 20px; width: auto;" alt="">
-                                        <span style="margin-left: 5px;">30</span>
-                                </span>
-                            </div>
-                        </div>
-                        <p class="card-text">유저가 적은 내용유저가 적은 내용유저가 적은 내용유저가 적은 내용</p>
-                    </div>
-                </div>
-            </div>
-            
-           
-            <div class="col-sm-6 col-md-4 card-block">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-head">
-                        <table class="userProple">
-                            <th style="padding-right: 5px;">
-                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class=" rounded-circle" alt="">
-                            </th>
-                            <th>
-                                    <div>유저닉네임</div>
-                                    <div style="font-weight: 400; font-size: 14px;">유저가 설정한 한줄 소개</div>
-                            </th>
-                        </table>
-                    </div>
-                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl-12" style="padding-top: 3px; padding-bottom: 5px;">
-                                <span style="padding-left: 5px;">
-                                    <img src="https://drive.google.com/uc?id=1qxz-wF69nTfWlkXBZ70xkWTjO_yjeblU" style="height: 20px; width: auto;">
-                                    <span style="margin-left: 5px; padding-top: 10px;">15</span>
-                                </span>
-                                <span style="float: right; padding-right: 5px;">
-                                        <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" style="height: 20px; width: auto;" alt="">
-                                        <span style="margin-left: 5px;">30</span>
-                                </span>
-                            </div>
-                        </div>
-                        <p class="card-text">유저가 적은 내용유저가 적은 내용유저가 적은 내용유저가 적은 내용</p>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="col-sm-6 col-md-4 card-block">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-head">
-                        <table class="userProple">
-                            <th style="padding-right: 5px;">
-                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class=" rounded-circle" alt="">
-                            </th>
-                            <th>
-                                    <div>유저닉네임</div>
-                                    <div style="font-weight: 400; font-size: 14px;">유저가 설정한 한줄 소개</div>
-                            </th>
-                        </table>
-                    </div>
-                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl-12" style="padding-top: 3px; padding-bottom: 5px;">
-                                <span style="padding-left: 5px;">
-                                    <img src="https://drive.google.com/uc?id=1qxz-wF69nTfWlkXBZ70xkWTjO_yjeblU" style="height: 20px; width: auto;">
-                                    <span style="margin-left: 5px; padding-top: 10px;">15</span>
-                                </span>
-                                <span style="float: right; padding-right: 5px;">
-                                        <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" style="height: 20px; width: auto;" alt="">
-                                        <span style="margin-left: 5px;">30</span>
-                                </span>
-                            </div>
-                        </div>
-                        <p class="card-text">유저가 적은 내용유저가 적은 내용유저가 적은 내용유저가 적은 내용</p>
-                    </div>
-                </div>
-            </div>
+        
+        <c:choose>
+        	<c:when test="${empty boardList }">
+        		<h1 style="text-align: center;">
+        			작성된 글이 없습니다
+        		</h1>
+        	</c:when>
+        
+        	<c:otherwise>
+        		<c:forEach items="${boardList }" var="board">
+        		
+	                            
+        		
+	                            
+        		
+        		
+        			 <div class="col-sm-6 col-md-4 card-block">
+	                <div class="card" style="width: 18rem; border: none;">
+	                    <div class="card-head">
+	                        <table class="userProple">
+	                            <th style="padding-right: 5px;">
+	                            
+	                            
+	                            
+	                            <%-- 유저프로필 이상확인 필요!!!!!!!!!!!!!!!!! --%>
+	                            <c:choose>
+	                            	<c:when test="${!empty board.memberProfile }">
+	                            	
+	                                <img src="${board.memberProfile}" class=" rounded-circle" alt="">
+	                            	</c:when>
+	                            	
+	                            	<c:otherwise>
+	                            		<img src="${contextPath}/resources/img/user.png" class=" rounded-circle" alt="">
+	                            	</c:otherwise>
+	                            </c:choose>
+	                            
+	                            </th>
+	                            <th>
+	                                    <div>${board.memberNickname }</div>
+	                                    <div style="font-weight: 400; font-size: 14px;">${board.memberContent }</div>
+	                            </th>
+	                        </table>
+	                    </div>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${empty board.fileName[0] }">
+			                    <a href="#">
+			                    <img src="${contextPath}/resources/img/noimage.png" class="card-img-top" alt="...">
+			                    </a>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<a href="#">
+	                    		
+			                    <img src="${contextPath}/${board.filePath[0]}${board.fileName[0]}" class="card-img-top" alt="...">
+	                    		</a>
+	                    	</c:otherwise>
+	                    </c:choose>
+	                    
+	                   
+	                    
+	                    
+	                    <div class="card-body">
+	                        <div class="row">
+	                            <div class="col-xl-12" style="padding-top: 3px; padding-bottom: 5px;">
+	                                <span style="padding-left: 5px;">
+	                                    <img src="https://drive.google.com/uc?id=1qxz-wF69nTfWlkXBZ70xkWTjO_yjeblU" style="height: 20px; width: auto;">
+	                                    <span style="margin-left: 5px; padding-top: 10px;">15</span>
+	                                </span>
+	                                <span style="float: right; padding-right: 5px;">
+	                                        <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" style="height: 20px; width: auto;" alt="">
+	                                        <span style="margin-left: 5px;">30</span>
+	                                </span>
+	                            </div>
+	                        </div>
+	                        <p class="card-text">${board.boardContent }</p>
+	                    </div>
+	                </div>
+	            </div>
+        		</c:forEach>
+	           
+        	
+        	
+        	</c:otherwise>
+        </c:choose>
 
             
-            <div class="col-sm-6 col-md-4 card-block">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-head">
-                        <table class="userProple">
-                            <th style="padding-right: 5px;">
-                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class=" rounded-circle" alt="">
-                            </th>
-                            <th>
-                                    <div>유저닉네임</div>
-                                    <div style="font-weight: 400; font-size: 14px;">유저가 설정한 한줄 소개</div>
-                            </th>
-                        </table>
-                    </div>
-                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl-12" style="padding-top: 3px; padding-bottom: 5px;">
-                                <span style="padding-left: 5px;">
-                                    <img src="https://drive.google.com/uc?id=1qxz-wF69nTfWlkXBZ70xkWTjO_yjeblU" style="height: 20px; width: auto;">
-                                    <span style="margin-left: 5px; padding-top: 10px;">15</span>
-                                </span>
-                                <span style="float: right; padding-right: 5px;">
-                                        <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" style="height: 20px; width: auto;" alt="">
-                                        <span style="margin-left: 5px;">30</span>
-                                </span>
-                            </div>
-                        </div>
-                        <p class="card-text">유저가 적은 내용유저가 적은 내용유저가 적은 내용유저가 적은 내용</p>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="col-sm-6 col-md-4 card-block">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-head">
-                        <table class="userProple">
-                            <th style="padding-right: 5px;">
-                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class=" rounded-circle" alt="">
-                            </th>
-                            <th>
-                                    <div>유저닉네임</div>
-                                    <div style="font-weight: 400; font-size: 14px;">유저가 설정한 한줄 소개</div>
-                            </th>
-                        </table>
-                    </div>
-                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl-12" style="padding-top: 3px; padding-bottom: 5px;">
-                                <span style="padding-left: 5px;">
-                                    <img src="https://drive.google.com/uc?id=1qxz-wF69nTfWlkXBZ70xkWTjO_yjeblU" style="height: 20px; width: auto;">
-                                    <span style="margin-left: 5px; padding-top: 10px;">15</span>
-                                </span>
-                                <span style="float: right; padding-right: 5px;">
-                                        <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" style="height: 20px; width: auto;" alt="">
-                                        <span style="margin-left: 5px;">30</span>
-                                </span>
-                            </div>
-                        </div>
-                        <p class="card-text">유저가 적은 내용유저가 적은 내용유저가 적은 내용유저가 적은 내용</p>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="col-sm-6 col-md-4 card-block">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-head">
-                        <table class="userProple">
-                            <th style="padding-right: 5px;">
-                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class=" rounded-circle" alt="">
-                            </th>
-                            <th>
-                                    <div>유저닉네임</div>
-                                    <div style="font-weight: 400; font-size: 14px;">유저가 설정한 한줄 소개</div>
-                            </th>
-                        </table>
-                    </div>
-                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA2MTFfMiAg%2FMDAxNjIzMzU5NzIwMDU4.YsCl4ZpXk99sB2Zl5MFAHVNIB_scdpu1hIaOrE7YX8og.t1zM2xSsox9giQO1H7yNZmGGhmKeauVbmUBuRRYjIc8g.JPEG.redtico63%2F1623357995954_edit.jpg&type=a340" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl-12" style="padding-top: 3px; padding-bottom: 5px;">
-                                <span style="padding-left: 5px;">
-                                    <img src="https://drive.google.com/uc?id=1qxz-wF69nTfWlkXBZ70xkWTjO_yjeblU" style="height: 20px; width: auto;">
-                                    <span style="margin-left: 5px; padding-top: 10px;">15</span>
-                                </span>
-                                <span style="float: right; padding-right: 5px;">
-                                        <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" style="height: 20px; width: auto;" alt="">
-                                        <span style="margin-left: 5px;">30</span>
-                                </span>
-                            </div>
-                        </div>
-                        <p class="card-text">유저가 적은 내용유저가 적은 내용유저가 적은 내용유저가 적은 내용</p>
-                    </div>
-                </div>
-            </div>
-            
-            
-            
-
   
             
         </div>
     </div>
+            <c:set var = "pageURL" value="list?type=${pagination.boardType}"/>
+            <c:set var = "prev" value="${pageURL }&&cp=${pagination.prevPage}"/>
+            <c:set var = "next" value="${pageURL }&&cp=${pagination.nextPage}"/>
+            
+            
+           
+           <div class="pagination-box row" style=";">
+           	<ul class="pagination">
+           		<c:if test="${pagination.currentPage>pagination.pageSize }">
+					<li><a class="page-link" href="${prev }">&lt;&lt;</a></li>          		
+           		</c:if>	
+           		<c:if test="${pagination.currentPage>2 }">
+					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}">&lt;</a></li>                 		
+           		</c:if>	
+           		
+           		<c:forEach var="p" begin="${pagination.startPage }" end="${pagination.endPage }">
+           			<li>
+           				<c:choose>
+           					<c:when test="${pagination.currentPage==p }">
+           						<a class="page-link">${p}</a>
+           					</c:when>
+           					<c:otherwise>
+           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
+           					</c:otherwise>
+           				</c:choose>
+           			
+           			</li>
+           		</c:forEach>
+           		
+           		<c:if test="${pagination.currentPage<pagination.maxPage }">
+					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+           		</c:if>	
+           		<c:if test="${pagination.currentPage<pagination.maxPage }">
+					<li><a class="page-link" href="${next}">&gt;&gt;</a></li>              		
+           		</c:if>	
+           	
+           	</ul>
+           
+           </div>
+            
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </body>
 </html>
