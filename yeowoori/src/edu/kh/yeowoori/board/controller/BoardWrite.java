@@ -16,6 +16,8 @@ public class BoardWrite extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/board/boardwrite.jsp");
 		view.forward(request, response);
 	}

@@ -40,6 +40,8 @@ public class SelectBoardController extends HttpServlet {
 //			게시글 목록조회 controller
 			if(command.equals("list")) {
 				
+				String category = request.getParameter("category");
+				System.out.println(category);
 				
 				int boardType = Integer.parseInt(request.getParameter("type"));
 				

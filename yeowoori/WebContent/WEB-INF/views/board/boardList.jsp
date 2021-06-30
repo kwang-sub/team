@@ -123,7 +123,7 @@
 <body>
 
 
-	${boardList }
+	
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include> 
     <div class="container">
         <form class="bg-white category-select" action="#" method="GET">
@@ -133,8 +133,8 @@
                   현재 카테고리
                 </button>
                 <div class="dropdown-menu">
-                    <a href="#">전체</a><br>
-                    <a href="#" >분위기 맛집</a><br>
+                    <a href="/yeowoori/board/list?type=1">전체</a><br>
+                    <a href="/yeowoori/board/list?type=1&category=2" >분위기맛집</a><br>
                     <a href="#">산책코스</a><br>
                     <a href="#">커플데이트</a><br>
                     <a href="#">카페투어</a><br>
@@ -145,17 +145,17 @@
         </form>
         <form class="category-btn" action="#" method="GET">
             <div style="padding:10px;"></div>
-            <button class="btn btn-light category-selected" name="category" value="전체">전체</button>
-            <button class="btn btn-light category-unselected" name="category" value="분위기맛집">분위기맛집</button>
-            <button class="btn btn-light category-unselected" name="category" value="산책코스">산책코스</button>
-            <button class="btn btn-light category-unselected" name="category" value="커플데이트">커플데이트</button>
-            <button class="btn btn-light category-unselected" name="category" value="카페투어">카페투어</button>
-            <button class="btn btn-light category-unselected" name="category" value="기타">기타</button>
+            <a class="btn btn-light category-selected" href="/yeowoori/board/list?type=1">전체</a>
+            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=2">분위기맛집</a>
+            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=2">산책코스</a>
+            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=2">커플데이트</a>
+            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=2">카페투어</a>
+            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=2">기타</a>
             <div style="padding : 20px"></div>
         </form>
         
         <div class="" style="height: 35px;">
-            <form action="${contextPath}/boardwrite" method="GET">
+            <form action="${contextPath}/boardwrite?cp=1" method="GET">
     
                 <button id="write-btn" class="rounded-circle">+</button>
             </form>
@@ -190,7 +190,7 @@
 	                            <c:choose>
 	                            	<c:when test="${!empty board.memberProfile }">
 	                            	
-	                                <img src="${board.memberProfile}" class=" rounded-circle" alt="">
+	                                <img src="${contextPath}${board.memberProfile}" class=" rounded-circle" alt="">
 	                            	</c:when>
 	                            	
 	                            	<c:otherwise>
