@@ -182,9 +182,9 @@
 
             </div>
             <div class="col-12 col-lg-12">
-                <form action="${contextPath}/board/boboardwrite?type=${param.type}" onsubmit="return boardcheck();" enctype="multipart/form-data" method="POST" >
+                <form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
 
-
+							
                     <div>
                         <h3>게시글올리기</h3>
                     </div>

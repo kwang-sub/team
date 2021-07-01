@@ -189,10 +189,10 @@
                     </c:if>
                     
         <div class="" style="height: 35px;">
-            <form action="${contextPath}/boardwrite?cp=1&type=${param.type}" method="GET">
+            <a href="${contextPath}/boardwrite?cp=${param.cp}&type=${param.type}" >
     
                 <button id="write-btn" class="rounded-circle">+</button>
-            </form>
+            </a>
 
         </div>
         <div class="row main">
@@ -206,11 +206,11 @@
         
         	<c:otherwise>
         	
+        		
         	
         		<c:forEach items="${boardList }" var="board">
         		
 	                            
-        		
 	                            
         		
         		
