@@ -14,6 +14,8 @@ public class Board {
 	private String boardContent;
 	private String memberContent;
 	private String memberProfile;
+	private int commentCount;
+	private int likeCount;
 	
 	
 	public String getMemberProfile() {
@@ -26,6 +28,22 @@ public class Board {
 
 	private List<String> filePath;
 	private List<String> fileName;
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
 	public String getBoardContent() {
 		return boardContent;
 	}
@@ -124,8 +142,10 @@ public class Board {
 		return "Board [boardNo=" + boardNo + ", boardtitle=" + boardtitle + ", categoryName=" + categoryName
 				+ ", areaCategory=" + areaCategory + ", memberNickname=" + memberNickname + ", readCount=" + readCount
 				+ ", createDate=" + createDate + ", boardContent=" + boardContent + ", memberContent=" + memberContent
-				+ ", memberProfile=" + memberProfile + ", filePath=" + filePath + ", fileName=" + fileName + "]";
+				+ ", memberProfile=" + memberProfile + ", commentCount=" + commentCount + ", likeCount=" + likeCount
+				+ ", filePath=" + filePath + ", fileName=" + fileName + "]";
 	}
+
 
 
 	
