@@ -60,7 +60,7 @@
         <div id="icons">
             <c:choose>
             	<c:when test="${empty loginMember}">
-            		<a href="login" class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></a>
+            		<a href="${contextPath}/login" class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></a>
             	</c:when>
             	<c:otherwise>
             		<div class="dropdownleft" style="float:right; margin:0px; padding:0px;">
@@ -68,8 +68,8 @@
 					    <span class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></span>
 					  </button>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					    <a class="dropdown-item" href="member/myPage">마이페이지</a>
-					    <a class="dropdown-item" href="logout">로그아웃</a>
+					    <a class="dropdown-item" href="${contextPath}/member/myPage">마이페이지</a>
+					    <a class="dropdown-item" href="${contextPath}/logout">로그아웃</a>
 					  </div>
 					</div>
             	</c:otherwise>
