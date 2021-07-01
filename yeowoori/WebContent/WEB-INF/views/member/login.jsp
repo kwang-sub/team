@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.80.0">
-    <title>로그인</title>
+ 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <title>로그인</title>
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -103,7 +104,18 @@ body {
   </p>
 </form>
 
-
+    <c:if test="${!empty title }">
+			<script>
+				swal({
+					"icon" : "${icon}",
+					"title" : "${title}",
+					"text" : "${text}"
+				})
+			</script>
+			<c:remove var="text"/>
+			<c:remove var="icon"/>
+			<c:remove var="title"/>
+	</c:if>
     
   </body>
 </html>
