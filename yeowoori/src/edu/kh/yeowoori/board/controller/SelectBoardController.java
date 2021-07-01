@@ -35,26 +35,25 @@ public class SelectBoardController extends HttpServlet {
 		
 		try {
 			SelectBoardService service = new SelectBoardService();
-			int cp = request.getParameter("cp")==null ? 1 : Integer.parseInt(request.getParameter("cp"));
-			
+			int cp = request.getParameter("cp") == null ? 1 : Integer.parseInt(request.getParameter("cp"));
 //			게시글 목록조회 controller
 			if(command.equals("list")) {
+				int area = request.getParameter("area") == null ? 0 : Integer.parseInt(request.getParameter("area"));
+				int category = request.getParameter("category") == null ? 0 : Integer.parseInt(request.getParameter("category"));
 				
-				String category = request.getParameter("category");
-				System.out.println(category);
 				
 				int boardType = Integer.parseInt(request.getParameter("type"));
 				
-//				페이징 처리
-				Pagination pagination = service.getPagination(cp,boardType);
-//				System.out.println(pagination);
-				List<Board> boardList = service.selectBoardList(pagination);
+				Pagination pagination = service.getPagination(cp,boardType,area,category);
 				pagination.setLimit(6);
+				List<Board> boardList= null;
+				boardList = service.selectBoardList(pagination,area,category);
 				request.setAttribute("pagination", pagination);
 				request.setAttribute("boardList", boardList);
 				path = "/WEB-INF/views/board/boardList.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
 			}
+			
 			
 			
 		}catch (Exception e) {

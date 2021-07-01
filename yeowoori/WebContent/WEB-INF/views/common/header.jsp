@@ -113,7 +113,7 @@
                               다른 지역 보기
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item color-grey" href="#">동북</a>
+                              <a class="dropdown-item color-grey" href="">동북</a>
                               <a class="dropdown-item color-grey" href="#">서남</a>
                               <a class="dropdown-item color-grey" href="#">서북</a>
                             </div>

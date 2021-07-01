@@ -24,7 +24,8 @@ public class BoardWrite extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		System.out.println("연결됨");
+		int type = Integer.parseInt(request.getParameter("type")) ;
 	}
 	
 	
