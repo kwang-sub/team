@@ -166,7 +166,7 @@ public class SelectBoardDAO {
 	 */
 	public List<Board> selectBoardList(Connection conn, Pagination pagination) throws Exception {
 		List<Board> boardList = new ArrayList<Board>();
-		String sql = prop.getProperty("selectBordList");
+		String sql = prop.getProperty("selectBoardList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -182,7 +182,7 @@ public class SelectBoardDAO {
 				Board board = new Board();
 				
 				board.setBoardNo(rs.getInt("BOARD_NO"));
-				board.setBoardtitle(rs.getString("BOARD_TITLE"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
 				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
 				board.setCategoryName(rs.getString("CATEGORY_NM"));
 				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
@@ -223,7 +223,7 @@ public class SelectBoardDAO {
 	 */
 	public List<Board> selectBoardList(Connection conn, int area, Pagination pagination) throws Exception {
 		List<Board> boardList = new ArrayList<Board>();
-		String sql = prop.getProperty("areaSelectBordList");
+		String sql = prop.getProperty("areaSelectBoardList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -240,7 +240,7 @@ public class SelectBoardDAO {
 				Board board = new Board();
 				
 				board.setBoardNo(rs.getInt("BOARD_NO"));
-				board.setBoardtitle(rs.getString("BOARD_TITLE"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
 				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
 				board.setCategoryName(rs.getString("CATEGORY_NM"));
 				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
@@ -278,7 +278,7 @@ public class SelectBoardDAO {
 	 */
 	public List<Board> selectBoardList(int category, Connection conn, Pagination pagination) throws Exception {
 		List<Board> boardList = new ArrayList<Board>();
-		String sql = prop.getProperty("categorySelectBordList");
+		String sql = prop.getProperty("categorySelectBoardList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -295,7 +295,7 @@ public class SelectBoardDAO {
 				Board board = new Board();
 				
 				board.setBoardNo(rs.getInt("BOARD_NO"));
-				board.setBoardtitle(rs.getString("BOARD_TITLE"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
 				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
 				board.setCategoryName(rs.getString("CATEGORY_NM"));
 				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
@@ -334,7 +334,7 @@ public class SelectBoardDAO {
 	 */
 	public List<Board> selectBoardList(int category, Connection conn, Pagination pagination, int area) throws Exception{
 		List<Board> boardList = new ArrayList<Board>();
-		String sql = prop.getProperty("areaCategorySelectBordList");
+		String sql = prop.getProperty("areaCategorySelectBoardList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -352,7 +352,7 @@ public class SelectBoardDAO {
 				Board board = new Board();
 				
 				board.setBoardNo(rs.getInt("BOARD_NO"));
-				board.setBoardtitle(rs.getString("BOARD_TITLE"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
 				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
 				board.setCategoryName(rs.getString("CATEGORY_NM"));
 				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));

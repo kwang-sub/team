@@ -54,6 +54,23 @@ public class SelectBoardController extends HttpServlet {
 				request.getRequestDispatcher(path).forward(request, response);
 			}
 			
+// 			질문 게시판
+			else if(command.equals("list2")) {
+				int area = request.getParameter("area") == null ? 0 : Integer.parseInt(request.getParameter("area"));
+				int category = request.getParameter("category") == null ? 0 : Integer.parseInt(request.getParameter("category"));
+				
+				int boardType = Integer.parseInt(request.getParameter("type"));
+				
+				Pagination pagination = service.getPagination(cp,boardType,area,category);
+				pagination.setLimit(5);
+				List<Board> boardList= null;
+				boardList = service.selectBoardList(pagination,area,category);
+				request.setAttribute("pagination", pagination);
+				request.setAttribute("boardList", boardList);
+				path = "/WEB-INF/views/board/boardList2.jsp";
+				request.getRequestDispatcher(path).forward(request, response);
+			}
+			
 			
 			
 		}catch (Exception e) {

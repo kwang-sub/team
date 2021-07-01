@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +11,6 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
-     * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
      #q-search{
             height: 300px;
             background-color: #f8f8f8;
@@ -200,65 +200,91 @@
         </div>
 
         <hr>
-
-        <div style="padding : 5px;">
-            <div class="width65">
-                <div ></div>
-                <h6>서울 여행 어디로 갈까요?</h6>
-                <p style="font-size: 12px; line-height: 1.4;">
-                    할아버지 할머니 모시고 서울여행... 어디가 좋을까요? 웬만하면 좋은 곳으로 
-                </p>
-                <div class="user-profile" style="background-image: url('');"></div>
-                <div class="user-name">유저닉네임</div>
-                <div class="time">1시간 전</div>
-                <div class="comments">댓글</div>
-                <div class="count-comments">4</div>
-                <a href="#">
-                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
-                    <div class="comments">좋아요</div>
-                </a>
-                <div class="report">신고</div>
-                    
-            </div>
-            <div class="q-img" style="background-image: url('');"></div>
-            <div class="padding"></div>
-            <hr>
-        </div>
-
         
-
+     
+        <c:if test="${empty boardList }">
+        		<h1 style="text-align: center;">작성된 글이 없습니다.</h1>
+        </c:if>
         
+    	<c:if test="${!empty boardList }">
+        		<c:forEach items="${boardList }" var="board">
+        		 <div style="padding : 5px;">
+		            <div class="width65">
+		                
+		                <h6>${board.boardTitle }</h6>
+		                <p style="font-size: 12px; line-height: 1.4;">
+		                    ${board.boardContent } 
+		                </p>
+		                <div class="user-profile" style="background-image: url('${loginMember.memberProfile}');"></div>
+		                <div class="user-name">${loginMember.memberNickname}</div>
+		                <div class="time">${board.createDate }</div>
+		                <div class="comments">댓글</div>
+		                <div class="count-comments">${board.commentCount }</div>
+		                <a href="#">
+		                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
+		                    <div class="comments">좋아요</div>
+		                </a>
+		                <a class="report" href="#">신고</div>
+		                    
+		            </div>
+		            <c:if test="${!empty board.fileName[0] }">
+		            	<div class="q-img" style="background-image: url('${contextPath}/${board.filePath[0]}${board.fileName[0]}'); float:right;"></div>
+		            </c:if>
+		            <div class="padding"></div>
+		            <hr>
+		        </div>
+        		</c:forEach>
+        </c:if>
 
 
-
-
-        <div >
-            <nav aria-label="Page navigation example" >
-                <ul class="pagination justify-content-center">
-                  <li class="page-item">
-                    <a class="page-link  page-numbers color-grey" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link  page-numbers page-now" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link  page-numbers" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link  page-numbers" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link  page-numbers" href="#">4</a></li>
-                  <li class="page-item"><a class="page-link  page-numbers" href="#">5</a></li>
-
-                  <li class="page-item">
-                    <a class="page-link  page-numbers color-grey" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+		<c:set var = "pageURL" value="list?type=${pagination.boardType}"/>
+        <c:set var = "prev" value="${pageURL }&cp=${pagination.prevPage}"/>
+        <c:set var = "next" value="${pageURL }&cp=${pagination.nextPage}"/>
+           
+        <div class="pagination-box row" style=";">
+        	<ul class="pagination">
+           		<c:if test="${pagination.currentPage>pagination.pageSize }">
+					<li><a class="page-link" href="${prev }">&lt;&lt;</a></li>          		
+           		</c:if>	
+           		<c:if test="${pagination.currentPage>2 }">
+					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}">&lt;</a></li>                 		
+           		</c:if>	
+           		
+           		<c:forEach var="p" begin="${pagination.startPage }" end="${pagination.endPage }">
+           			<li>
+           				<c:choose>
+           					<c:when test="${pagination.currentPage==p }">
+           						<a class="page-link">${p}</a>
+           					</c:when>
+           					<c:otherwise>
+           						<c:if test="${!empty param.area }">
+	           						<a class="page-link" href="${pageURL}&cp=${p}&area=${param.area}">${p}</a>
+           						</c:if>
+           						<c:if test="${!empty param.category }">
+	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}">${p}</a>
+           						</c:if>
+           						<c:if test="${!empty param.category && !empty param.area }">
+	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}&area=${param.area}">${p}</a>
+           						</c:if>
+           						<c:if test="${empty param.category && empty param.area }">
+	           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
+           						</c:if>
+           					</c:otherwise>
+           				</c:choose>
+           			
+           			</li>
+           		</c:forEach>
+           		
+           		<c:if test="${pagination.currentPage<pagination.maxPage }">
+					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+           		</c:if>	
+           		<c:if test="${pagination.currentPage<pagination.maxPage }">
+					<li><a class="page-link" href="${next}">&gt;&gt;</a></li>              		
+           		</c:if>	
+           	
+        	</ul>
+           
         </div>
-       
-
-
-
-
     </div>
     <div style="padding : 40px;"></div>
 </body>

@@ -102,10 +102,10 @@
                 </button>
                 <ul class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active menu"><a class="nav-link" href="#">공지</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list4?type=4">공지</a></li>
                         <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list?type=1">여행</a></li>
-                        <li class="nav-item active menu"><a class="nav-link" href="#">질문</a></li>
-                        <li class="nav-item active menu"><a class="nav-link" href="#">같이 떠나요</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list2?type=2">질문</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list3?type=3">같이 떠나요</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">

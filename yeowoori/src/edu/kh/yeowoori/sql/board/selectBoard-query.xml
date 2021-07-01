@@ -48,7 +48,7 @@
 	
 	
 	<!-- 게시글 목록 조회(페이징 처리 적용) -->
-	<entry key="selectBordList">
+	<entry key="selectBoardList">
 		SELECT*FROM
 			(SELECT ROWNUM RNUM, A.* FROM
 			    (SELECT * FROM BOARD_LIST
@@ -60,7 +60,7 @@
 	
 	</entry>
 	<!-- 지역 카테고리 적용된 게시글 조회  -->
-	<entry key="areaSelectBordList">
+	<entry key="areaSelectBoardList">
 		SELECT*FROM
 			(SELECT ROWNUM RNUM, A.* FROM
 			    (SELECT * FROM BOARD_LIST
@@ -72,7 +72,7 @@
 	</entry>
 	
 	<!-- 카테고리 적용된 게시글 조회 -->
-	<entry key="categorySelectBordList">
+	<entry key="categorySelectBoardList">
 	SELECT*FROM
 			(SELECT ROWNUM RNUM, A.* FROM
 			    (SELECT * FROM BOARD_LIST
@@ -82,7 +82,7 @@
 			    ORDER BY BOARD_NO DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
-	<entry key="areaCategorySelectBordList">
+	<entry key="areaCategorySelectBoardList">
 	SELECT*FROM
 			(SELECT ROWNUM RNUM, A.* FROM
 			    (SELECT * FROM BOARD_LIST
