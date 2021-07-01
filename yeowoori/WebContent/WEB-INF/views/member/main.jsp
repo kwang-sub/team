@@ -5,8 +5,10 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title></title>
-	
+	<title>main</title>
+</head>
+<body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<style>
 		body{
 			padding-top: 60px;
@@ -102,15 +104,7 @@
             
             }
         }
-      
-        
     </style>
-	
-	
-	
-</head>
-<body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
  <div class="row">
     <div class="col-1">
     </div>
