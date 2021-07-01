@@ -16,8 +16,35 @@ public class Board {
 	private String memberProfile;
 	private int commentCount;
 	private int likeCount;
+	private int categoryCode;
+	private int areaCode;
+	private int memberNo;
 	
 	
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public int getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+	public int getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
+	}
+
 	public String getMemberProfile() {
 		return memberProfile;
 	}
@@ -144,8 +171,13 @@ public class Board {
 				+ ", areaCategory=" + areaCategory + ", memberNickname=" + memberNickname + ", readCount=" + readCount
 				+ ", createDate=" + createDate + ", boardContent=" + boardContent + ", memberContent=" + memberContent
 				+ ", memberProfile=" + memberProfile + ", commentCount=" + commentCount + ", likeCount=" + likeCount
-				+ ", filePath=" + filePath + ", fileName=" + fileName + "]";
+				+ ", categoryCode=" + categoryCode + ", areaCode=" + areaCode + ", memberNo=" + memberNo + ", filePath="
+				+ filePath + ", fileName=" + fileName + "]";
 	}
+	
+	
+	
+
 
 
 
