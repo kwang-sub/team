@@ -54,7 +54,7 @@ public class SelectBoardService {
 	 * @param pagination
 	 * @param category 
 	 * @param area 
-	 * @return
+	 * @return boardList
 	 * @throws Exception
 	 */
 	public List<Board> selectBoardList(Pagination pagination, int area, int category) throws Exception {
