@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" scope="application"
+	value="${pageContext.servletContext.contextPath }"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이 페이지</title>
-    
+    <title>마이페이지</title>
+</head>
+<body>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <style>
       
        .category-selected{
@@ -89,9 +93,6 @@
       
 
     </style>
-</head>
-<body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
     <div class="container">
         <form class="bg-white category-select" action="#" method="GET">
@@ -113,20 +114,20 @@
         <form class="category-btn" action="#" method="GET">
             <div style="padding:10px;"></div>
             <h6 style="display: inline-block; font-weight: 500;">마이페이지</h6>
-            <button class="btn btn-light category-selected" name="category" value="전체">나의활동</button>
-            <button class="btn btn-light category-unselected" name="category" value="분위기맛집">좋아요</button>
-            <button class="btn btn-light category-unselected" name="category" value="산책코스">알림</button>
-            <button class="btn btn-light category-unselected" name="category" value="커플데이트">설정</button>
+            <button class="btn btn-light category-selected" name="category" onclick="">나의활동</button>
+            <button class="btn btn-light category-unselected" name="category" onclick="" >좋아요</button>
+            <button class="btn btn-light category-unselected" name="category" onclick="">알림</button>
+            <button class="btn btn-light category-unselected" name="category" onclick="" >설정</button>
             <hr  align="center" style="border: solid #b6957c; border-width: 1px 0px 0px 0px; width:100%">
             <div style="padding : 20px"></div>
         </form>
 
         <div class="row board">
             <div class="col-sm-12 col-lg-3" id="profile-container">
-                <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/161767217197477349.jpeg?gif=1&w=320&h=320&c=c">
-                <h5 style="font-weight: 600;">유저 닉네임</h5>
+                <img src="${contextPath}${loginMember.memberProfile}">
+                <h5 style="font-weight: 600;">${loginMember.memberNickname }</h5>
                 <div style="padding: 10px;"></div>
-                <button class="btn btn-light">설정</button>
+                <button class="btn btn-light" onclick="">설정</button>
                 <hr align="center"style="width:80%">
                 <div style="padding-top: 15px; padding-bottom: 10px;">
                     <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" width="30px;">
@@ -158,7 +159,7 @@
                             style="background-image: url('https://i.pinimg.com/originals/53/ae/3e/53ae3ebcd93980ff7ff04b6b9b8a48a7.jpg');">
                         </div>
                         <div style="padding: 3px;"></div>
-                        <button type="button" class="btn btn-brown">여행 게시글 올리기</button>
+                        <button type="button" class="btn btn-brown" onclick="">여행 게시글 올리기</button>
                         <div style="padding-bottom:40px;"></div>
                     
                     </div>
@@ -181,7 +182,7 @@
                                 <li class="list-group-item">뷰맛집 카페 알려주실 분?</li>
                             </ul>
                             <div style="padding: 10px;"></div>
-                            <button type="button" class="btn btn-brown">질문 올리기</button>
+                            <button type="button" class="btn btn-brown" onclick="">질문 올리기</button>
                             <div style="padding-bottom:40px;"></div>
                         </div>
 
@@ -203,12 +204,12 @@
                                 <li class="list-group-item">같이 떠나는 게시글 7</li>
                         </ul>
                         <div style="padding: 10px;"></div>
-                        <button type="button" class="btn btn-brown">질문 올리기</button>
+                        <button type="button" class="btn btn-brown" onclick="">게시글 올리기</button>
                         <div style="padding-bottom:40px;"></div>
                     </div>
                </div>
 
-               <div class="col-12 col-md-6 col-lg-6">
+      <!--  <div class="col-12 col-md-6 col-lg-6 ">
                 <div>
                         <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">신고한 게시글</h6>
                         <span style="color:#A66129">5</span>
@@ -224,7 +225,7 @@
                         <li class="list-group-item">게시글이 삭제되었습니다.</li>
                 </ul>
                 <div style="padding-bottom:40px;"></div>
-            </div>
+            </div> -->
        </div>
                 
                 <div style="padding : 20px;" ></div>

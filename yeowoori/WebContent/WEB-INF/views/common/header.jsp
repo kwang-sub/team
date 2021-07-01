@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
-    <style>
+    <style type="text/css">
         * {  font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
         body{padding-top: 50px;}
         a{text-decoration: none; color:black;}
@@ -152,20 +152,20 @@
 
         <%-- 로그인 실패와 같은 메시지가 서버로부터 전달되어 온 경우 출력 --%>
 	    <c:if test="${!empty title }">
-		<script>
-			swal({
-				"icon" : "${icon}",
-				"title" : "${title}",
-				"text" : "${text}"
-			})
-		</script>
-		
-		<%-- 특정 스코프에 있는 속성(변수)를 제거 할 수있음 --%>
-		<%-- 서버로부터 전달 받은 메세지를 1회 출력후 제거 (반복 출력되지 않는다.) --%>
-		<c:remove var="text"/>
-		<c:remove var="icon"/>
-		<c:remove var="title"/>
-	</c:if>
+			<script>
+				swal({
+					"icon" : "${icon}",
+					"title" : "${title}",
+					"text" : "${text}"
+				})
+			</script>
+			
+			<%-- 특정 스코프에 있는 속성(변수)를 제거 할 수있음 --%>
+			<%-- 서버로부터 전달 받은 메세지를 1회 출력후 제거 (반복 출력되지 않는다.) --%>
+			<c:remove var="text"/>
+			<c:remove var="icon"/>
+			<c:remove var="title"/>
+		</c:if>
         
 
 </body>
