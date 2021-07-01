@@ -9,7 +9,7 @@
     <title>질문게시판</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
 <style>
      #q-search{
             height: 300px;
@@ -154,6 +154,7 @@
            }
        }
 </style>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
     <div class="container">
         <div id="q-search">
@@ -224,9 +225,8 @@
 		                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
 		                    <div class="comments">좋아요</div>
 		                </a>
-		                <a class="report" href="#">신고</div>
-		                    
-		            </div>
+		                <a class="report" href="#">신고</a>
+		         	</div>
 		            <c:if test="${!empty board.fileName[0] }">
 		            	<div class="q-img" style="background-image: url('${contextPath}/${board.filePath[0]}${board.fileName[0]}'); float:right;"></div>
 		            </c:if>
@@ -237,54 +237,11 @@
         </c:if>
 
 
-		<c:set var = "pageURL" value="list?type=${pagination.boardType}"/>
+		<c:set var = "pageURL" value="list2?type=2"/>
         <c:set var = "prev" value="${pageURL }&cp=${pagination.prevPage}"/>
         <c:set var = "next" value="${pageURL }&cp=${pagination.nextPage}"/>
            
-        <div class="pagination-box row" style=";">
-        	<ul class="pagination">
-           		<c:if test="${pagination.currentPage>pagination.pageSize }">
-					<li><a class="page-link" href="${prev }">&lt;&lt;</a></li>          		
-           		</c:if>	
-           		<c:if test="${pagination.currentPage>2 }">
-					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}">&lt;</a></li>                 		
-           		</c:if>	
-           		
-           		<c:forEach var="p" begin="${pagination.startPage }" end="${pagination.endPage }">
-           			<li>
-           				<c:choose>
-           					<c:when test="${pagination.currentPage==p }">
-           						<a class="page-link">${p}</a>
-           					</c:when>
-           					<c:otherwise>
-           						<c:if test="${!empty param.area }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&area=${param.area}">${p}</a>
-           						</c:if>
-           						<c:if test="${!empty param.category }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}">${p}</a>
-           						</c:if>
-           						<c:if test="${!empty param.category && !empty param.area }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}&area=${param.area}">${p}</a>
-           						</c:if>
-           						<c:if test="${empty param.category && empty param.area }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
-           						</c:if>
-           					</c:otherwise>
-           				</c:choose>
-           			
-           			</li>
-           		</c:forEach>
-           		
-           		<c:if test="${pagination.currentPage<pagination.maxPage }">
-					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
-           		</c:if>	
-           		<c:if test="${pagination.currentPage<pagination.maxPage }">
-					<li><a class="page-link" href="${next}">&gt;&gt;</a></li>              		
-           		</c:if>	
-           	
-        	</ul>
-           
-        </div>
+        
     </div>
     <div style="padding : 40px;"></div>
 </body>
