@@ -164,9 +164,9 @@
             <button type="submit" class="btn-submit">등록</button>
         </form>
         <div style="padding: 10px;"></div>
-        <div class="user-profile-big" style="background-image: url(''); margin-bottom: 30px;"></div>
+        <div class="user-profile-big" style="background-image: url('${loginMember.memberProfile}'); margin-bottom: 30px;"></div>
         <div style="display: inline-block;">
-            <div class="user-name" style="font-size: 14px; margin-left: 0px;">유저닉네임</div>
+            <div class="user-name" style="font-size: 14px; margin-left: 0px;">${loginMember.memberNickname }</div>
             <div style="display: inline-block; margin-left: 10px; font-size: 14px;">댓글 내용</div>
             <div>
                 <div class="time" style="margin-left: 0px; margin-right: 20px;">1시간 전</div>
