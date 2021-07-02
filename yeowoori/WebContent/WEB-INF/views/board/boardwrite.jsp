@@ -243,8 +243,11 @@
                         </span>
                         
                     </div>
-                    <c:if test="${param.type == 1 }">
                     
+                    
+                    <%-- <c:if test="${param.type == 1 }">
+                    
+                    </c:if> 해당구문 적용 확인 필요 타입에 따른 보이는거 처리 할시 파일 넘어가는게 제대로 작동안함--%>
                     
                         <div class="form-inline mb-2">
                             <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
@@ -273,7 +276,6 @@
                            
                         </div>
                     
-                    </c:if>
                     
                         <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote"></textarea>
                     
