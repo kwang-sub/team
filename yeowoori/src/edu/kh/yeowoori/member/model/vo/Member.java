@@ -13,7 +13,26 @@ public class Member {
     private String memberStatus;   
     private String memberGrade;
     private String memberProfile;
+    
+    private String filePath;
+    private String fileNm;
 	    
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getFileNm() {
+		return fileNm;
+	}
+
+	public void setFileNm(String fileNm) {
+		this.fileNm = fileNm;
+	}
+
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
@@ -115,12 +134,13 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw 
-				+ ", memberEmail=" + memberEmail + ", memberContent=" + memberContent + ", memberNickname="
-				+ memberNickname + ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberGrade="
-				+ memberGrade + ", memberProfile=" + memberProfile +"]";
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberEmail="
+				+ memberEmail + ", memberContent=" + memberContent + ", memberNickname=" + memberNickname
+				+ ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberGrade=" + memberGrade
+				+ ", memberProfile=" + memberProfile + ", filePath=" + filePath + ", fileNm=" + fileNm + "]";
 	}
 
+	
 	
 	
 	
