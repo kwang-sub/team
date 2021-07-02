@@ -22,6 +22,15 @@ public class BoardService {
 		int result = 0;
 		if(boardNo>0) {
 			board.setBoardNo(boardNo);
+			String boardContent = board.getBoardContent();
+			
+			replaceParameter(boardContent);
+			board.setBoardTitle(replaceParameter(board.getBoardTitle()));
+			boardContent = boardContent.replaceAll("\r\n", "<br>");
+			board.setBoardContent(boardContent);
+			
+			System.out.println(board);
+			
 			result = dao.insertBoard(conn, board, boardType);
 			if(result > 0) {
 				for(Attachment at : atList) {
@@ -43,5 +52,19 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	
+	   // 크로스 사이트 스크립트 방지 메소드
+	   private String replaceParameter(String param) {
+	      String result = param;
+	      if(param != null) {
+	         result = result.replaceAll("&", "&amp;");
+	         result = result.replaceAll("<", "&lt;");
+	         result = result.replaceAll(">", "&gt;");
+	         result = result.replaceAll("\"", "&quot;");
+	      }
+	      
+	      return result;
+	   }
 
 }
