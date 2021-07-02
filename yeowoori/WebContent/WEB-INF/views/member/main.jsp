@@ -128,7 +128,7 @@
     <div class="col-1">
     </div>
     <div class="col-10 jumbotron jumbotron-fluid con" id="jumbotron">
-        <a href="#" style="color:black;">
+        <a href="${contextPath}/homeBoard?area=1" style="color:black;">
             <div class="area northwest" id="northwest">
                 <br>
                 <div class="content">
@@ -142,7 +142,7 @@
             </div>
 
         </a>
-        <a href="#" style="color:black;">
+        <a href="${contextPath}/homeBoard?area=4" style="color:black;">
             <div class="area northeast" id="northeast">
                 <br>
                 <div class="content">
@@ -155,7 +155,7 @@
             </div>
 
         </a>
-        <a href="#" style="color:black;">
+        <a href="${contextPath}/homeBoard?area=2" style="color:black;">
             <div class="area southwest" id="southwest">
                 <br>
                 <div class="content">
@@ -168,7 +168,7 @@
             </div>
 
         </a>
-        <a href="#" style="color:black;">
+        <a href="${contextPath}/homeBoard?area=3" style="color:black;">
             <div class="area southeast" id="southeast">
                 <br>
                 <div class="content">
