@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Board {
 	private int boardNo;
-	private String boardtitle;
+	private String boardTitle;
 	private String categoryName;
 	private String areaCategory;
 	private String memberNickname;
@@ -14,8 +14,37 @@ public class Board {
 	private String boardContent;
 	private String memberContent;
 	private String memberProfile;
+	private int commentCount;
+	private int likeCount;
+	private int categoryCode;
+	private int areaCode;
+	private int memberNo;
 	
 	
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public int getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+	public int getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
+	}
+
 	public String getMemberProfile() {
 		return memberProfile;
 	}
@@ -26,6 +55,23 @@ public class Board {
 
 	private List<String> filePath;
 	private List<String> fileName;
+	
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
 	public String getBoardContent() {
 		return boardContent;
 	}
@@ -55,12 +101,12 @@ public class Board {
 		this.boardNo = boardNo;
 	}
 
-	public String getBoardtitle() {
-		return boardtitle;
+	public String getBoardTitle() {
+		return boardTitle;
 	}
 
-	public void setBoardtitle(String boardtitle) {
-		this.boardtitle = boardtitle;
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
 
 	public String getCategoryName() {
@@ -121,11 +167,18 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", boardtitle=" + boardtitle + ", categoryName=" + categoryName
+		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", categoryName=" + categoryName
 				+ ", areaCategory=" + areaCategory + ", memberNickname=" + memberNickname + ", readCount=" + readCount
 				+ ", createDate=" + createDate + ", boardContent=" + boardContent + ", memberContent=" + memberContent
-				+ ", memberProfile=" + memberProfile + ", filePath=" + filePath + ", fileName=" + fileName + "]";
+				+ ", memberProfile=" + memberProfile + ", commentCount=" + commentCount + ", likeCount=" + likeCount
+				+ ", categoryCode=" + categoryCode + ", areaCode=" + areaCode + ", memberNo=" + memberNo + ", filePath="
+				+ filePath + ", fileName=" + fileName + "]";
 	}
+	
+	
+	
+
+
 
 
 	

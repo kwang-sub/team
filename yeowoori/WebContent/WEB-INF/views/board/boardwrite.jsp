@@ -182,18 +182,18 @@
 
             </div>
             <div class="col-12 col-lg-12">
-                <form action="#" onsubmit="return boardcheck();">
+                <form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
 
-
+							
                     <div>
                         <h3>게시글올리기</h3>
                     </div>
                     <div style="padding : 10px;"></div>
                     <div>
-                        <select name="category" id="category" style="color: grey; height: 40px; max-width: 20%;">
-                            <option value="여행">여행</option>
-                            <option value="같이떠나요">같이떠나요</option>
-                            <option value="질문">질문</option>
+                        <select name="type" id="category" style="color: grey; height: 40px; max-width: 20%;">
+                            <option value="1">여행</option>
+                            <option value="2">질문</option>
+                            <option value="3">같이떠나요</option>
                         </select>
                         <input type="text" name="title" id="title" size="80" placeholder="제목"
                             style="height: 40px; width: 400px; max-width: 55%;">
@@ -204,15 +204,15 @@
                         <div style="color: grey; display: inline-block; margin-right: 10px; margin-bottom: 10px;">태그 선택
                         </div>
                         <div class="area" style="display: inline-block; margin-bottom: 10px;">
-                            <input type="radio" id="mood" name="tag" value="분위기맛집">
+                            <input type="radio" id="mood" name="category" value="1">
                             <label for="mood">분위기맛집</label>
-                            <input type="radio" id="walk" name="tag" value="산책코스">
+                            <input type="radio" id="walk" name="category" value="2">
                             <label for="walk">산책코스</label>
-                            <input type="radio" id="couple" name="tag" value="커플데이트">
+                            <input type="radio" id="couple" name="category" value="3">
                             <label for="couple">커플데이트</label>
-                            <input type="radio" id="cafe" name="tag" value="카페투어">
+                            <input type="radio" id="cafe" name="category" value="4">
                             <label for="cafe">카페투어</label>
-                            <input type="radio" id="etc" name="tag" value="기타" checked>
+                            <input type="radio" id="etc" name="category" value="5" checked>
                             <label for="etc">기타</label>
                         </div>
                     </div>
@@ -220,13 +220,13 @@
                         <div style="color: grey; display: inline-block; margin-right: 10px; margin-bottom: 10px;">지역 선택
                         </div>
                         <span class="area">
-                            <input type="radio" id="southwest" name="area" value="southwest" checked>
-                            <label for="southwest">서남</label>
-                            <input type="radio" id="southeast" name="area" value="southeast">
-                            <label for="southeast">동남</label>
-                            <input type="radio" id="northwest" name="area" value="northwest">
+                            <input type="radio" id="northwest" name="area" value="1" checked>
                             <label for="northwest">서북</label>
-                            <input type="radio" id="northeast" name="area" value="northeast">
+                            <input type="radio" id="southwest" name="area" value="2" >
+                            <label for="southwest">서남</label>
+                            <input type="radio" id="southeast" name="area" value="3">
+                            <label for="southeast">동남</label>
+                            <input type="radio" id="northeast" name="area" value="4">
                             <label for="northeast"> 동북 </label>
                         </span>
                     </div>
@@ -242,17 +242,11 @@
                                 <label for="thumbnail">대표</label>
                                 <input class="upload-name" value="파일선택" disabled="disabled">
 
-                                <input type="file" id="thumbnail" name="thumbnail" class="upload-hidden">
+                                <input type="file" id="thumbnail" name="img0" class="upload-hidden">
                             </span>
                         </span>
                         
                     </div>
-
-                    
-                        
-        
-                      
-        
                         <div class="form-inline mb-2">
                             <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
                             <div class="mr-2 boardImg" id="contentImgArea">
@@ -274,9 +268,9 @@
                             <!--  multiple 속성
                                 - input 요소 하나에 둘 이상의 값을 입력할 수 있음을 명시 (파일 여러개 선택 가능)
                              -->
-                            <input type="file" id="img0" name="img0" onchange="LoadImg(this,0)"> 
-                            <input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
-                            <input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
+                            <input type="file" id="img0" name="img1" onchange="LoadImg(this,0)"> 
+                            <input type="file" id="img1" name="img2" onchange="LoadImg(this,1)"> 
+                            <input type="file" id="img2" name="img3" onchange="LoadImg(this,2)"> 
                            
                         </div>
                     

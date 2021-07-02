@@ -123,42 +123,76 @@
 <body>
 
 
-	${boardList }
+	
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include> 
     <div class="container">
-        <form class="bg-white category-select" action="#" method="GET">
-            
-            <div class="btn-group category-sm-btn">
-                <button class="btn btn-li btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  현재 카테고리
-                </button>
-                <div class="dropdown-menu">
-                    <a href="#">전체</a><br>
-                    <a href="#" >분위기 맛집</a><br>
-                    <a href="#">산책코스</a><br>
-                    <a href="#">커플데이트</a><br>
-                    <a href="#">카페투어</a><br>
-                    <a href="#" >기타</a><br>
-                </div>
-              </div>
-              
-        </form>
-        <form class="category-btn" action="#" method="GET">
-            <div style="padding:10px;"></div>
-            <button class="btn btn-light category-selected" name="category" value="전체">전체</button>
-            <button class="btn btn-light category-unselected" name="category" value="분위기맛집">분위기맛집</button>
-            <button class="btn btn-light category-unselected" name="category" value="산책코스">산책코스</button>
-            <button class="btn btn-light category-unselected" name="category" value="커플데이트">커플데이트</button>
-            <button class="btn btn-light category-unselected" name="category" value="카페투어">카페투어</button>
-            <button class="btn btn-light category-unselected" name="category" value="기타">기타</button>
-            <div style="padding : 20px"></div>
-        </form>
         
+        
+                    <c:if test="${empty param.area }">
+                    	<form class="bg-white category-select" action="#" method="GET">
+            
+				            <div class="btn-group category-sm-btn">
+				                <button class="btn btn-li btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				                  현재 카테고리
+				                </button>
+				                <div class="dropdown-menu">
+				                    <a href="/yeowoori/board/list?type=1">전체</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=1">분위기맛집</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=2">산책코스</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=3">커플데이트</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=4">카페투어</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=5" >기타</a><br>
+				                </div>
+				              </div>
+				              
+				        </form>
+				        <form class="category-btn" action="#" method="GET">
+				            <div style="padding:10px;"></div>
+				            <a class="btn btn-light category-selected" href="/yeowoori/board/list?type=1">전체</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=1">분위기맛집</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=2">산책코스</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=3">커플데이트</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=4">카페투어</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=5">기타</a>
+				            <div style="padding : 20px"></div>
+				        </form>
+                    </c:if>
+                    <c:if test="${!empty param.area }">
+                    	<form class="bg-white category-select" action="#" method="GET">
+            
+				            <div class="btn-group category-sm-btn">
+				                <button class="btn btn-li btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				                  현재 카테고리
+				                </button>
+				                <div class="dropdown-menu">
+				                    <a href="/yeowoori/board/list?type=1">전체</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=1">분위기맛집</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=2">산책코스</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=3">커플데이트</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=4">카페투어</a><br>
+				                    <a href="/yeowoori/board/list?type=1&category=5" >기타</a><br>
+				                </div>
+				              </div>
+				              
+				        </form>
+				        <form class="category-btn" action="#" method="GET">
+				            <div style="padding:10px;"></div>
+				            <a class="btn btn-light category-selected" href="/yeowoori/board/list?type=1&area=${param.area }">전체</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=1&area=${param.area }">분위기맛집</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=2&area=${param.area }">산책코스</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=3&area=${param.area }">커플데이트</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=4&area=${param.area }">카페투어</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=5&area=${param.area }">기타</a>
+				            <div style="padding : 20px"></div>
+				        </form>
+                    
+                    </c:if>
+                    
         <div class="" style="height: 35px;">
-            <form action="${contextPath}/boardwrite" method="GET">
+            <a href="${contextPath}/boardwrite?cp=${param.cp}&type=${param.type}" >
     
                 <button id="write-btn" class="rounded-circle">+</button>
-            </form>
+            </a>
 
         </div>
         <div class="row main">
@@ -171,10 +205,12 @@
         	</c:when>
         
         	<c:otherwise>
+        	
+        		
+        	
         		<c:forEach items="${boardList }" var="board">
         		
 	                            
-        		
 	                            
         		
         		
@@ -190,7 +226,7 @@
 	                            <c:choose>
 	                            	<c:when test="${!empty board.memberProfile }">
 	                            	
-	                                <img src="${board.memberProfile}" class=" rounded-circle" alt="">
+	                                <img src="${contextPath}${board.memberProfile}" class=" rounded-circle" alt="">
 	                            	</c:when>
 	                            	
 	                            	<c:otherwise>
@@ -228,11 +264,11 @@
 	                            <div class="col-xl-12" style="padding-top: 3px; padding-bottom: 5px;">
 	                                <span style="padding-left: 5px;">
 	                                    <img src="https://drive.google.com/uc?id=1qxz-wF69nTfWlkXBZ70xkWTjO_yjeblU" style="height: 20px; width: auto;">
-	                                    <span style="margin-left: 5px; padding-top: 10px;">15</span>
+	                                    <span style="margin-left: 5px; padding-top: 10px;">${board.commentCount }</span>
 	                                </span>
 	                                <span style="float: right; padding-right: 5px;">
 	                                        <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" style="height: 20px; width: auto;" alt="">
-	                                        <span style="margin-left: 5px;">30</span>
+	                                        <span style="margin-left: 5px;">${board.likeCount }</span>
 	                                </span>
 	                            </div>
 	                        </div>
@@ -257,6 +293,9 @@
             <c:set var = "next" value="${pageURL }&&cp=${pagination.nextPage}"/>
             
             
+            
+            <!-- 페이지 버튼 누를시 쿼리스트링 값 유지 되는법 확인하기  -->
+            
            
            <div class="pagination-box row" style=";">
            	<ul class="pagination">
@@ -274,7 +313,18 @@
            						<a class="page-link">${p}</a>
            					</c:when>
            					<c:otherwise>
-           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
+           						<c:if test="${!empty param.area }">
+	           						<a class="page-link" href="${pageURL}&cp=${p}&area=${param.area}">${p}</a>
+           						</c:if>
+           						<c:if test="${!empty param.category }">
+	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}">${p}</a>
+           						</c:if>
+           						<c:if test="${!empty param.category && !empty param.area }">
+	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}&area=${param.area}">${p}</a>
+           						</c:if>
+           						<c:if test="${empty param.category && empty param.area }">
+	           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
+           						</c:if>
            					</c:otherwise>
            				</c:choose>
            			

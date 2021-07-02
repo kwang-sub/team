@@ -13,9 +13,42 @@
 		GROUP BY BOARD_NM
 	</entry>
 	
+	<!-- 지역따른 게시글  수 + 게시판 이름 조회  -->
+	<entry key="areaGetListCount">
+		SELECT COUNT(*),BOARD_NM
+		FROM BOARD
+		JOIN BOARD_TYPE USING(BOARD_TYPE_NO)
+		WHERE BOARD_TYPE_NO=?
+		AND BOARD_STATUS ='Y'
+        AND AREA_CATEGORY_CD=?
+		GROUP BY BOARD_NM
+	
+	</entry>
+	<entry key="categoryGetListCount">
+		SELECT COUNT(*),BOARD_NM
+		FROM BOARD
+		JOIN BOARD_TYPE USING(BOARD_TYPE_NO)
+		WHERE BOARD_TYPE_NO=?
+		AND BOARD_STATUS ='Y'
+        AND CATEGORY_CD=?
+		GROUP BY BOARD_NM
+	
+	</entry>
+	<entry key="categoryAreaGetListCount">
+		SELECT COUNT(*),BOARD_NM
+		FROM BOARD
+		JOIN BOARD_TYPE USING(BOARD_TYPE_NO)
+		WHERE BOARD_TYPE_NO=?
+		AND BOARD_STATUS ='Y'
+        AND CATEGORY_CD=?
+        AND AREA_CATEGORY_CD=?
+		GROUP BY BOARD_NM
+	
+	</entry>
+	
 	
 	<!-- 게시글 목록 조회(페이징 처리 적용) -->
-	<entry key="selectBordList">
+	<entry key="selectBoardList">
 		SELECT*FROM
 			(SELECT ROWNUM RNUM, A.* FROM
 			    (SELECT * FROM BOARD_LIST
@@ -23,6 +56,41 @@
 			    AND board_type_no = ?
 			    ORDER BY BOARD_NO DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
+		
 	
+	</entry>
+	<!-- 지역 카테고리 적용된 게시글 조회  -->
+	<entry key="areaSelectBoardList">
+		SELECT*FROM
+			(SELECT ROWNUM RNUM, A.* FROM
+			    (SELECT * FROM BOARD_LIST
+			    WHERE board_status = 'Y' 
+			    AND board_type_no = ?
+		AND AREA_CATEGORY_CD = ?
+			    ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 카테고리 적용된 게시글 조회 -->
+	<entry key="categorySelectBoardList">
+	SELECT*FROM
+			(SELECT ROWNUM RNUM, A.* FROM
+			    (SELECT * FROM BOARD_LIST
+			    WHERE board_status = 'Y' 
+			    AND board_type_no = ?
+			AND CATEGORY_CD = ?
+			    ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="areaCategorySelectBoardList">
+	SELECT*FROM
+			(SELECT ROWNUM RNUM, A.* FROM
+			    (SELECT * FROM BOARD_LIST
+			    WHERE board_status = 'Y' 
+			    AND board_type_no = ?
+		AND CATEGORY_CD = ?
+		AND AREA_CATEGORY_CD = ?
+			    ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 </properties>

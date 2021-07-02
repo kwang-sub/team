@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.80.0">
-    <title>로그인</title>
+ 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <title>로그인</title>
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -91,7 +92,7 @@ body {
     
 <form class="form-signin" action="login" method="post">
   <a href="#">
-    <img class="mb-4" id="logo-img" src="https://drive.google.com/uc?id=19liz0I53xhs6UEJQ7PG_xpQEEbBq1tGw">
+    <img class="mb-4" id="logo-img" src="${contextPath}/resources/img/logo.png">
   </a>
 
   <input type="text" name="inputId" id="inputId" class="form-control" placeholder="아이디" required autofocus>
@@ -103,7 +104,18 @@ body {
   </p>
 </form>
 
-
+    <c:if test="${!empty title }">
+			<script>
+				swal({
+					"icon" : "${icon}",
+					"title" : "${title}",
+					"text" : "${text}"
+				})
+			</script>
+			<c:remove var="text"/>
+			<c:remove var="icon"/>
+			<c:remove var="title"/>
+	</c:if>
     
   </body>
 </html>

@@ -18,17 +18,30 @@ public class SelectBoardService {
 	/** 페이징 처리 객체 생성용 service
 	 * @param cp
 	 * @param boardType
+	 * @param category 
+	 * @param area 
 	 * @return pagination
 	 */
-	public Pagination getPagination(int cp, int boardType) throws Exception {
+	public Pagination getPagination(int cp, int boardType, int area, int category) throws Exception {
 		
 		
 		Connection conn = getConnection();
+		Map<String, Object> map = null;
+		
 //		DB에서 전체 게시글 수 +게시판 이름을 얻어옴
-		Map<String, Object> map = dao.getListCount(conn, cp, boardType);
+		if(area!=0 && category==0) {
+			map = dao.getListCount(conn, cp, boardType, area);
+		}else if(area==0 && category !=0 ) {
+			map = dao.getListCount(cp, conn, boardType, category);
+		}else if(area!=0 && category != 0) {
+			map = dao.getListCount(cp, conn, boardType, category, area);
+		}else {
+			map = dao.getListCount(conn, cp, boardType);
+		}
+		
 		close(conn);
 		
-		int listCount = (int)map.get("listCount");
+		int listCount = (map.get("listCount")==null) ? 0 : (int)map.get("listCount");
 		String boardName = (String)map.get("boardName");
 		
 		
@@ -39,12 +52,26 @@ public class SelectBoardService {
 
 	/**게시글 목록 조회
 	 * @param pagination
-	 * @return
+	 * @param category 
+	 * @param area 
+	 * @return boardList
 	 * @throws Exception
 	 */
-	public List<Board> selectBoardList(Pagination pagination) throws Exception {
+	public List<Board> selectBoardList(Pagination pagination, int area, int category) throws Exception {
 		Connection conn = getConnection();
-		List<Board> boardList = dao.selectBoardList(conn,pagination);
+		
+		List<Board> boardList = null;
+		if(area != 0 && category == 0) {
+			boardList = dao.selectBoardList(conn, area, pagination);
+		}else if (area == 0 && category != 0) {
+			boardList = dao.selectBoardList(category, conn, pagination);
+		}else if (area != 0 && category != 0) {
+			boardList = dao.selectBoardList(category, conn, pagination, area);
+			
+		}else {
+			boardList = dao.selectBoardList(conn, pagination);
+		}
+		
 		close(conn);
 		return boardList;
 	}

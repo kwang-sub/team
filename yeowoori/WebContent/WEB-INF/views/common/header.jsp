@@ -16,16 +16,22 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
-    <style>
+    <style type="text/css">
         * {  font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
         body{padding-top: 50px;}
-        a{color:black;}
-        a:hover{color:#A66129;}
-        #icons{position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
-        padding-top: 10px; padding-left: 6%; padding-right: 6%; padding-bottom:10px; 
-        background-color: white;
-        height: 50px;
-        z-index: 1;} 
+        a{text-decoration: none; color:black;}
+        a:hover{text-decoration: none; color:#A66129;}
+        a:visited{
+            text-decoration: none;
+            color: black;
+        }
+        #icons{
+        	position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+	        padding-top: 10px; padding-left: 6%; padding-right: 6%; padding-bottom:10px; 
+	        background-color: white;
+	        height: 50px;
+	        z-index: 1;
+	     } 
         .icon{margin-left: 30px; float: right; }
         .menu{font-weight: 500; padding-right: 30px;}
         .color-grey{ color:grey; }
@@ -47,81 +53,14 @@
             margin-right: 0px;
         }
 
-        /*  ******************* */
-        #carousel-bg{
-            width: 100%; height: auto;
-            background-color: rgb(245, 245, 245);   
-            padding-left: 8%; padding-top: 30px; padding-right: 8%; padding-bottom: 10px;
-        }
-        .carousel-img1{
-            width: 500px; height: 400px;
-            max-width: 100%;
-            border: 1px solid black;
-            background-color:rgb(83, 83, 83);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: inline-block;
-            position: relative;
-        }
-        .carousel-cap{
-            color: white;
-            max-width: 100%;
-            height: 80px;
-            position: absolute;
-            top: 70%;
-            margin-left: 5%;
-            margin-right: 5%;
-        }
-        .carousel-img2{
-            width: 500px; height: 150px;
-            display: inline-block;
-            max-width: 100%;
-            background-color:rgb(83, 83, 83);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .carousel-btn{
-            border: 0px;
-            border-radius: 20px;
-            width: 80px;
-            height: 30px;
-        }
-        .notice-bar{
-            background-color: rgb(245, 245, 245);   
-            height: 30px;
-            margin-bottom: 10px;
-        }
-        .notice-content{
-            line-height: 2;
-            text-align: center;
-        }
-        .notice-content > a{
-            color: black;
-        }
-        .main-board{
-            max-width: 100%;
-            margin-bottom: 10px;
-        }
-        .more{
-            width: 70px; height: 25px;
-            background-color: #eee;
-            border-radius: 5px;
-            line-height: 1.8;
-            text-align: center;
-            float: right;
-            color: grey;
-            font-size: 14px;
-            margin-right: 10px;
-        }
+        
 </style>
 </head>
     <body>
         <div id="icons">
             <c:choose>
             	<c:when test="${empty loginMember}">
-            		<a href="login" class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></a>
+            		<a href="${contextPath}/login" class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></a>
             	</c:when>
             	<c:otherwise>
             		<div class="dropdownleft" style="float:right; margin:0px; padding:0px;">
@@ -129,8 +68,8 @@
 					    <span class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></span>
 					  </button>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					    <a class="dropdown-item" href="member/mypage">마이페이지</a>
-					    <a class="dropdown-item" href="logout">로그아웃</a>
+					    <a class="dropdown-item" href="${contextPath}/member/myPage">마이페이지</a>
+					    <a class="dropdown-item" href="${contextPath}/logout">로그아웃</a>
 					  </div>
 					</div>
             	</c:otherwise>
@@ -163,10 +102,10 @@
                 </button>
                 <ul class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active menu"><a class="nav-link" href="#">공지</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list4?type=4">공지</a></li>
                         <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list?type=1">여행</a></li>
-                        <li class="nav-item active menu"><a class="nav-link" href="#">질문</a></li>
-                        <li class="nav-item active menu"><a class="nav-link" href="#">같이 떠나요</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list2?type=2">질문</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list3?type=3">같이 떠나요</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
@@ -174,7 +113,7 @@
                               다른 지역 보기
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item color-grey" href="#">동북</a>
+                              <a class="dropdown-item color-grey" href="">동북</a>
                               <a class="dropdown-item color-grey" href="#">서남</a>
                               <a class="dropdown-item color-grey" href="#">서북</a>
                             </div>
@@ -213,20 +152,20 @@
 
         <%-- 로그인 실패와 같은 메시지가 서버로부터 전달되어 온 경우 출력 --%>
 	    <c:if test="${!empty title }">
-		<script>
-			swal({
-				"icon" : "${icon}",
-				"title" : "${title}",
-				"text" : "${text}"
-			})
-		</script>
-		
-		<%-- 특정 스코프에 있는 속성(변수)를 제거 할 수있음 --%>
-		<%-- 서버로부터 전달 받은 메세지를 1회 출력후 제거 (반복 출력되지 않는다.) --%>
-		<c:remove var="text"/>
-		<c:remove var="icon"/>
-		<c:remove var="title"/>
-	</c:if>
+			<script>
+				swal({
+					"icon" : "${icon}",
+					"title" : "${title}",
+					"text" : "${text}"
+				})
+			</script>
+			
+			<%-- 특정 스코프에 있는 속성(변수)를 제거 할 수있음 --%>
+			<%-- 서버로부터 전달 받은 메세지를 1회 출력후 제거 (반복 출력되지 않는다.) --%>
+			<c:remove var="text"/>
+			<c:remove var="icon"/>
+			<c:remove var="title"/>
+		</c:if>
         
 
 </body>
