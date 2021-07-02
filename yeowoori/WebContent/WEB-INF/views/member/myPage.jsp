@@ -116,7 +116,7 @@
             <h6 style="display: inline-block; font-weight: 500;">마이페이지</h6>
             <button class="btn btn-light category-selected" name="category" onclick="">나의활동</button>
             <button class="btn btn-light category-unselected" name="category" onclick="" >좋아요</button>
-            <button class="btn btn-light category-unselected" name="category" onclick="">알림</button>
+            <a class="btn btn-light category-unselected" href="${contextPath }/myPage/myNotice">알림</a>
             <button class="btn btn-light category-unselected" name="category" onclick="" >설정</button>
             <hr  align="center" style="border: solid #b6957c; border-width: 1px 0px 0px 0px; width:100%">
             <div style="padding : 20px"></div>

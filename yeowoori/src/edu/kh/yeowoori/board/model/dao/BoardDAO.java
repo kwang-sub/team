@@ -90,12 +90,14 @@ public class BoardDAO {
 		int result = 0;
 		String sql = prop.getProperty("insertAttachment");
 		try {
+			System.out.println(at);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, at.getFilePath());
 			pstmt.setString(2, at.getFileNm());
 			pstmt.setInt(3,at.getFileLevel());
 			pstmt.setInt(4, at.getBoardNo());
 			result = pstmt.executeUpdate();
+			System.out.println(result);
 		}finally {
 			close(pstmt);
 		}
