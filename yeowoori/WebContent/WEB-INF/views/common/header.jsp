@@ -85,18 +85,20 @@
                     <input  type="search" id="search-bar" name="search" placeholder="search"><button id="search-bar-btn" style="background-color: white; border: white;" ><img src="${contextPath}/resources/img/search.png" height="20px" ></button>
                 </form>
             </div>
-            <a href="#">
+  			<c:if test="${!empty area }">
+  			<a href="#">
 	            <div class="icon" id="area-icon" style="padding:0px;" >
 	                <div style="background-color: black; width: 40px; text-align: center; border-radius: 5px; color: white; font-weight: 500; display: inline-block; font-size: 13px;">
 	                    <span style="position: relative; top: 1px;">동남</span>
 	                </div>
 	            </div>
             </a>
+  			</c:if>
         </div>
         
         <div class="header navbar navbar-expand-lg navbar-light bg-white ">
             <div class="container">
-                <a class="navbar-brand" href="${contextPath}"><img src="${contextPath}/resources/img/logo.png" style="width: 150px;"></a>
+                <a class="navbar-brand" href="${contextPath}/homeBoard"><img src="${contextPath}/resources/img/logo.png" style="width: 150px;"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -113,6 +115,8 @@
                               다른 지역 보기
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item color-grey" href="">전체</a>
+                              <a class="dropdown-item color-grey" href="">동남</a>
                               <a class="dropdown-item color-grey" href="">동북</a>
                               <a class="dropdown-item color-grey" href="#">서남</a>
                               <a class="dropdown-item color-grey" href="#">서북</a>
