@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -190,13 +191,8 @@
                     </div>
                     <div style="padding : 10px;"></div>
                     <div>
-                        <select name="type" id="category" style="color: grey; height: 40px; max-width: 20%;">
-                            <option value="1">여행</option>
-                            <option value="2">질문</option>
-                            <option value="3">같이떠나요</option>
-                        </select>
                         <input type="text" name="title" id="title" size="80" placeholder="제목"
-                            style="height: 40px; width: 400px; max-width: 55%;">
+                            style="height: 40px; width: 500px; max-width: 55%;">
                         <button type="submit" class="btn" id="btn-label" style="float:right;">올리기</button>
                     </div>
                     <div style="padding :5px;"></div>
@@ -247,6 +243,9 @@
                         </span>
                         
                     </div>
+                    <c:if test="${param.type == 1 }">
+                    
+                    
                         <div class="form-inline mb-2">
                             <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
                             <div class="mr-2 boardImg" id="contentImgArea">
@@ -274,6 +273,7 @@
                            
                         </div>
                     
+                    </c:if>
                     
                         <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote"></textarea>
                     

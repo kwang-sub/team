@@ -60,6 +60,8 @@ public class BoardWrite extends HttpServlet {
 				String filePath = "resources/img";
 				switch(boardType) {//게시판 별로 경로 지정
 				case 1: filePath +="/tripboard/"; break;
+				case 2: filePath +="/questionboard/"; break;
+				case 3: filePath +="/togetherboard/"; break;
 				}
 				MultipartRequest mpRequest = new MultipartRequest(request, root+filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 				
@@ -80,17 +82,15 @@ public class BoardWrite extends HttpServlet {
 				for(Attachment a : atList) {
 					System.out.println(a);
 				}
-				
+			
 //				type, title, category,area, img0, img1, img2, memberNo,content
 				String boardTitle = mpRequest.getParameter("title");
 				String boardContent = mpRequest.getParameter("content");
 				int categoryCode = Integer.parseInt(mpRequest.getParameter("category"));
-				int area = Integer.parseInt(mpRequest.getParameter("crea"));
+				int area = Integer.parseInt(mpRequest.getParameter("area"));
 				
-				System.out.println("1 : " + mpRequest.getParameter("title"));
-				System.out.println("2 : " +mpRequest.getParameter("content"));
-				System.out.println("3 : " +Integer.parseInt(mpRequest.getParameter("category")));
-				System.out.println("4 : " +Integer.parseInt(mpRequest.getParameter("crea")));
+				
+				
 				
 				Board board = new Board();
 				board.setAreaCode(area);
@@ -98,14 +98,16 @@ public class BoardWrite extends HttpServlet {
 				board.setBoardContent(boardContent);
 				board.setBoardTitle(boardTitle);
 				board.setMemberNo(memberNo);
-				
 				int result = service.insertBoard(board, atList, boardType);
+				
+				
 				
 				if(result > 0) {
 					
 					icon = "success";
 					title = "게시글 등록성공";
-					path = request.getContextPath()+"/board/list";
+//				게시글 디테일 페이지 확정되면 수정필수!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					path = request.getContextPath()+"/board/list?type=1";
 				}else {
 					
 					icon = "error";
