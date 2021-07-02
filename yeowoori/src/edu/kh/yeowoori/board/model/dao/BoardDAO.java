@@ -19,7 +19,6 @@ public class BoardDAO {
 	private Properties prop = null;
 	
 	public BoardDAO() {
-//		member-query.xml 파일의 경로 얻어오기
 		String filePath = SelectBoardDAO.class.getResource("/edu/kh/yeowoori/sql/board/Board-query.xml").getPath();
 		try {
 			prop = new Properties();
@@ -46,7 +45,8 @@ public class BoardDAO {
 				
 			}
 		}finally {
-			close(conn);
+			close(rs);
+			close(stmt);
 		}
 		
 		return boardNo;
@@ -72,6 +72,7 @@ public class BoardDAO {
 			pstmt.setInt(6, boardType);
 			pstmt.setInt(7, board.getAreaCode());
 			result = pstmt.executeUpdate();
+			System.out.println(result);
 			
 		}finally {
 			close(pstmt);
