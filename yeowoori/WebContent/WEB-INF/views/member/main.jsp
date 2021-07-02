@@ -117,7 +117,7 @@
     <a href="${contextPath}/homeBoard">
     	<img src="${contextPath}/resources/img/logo.png" style="width:150px; margin-top:60px; margin-left : 120px;">
     </a>
-    <div style="display:inline-block; position:fixed; top:90px; line-height: 2; margin-left : 30px; color:grey;">
+    <div style="display:inline-block; position:absolute; top:90px; line-height: 2; margin-left : 30px; color:grey;">
     	지역을 선택해주세요.
     </div>
     
