@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.kh.yeowoori.board.model.service.HomeBoardService;
 import edu.kh.yeowoori.board.model.vo.Attachment;
 import edu.kh.yeowoori.board.model.vo.Board;
+import edu.kh.yeowoori.board.model.vo.Notice;
 
 @WebServlet("/homeBoard")
 public class HomeBoardServlet extends HttpServlet {
@@ -21,22 +22,55 @@ public class HomeBoardServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String uri = request.getRequestURI(); //요청 주소 				 
-		String contextPath = request.getContextPath();  //최상위 주소	 
-		
-		String path = null; //응답화면 주소 또는 경로
 		RequestDispatcher view = null; //요청 위임 객체 저장 참조 변수
 		
 		HomeBoardService service = new HomeBoardService();
 		
+		int area = request.getParameter("area") == null ? 0: Integer.parseInt(request.getParameter("area")) ;
+		request.getSession().setAttribute("area", area);
+		
 		try {
-			int area = Integer.parseInt(request.getParameter("area"));
 			
-			List<Board> boardList = service.selectHomeBoard(area);
+			List<Board> boardList = null;
+			List<Board> qBoardList = null;
+			List<Board> withBoardList = null;
 			
+			if(area ==0) {
+				
+				boardList = service.selectHomeTrip();
+				qBoardList = service.selectHomeOther();
+				
+				
+				
+			}else {
+				boardList = service.selectHomeBoard(area);
+				//System.out.println(boardList);
+				
+				int type = 2;
+				qBoardList = service.selectHomeQuestion(area, type);
+				
+				
+				type = 3;
+				withBoardList = service.selectHomeQuestion(area, type);
+				
+
+			}
+
 			if(boardList !=null) {
 				request.getSession().setAttribute("boardList", boardList);
-				request.getSession().setAttribute("area", area);
+			}
+			if(qBoardList != null ) {
+				request.getSession().setAttribute("qBoardList", qBoardList);
+			}
+			if(qBoardList != null ) {
+				request.getSession().setAttribute("withBoardList", withBoardList);
+			}
+			
+			List<Notice> noticeList = service.selectHomeNotice();
+			//System.out.println(noticeList);
+			
+			if(noticeList != null) {
+				request.getSession().setAttribute("noticeList", noticeList);
 			}
 			
 		}catch (Exception e) {

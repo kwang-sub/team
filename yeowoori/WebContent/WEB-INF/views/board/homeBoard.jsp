@@ -1,7 +1,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<c:set var="contextPath" scope="application"
+	value="${pageContext.servletContext.contextPath }"/>
     
 <!DOCTYPE html>
 <html lang="ko">
@@ -103,10 +106,11 @@
           <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false"><title> </title><rect width="100%" height="100%" fill="#f8f8f8"/><text x="50%" y="50%" fill="#777" dy=".3em"> </text></svg>
           <div class="container">
               <a href="#">
-                    <div class="bg-img" style="background-image: url('');"></div>
+                    <div class="bg-img" style="background-image: url(${contextPath}/${boardList[0].filePath[0]}${boardList[0].fileName[0]});"></div>
                     <div class="carousel-caption text-left">
-                    <h3 style="color: black;">Example headline.</h3>
-                    <p style="color: black;">Some representative placeholder content for the first slide of the carousel.</p>
+                    <h3 style="color: black;">${boardList[0].boardTitle }</h3>
+                    <c:set var="boardContent" value="${boardList[0].boardContent }"/>
+                    <p style="color: black;">${fn:substring(boardContent,0,100) }...</p>
                     </div>
                </a>
           </div>
@@ -116,10 +120,11 @@
           
           <div class="container">
                 <a href="#">
-                    <div class="bg-img" style="background-image: url('');"></div>
+                    <div class="bg-img" style="background-image: url(${contextPath}/${boardList[1].filePath[0]}${boardList[1].fileName[0]});"></div>
                     <div class="carousel-caption text-left">
-                    <h3 style="color: black;">Example headline.</h3>
-                    <p style="color: black;">Some representative placeholder content for the first slide of the carousel.</p>
+                    <h3 style="color: black;">${boardList[1].boardTitle }</h3>
+                    <c:set var="boardContent" value="${boardList[1].boardContent }"/>
+                    <p style="color: black;">${fn:substring(boardContent,0,100) }...</p>
                     </div>
                </a>
           </div>
@@ -129,10 +134,11 @@
           
           <div class="container">
                 <a href="#">
-                    <div class="bg-img" style="background-image: url('');"></div>
+                    <div class="bg-img" style="background-image: url(${contextPath}/${boardList[2].filePath[0]}${boardList[2].fileName[0]});"></div>
                     <div class="carousel-caption text-left">
-                    <h3 style="color: black;">Example headline.</h3>
-                    <p style="color: black;">Some representative placeholder content for the first slide of the carousel.</p>
+                   <h3 style="color: black;">${boardList[2].boardTitle }</h3>
+                    <c:set var="boardContent" value="${boardList[2].boardContent }"/>
+                    <p style="color: black;">${fn:substring(boardContent,0,100) }...</p>
                     </div>
                 </a>
            </div>
@@ -148,29 +154,22 @@
     </div>
     </div>
 
-        <div class="notice-bar">
+	<c:if test="${! empty noticeList }">
+	<c:forEach items="${noticeList}" var="notice">
+		<div class="notice-bar">
             <div class="notice-content">
                 <a href="#"> <!-- 해당 공지글로 이동-->
                     <img src="https://drive.google.com/uc?id=1Qa_8qymuVwaissFmndNUsXEIuHkOLq9H" style="width:20px">
-                    <span style="padding-left: 10px;"><a href="#">공지사항 1....</a></span>
+                    <span style="padding-left: 10px;">
+						<b>${notice.noticeTitle}</b>&nbsp;
+						${fn:substring(notice.noticeContent,0,20) }...
+                    </span>
                 </a>
             </div>
         </div>
-        <div class="notice-bar">
-            <div class="notice-content">
-                <a href="#"> <!-- 해당 공지글로 이동-->
-                    <img src="https://drive.google.com/uc?id=1Qa_8qymuVwaissFmndNUsXEIuHkOLq9H" style="width:20px">
-                    <span style="padding-left: 10px;"><a href="#">공지사항 2....</a></span>
-                </a>
-            </div>
-        </div>        <div class="notice-bar">
-            <div class="notice-content">
-                <a href="#"> <!-- 해당 공지글로 이동-->
-                    <img src="https://drive.google.com/uc?id=1Qa_8qymuVwaissFmndNUsXEIuHkOLq9H" style="width:20px">
-                    <span style="padding-left: 10px;"><a href="#">공지사항 3....</a></span>
-                </a>
-            </div>
-        </div>
+	</c:forEach>
+	</c:if>
+        
         <div style="padding: 30px;"></div>
         <div class="container">
             <div class="row">
@@ -180,8 +179,9 @@
                         <a class="more" href="#">더보기</a> <!--질문 게시판으로 이동-->
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="#">질문게시글 7개</a></li>
-
+                    	<c:forEach items="#{qBoardList}" var="qboard">
+                    	<li class="list-group-item"><a href="#">${qboard.boardTitle }</a></li>
+                    	</c:forEach>
                       </ul>
                 </div>
                 <div style="padding : 20px;"></div>
@@ -191,7 +191,9 @@
                         <a class="more" href="#">더보기</a> <!-- 같이 떠나요 게시판으로 이동-->
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="#">같이 떠나요 게시글 7개</a></li>
+                        <c:forEach items="#{withBoardList}" var="qboard">
+                    	<li class="list-group-item"><a href="#">${withboard.boardTitle }</a></li>
+                    	</c:forEach>
                       </ul>
                 </div>
             </div>

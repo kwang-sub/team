@@ -19,7 +19,14 @@ public class Board {
 	private int categoryCode;
 	private int areaCode;
 	private int memberNo;
-	
+
+	private List<String> filePath;
+	private List<String> fileName;
+
+	public Board() {
+		// TODO Auto-generated constructor stub
+	}
+
 	
 	public int getMemberNo() {
 		return memberNo;
@@ -53,8 +60,6 @@ public class Board {
 		this.memberProfile = memberProfile;
 	}
 
-	private List<String> filePath;
-	private List<String> fileName;
 	
 	public int getCommentCount() {
 		return commentCount;
@@ -89,9 +94,6 @@ public class Board {
 	}
 
 	
-	public Board() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getBoardNo() {
 		return boardNo;
