@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.kh.yeowoori.board.model.service.HomeBoardService;
+import edu.kh.yeowoori.board.model.vo.Attachment;
 import edu.kh.yeowoori.board.model.vo.Board;
 
 @WebServlet("/homeBoard")
@@ -33,19 +34,14 @@ public class HomeBoardServlet extends HttpServlet {
 			
 			List<Board> boardList = service.selectHomeBoard(area);
 			
-			
-					
 			if(boardList !=null) {
-				
-				
+				request.getSession().setAttribute("boardList", boardList);
+				request.getSession().setAttribute("area", area);
 			}
-			
-			
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 		view = request.getRequestDispatcher("/WEB-INF/views/board/homeBoard.jsp");
 		view.forward(request, response);

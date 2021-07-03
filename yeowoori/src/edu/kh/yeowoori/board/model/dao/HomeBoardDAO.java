@@ -54,14 +54,23 @@ public class HomeBoardDAO {
 		List<Board> boardList = new ArrayList<Board>();
 		String sql = prop.getProperty("selectHomeBoard");
 		try {
-			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, area);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setAreaCode(area);
+				
+				boardList.add(board);
+			}
 		}finally {
-			
+			close(rs);
+			close(pstmt);
 		}
-		
-		
-		
-		return null;
+		return boardList;
 	}
 
 }
