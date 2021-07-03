@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("loginMember", loginMember);
 				session.setMaxInactiveInterval(1800);
 				System.out.println(loginMember);
-				path = request.getContextPath();
+				path = request.getContextPath() + "/homeBoard";
 				
 				
 				
