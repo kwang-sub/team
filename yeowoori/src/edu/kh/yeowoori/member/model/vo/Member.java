@@ -16,7 +16,25 @@ public class Member {
     
     private String filePath;
     private String fileNm;
+    private String boardTitle;
+    private int count;
 	    
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+
 	public String getFilePath() {
 		return filePath;
 	}
@@ -146,10 +164,10 @@ public class Member {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberEmail="
 				+ memberEmail + ", memberContent=" + memberContent + ", memberNickname=" + memberNickname
 				+ ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberGrade=" + memberGrade
-
-				+ ", memberProfile=" + memberProfile + ", filePath=" + filePath + ", fileNm=" + fileNm + "]";
-
+				+ ", memberProfile=" + memberProfile + ", filePath=" + filePath + ", fileNm=" + fileNm + ", boardTitle="
+				+ boardTitle + "]";
 	}
+
 
 	
 	

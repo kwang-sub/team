@@ -3,14 +3,66 @@
 <properties>
 
 	<entry key="getMyTrip">
-		SELECT ROWNUM, FILE_PATH,FILE_NM,MEMBER_NO
+		SELECT ROWNUM, FILE_PATH,FILE_NM,MEMBER_NO,COUNT
 		FROM ATTACHMENT
 		LEFT JOIN BOARD USING (BOARD_NO)
+        JOIN (SELECT COUNT(*) COUNT,MEMBER_NO
+                FROM BOARD
+                WHERE BOARD_TYPE_NO =1
+                AND MEMBER_NO =?
+                AND BOARD_STATUS = 'Y'
+                GROUP BY  MEMBER_NO) USING (MEMBER_NO)
 		WHERE FILE_LEVEL = 0
 		AND MEMBER_NO = ?
 		AND BOARD_STATUS = 'Y'
 		AND BOARD_TYPE_NO=1
 		AND  ROWNUM &lt; 5
 		ORDER BY FILE_NO DESC
+	</entry>
+	<entry key="getMyQuestion">
+		SELECT ROWNUM, BOARD_TITLE, BOARD_NO,COUNT
+		FROM BOARD
+        JOIN (SELECT COUNT(*) COUNT,MEMBER_NO
+                FROM BOARD
+                WHERE BOARD_TYPE_NO =2
+                AND MEMBER_NO =?
+                AND BOARD_STATUS = 'Y'
+                GROUP BY  MEMBER_NO) USING (MEMBER_NO)
+		WHERE MEMBER_NO = ?
+		AND BOARD_STATUS = 'Y'
+		AND BOARD_TYPE_NO=2
+		AND  ROWNUM &lt; 7
+		ORDER BY BOARD_NO DESC
+	
+	</entry>
+	<entry key="getMyTogether">
+		SELECT ROWNUM, BOARD_TITLE, BOARD_NO,COUNT
+		FROM BOARD
+        JOIN (SELECT COUNT(*) COUNT,MEMBER_NO
+                FROM BOARD
+                WHERE BOARD_TYPE_NO =3
+                AND MEMBER_NO =?
+                AND BOARD_STATUS = 'Y'
+                GROUP BY  MEMBER_NO) USING (MEMBER_NO)
+		WHERE MEMBER_NO = ?
+		AND BOARD_STATUS = 'Y'
+		AND BOARD_TYPE_NO=3
+		AND  ROWNUM &lt; 7
+		ORDER BY BOARD_NO DESC
+	</entry>
+	<entry key="getBoardLikeCount">
+		SELECT COUNT(*) BOARD_LIKE,A.MEMBER_NO
+		FROM BOARD A
+		JOIN BOARD_LIKE USING (BOARD_NO)
+		WHERE A.MEMBER_NO =?
+		GROUP BY A.MEMBER_NO
+	</entry>
+	<entry key="getCommentLikeCount">
+	
+		SELECT COUNT(*) COMMENT_LIKE,A.MEMBER_NO
+		FROM "COMMENT" A
+		JOIN COMMENT_LIKE USING (COMMENT_NO)
+		WHERE A.MEMBER_NO =?
+		GROUP BY A.MEMBER_NO
 	</entry>
 </properties>

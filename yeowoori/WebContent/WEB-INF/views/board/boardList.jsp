@@ -117,6 +117,11 @@
 			margin-left: auto; 
 			margin-right: auto;
 		}
+		.bg-img{
+			background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+		}
 
     </style>
 </head>
@@ -248,13 +253,14 @@
 	                    <c:choose>
 	                    	<c:when test="${empty board.fileName[0] }">
 			                    <a href="#">
-			                    <img src="${contextPath}/resources/img/noimage.png" class="card-img-top" alt="...">
+			                    <div class="bg-img card-img-top" style="background-image: url(${contextPath}/resources/img/noimage.png);"></div>
 			                    </a>
 	                    	</c:when>
 	                    	<c:otherwise>
 	                    		<a href="#">
 	                    		
-			                    <img src="${contextPath}/${board.filePath[0]}${board.fileName[0]}" class="card-img-top" alt="...">
+			                    <div class="bg-img card-img-top" style="background-image: url(${contextPath}/${board.filePath[0]}${board.fileName[0]});"></div>
+
 	                    		</a>
 	                    	</c:otherwise>
 	                    </c:choose>

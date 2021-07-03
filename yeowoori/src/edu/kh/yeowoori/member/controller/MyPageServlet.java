@@ -31,7 +31,13 @@ public class MyPageServlet extends HttpServlet {
 		
 		try {
 			List<Member> myTrip =  service.getMyTrip(loginMember);
+			List<Member> myQuestion = service.getMyQuestion(loginMember);
+			List<Member> myTogether = service.getMyTogether(loginMember);
+			int likeCount = service.getLikeCount(loginMember);
+			request.setAttribute("myQuestion", myQuestion);
 			request.setAttribute("myTrip", myTrip);
+			request.setAttribute("myTogether", myTogether);
+			request.setAttribute("likeCount", likeCount);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

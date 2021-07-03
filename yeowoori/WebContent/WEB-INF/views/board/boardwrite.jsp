@@ -183,11 +183,36 @@
 
             </div>
             <div class="col-12 col-lg-12">
-                <form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
+            
+           
+            	<c:choose>
+            	
+            		<c:when test="${param.type == '1' }">
+                		<form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
+            		</c:when>
+            		
+            		<c:otherwise>
+                		<form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
+            		</c:otherwise>
+            		
+            	</c:choose>
+            	
+            
+            
 
 							
                     <div>
-                        <h3>게시글올리기</h3>
+                    <c:choose>
+                    	<c:when test="${param.type==1 }">
+                        <h3>여행 게시판</h3>
+                    	</c:when>
+                    	<c:when test="${param.type==2 }">
+                        <h3>질문 게시판</h3>
+                    	</c:when>
+                    	<c:when test="${param.type==3 }">
+                        <h3>같이 떠나요 게시판</h3>
+                    	</c:when>
+                    </c:choose>
                     </div>
                     <div style="padding : 10px;"></div>
                     <div>
@@ -299,8 +324,20 @@
                 alert("내용을 입력해주세요");
                 return false;
             }
-    
-    
+        } 
+        function boardcheck2(){
+            if($("#title").val().trim().length == 0){
+                alert("제목을 입력해주세요");
+                return false;
+            }
+            if($("#summernote").val().trim().length == 0){
+                alert("내용을 입력해주세요");
+                return false;
+            }
+            if(!$(".upload-hidden").val() ){
+            	alert("대표사진을 등록 해주세요");
+                return false;
+            }
         } 
         
         $(document).ready(function () {

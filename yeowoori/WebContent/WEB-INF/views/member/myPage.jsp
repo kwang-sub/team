@@ -131,7 +131,7 @@
                 <div style="padding-top: 15px; padding-bottom: 10px;">
                     <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" width="30px;">
                     <div style="padding-top: 15px; font-size: 14px; font-weight: 400;">좋아요</div>
-                    <div>130</div>
+                    <div>${likeCount }</div>
                 </div>
             </div>
 
@@ -142,8 +142,8 @@
                     <div class="col-12 col-md-6 col-lg-6"> 
                         <div>
                             <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">여행</h6>
-                            <span style="color:#A66129">17</span>
-                            <div class="show-all">전체보기</div>
+                            <span style="color:#A66129">내가 작성한 수 : ${myTrip[0].count }</span>
+                            <div class="show-all"><a href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}">전체보기</a></div>
                         </div>
                        
                         <c:forEach items="${myTrip }" var="my">
@@ -155,7 +155,7 @@
                         </c:forEach>
                         
                         <div style="padding: 3px;"></div>
-                        <button type="button" class="btn btn-brown" onclick="">여행 게시글 올리기</button>
+                        <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=1">여행 게시글 올리기</a>
                         <div style="padding-bottom:40px;"></div>
                     
                     </div>
@@ -165,20 +165,18 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div>
                                 <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">질문</h6>
-                                <span style="color:#A66129">17</span>
-                                <div class="show-all">전체보기</div>
+                                <span style="color:#A66129">내가 작성한 수 : ${myQuestion[0].count }</span>
+                                <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
                         <ul class="list-group">
-                                <li class="list-group-item">어디가 맛있나요?</li>
-                                <li class="list-group-item">종로구 맛집은 어디인가요</li>
-                                <li class="list-group-item">호캉스 추천 부탁</li>
-                                <li class="list-group-item">서울 여행 질문 있어요!</li>
-                                <li class="list-group-item">인스타 감성 카페 찾아요~</li>
-                                <li class="list-group-item">뷰맛집 카페 알려주실 분?</li>
-                                <li class="list-group-item">뷰맛집 카페 알려주실 분?</li>
+                        	<c:forEach items="${myQuestion }" var="my">
+                        	
+                                <li class="list-group-item">${my.boardTitle }</li>
+                        	</c:forEach>
+                                
                             </ul>
                             <div style="padding: 10px;"></div>
-                            <button type="button" class="btn btn-brown" onclick="">질문 올리기</button>
+                            <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=2">질문 올리기</a>
                             <div style="padding-bottom:40px;"></div>
                         </div>
 
@@ -187,20 +185,17 @@
                     <div class="col-12 col-md-6 col-lg-6" >
                         <div>
                                 <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">같이 떠나요</h6>
-                                <span style="color:#A66129">5</span>
-                                <div class="show-all">전체보기</div>
+                                <span style="color:#A66129">내가 작성한 수 : ${myTogether[0].count }</span>
+                                <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
                         <ul class="list-group">
-                                <li class="list-group-item">같이 떠나는 게시글 1</li>
-                                <li class="list-group-item">같이 떠나는 게시글 2 </li>
-                                <li class="list-group-item">같이 떠나는 게시글 3</li>
-                                <li class="list-group-item">같이 떠나는 게시글 4</li>
-                                <li class="list-group-item">같이 떠나는 게시글 5</li>
-                                <li class="list-group-item">같이 떠나는 게시글 6</li>
-                                <li class="list-group-item">같이 떠나는 게시글 7</li>
+                            <c:forEach items="${myTogether }" var="my">
+                        	
+                                <li class="list-group-item">${my.boardTitle }</li>
+                        	</c:forEach>
                         </ul>
                         <div style="padding: 10px;"></div>
-                        <button type="button" class="btn btn-brown" onclick="">게시글 올리기</button>
+                        <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=3">게시글 올리기</a>
                         <div style="padding-bottom:40px;"></div>
                     </div>
                </div>
