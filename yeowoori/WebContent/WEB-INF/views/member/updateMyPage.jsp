@@ -104,6 +104,10 @@ p {
 	margin-top : 30px;
 }
 
+.session-btn{
+ : left; 
+}
+
 
 
 </style>
@@ -127,6 +131,7 @@ p {
 
 			<div class="col-md-8 offset-md-2">
 				<h4 id="update" style="margin-left : 18%;">내 정보 수정</h4>
+				<a class="session-btn" href="">탈퇴하기</a>
 				<div class="bg-white rounded shadow-sm container p-3">
 					<form method="POST" action="" onsubmit="return pwdValidate();" class="form-horizontal" role="form" id="updateForm">
 
