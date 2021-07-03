@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html lang="ko">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>html문서 제목</title>
+        <title>검색 화면</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include> 
 	<style>
+	
         .card{
             border: none;
         }
@@ -218,19 +220,18 @@
 
     </style>
     <div class="container">
-    
-        <div class="row main">
-        
+    <div style="padding:10px"></div>
         <c:if test="${!empty tripBoardList}">
         <h5>여행 게시판</h5>
-        <div style="padding:10px"></div>
+        <div style="padding:10px; display:block;"></div>
         <c:forEach items="${tripBoardList }" var="board">
+        <div class="row main">
         	<div class="col-sm-6 col-md-4 card-block">
 	           <div class="card" style="width: 18rem; border: none;">
 	               <div class="card-head">
 	                    <table class="userProple">
 	                        <th style="padding-right: 5px;">
-	                           <img src="${contextPath}/resources/img/user.png" class=" rounded-circle" alt="">
+	                           <img src="${contextPath}/${board.memberProfile}" class=" rounded-circle" alt="">
 	                        </th>
 	                        <th>
 	                            <div>${board.memberNickname }</div>
@@ -267,15 +268,22 @@
 	                                </span>
 	                            </div>
 	                        </div>
-	                        <p class="card-text">${board.boardContent}</p>
+	                        <p class="card-text">${fn:substring(board.boardContent,0,40) }...</p>
 	                    </div>
 	                </div>
 	            </div>
-        		</c:forEach>
+	       </div>
+	       
+           </c:forEach>
+           <hr>
         </c:if>
+        
+        
+        <div style="padding :10px;"></div>
+        
         <c:if test="${!empty qBoardList}">
         <h5>질문 게시판</h5>
-        <div style="padding:5px"></div>
+        <div style="padding:5px "></div>
         <c:forEach items="${qBoardList }" var="board">
        			<div style="padding : 5px;">
 		            <div class="width65">
@@ -303,6 +311,9 @@
 		        </div>
         </c:forEach>
         </c:if>
+        
+       
+        <div style="padding :10px;"></div>
         
         <c:if test="${!empty withBoardList }">
         <h5>같이 떠나요 게시판</h5>
@@ -337,9 +348,11 @@
         </c:if>
         
         		
-        </div>
+        
     </div>
             
-
+	<div style="padding : 40px;"></div>
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

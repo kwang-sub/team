@@ -158,7 +158,7 @@
 	<c:forEach items="${noticeList}" var="notice">
 		<div class="notice-bar">
             <div class="notice-content">
-                <a href="#"> <!-- 해당 공지글로 이동-->
+                <a href="#">
                     <img src="https://drive.google.com/uc?id=1Qa_8qymuVwaissFmndNUsXEIuHkOLq9H" style="width:20px">
                     <span style="padding-left: 10px;">
 						<b>${notice.noticeTitle}</b>&nbsp;
