@@ -12,6 +12,7 @@ import java.util.Properties;
 
 
 import edu.kh.yeowoori.board.model.vo.Board;
+import edu.kh.yeowoori.board.model.vo.Notice;
 
 public class HomeBoardDAO {
 
@@ -59,9 +60,20 @@ public class HomeBoardDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Board board = new Board();
+				
 				board.setBoardNo(rs.getInt("BOARD_NO"));
 				board.setBoardTitle(rs.getString("BOARD_TITLE"));
 				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				
+				List<String> filePath = new ArrayList<String>();
+				List<String> fileName = new ArrayList<String>();
+				
+				filePath.add(rs.getString("FILE_PATH"));
+				fileName.add(rs.getString("FILE_NM"));
+				
+				board.setFilePath(filePath);
+				board.setFileName(fileName);
+				
 				board.setAreaCode(area);
 				
 				boardList.add(board);
@@ -73,4 +85,100 @@ public class HomeBoardDAO {
 		return boardList;
 	}
 
+	/**
+	 *  홈보드 공지글 목록 조회 DAO
+	 * @param conn
+	 * @return noticeList
+	 * @throws Exception
+	 */
+	public List<Notice> selectHomeNotice(Connection conn) throws Exception {
+		List<Notice> noticeList = new ArrayList<Notice>();
+		String sql = prop.getProperty("selectHomeNotice");
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Notice n = new Notice();
+				n.setNoticeTitle(rs.getString(1));
+				n.setNoticeContent(rs.getString(2));
+				n.setNoticeNo(rs.getInt(3));
+				noticeList.add(n);
+			}
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return noticeList;
+	}
+
+	/**
+	 * 홈보드 질문 목록 조회 DAO
+	 * @param conn
+	 * @param area
+	 * @param type 
+	 * @return boardList
+	 * @throws Exception
+	 */
+	public List<Board> selectHomeQuestion(Connection conn, int area, int type)throws Exception{
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = prop.getProperty("selectHomeQuestion");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, area);
+			pstmt.setInt(2, type);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board b = new Board();
+				b.setBoardNo(rs.getInt(1));
+				b.setBoardTitle(rs.getString(2));
+				b.setAreaCode(area);
+				boardList.add(b);
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return boardList;
+	}
+
+	/**
+	 * 홈보드 전체지역 여행게시글 목록 조회 DAO
+	 * @param conn
+	 * @return boardList
+	 * @throws Exception
+	 */
+	public List<Board> selectHomeTrip(Connection conn) throws Exception{
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = prop.getProperty("selectHomeTrip");
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				
+				List<String> filePath = new ArrayList<String>();
+				List<String> fileName = new ArrayList<String>();
+				
+				filePath.add(rs.getString("FILE_PATH"));
+				fileName.add(rs.getString("FILE_NM"));
+				
+				board.setFilePath(filePath);
+				board.setFileName(fileName);
+				
+				boardList.add(board);
+			}
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return boardList;
+	}
+	
+	
+	
+	
 }
