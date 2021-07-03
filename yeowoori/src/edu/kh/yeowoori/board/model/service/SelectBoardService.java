@@ -47,6 +47,24 @@ public class SelectBoardService {
 		
 		return new Pagination(cp, listCount, boardType, boardName);
 	}
+	
+	/** 내가 작성한글 페이지네이션처리
+	 * @param cp
+	 * @param memberNo
+	 * @param memberNo2 
+	 * @return
+	 * @throws Exception
+	 */
+	public Pagination getMyPagination(int cp, int boardType, int memberNo) throws Exception {
+		Connection conn = getConnection();
+		Map<String, Object> map = dao.getMyListCount(conn, cp, boardType,memberNo);
+		close(conn);
+		int listCount = (map.get("listCount")==null) ? 0 : (int)map.get("listCount");
+		String boardName = (String)map.get("boardName");
+		
+		return new Pagination(cp, listCount, boardType, boardName);
+	}
+
 
 
 
@@ -75,5 +93,22 @@ public class SelectBoardService {
 		close(conn);
 		return boardList;
 	}
+
+	/**	내가 작성한 게시글 목록 조회
+	 * @param pagination
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectBoardList(Pagination pagination, int memberNo) throws Exception {
+		Connection conn = getConnection();
+		List<Board> boardList = null;
+		boardList = dao.selectBoardList(conn, pagination, memberNo);
+		close(conn);
+		return boardList;
+	}
+
+
+
 
 }

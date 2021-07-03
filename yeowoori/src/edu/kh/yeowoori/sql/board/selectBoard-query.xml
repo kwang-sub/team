@@ -12,6 +12,16 @@
 		AND BOARD_STATUS ='Y'
 		GROUP BY BOARD_NM
 	</entry>
+	<!-- 내가 작성한 게시글 수 + 게시판 이름 조회 -->
+	<entry key="GetMyListCount">
+		SELECT COUNT(*),BOARD_NM
+		FROM BOARD
+		JOIN BOARD_TYPE USING(BOARD_TYPE_NO)
+		WHERE BOARD_TYPE_NO=?
+		AND BOARD_STATUS ='Y'
+        AND MEMBER_NO = ?
+		GROUP BY BOARD_NM
+	</entry>
 	
 	<!-- 지역따른 게시글  수 + 게시판 이름 조회  -->
 	<entry key="areaGetListCount">
@@ -90,6 +100,17 @@
 			    AND board_type_no = ?
 		AND CATEGORY_CD = ?
 		AND AREA_CATEGORY_CD = ?
+			    ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectMyBoardList">
+		SELECT*FROM
+			(SELECT ROWNUM RNUM, A.* FROM
+			    (SELECT * FROM BOARD_LIST
+			    WHERE board_status = 'Y' 
+			    AND board_type_no = ?
+			    AND MEMBER_NO = ?
 			    ORDER BY BOARD_NO DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
