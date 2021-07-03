@@ -2,6 +2,8 @@ package edu.kh.yeowoori.member.model.dao;
 
 
 import static edu.kh.yeowoori.common.JDBCTemplate.close;
+import static edu.kh.yeowoori.common.JDBCTemplate.close;
+import static edu.kh.yeowoori.common.JDBCTemplate.close;
 import static edu.kh.yeowoori.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
@@ -96,6 +98,73 @@ int result = 0;
 			
 			result = pstmt.executeUpdate();
 		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	/** 회원 가입 DAO
+	 * @param conn
+	 * @param member
+	 * @return result
+	 * @throws Exception
+	 */
+	public int signUp(Connection conn, Member member) throws Exception {
+
+		// 1) 결과 반환용 변수 선언
+				int result = 0;
+				
+				// 2) SQL구문을 properties에서 얻어오기
+				String sql = prop.getProperty("signUp");
+				
+				try {
+					// 3) preparedStatement 객체를 생성해서 SQL 세팅
+					pstmt = conn.prepareStatement(sql);
+					
+					// 4) 위치홀더에 알맞은 값 대입
+					pstmt.setString(1, member.getMemberId());
+					pstmt.setString(2, member.getMemberPw());
+					pstmt.setString(3, member.getMemberEmail());
+					pstmt.setString(4, member.getMemberNickname());
+					
+					// 5) SQL 수행 후 결과 반환 받기
+					result = pstmt.executeUpdate();
+				}finally {
+					// 6) 사용한 JDBC 자원 반환하기
+					close(pstmt);
+				}
+				
+				// 7) 결과를 Service로 반환하기
+				return result;
+	}
+	/** 아이디 중복 검사 DAO
+	 * @param conn
+	 * @param id
+	 * @return result
+	 * @throws Exception
+	 */
+	public int idDupCheck(Connection conn, String id) throws Exception{
+		int result = 0;
+		
+		String sql = prop.getProperty("idDupCheck");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			
+		} finally {
+			close(rs);
 			close(pstmt);
 		}
 		

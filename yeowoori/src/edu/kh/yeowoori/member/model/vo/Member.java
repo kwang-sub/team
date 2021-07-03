@@ -37,6 +37,15 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public Member(String memberId, String memberPw, String memberEmail, String memberNickname) {
+		super();
+		this.memberId = memberId;
+		this.memberPw = memberPw;
+		this.memberEmail = memberEmail;
+		this.memberNickname = memberNickname;
+	}
+
 	public Member(int memberNo, String memberId, String memberEmail, String memberContent,
 			String memberNickname, Date enrollDate, String memberStatus, String memberGrade, String memberProfile) {
 		super();
@@ -137,7 +146,9 @@ public class Member {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberEmail="
 				+ memberEmail + ", memberContent=" + memberContent + ", memberNickname=" + memberNickname
 				+ ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberGrade=" + memberGrade
+
 				+ ", memberProfile=" + memberProfile + ", filePath=" + filePath + ", fileNm=" + fileNm + "]";
+
 	}
 
 	

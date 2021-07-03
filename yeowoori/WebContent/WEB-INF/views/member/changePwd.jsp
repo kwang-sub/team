@@ -2,12 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
+<title>비밀번호 변경</title>
 
 <style>
 #btn-change {
@@ -61,7 +65,7 @@ a {
 </style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
 	<form class="category-btn" action="#" method="GET">
 		<div style="padding: 10px;"></div>
 		<h6 style="display: inline-block; font-weight: bold;">설정</h6>
