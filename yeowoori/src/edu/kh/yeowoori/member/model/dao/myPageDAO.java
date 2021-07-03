@@ -41,11 +41,13 @@ public class myPageDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,loginMember.getMemberNo());
+			pstmt.setInt(2, loginMember.getMemberNo());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Member mem = new Member();
 				mem.setFilePath(rs.getString("FILE_PATH"));
 				mem.setFileNm(rs.getString("FILE_NM"));
+				mem.setCount(rs.getInt("COUNT"));
 				myTrip.add(mem);
 			}
 			
@@ -55,5 +57,98 @@ public class myPageDAO {
 		}
 		
 		return myTrip;
+	}
+	/**내가 작성한 질문 게시글 가져오기
+	 * @param conn
+	 * @param loginMember
+	 * @return
+	 */
+	public List<Member> getMyQuestion(Connection conn, Member loginMember) throws Exception {
+		List<Member> myQuestion = new ArrayList<Member>();
+		String sql = prop.getProperty("getMyQuestion");
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember.getMemberNo());
+			pstmt.setInt(2, loginMember.getMemberNo());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Member mem = new Member();
+				mem.setBoardTitle(rs.getString("BOARD_TITLE"));
+				mem.setCount(rs.getInt("COUNT"));
+				myQuestion.add(mem);
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return myQuestion;
+	}
+	/** 내가 작성한 같이떠나요 게시글 가져오기
+	 * @param conn
+	 * @param loginMember
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Member> getMyTogether(Connection conn, Member loginMember) throws Exception {
+		String sql = prop.getProperty("getMyTogether");
+		List<Member> myTogether = new ArrayList<Member>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember.getMemberNo());
+			pstmt.setInt(2, loginMember.getMemberNo());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Member mem = new Member();
+				mem.setBoardTitle(rs.getString("BOARD_TITLE"));
+				mem.setCount(rs.getInt("COUNT"));
+				myTogether.add(mem);
+			}	
+		}finally {
+			
+			close(rs);
+			close(pstmt);
+		}
+		return myTogether;
+	}
+	/**내가 작성한 게시글 좋아요 수가져오기
+	 * @param conn
+	 * @param loginMember
+	 * @return
+	 */
+	public Member getBoardLikeCount(Connection conn, Member loginMember) throws Exception {
+		Member boardLike = new Member();
+		String sql = prop.getProperty("getBoardLikeCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember.getMemberNo());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				boardLike.setCount(rs.getInt("BOARD_LIKE"));
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return boardLike;
+	}
+	public Member getCommentLikeCount(Member loginMember, Connection conn) throws Exception {
+		Member commentLike = new Member();
+		String sql = prop.getProperty("getCommentLikeCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember.getMemberNo());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				commentLike.setCount(rs.getInt("COMMENT_LIKE"));
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return commentLike;
 	}
 }
