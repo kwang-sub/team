@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.kh.yeowoori.board.model.service.HomeBoardService;
-import edu.kh.yeowoori.board.model.vo.Attachment;
 import edu.kh.yeowoori.board.model.vo.Board;
 import edu.kh.yeowoori.board.model.vo.Notice;
 
@@ -29,6 +28,8 @@ public class HomeBoardServlet extends HttpServlet {
 		int area = request.getParameter("area") == null ? 0: Integer.parseInt(request.getParameter("area")) ;
 		request.getSession().setAttribute("area", area);
 		
+		int type = 0;
+		
 		try {
 			
 			List<Board> boardList = null;
@@ -38,22 +39,23 @@ public class HomeBoardServlet extends HttpServlet {
 			if(area ==0) {
 				
 				boardList = service.selectHomeTrip();
-				qBoardList = service.selectHomeOther();
 				
+				type = 2;
+				qBoardList = service.selectHomeOther(type);
+				
+				type= 3;
+				withBoardList = service.selectHomeOther(type);
 				
 				
 			}else {
 				boardList = service.selectHomeBoard(area);
 				//System.out.println(boardList);
 				
-				int type = 2;
+				type = 2;
 				qBoardList = service.selectHomeQuestion(area, type);
-				
 				
 				type = 3;
 				withBoardList = service.selectHomeQuestion(area, type);
-				
-
 			}
 
 			if(boardList !=null) {

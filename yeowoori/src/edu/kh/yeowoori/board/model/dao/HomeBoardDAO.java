@@ -177,6 +177,27 @@ public class HomeBoardDAO {
 		}
 		return boardList;
 	}
+
+	public List<Board> selectHomeOther(Connection conn, int type) throws Exception{
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = prop.getProperty("selectHomeOther");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, type);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board b = new Board();
+				b.setBoardNo(rs.getInt(1));
+				b.setBoardTitle(rs.getString(2));
+				boardList.add(b);
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return boardList;
+
+	}
 	
 	
 	

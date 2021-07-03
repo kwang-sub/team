@@ -71,10 +71,11 @@ public class HomeBoardService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Board> selectHomeOther() throws Exception{
-
-		
-		return null;
+	public List<Board> selectHomeOther(int type) throws Exception {
+		Connection conn = getConnection();
+		List<Board> boardList = dao.selectHomeOther(conn, type);
+		close(conn);
+		return boardList;
 	}
 	
 	
