@@ -155,6 +155,37 @@ public class SelectBoardDAO {
 		
 		return map;
 	}
+	
+	
+	/**내가작성한 게시글 수 카운트
+	 * @param conn
+	 * @param cp
+	 * @param boardType
+	 * @param memberNo
+	 * @return
+	 */
+	public Map<String, Object> getMyListCount(Connection conn, int cp, int boardType, int memberNo) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		String sql = prop.getProperty("GetMyListCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardType);
+			pstmt.setInt(2, memberNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				map.put("listCount", rs.getInt(1));
+				map.put("boardName", rs.getString(2));
+				
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return map;
+	}
 
 
 
@@ -380,6 +411,67 @@ public class SelectBoardDAO {
 		
 		return boardList;
 	}
+
+	/** 내가 작성한 게시글 목록조회
+	 * @param conn
+	 * @param pagination
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectBoardList(Connection conn, Pagination pagination, int memberNo) throws Exception {
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = prop.getProperty("selectMyBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pagination.getBoardType());
+			// 조회할 범위를 지정할 변수 선언
+			
+			int startRow = (pagination.getCurrentPage()-1)*pagination.getLimit()+1;
+			int endRow = startRow + pagination.getLimit() -1;
+			pstmt.setInt(2, memberNo);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
+				board.setCategoryName(rs.getString("CATEGORY_NM"));
+				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
+				board.setReadCount(rs.getInt("READ_COUNT"));
+				board.setCreateDate(rs.getTimestamp("CREATE_DT"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
+				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+				board.setCommentCount(rs.getInt("COMMENT_COUNT"));
+				board.setLikeCount(rs.getInt("LIKE_COUNT"));
+				
+				
+				List<String> filePath = new ArrayList<String>();
+				List<String> fileName = new ArrayList<String>();
+				
+				filePath.add(rs.getString("FILE_PATH"));
+				fileName.add(rs.getString("FILE_NM"));
+				board.setFilePath(filePath);
+				board.setFileName(fileName);
+				boardList.add(board);
+				
+				
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return boardList;
+	}
+
+	
 
 
 	

@@ -132,8 +132,8 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include> 
     <div class="container">
         
-        
-                    <c:if test="${empty param.area }">
+        		<c:if test="${empty param.memberNo }">
+        			<c:if test="${empty param.area }">
                     	<form class="bg-white category-select" action="#" method="GET">
             
 				            <div class="btn-group category-sm-btn">
@@ -193,6 +193,8 @@
 				        </form>
                     
                     </c:if>
+        		</c:if>
+                    
        	<c:if test="${!empty loginMember }">
        	
         <div class="" style="height: 35px;">
@@ -322,17 +324,20 @@
            						<a class="page-link">${p}</a>
            					</c:when>
            					<c:otherwise>
-           						<c:if test="${!empty param.area }">
+           						<c:if test="${!empty param.area && empty param.memberNo }">
 	           						<a class="page-link" href="${pageURL}&cp=${p}&area=${param.area}">${p}</a>
            						</c:if>
-           						<c:if test="${!empty param.category }">
+           						<c:if test="${!empty param.category && empty param.memberNo }">
 	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}">${p}</a>
            						</c:if>
-           						<c:if test="${!empty param.category && !empty param.area }">
+           						<c:if test="${!empty param.category && !empty param.area && empty param.memberNo }">
 	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}&area=${param.area}">${p}</a>
            						</c:if>
-           						<c:if test="${empty param.category && empty param.area }">
+           						<c:if test="${empty param.category && empty param.area && empty param.memberNo }">
 	           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
+           						</c:if>
+           						<c:if test="${empty param.category && empty param.area && !empty param.memberNo }">
+           							<a class="page-link" href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1&cp=${p}">${p}</a>
            						</c:if>
            					</c:otherwise>
            				</c:choose>

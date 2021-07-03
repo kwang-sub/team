@@ -70,6 +70,18 @@ public class SelectBoardController extends HttpServlet {
 				path = "/WEB-INF/views/board/boardList2.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
 			}
+			else if(command.equals("list/my")) {
+				int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+				int boardType = Integer.parseInt(request.getParameter("type"));
+				Pagination pagination = service.getMyPagination(cp,boardType,memberNo);
+				pagination.setLimit(6);
+				List<Board> boardList= service.selectBoardList(pagination,memberNo);
+				request.setAttribute("pagination", pagination);
+				request.setAttribute("boardList", boardList);
+				path = "/WEB-INF/views/board/boardList.jsp";
+				request.getRequestDispatcher(path).forward(request, response);
+				
+			}
 			
 			
 			
