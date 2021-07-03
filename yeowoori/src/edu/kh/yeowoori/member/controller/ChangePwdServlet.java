@@ -21,7 +21,7 @@ public class ChangePwdServlet extends HttpServlet {
 	// 비밀번호 변경 화면으로 요청 위임
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/findPwd.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/changePwd.jsp");
 		view.forward(request, response);
 	}
 	

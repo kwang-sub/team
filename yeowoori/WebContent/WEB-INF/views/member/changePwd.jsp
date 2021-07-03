@@ -38,16 +38,16 @@ a {
 
 .category-selected {
 	background-color: #A66129;
-	color: white;
+	color: white !important;
 	font-weight: 500;
 }
 
 .category-unselected {
-	color: #A66129;
+	color: #A66129 !important;
 	font-weight: 500;
 }
 
-.category-btn>button {
+.category-btn> a {
 	margin-left: 25px;
 }
 
@@ -65,20 +65,18 @@ a {
 </style>
 </head>
 <body>
+	<div class="container" id="content-main">
 
-	<form class="category-btn" action="#" method="GET">
+	<div class="category-btn">
 		<div style="padding: 10px;"></div>
 		<h6 style="display: inline-block; font-weight: bold;">설정</h6>
-		<button class="btn btn-light category-unselected" name="category"
-			value="내 정보 수정">내 정보 수정</button>
-		<button class="btn btn-light category-selected" name="category"
-			value="비밀번호 변경">비밀번호 변경</button>
+			<a class="btn btn-light category-unselected" href="${contextPath}/member/updateMyPage">내 정보 수정</a>
+			<a class="btn btn-light category-selected"  href="${contextPath}/member/changePwd">비밀번호 변경</a>
 		<hr align="center"
 			style="border: solid #b6957c; border-width: 1px 0px 0px 0px; width: 100%">
 		<div style="padding: 20px"></div>
-	</form>
+	</div>
 
-	<div class="container" id="content-main">
 
 		<div class="row my-5">
 
