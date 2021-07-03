@@ -19,6 +19,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
+	
+	
 
 <style>
 /* number 태그 화살표 제거 */
@@ -40,6 +42,12 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 body {
 	font-weight: bold;
+	display : flex;
+	
+}
+
+.text-center{
+height : 700px;
 }
 
 #idDupCheck {

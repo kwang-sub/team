@@ -88,7 +88,7 @@ body {
   border-top-right-radius: 0;
 }
     </style>
-    <link href="../../../resources/css/login.css" rel="stylesheet">
+    <link rel = "stylesheet" href ="${contextPath}/resources/css/login.css">
 
     
   </head>

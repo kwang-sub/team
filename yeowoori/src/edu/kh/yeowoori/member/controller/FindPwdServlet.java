@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/member/findPwd")
-public class findPwdServlet extends HttpServlet {
+public class FindPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     

@@ -16,14 +16,14 @@
       
        .category-selected{
             background-color: #A66129;
-            color:white;
+            color:white !important;
             font-weight: 500;
         }
        .category-unselected{
-            color: #A66129;
+            color: #A66129 !important;
             font-weight: 500;
        }
-       .category-btn>button{
+       .category-btn>a{
            margin-left: 25px;
        }
 
@@ -111,15 +111,15 @@
               
         </form>
         
-        <form class="category-btn" action="#" method="GET">
+        <div class="category-btn" >
             <div style="padding:10px;"></div>
             <h6 style="display: inline-block; font-weight: 500;">마이페이지</h6>
-            <button class="btn btn-light category-selected" name="category" onclick="">나의활동</button>
-            <button class="btn btn-light category-unselected" name="category" onclick="" >좋아요</button>
-            <button class="btn btn-light category-unselected" name="category" onclick="" >설정</button>
+            <a class="btn btn-light category-selected" href="">나의활동</a>
+            <a class="btn btn-light category-unselected" href="" >좋아요</a>
+            <a class="btn btn-light category-unselected" href="${contextPath}/member/updateMyPage">설정</a>
             <hr  align="center" style="border: solid #b6957c; border-width: 1px 0px 0px 0px; width:100%">
             <div style="padding : 20px"></div>
-        </form>
+        </div>
 
         <div class="row board">
             <div class="col-sm-12 col-lg-3" id="profile-container">
