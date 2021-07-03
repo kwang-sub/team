@@ -154,7 +154,7 @@
     </div>
     </div>
 
-	<c:if test="${! empty noticeList }">
+	<c:if test="${!empty noticeList }">
 	<c:forEach items="${noticeList}" var="notice">
 		<div class="notice-bar">
             <div class="notice-content">
@@ -179,9 +179,11 @@
                         <a class="more" href="#">더보기</a> <!--질문 게시판으로 이동-->
                     </div>
                     <ul class="list-group">
-                    	<c:forEach items="#{qBoardList}" var="qboard">
-                    	<li class="list-group-item"><a href="#">${qboard.boardTitle }</a></li>
+                    <c:if test="${!empty qBoardList }">
+                       	<c:forEach items="#{qBoardList}" var="qboard">
+                    	<li class="list-group-item"><a href="#">${fn:substring(qboard.boardTitle,0,20) }...</a></li>
                     	</c:forEach>
+                    </c:if>
                       </ul>
                 </div>
                 <div style="padding : 20px;"></div>
@@ -191,9 +193,11 @@
                         <a class="more" href="#">더보기</a> <!-- 같이 떠나요 게시판으로 이동-->
                     </div>
                     <ul class="list-group">
-                        <c:forEach items="#{withBoardList}" var="qboard">
-                    	<li class="list-group-item"><a href="#">${withboard.boardTitle }</a></li>
+                    <c:if test="${!empty withBoardList }">
+                        <c:forEach items="#{withBoardList}" var="withboard">
+                    	<li class="list-group-item"><a href="#">${fn:substring(withboard.boardTitle,0,20) }...</a></li>
                     	</c:forEach>
+                    </c:if>
                       </ul>
                 </div>
             </div>
