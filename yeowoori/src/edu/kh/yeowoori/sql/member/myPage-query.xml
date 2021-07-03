@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="getMyTrip">
+		SELECT ROWNUM, FILE_PATH,FILE_NM,MEMBER_NO
+		FROM ATTACHMENT
+		LEFT JOIN BOARD USING (BOARD_NO)
+		WHERE FILE_LEVEL = 0
+		AND MEMBER_NO = ?
+		AND BOARD_STATUS = 'Y'
+		AND BOARD_TYPE_NO=1
+		AND  ROWNUM &lt; 5
+		ORDER BY FILE_NO DESC
+	</entry>
+</properties>

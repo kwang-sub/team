@@ -188,7 +188,8 @@
 				        </form>
                     
                     </c:if>
-                    
+       	<c:if test="${!empty loginMember }">
+       	
         <div class="" style="height: 35px;">
             <a href="${contextPath}/boardwrite?cp=${param.cp}&type=${param.type}" >
     
@@ -196,6 +197,7 @@
             </a>
 
         </div>
+       	</c:if>
         <div class="row main">
         
         <c:choose>
