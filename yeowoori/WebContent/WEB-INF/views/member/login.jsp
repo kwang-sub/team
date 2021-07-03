@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" scope="application"
+	value="${pageContext.servletContext.contextPath }"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!doctype html>
 <html lang="ko">
   <head>
@@ -91,7 +95,7 @@ body {
   <body class="text-center">
     
 <form class="form-signin" action="login" method="post">
-  <a href="#">
+  <a href="${contextPath}/homeBoard">
     <img class="mb-4" id="logo-img" src="${contextPath}/resources/img/logo.png">
   </a>
 
@@ -99,8 +103,8 @@ body {
   <input type="password" name="inputPw" id="inputPassword" class="form-control" placeholder="비밀번호" required>
   <button class="btn btn-lg btn-block" id="login-btn" type="submit">로그인</button>
   <p id="login-footer">
-    <a href="#">회원가입</a>
-    <a href="#">아이디/비밀번호 찾기</a>
+    <a href="${contextPath}/member/signUp">회원가입</a>
+    <a href="${contextPath}/member/findPwd">아이디/비밀번호 찾기</a>
   </p>
 </form>
 

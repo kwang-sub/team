@@ -94,6 +94,7 @@
 
     </style>
 
+
     <div class="container">
         <form class="bg-white category-select" action="#" method="GET">
             
@@ -104,7 +105,6 @@
                 <div class="dropdown-menu">
                     <a href="#">나의활동</a><br>
                     <a href="#">좋아요</a><br>
-                    <a href="#">알림</a><br>
                     <a href="#">설정</a><br>
                 </div>
               </div>
@@ -116,7 +116,6 @@
             <h6 style="display: inline-block; font-weight: 500;">마이페이지</h6>
             <button class="btn btn-light category-selected" name="category" onclick="">나의활동</button>
             <button class="btn btn-light category-unselected" name="category" onclick="" >좋아요</button>
-            <a class="btn btn-light category-unselected" href="${contextPath }/myPage/myNotice">알림</a>
             <button class="btn btn-light category-unselected" name="category" onclick="" >설정</button>
             <hr  align="center" style="border: solid #b6957c; border-width: 1px 0px 0px 0px; width:100%">
             <div style="padding : 20px"></div>
@@ -146,18 +145,15 @@
                             <span style="color:#A66129">17</span>
                             <div class="show-all">전체보기</div>
                         </div>
+                       
+                        <c:forEach items="${myTrip }" var="my">
+                        
                         <div class="board-img img-left" class="col-sm-6 col-lg-1" 
-                            style="background-image: url('https://pbs.twimg.com/media/Dz0_ZLKUcAE-Foh.jpg:large');">
+                            style="background-image: url(${contextPath}/${my.filePath }${my.fileNm });">
                         </div>
-                        <div class="board-img img-right" class="col-sm-6 col-lg-1" 
-                            style="background-image: url('https://t1.daumcdn.net/cfile/tistory/998C41385D29FEDC06');">
-                        </div>
-                        <div class="board-img img-left" class="col-sm-6 col-lg-1" 
-                            style="background-image: url('https://mblogthumb-phinf.pstatic.net/MjAxOTAyMjZfMjQ4/MDAxNTUxMTg4NTMyNTk0.ntasq8yP_BaB0IzSXVAeW3LUZCEhzZG-STpO70SKWRQg.ByhPhxQQecefiVwvMlyGiWefOVZP2dYHuQRs6WHfnv0g.JPEG.yeanzz/%EA%BC%AC%EC%95%99%EB%93%9C%ED%8C%8C%EB%A6%AC24-1.jpg?type=w800');">
-                        </div>
-                        <div class="board-img img-right" class="col-sm-6 col-lg-1" 
-                            style="background-image: url('https://i.pinimg.com/originals/53/ae/3e/53ae3ebcd93980ff7ff04b6b9b8a48a7.jpg');">
-                        </div>
+                        
+                        </c:forEach>
+                        
                         <div style="padding: 3px;"></div>
                         <button type="button" class="btn btn-brown" onclick="">여행 게시글 올리기</button>
                         <div style="padding-bottom:40px;"></div>

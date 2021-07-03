@@ -13,9 +13,37 @@ public class Member {
     private String memberStatus;   
     private String memberGrade;
     private String memberProfile;
+    
+    private String filePath;
+    private String fileNm;
 	    
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getFileNm() {
+		return fileNm;
+	}
+
+	public void setFileNm(String fileNm) {
+		this.fileNm = fileNm;
+	}
+
 	public Member() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	public Member(String memberId, String memberPw, String memberEmail, String memberNickname) {
+		super();
+		this.memberId = memberId;
+		this.memberPw = memberPw;
+		this.memberEmail = memberEmail;
+		this.memberNickname = memberNickname;
 	}
 
 	public Member(int memberNo, String memberId, String memberEmail, String memberContent,
@@ -118,7 +146,9 @@ public class Member {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberEmail="
 				+ memberEmail + ", memberContent=" + memberContent + ", memberNickname=" + memberNickname
 				+ ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberGrade=" + memberGrade
-				+ ", memberProfile=" + memberProfile + "]";
+
+				+ ", memberProfile=" + memberProfile + ", filePath=" + filePath + ", fileNm=" + fileNm + "]";
+
 	}
 
 	
