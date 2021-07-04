@@ -261,7 +261,7 @@
 			                    </a>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<a href="#">
+	                    		<a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=${pagination.boardType}">
 	                    		
 			                    <div class="bg-img card-img-top" style="background-image: url(${contextPath}/${board.filePath[0]}${board.fileName[0]});"></div>
 

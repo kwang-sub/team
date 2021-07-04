@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 import static edu.kh.yeowoori.common.JDBCTemplate.*;
 import edu.kh.yeowoori.board.model.dao.SelectBoardDAO;
+import edu.kh.yeowoori.board.model.vo.Attachment;
 import edu.kh.yeowoori.board.model.vo.Board;
 import edu.kh.yeowoori.board.model.vo.Pagination;
 
@@ -487,28 +488,38 @@ public class SelectBoardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
 			rs = pstmt.executeQuery();
+			
+			board = new Board();
+			board.setAtList(new ArrayList<Attachment>());
+			
+			boolean flag = true;
+			
 			while(rs.next()) {
-				board.setBoardNo(rs.getInt("BOARD_NO"));
-				board.setBoardTitle(rs.getString("BOARD_TITLE"));
-				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
-				board.setCategoryName(rs.getString("CATEGORY_NM"));
-				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
-				board.setReadCount(rs.getInt("READ_COUNT"));
-				board.setCreateDate(rs.getTimestamp("CREATE_DT"));
-				board.setBoardContent(rs.getString("BOARD_CONTENT"));
-				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
-				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
-				board.setCommentCount(rs.getInt("COMMENT_COUNT"));
-				board.setLikeCount(rs.getInt("LIKE_COUNT"));
 				
-				
-				List<String> filePath = new ArrayList<String>();
-				List<String> fileName = new ArrayList<String>();
-				
-				filePath.add(rs.getString("FILE_PATH"));
-				fileName.add(rs.getString("FILE_NM"));
-				board.setFilePath(filePath);
-				board.setFileName(fileName);
+				if (flag) {
+					board.setBoardNo(rs.getInt("BOARD_NO"));
+					board.setBoardTitle(rs.getString("BOARD_TITLE"));
+					board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
+					board.setCategoryName(rs.getString("CATEGORY_NM"));
+					board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
+					board.setReadCount(rs.getInt("READ_COUNT"));
+					board.setCreateDate(rs.getTimestamp("CREATE_DT"));
+					board.setModifyDate(rs.getTimestamp("MODIFY_DT"));
+					board.setBoardContent(rs.getString("BOARD_CONTENT"));
+					board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+					board.setCommentCount(rs.getInt("COMMENT_COUNT"));
+					board.setLikeCount(rs.getInt("LIKE_COUNT"));
+					board.setCategoryCode(rs.getInt("CATEGORY_CD"));
+					board.setMemberNo(rs.getInt("MEMBER_NO"));
+					
+					flag =false;
+				}
+					Attachment at = new Attachment();
+					at.setFileLevel(rs.getInt("FILE_LEVEL"));
+					at.setFileNm(rs.getString("FILE_NM"));
+					at.setFilePath(rs.getString("FILE_PATH"));
+					
+					board.getAtList().add(at);
 			}
 		}finally {
 			close(rs);
@@ -574,6 +585,29 @@ public class SelectBoardDAO {
 		}
 		
 		return boardList;
+	}
+
+	/**
+	 * 게시글 조회수 증가 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int boardNo) throws Exception{
+		int result = 0;
+		String sql = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

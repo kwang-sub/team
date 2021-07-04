@@ -115,6 +115,7 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<!-- 상세조회 -->
 	<entry key="selectBoard">
 	SELECT*FROM BOARD_DETAIL
 	WHERE BOARD_NO = ?
@@ -138,5 +139,12 @@
 		WHERE RNUM BETWEEN ? AND ? 
 	
 	</entry>
+	
+	<!-- 상세조회 조회수 증가 -->
+	<entry key="increaseReadCount">
+	UPDATE BOARD SET READ_COUNT = READ_COUNT+1
+	WHERE BOARD_NO = ?
+	</entry>
+	
 	
 </properties>

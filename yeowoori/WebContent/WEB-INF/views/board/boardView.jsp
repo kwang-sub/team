@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<c:set var="contextPath" scope="application"
+	value="${pageContext.servletContext.contextPath }"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글</title>
+    <title>${board.boardTitle }</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -108,61 +111,121 @@
             bottom: -25px;
             right: 10px;
        }
+       .boardImg{
+			width: 200px;
+			height: 200px;
+			border : 1px solid #ced4da;
+			display: inline-block;
+			text-align:center;
+		}
+		
 </style>
     <div style="padding :20px;" id="top"></div>
     <div class="container">
-        <h5>서울 여행 코스 추천 서울식물원</h5>
+        <h5>${board.boardTitle }</h5>
         <div style="padding : 3px;"></div>
-        <button class="btn btn-light category-selected" name="category" value="산책코스">산책코스</button>
-        <button class="btn btn-light category-selected" name="category" value="커플데이트">커플데이트</button>
+        <a class="btn btn-light category-selected" name="category" href="#">${board.categoryName }</a>
         <div style="padding : 5px;"></div>
         <div style="display: inline-block; margin-top: 8px;">
-            <div class="user-profile" style="background-image: url('');"></div>
-            <div class="user-name">유저닉네임</div>
-            <div class="time">2021.5.24. 10:43</div>
+            <div class="user-profile" style="background-image: url(${contextPath }/${board.memberProfile});"></div>
+            <div class="user-name">${board.memberNickname }</div>
+            <div class="time"><fmt:formatDate value="${board.createDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> </div>
+            
+            <c:if test="${board.createDate != board.modifyDate }">
+            <div class="time">마지막 수정일 : <fmt:formatDate value="${board.modifyDate }" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></div>
+            </c:if>
+        
         </div>
         <div id="etc-board">
             <a href="#" style="padding-right : 10px;">
                 <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
             </a>
-            <span style="font-size: 12px; color: grey;">138</span>
+            <span style="font-size: 12px; color: grey;">${board.likeCount }</span>
+            
+            <c:if test="${loginMember.memberNo == board.memberNo }">
             <div style="padding : 5px; display: inline-block;"></div>
             <div class="dropdownleft" style="display: inline-block;">
                 <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="https://drive.google.com/uc?id=1CBODLkaPUc8Zt4MCTz-uAIBiRgmYjepI" height="15px">
                 </button>
                 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item " href="#">수정하기</a>
-                  <a class="dropdown-item" href="#">삭제하기</a>
+                  <button class="dropdown-item " href="#">수정하기</button>
+                  <button class="dropdown-item" href="#">삭제하기</button>
                 </div>
-              </div>
+             </div>
+            </c:if>
+            
         </div>
         <hr>
         <div style="padding: 10px;"></div>
-        <img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/47uI/image/bhCo5ld5HPr7bXDvSFrt6YKzT9k.jpg">
+        
+		<c:forEach items="${board.atList }" var="at">
+		<c:choose>
+			<c:when test="${at.fileLevel == 0 && !empty at.fileNm}">
+			<c:set var="img0" value="${contextPath}/${at.filePath}${at.fileNm}"/>
+			</c:when>		
+			<c:when test="${at.fileLevel == 1 && !empty at.fileNm}">
+			<c:set var="img1" value="${contextPath}/${at.filePath}${at.fileNm}"/>
+			</c:when>		
+			<c:when test="${at.fileLevel == 2 && !empty at.fileNm}">
+			<c:set var="img2" value="${contextPath}/${at.filePath}${at.fileNm}"/>
+			</c:when>		
+			<c:when test="${at.fileLevel == 3 && !empty at.fileNm}">
+			<c:set var="img3" value="${contextPath}/${at.filePath}${at.fileNm}"/>
+			</c:when>		
+		</c:choose>
+		</c:forEach>
+		<c:if test="${!empty img0 }">
+			<h6 style="color:#b9b9b9;">대표 사진</h6>
+			<img src="${img0 }" style="max-width:100%; border:1px solid #eee">
+			<div style="padding:10px;"></div>
+		</c:if>
+		<c:if test="${!empty img1 && !empty img2 && !empty img3}">
+			<h6 style="color:#b9b9b9;">추가 사진</h6>
+		</c:if>
+		<c:if test="${!empty img1 }">
+		    <div class="mr-2 boardImg">
+                <img src="${img1}" style="max-width:100%; max-height:100%;">
+            </div>
+		</c:if>
+		<c:if test="${!empty img2 }">
+		    <div class="mr-2 boardImg">
+                <img src="${img2}" style="max-width:100%; max-height:100%;">
+            </div>
+		</c:if>
+		<c:if test="${!empty img3 }">
+		    <div class="mr-2 boardImg">
+                <img src="${img3}" style="max-width:100%; max-height:100%;">
+            </div>
+		</c:if>
+		<c:if test="${!empty img1 && !empty img2 && !empty img3}">
+			<div style="padding:10px;"></div>
+		</c:if>
+		
         <div style="padding :5px;"></div>
         <p>
-            유저가 적은 내용유저가 적은 내용유저가 적은 내용<br>
-            유저가 적은 내용유저가 적은 내용유저가 적은 내용<br>
-            유저가 적은 내용유저가 적은 내용유저가 적은 내용<br>
-            유저가 적은 내용유저가 적은 내용
+            ${board.boardContent}
         </p>
         <div style="padding: 10px;"></div>
         <div class="comments">조회</div>
-        <div class="comments">123</div>
+        <div class="comments">${board.readCount }</div>
         <div class="comments">댓글</div>
-        <div class="comments">1</div>
+        <div class="comments">${board.commentCount }</div>
         <a href="#" class="report">신고</a>
         <div style="padding: 20px;"></div>
         <hr>
         <div style="padding: 20px;"></div>
-        <h6>댓글 1</h6>
+        <h6>댓글 ${board.commentCount }</h6>
         <div style="padding: 5px;"></div>
-        <div class="user-profile-big" style="background-image: url('');"></div>
+        
+        <c:if test="${!empty loginMember }">
+        <div class="user-profile-big" style="background-image: url(${loginMember.memberProfile});"></div>
         <form class="text-container">
             <input type="text" class="input-comment" placeholder="댓글을 입력해주세요.">
             <button type="submit" class="btn-submit">등록</button>
         </form>
+        </c:if>
+        
         <div style="padding: 10px;"></div>
         <div class="user-profile-big" style="background-image: url('${loginMember.memberProfile}'); margin-bottom: 30px;"></div>
         <div style="display: inline-block;">
@@ -174,7 +237,7 @@
                     <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
                     <div class="comments">좋아요</div>
                 </a>
-                <div class="report">신고</div>
+                <a href="#" class="report">신고</a>
             </div>
         </div>
         

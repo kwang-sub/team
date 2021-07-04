@@ -98,16 +98,15 @@ public class SelectBoardController extends HttpServlet {
 				int boardNo = Integer.parseInt(request.getParameter("no"));
 
 				Board board = service.selectBoard(boardNo);
-
-
+				
+				request.setAttribute("board", board);
+				path = "/WEB-INF/views/board/boardView.jsp";
+				request.getRequestDispatcher(path).forward(request, response);
 			}
-			
-			
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 

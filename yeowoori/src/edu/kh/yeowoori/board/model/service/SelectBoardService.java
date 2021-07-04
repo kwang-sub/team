@@ -118,6 +118,15 @@ public class SelectBoardService {
 	public Board selectBoard(int boardNo) throws Exception{
 		Connection conn = getConnection();
 		Board board = dao.selectBoard(conn, boardNo);
+		if(board.getBoardTitle() !=null) {
+			int result = dao.increaseReadCount(conn, boardNo);
+			if(result>0) {
+				commit(conn);
+				board.setReadCount(board.getReadCount()+1);
+			}else {
+				rollback(conn);
+			}
+		}
 		close(conn);
 		
 		return board;
