@@ -59,9 +59,8 @@
 						<div>
 			                  <hr>
 						        <h5>[공 지] ${board.boardTitle }</h5> <br>
-						                  ${board.boardContent }<br><br>
-						                  <fmt:formatDate value="${board.createDate }" pattern="yyyy-mm-dd"/>
-						                  
+						        ${board.boardContent }<br><br>
+						     <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
 			              </div>
 				</c:forEach> 
 				
