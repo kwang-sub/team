@@ -517,6 +517,65 @@ public class SelectBoardDAO {
 		return board;
 	}
 
+	/**notice 갯수  dao
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int getNoticePagination(Connection conn) throws Exception {
+		int listCount = 0;
+		String sql = prop.getProperty("getNoticePagination");
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				listCount = rs.getInt("COUNT(*)");
+				
+			}
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return listCount;
+	}
+
+	/**공지사항 리스트 DAO
+	 * @param pagination
+	 * @param conn
+	 * @param cp
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectNoticeBoardList(Pagination pagination, Connection conn, int cp) throws Exception {
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = prop.getProperty("selectNoticeBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pagination.getBoardType());
+			// 조회할 범위를 지정할 변수 선언
+			
+			int startRow = (pagination.getCurrentPage()-1)*pagination.getLimit()+1;
+			int endRow = startRow + pagination.getLimit() -1;
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				board.setBoardTitle(rs.getString("NOTICE_TITLE"));
+				board.setBoardContent(rs.getString("NOTICE_CONTENT"));
+				board.setCreateDate(rs.getTimestamp("CREATE_DT"));
+				boardList.add(board);
+				
+			}	
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return boardList;
+	}
+
 	
 
 

@@ -37,6 +37,7 @@ public class SelectBoardService {
 			map = dao.getListCount(cp, conn, boardType, category, area);
 		}else {
 			map = dao.getListCount(conn, cp, boardType);
+			
 		}
 		
 		close(conn);
@@ -120,6 +121,29 @@ public class SelectBoardService {
 		close(conn);
 		
 		return board;
+	}
+
+	/**  공지사항 페이지네이션
+	 * @param cp
+	 * @return
+	 */
+	public Pagination getNoticePagination(int cp) throws Exception {
+		Connection conn = getConnection();
+		int listCount = dao.getNoticePagination(conn);
+	
+		return new Pagination(cp, listCount);
+	}
+
+	/**공지사항 리스트 가져오기
+	 * @param cp 
+	 * @param pagination
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectNoticeBoardList(int cp, Pagination pagination) throws Exception {
+		Connection conn = getConnection();
+		List<Board> boardList = dao.selectNoticeBoardList(pagination, conn, cp);
+		return boardList;
 	}
 
 
