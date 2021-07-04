@@ -7,6 +7,7 @@ import java.util.Map;
 
 import edu.kh.yeowoori.board.model.dao.SelectBoardDAO;
 import edu.kh.yeowoori.board.model.vo.Board;
+import edu.kh.yeowoori.board.model.vo.Category;
 import edu.kh.yeowoori.board.model.vo.Pagination;
 
 public class SelectBoardService {
@@ -153,6 +154,18 @@ public class SelectBoardService {
 		Connection conn = getConnection();
 		List<Board> boardList = dao.selectNoticeBoardList(pagination, conn, cp);
 		return boardList;
+	}
+
+	/**
+	 * 카테고리 리스트 조회
+	 * @return categoryList
+	 */
+	public List<Category> selectCategoryList() throws Exception{
+
+		Connection conn= getConnection();
+		List<Category>  categoryList = dao.selectCategoryList(conn);
+		close(conn);
+		return null;
 	}
 
 

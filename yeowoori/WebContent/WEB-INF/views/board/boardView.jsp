@@ -12,6 +12,7 @@
     <title>${board.boardTitle }</title>
 </head>
 <body>
+<div id="top"></div>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
         .category-selected{
@@ -118,6 +119,9 @@
 			display: inline-block;
 			text-align:center;
 		}
+		.btn-brown{
+			background-color :#A66129; 
+		}
 		
 </style>
     <div style="padding :20px;" id="top"></div>
@@ -149,8 +153,8 @@
                     <img src="https://drive.google.com/uc?id=1CBODLkaPUc8Zt4MCTz-uAIBiRgmYjepI" height="15px">
                 </button>
                 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                  <button class="dropdown-item " href="#">수정하기</button>
-                  <button class="dropdown-item" href="#">삭제하기</button>
+                  <button class="dropdown-item " onclick="fnRequest('updateForm');" >수정하기</button>
+                  <button class="dropdown-item" >삭제하기</button>
                 </div>
              </div>
             </c:if>
@@ -241,10 +245,35 @@
             </div>
         </div>
         
-        <div id="to-top"><a href="#header" style="color: grey;">▲<br>TOP</a></div>
+        <hr>
+        <c:if test="${empty param.area }">
+        <a href="list?type=${param.type}&cp=${param.cp}" class="btn btn-brown float-right" style="color:white;">목록으로</a>
+        </c:if>
+        <c:if test="${!empty param.area }">
+        <a href="list?type=${param.type}&area=${param.area}&cp=${param.cp}" class="btn btn-brown float-right" style="color:white;">목록으로</a>
+        </c:if>
+        
+        
+        <div id="to-top"><a href="#top" style="color: grey;">▲<br>TOP</a></div>
     </div>
     <div style="padding : 40px;"></div>
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    
+    <form action="#" method="POST" name="requestForm">
+    	<input type="hidden" name="boardNo" value="${board.boardNo}">
+    	<input type="hidden" name="cp" value="${param.cp }">
+    	<input type="hidden" name="type" value="${param.type }">
+    	<input type="hidden" name="area" value="${param.area }">
+    </form>
+    
+    <script>
+    	function fnRequest(addr){
+    		document.requestForm.action = "../board2/"+addr;
+    		document.requestForm.submit();
+    	}
+    
+    </script>
+    
 </body>
 </html>

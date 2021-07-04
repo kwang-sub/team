@@ -25,8 +25,6 @@ public class HomeBoardServlet extends HttpServlet {
 		
 		HomeBoardService service = new HomeBoardService();
 		
-		int area = request.getParameter("area") == null ? 0: Integer.parseInt(request.getParameter("area")) ;
-		
 		int type = 0;
 		
 		try {
@@ -35,7 +33,7 @@ public class HomeBoardServlet extends HttpServlet {
 			List<Board> qBoardList = null;
 			List<Board> withBoardList = null;
 			
-			if(area ==0) {
+			if(request.getParameter("area")==null) {
 				
 				boardList = service.selectHomeTrip();
 				
@@ -47,6 +45,8 @@ public class HomeBoardServlet extends HttpServlet {
 				
 				
 			}else {
+				int area = Integer.parseInt(request.getParameter("area"));
+				
 				boardList = service.selectHomeBoard(area);
 				//System.out.println(boardList);
 				
