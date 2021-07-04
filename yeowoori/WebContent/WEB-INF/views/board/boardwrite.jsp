@@ -170,6 +170,7 @@
 	#fileArea{
 		display : none;
 	}
+	
     </style>
 </head>
 
@@ -204,45 +205,57 @@
             
 
 							
-                    <div>
-                    <c:choose>
-                    	<c:when test="${param.type==1 }">
-                        <h3>여행 게시판</h3>
-                    	</c:when>
-                    	<c:when test="${param.type==2 }">
-                        <h3>질문 게시판</h3>
-                    	</c:when>
-                    	<c:when test="${param.type==3 }">
-                        <h3>같이 떠나요 게시판</h3>
-                    	</c:when>
-                    	<c:when test="${param.type==4 }">
-                        <h3>공지사항 게시판</h3>
-                    	</c:when>
-                    </c:choose>
+                    <div >
+	                    <c:choose>
+	                    	<c:when test="${param.type==1 }">
+	                        <h3>여행 게시판</h3>
+	                    	</c:when>
+	                    	<c:when test="${param.type==2 }">
+	                        <h3>질문 게시판</h3>
+	                    	</c:when>
+	                    	<c:when test="${param.type==3 }">
+	                        <h3>같이 떠나요 게시판</h3>
+	                    	</c:when>
+	                    	<c:when test="${param.type==4 }">
+	                        <h3>공지사항 게시판</h3>
+	                    	</c:when>
+	                    </c:choose>
                     </div>
+                    
                     <div style="padding : 10px;"></div>
                     <div>
                         <input type="text" name="title" id="title" size="80" placeholder="제목"
                             style="height: 40px; width: 500px; max-width: 55%;">
                         <button type="submit" class="btn" id="btn-label" style="float:right;">올리기</button>
                     </div>
+                    
                     <div style="padding :5px;"></div>
-                    <div>
-                        <div style="color: grey; display: inline-block; margin-right: 10px; margin-bottom: 10px;">태그 선택
-                        </div>
-                        <div class="area" style="display: inline-block; margin-bottom: 10px;">
-                            <input type="radio" id="mood" name="category" value="1">
-                            <label for="mood">분위기맛집</label>
-                            <input type="radio" id="walk" name="category" value="2">
-                            <label for="walk">산책코스</label>
-                            <input type="radio" id="couple" name="category" value="3">
-                            <label for="couple">커플데이트</label>
-                            <input type="radio" id="cafe" name="category" value="4">
-                            <label for="cafe">카페투어</label>
-                            <input type="radio" id="etc" name="category" value="5" checked>
-                            <label for="etc">기타</label>
-                        </div>
-                    </div>
+                    
+                    <c:if test="${loginMember.memberGrade == 'A' }">
+                    
+                    <div style=" visibility:hidden; height: 0px" >
+                    </c:if>
+                    
+                    <c:if test="${loginMember.memberGrade == 'G' }">
+                    
+                    <div  >
+                    </c:if>
+                    	<div>
+	                        <div style="color: grey; display: inline-block; margin-right: 10px; margin-bottom: 10px; ">태그 선택
+	                        </div>
+	                        <div class="area" style="display: inline-block; margin-bottom: 10px;">
+	                            <input type="radio" id="mood" name="category" value="1">
+	                            <label for="mood">분위기맛집</label>
+	                            <input type="radio" id="walk" name="category" value="2">
+	                            <label for="walk">산책코스</label>
+	                            <input type="radio" id="couple" name="category" value="3">
+	                            <label for="couple">커플데이트</label>
+	                            <input type="radio" id="cafe" name="category" value="4">
+	                            <label for="cafe">카페투어</label>
+	                            <input type="radio" id="etc" name="category" value="5" checked>
+	                            <label for="etc">기타</label>
+	                        </div>
+	                    </div>
                     <div>
                         <div style="color: grey; display: inline-block; margin-right: 10px; margin-bottom: 10px;">지역 선택
                         </div>
@@ -306,12 +319,16 @@
                             <input type="file" id="img2" name="img3" onchange="LoadImg(this,2)"> 
                            
                         </div>
+                    </div>
+                    
+                    	
+                    
+                    
                     
                     
                         <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote"></textarea>
                     
                 </form>
-				<a href="${pageContext.request.requestURI }">test</a>
             </div>
 
             <div class="col-xs-1">
