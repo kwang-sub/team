@@ -23,6 +23,30 @@ public class Board {
 	private List<String> filePath;
 	private List<String> fileName;
 
+	private Timestamp modifyDate;
+	private List<Attachment> atList;
+	
+	
+	public Timestamp getModifyDate() {
+		return modifyDate;
+	}
+
+
+	public void setModifyDate(Timestamp modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+
+	public List<Attachment> getAtList() {
+		return atList;
+	}
+
+
+	public void setAtList(List<Attachment> atList) {
+		this.atList = atList;
+	}
+
+
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
@@ -167,6 +191,7 @@ public class Board {
 		this.fileName = fileName;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", categoryName=" + categoryName
@@ -174,9 +199,10 @@ public class Board {
 				+ ", createDate=" + createDate + ", boardContent=" + boardContent + ", memberContent=" + memberContent
 				+ ", memberProfile=" + memberProfile + ", commentCount=" + commentCount + ", likeCount=" + likeCount
 				+ ", categoryCode=" + categoryCode + ", areaCode=" + areaCode + ", memberNo=" + memberNo + ", filePath="
-				+ filePath + ", fileName=" + fileName + "]";
+				+ filePath + ", fileName=" + fileName + ", modifyDate=" + modifyDate + ", atList=" + atList + "]";
 	}
-	
+
+
 	
 	
 
