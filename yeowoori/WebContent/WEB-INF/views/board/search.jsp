@@ -222,10 +222,14 @@
     <div class="container">
     <div style="padding:10px"></div>
         <c:if test="${!empty tripBoardList}">
-        <h5>여행 게시판</h5>
+        <h5 style="display:inline-block;">여행 게시판</h5>
+        <c:if test="${fn:length(tripboardList)> 6}">
+        	<a href="#" style="float:right; color:grey;">검색결과 더보기</a>
+        </c:if> 
         <div style="padding:10px; display:block;"></div>
-        <c:forEach items="${tripBoardList }" var="board">
         <div class="row main">
+        <c:forEach items="${tripBoardList }" var="board" begin = "0" end="5">
+        
         	<div class="col-sm-6 col-md-4 card-block">
 	           <div class="card" style="width: 18rem; border: none;">
 	               <div class="card-head">
@@ -271,10 +275,11 @@
 	                        <p class="card-text">${fn:substring(board.boardContent,0,40) }...</p>
 	                    </div>
 	                </div>
-	            </div>
-	       </div>
-	       
+           		</div>
+	          	
            </c:forEach>
+           	</div>	
+           
            <hr>
         </c:if>
         
@@ -282,9 +287,12 @@
         <div style="padding :10px;"></div>
         
         <c:if test="${!empty qBoardList}">
-        <h5>질문 게시판</h5>
+        <h5 style="display: inline-block;">질문 게시판</h5>
+        <c:if test="${fn:length(qboardList)> 5}">
+        	<a href="#" style="float:right; color:grey;">검색결과 더보기</a>
+        </c:if> 
         <div style="padding:5px "></div>
-        <c:forEach items="${qBoardList }" var="board">
+        <c:forEach items="${qBoardList }" var="board" begin = "0" end="4">
        			<div style="padding : 5px;">
 		            <div class="width65">
 		                
@@ -316,9 +324,12 @@
         <div style="padding :10px;"></div>
         
         <c:if test="${!empty withBoardList }">
-        <h5>같이 떠나요 게시판</h5>
+        <h5 style="display:inline-block;">같이 떠나요 게시판</h5>
+         <c:if test="${fn:length(withboardList)> 5}">
+        	<a href="#" style="float:right; color:grey;">검색결과 더보기</a>
+        </c:if> 
         <div style="padding:5px"></div>
-        <c:forEach items="${withBoardList }" var="board">
+        <c:forEach items="${withBoardList }" var="board" begin = "0" end="4">
         		<div style="padding : 5px;">
 		            <div class="width65">
 		                

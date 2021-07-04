@@ -37,28 +37,28 @@ public class SearchServlet extends HttpServlet {
 			List<Board> withBoardList = null;
 			
 			if(area ==0) {
-				maxBoardNum = 6;
+				maxBoardNum = 7;
 				type = 1;
 				tripBoardList = service.searchBoard(type, maxBoardNum, search);
 				
-				maxBoardNum = 5;
+				maxBoardNum = 6;
 				type= 2;
 				qBoardList = service.searchBoard(type, maxBoardNum, search);
 				
-				maxBoardNum = 5;
+				maxBoardNum = 6;
 				type= 3;
 				withBoardList = service.searchBoard(type, maxBoardNum, search);
 				
 			}else {
-				maxBoardNum = 6;
+				maxBoardNum = 7;
 				type =1;
 				tripBoardList= service.searchAreaBoard(area, type, maxBoardNum, search);
 				
-				maxBoardNum = 5;
+				maxBoardNum = 6;
 				type =2;
 				qBoardList = service.searchAreaBoard(area, type, maxBoardNum, search);
 				
-				maxBoardNum = 5;
+				maxBoardNum = 6;
 				type =3;
 				withBoardList = service.searchAreaBoard(area, type, maxBoardNum, search);
 			}

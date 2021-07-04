@@ -26,7 +26,6 @@ public class HomeBoardServlet extends HttpServlet {
 		HomeBoardService service = new HomeBoardService();
 		
 		int area = request.getParameter("area") == null ? 0: Integer.parseInt(request.getParameter("area")) ;
-		request.getSession().setAttribute("area", area);
 		
 		int type = 0;
 		
