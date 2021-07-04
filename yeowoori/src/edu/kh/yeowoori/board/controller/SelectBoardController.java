@@ -91,9 +91,9 @@ public class SelectBoardController extends HttpServlet {
 				boardList = service.selectBoardList(pagination,area,category);
 				request.setAttribute("pagination", pagination);
 				request.setAttribute("boardList", boardList);
-				for(Board board : boardList) {
-					System.out.println(board);
-				}
+				//for(Board board : boardList) {
+				//		System.out.println(board);
+				//}
 				path = "/WEB-INF/views/board/boardList4.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
 				
