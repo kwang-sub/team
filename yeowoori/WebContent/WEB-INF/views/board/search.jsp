@@ -322,10 +322,10 @@
         
        
         <div style="padding :10px;"></div>
-        
+       
         <c:if test="${!empty withBoardList }">
         <h5 style="display:inline-block;">같이 떠나요 게시판</h5>
-         <c:if test="${fn:length(withboardList)> 5}">
+         <c:if test="${fn:length(withBoardList)> 5}">
         	<a href="#" style="float:right; color:grey;">검색결과 더보기</a>
         </c:if> 
         <div style="padding:5px"></div>
