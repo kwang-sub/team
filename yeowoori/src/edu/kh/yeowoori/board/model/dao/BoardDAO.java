@@ -105,4 +105,28 @@ public class BoardDAO {
 		return result;
 	}
 
+	/**공지사항 작성 DAO
+	 * @param board
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertNoticeBoard(Board board, Connection conn) throws Exception {
+		int result = 0;
+		String sql = prop.getProperty("insertNoticeBoard");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board.getBoardTitle());
+			pstmt.setString(2, board.getBoardContent());
+			pstmt.setInt(3, board.getMemberNo());
+			result =  pstmt.executeUpdate();
+					
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
