@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -248,6 +249,7 @@
 	                            <th>
 	                                    <div>${board.memberNickname }</div>
 	                                    <div style="font-weight: 400; font-size: 14px;">${board.memberContent }</div>
+	                                    
 	                            </th>
 	                        </table>
 	                    </div>
@@ -283,7 +285,13 @@
 	                                </span>
 	                            </div>
 	                        </div>
-	                        <p class="card-text">${board.boardContent }</p>
+	                        <c:if test="${fn:length(board.boardContent)>=39}">
+	                        	<p class="card-text">${fn:substring(board.boardContent,0,39) }...</p>
+	                        </c:if>
+	                        <c:if test="${fn:length(board.boardContent)<=39}">
+	                        	<p class="card-text">${board.boardContent }</p>
+	                        </c:if>
+	                        
 	                    </div>
 	                </div>
 	            </div>

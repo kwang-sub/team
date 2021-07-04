@@ -142,7 +142,7 @@
                     <div class="col-12 col-md-6 col-lg-6"> 
                         <div>
                             <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">여행</h6>
-                            <span style="color:#A66129">내가 작성한 수 : ${myTrip[0].count }</span>
+                            <span style="color:#A66129">내가 작성한 수 : ${myTrip[0].count   == null ? 0 : myTrip[0].count }</span>
                             <div class="show-all"><a href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1">전체보기</a></div>
                         </div>
                        
@@ -165,7 +165,7 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div>
                                 <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">질문</h6>
-                                <span style="color:#A66129">내가 작성한 수 : ${myQuestion[0].count }</span>
+                                <span style="color:#A66129">내가 작성한 수 : ${myQuestion[0].count  == null ? 0 : myQuestion[0].count }</span>
                                 <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
                         <ul class="list-group">
@@ -185,7 +185,7 @@
                     <div class="col-12 col-md-6 col-lg-6" >
                         <div>
                                 <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">같이 떠나요</h6>
-                                <span style="color:#A66129">내가 작성한 수 : ${myTogether[0].count }</span>
+                                <span style="color:#A66129">내가 작성한 수 : ${myTogether[0].count == null ? 0 : myTogether[0].count }</span>
                                 <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
                         <ul class="list-group">

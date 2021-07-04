@@ -46,6 +46,7 @@ public class SelectBoardDAO {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String sql = prop.getProperty("getListCount");
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardType);
 			rs = pstmt.executeQuery();
