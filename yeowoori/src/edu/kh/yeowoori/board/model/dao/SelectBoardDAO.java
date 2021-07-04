@@ -472,6 +472,51 @@ public class SelectBoardDAO {
 		return boardList;
 	}
 
+	/**
+	 * 게시글 상세조회 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return board
+	 * @throws Exception
+	 */
+	public Board selectBoard(Connection conn, int boardNo) throws Exception {
+		
+		Board board = null;
+		String sql = prop.getProperty("selectBoard");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
+				board.setCategoryName(rs.getString("CATEGORY_NM"));
+				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
+				board.setReadCount(rs.getInt("READ_COUNT"));
+				board.setCreateDate(rs.getTimestamp("CREATE_DT"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
+				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+				board.setCommentCount(rs.getInt("COMMENT_COUNT"));
+				board.setLikeCount(rs.getInt("LIKE_COUNT"));
+				
+				
+				List<String> filePath = new ArrayList<String>();
+				List<String> fileName = new ArrayList<String>();
+				
+				filePath.add(rs.getString("FILE_PATH"));
+				fileName.add(rs.getString("FILE_NM"));
+				board.setFilePath(filePath);
+				board.setFileName(fileName);
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return board;
+	}
+
 	
 
 

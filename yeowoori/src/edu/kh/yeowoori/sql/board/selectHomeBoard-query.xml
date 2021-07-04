@@ -11,7 +11,7 @@
 	AND BOARD_STATUS = 'Y'
 	AND BOARD_TYPE_NO =1
     AND FILE_LEVEL = 0
-	AND ROWNUM &lt;= 3
+	 <![CDATA[ AND ROWNUM <= 3 ]]>
 	ORDER BY READ_COUNT DESC
 	</entry>
 	
@@ -19,7 +19,7 @@
 	SELECT NOTICE_TITLE, NOTICE_CONTENT, NOTICE_NO
     FROM NOTICE
     WHERE NOTICE_STATUS = 'Y'
-    AND ROWNUM &lt;= 3
+     <![CDATA[ AND ROWNUM <= 3 ]]>
     ORDER BY NOTICE_NO DESC
 	</entry>
 	
@@ -29,7 +29,7 @@
 	WHERE AREA_CATEGORY_CD = ?
 	AND BOARD_STATUS = 'Y'
     AND BOARD_TYPE_NO =?
-	AND ROWNUM &lt;= 7
+	 <![CDATA[ AND ROWNUM <= 7 ]]>
 	ORDER BY BOARD_NO DESC
 	</entry>
 	
@@ -42,7 +42,7 @@
 	    AND BOARD_STATUS = 'Y'
 	    AND FILE_LEVEL = 0
 		ORDER BY READ_COUNT DESC)
-    WHERE ROWNUM &lt;= 3
+     <![CDATA[ WHERE ROWNUM <= 3 ]]>
 	</entry>
 	
 	<entry key="selectHomeOther">
@@ -50,7 +50,7 @@
 	FROM BOARD
 	WHERE BOARD_STATUS = 'Y'
     AND BOARD_TYPE_NO =?
-	AND ROWNUM &lt;= 7
+	 <![CDATA[ AND ROWNUM <= 7 ]]>
 	ORDER BY BOARD_NO DESC
 	</entry>
 	
