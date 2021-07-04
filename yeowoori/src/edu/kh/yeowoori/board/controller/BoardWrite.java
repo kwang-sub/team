@@ -88,7 +88,6 @@ public class BoardWrite extends HttpServlet {
 				
 				
 				
-				
 				Board board = new Board();
 				board.setAreaCode(area);
 				board.setCategoryCode(categoryCode);

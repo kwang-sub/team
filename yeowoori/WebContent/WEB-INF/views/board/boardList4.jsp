@@ -80,42 +80,20 @@
            		<c:if test="${pagination.currentPage>pagination.pageSize }">
 					<li><a class="page-link" href="${prev }">&lt;&lt;</a></li>          		
            		</c:if>	
-           		<c:if test="${pagination.currentPage>2 }">
-					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}">&lt;</a></li>                 		
+           		<c:if test="${pagination.currentPage>=2 }">
+					<li><a class="page-link" href="/yeowoori/board/list4?type=4&cp=${pagination.currentPage-1}">&lt;</a></li>                 		
            		</c:if>	
            		
            		<c:forEach var="p" begin="${pagination.startPage }" end="${pagination.endPage }">
            			<li>
-           				<c:choose>
-           					<c:when test="${pagination.currentPage==p }">
-           						<a class="page-link">${p}</a>
-           					</c:when>
-           					<c:otherwise>
-           						<c:if test="${!empty param.area && empty param.memberNo }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&area=${param.area}">${p}</a>
-           						</c:if>
-           						<c:if test="${!empty param.category && empty param.memberNo }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}">${p}</a>
-           						</c:if>
-           						<c:if test="${!empty param.category && !empty param.area && empty param.memberNo }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}&area=${param.area}">${p}</a>
-           						</c:if>
-           						<c:if test="${empty param.category && empty param.area && empty param.memberNo }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
-           						</c:if>
-           						<c:if test="${empty param.category && empty param.area && !empty param.memberNo }">
-           							<a class="page-link" href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1&cp=${p}">${p}</a>
-           						</c:if>
-           					</c:otherwise>
-           				</c:choose>
-           			
+	           			<a class="page-link" href="/yeowoori/board/list4?type=4&cp=${p}">${p}</a>
            			</li>
            		</c:forEach>
            		
            		<c:if test="${pagination.currentPage<pagination.maxPage }">
-					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+					<li><a class="page-link" href="/yeowoori/board/list4?type=4&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
            		</c:if>	
-           		<c:if test="${pagination.currentPage<pagination.maxPage }">
+           		<c:if test="${pagination.endPage<pagination.maxPage }">
 					<li><a class="page-link" href="${next}">&gt;&gt;</a></li>              		
            		</c:if>	
            	
