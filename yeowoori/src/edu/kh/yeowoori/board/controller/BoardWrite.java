@@ -95,7 +95,13 @@ public class BoardWrite extends HttpServlet {
 				board.setBoardContent(boardContent);
 				board.setBoardTitle(boardTitle);
 				board.setMemberNo(memberNo);
-				int result = service.insertBoard(board, atList, boardType);
+				int result = 0;
+				if(boardType==4) {
+					result = service.insertNoticeBoard(board);
+				}else {
+					
+					result = service.insertBoard(board, atList, boardType);
+				}
 				
 				
 				
