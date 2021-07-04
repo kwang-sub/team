@@ -146,5 +146,10 @@
 	WHERE BOARD_NO = ?
 	</entry>
 	
+	<!-- 카테고리 리스트 조회 -->
+	<entry key="selectCategoryList">
+	SELECT*FROM CATEGORY
+	</entry>
+	
 	
 </properties>

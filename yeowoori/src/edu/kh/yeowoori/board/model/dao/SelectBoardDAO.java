@@ -15,6 +15,7 @@ import static edu.kh.yeowoori.common.JDBCTemplate.*;
 import edu.kh.yeowoori.board.model.dao.SelectBoardDAO;
 import edu.kh.yeowoori.board.model.vo.Attachment;
 import edu.kh.yeowoori.board.model.vo.Board;
+import edu.kh.yeowoori.board.model.vo.Category;
 import edu.kh.yeowoori.board.model.vo.Pagination;
 
 public class SelectBoardDAO {
@@ -608,6 +609,32 @@ public class SelectBoardDAO {
 		}
 		
 		return result;
+	}
+
+	/**
+	 * 카테고리 리스트 조회
+	 * @param conn
+	 * @return  categoryList
+	 * @throws Exception
+	 */
+	public List<Category> selectCategoryList(Connection conn) throws Exception{
+		
+		List<Category>  categoryList = new ArrayList<Category>();
+		String sql = prop.getProperty("selectCategoryList");
+		try {
+			stmt= conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Category ca = new Category();
+				ca.setCategoryCode(rs.getInt(1));
+				ca.setCategoryName(rs.getString(2));
+				categoryList.add(ca);
+			}
+		}finally {
+			close(stmt);
+			close(rs);
+		}
+		return  categoryList;
 	}
 
 	

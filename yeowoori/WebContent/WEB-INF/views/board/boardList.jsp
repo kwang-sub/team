@@ -261,7 +261,12 @@
 			                    </a>
 	                    	</c:when>
 	                    	<c:otherwise>
+	                    		<c:if test="${empty param.area }">
 	                    		<a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=${pagination.boardType}">
+	                    		</c:if>
+	                    		<c:if test="${!empty param.area }">
+	                    		<a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=${pagination.boardType}&area=${param.area}">
+	                    		</c:if>
 	                    		
 			                    <div class="bg-img card-img-top" style="background-image: url(${contextPath}/${board.filePath[0]}${board.fileName[0]});"></div>
 
