@@ -17,6 +17,18 @@
 			margin-left: auto; 
 			margin-right: auto;
 		}
+		 #write-btn{
+            width: 50px;
+            height: 50px;
+            border: none;
+            background-color: #A66129;
+            color: white;
+            line-height: 20px;
+            font-size: 50px;
+            padding-bottom: 5px;
+            float: right;
+         }   
+          
     </style>
 </head>
 <body>
@@ -30,6 +42,19 @@
               <div id="type">
                   <h2>공지사항</h2>
               </div>
+              
+              	<c:if test="${loginMember.memberGrade == 'A' }">
+	                 <div class="" style="height: 35px;">
+			            <a href="${contextPath}/boardwrite?cp=${param.cp}&type=${param.type}" >
+			    
+			                <button id="write-btn" class="rounded-circle">+</button>
+			            </a>
+			
+			        </div>
+              	
+              	</c:if>
+		        
+		        
 				 <c:forEach items="${boardList }" var="board">
 						<div>
 			                  <hr>

@@ -104,7 +104,13 @@ public class BoardWrite extends HttpServlet {
 					icon = "success";
 					title = "게시글 등록성공";
 //				게시글 디테일 페이지 확정되면 수정필수!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					path = request.getContextPath()+"/board/list?type=1";
+					if(boardType==1) {
+						
+						path = request.getContextPath()+"/board/list?type="+boardType;
+					}else {
+						path = request.getContextPath()+"/board/list"+boardType+"?type="+boardType;
+						
+					}
 				}else {
 					
 					icon = "error";

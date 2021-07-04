@@ -196,7 +196,7 @@
                     </c:if>
         		</c:if>
                     
-       	<c:if test="${!empty loginMember }">
+       	<c:if test="${!empty loginMember && loginMember.memberGrade == 'G' }">
        	
         <div class="" style="height: 35px;">
             <a href="${contextPath}/boardwrite?cp=${param.cp}&type=${param.type}" >
