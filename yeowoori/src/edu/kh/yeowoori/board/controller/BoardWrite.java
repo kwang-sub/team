@@ -50,9 +50,7 @@ public class BoardWrite extends HttpServlet {
 //				type, title, category,area, img0, img1, img2, memberNo
 				int boardType = Integer.parseInt(request.getParameter("type"));
 				HttpSession session = request.getSession();
-//				int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-//				완료하고수정필수!!!!!!!!!!!!!!!!!!!!!!!!!
-				int memberNo = 1;
+				int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 				int maxSize = 1024*1024*20;
 				String root = session.getServletContext().getRealPath("/");
 				

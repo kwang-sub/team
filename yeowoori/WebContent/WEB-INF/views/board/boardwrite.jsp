@@ -190,6 +190,9 @@
             		<c:when test="${param.type == '1' }">
                 		<form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
             		</c:when>
+            		<c:when test="${param.type == '4' }">
+                		<form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck3();" enctype="multipart/form-data" method="post" >
+            		</c:when>
             		
             		<c:otherwise>
                 		<form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
@@ -211,6 +214,9 @@
                     	</c:when>
                     	<c:when test="${param.type==3 }">
                         <h3>같이 떠나요 게시판</h3>
+                    	</c:when>
+                    	<c:when test="${param.type==4 }">
+                        <h3>공지사항 게시판</h3>
                     	</c:when>
                     </c:choose>
                     </div>
@@ -305,7 +311,7 @@
                         <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote"></textarea>
                     
                 </form>
-
+				<a href="${pageContext.request.requestURI }">test</a>
             </div>
 
             <div class="col-xs-1">
@@ -336,6 +342,22 @@
             }
             if(!$(".upload-hidden").val() ){
             	alert("대표사진을 등록 해주세요");
+                return false;
+            }
+        } 
+        function boardcheck3(){
+            if($("#title").val().trim().length == 0){
+                alert("제목을 입력해주세요");
+                return false;
+            }
+            if($("#summernote").val().trim().length == 0){
+                alert("내용을 입력해주세요");
+                return false;
+            }
+            
+            if(${loginMember.memberGrade == 'G' }){
+            	
+            	alert("관리자만 작성할 수 있습니다");
                 return false;
             }
         } 
