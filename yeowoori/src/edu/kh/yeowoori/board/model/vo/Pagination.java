@@ -28,6 +28,14 @@ public class Pagination {
 	}
 
 
+	public Pagination(int currentPage, int listCount) {
+		super();
+		this.currentPage = currentPage;
+		this.listCount = listCount;
+		makePagination();
+	}
+
+
 	public int getCurrentPage() {
 		return currentPage;
 	}

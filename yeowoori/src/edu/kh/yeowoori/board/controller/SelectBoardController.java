@@ -82,13 +82,10 @@ public class SelectBoardController extends HttpServlet {
 				request.getRequestDispatcher(path).forward(request, response);
 				
 			}else if(command.equals("list4")) {
-				int area = request.getParameter("area") == null ? 0 : Integer.parseInt(request.getParameter("area"));
-				int category = request.getParameter("category") == null ? 0 : Integer.parseInt(request.getParameter("category"));
-				int boardType = Integer.parseInt(request.getParameter("type"));
-				Pagination pagination = service.getPagination(cp,boardType,area,category);
-				pagination.setLimit(10);
+				Pagination pagination = service.getNoticePagination(cp);
+				pagination.setLimit(7);
 				List<Board> boardList= null;
-				boardList = service.selectBoardList(pagination,area,category);
+				boardList = service.selectNoticeBoardList(cp,pagination);
 				request.setAttribute("pagination", pagination);
 				request.setAttribute("boardList", boardList);
 				//for(Board board : boardList) {
