@@ -72,7 +72,6 @@ public class BoardDAO {
 			pstmt.setInt(6, boardType);
 			pstmt.setInt(7, board.getAreaCode());
 			result = pstmt.executeUpdate();
-			System.out.println(result);
 			
 		}finally {
 			close(pstmt);
@@ -97,7 +96,6 @@ public class BoardDAO {
 			pstmt.setInt(3,at.getFileLevel());
 			pstmt.setInt(4, at.getBoardNo());
 			result = pstmt.executeUpdate();
-			System.out.println(result);
 		}finally {
 			close(pstmt);
 		}
