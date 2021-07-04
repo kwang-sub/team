@@ -108,6 +108,20 @@ public class SelectBoardService {
 		return boardList;
 	}
 
+	/**
+	 * 게시글 상세조회 Service
+	 * @param boardNo
+	 * @return board
+	 * @throws Exception
+	 */
+	public Board selectBoard(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		Board board = dao.selectBoard(conn, boardNo);
+		close(conn);
+		
+		return board;
+	}
+
 
 
 

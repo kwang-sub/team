@@ -180,7 +180,7 @@
 		<div class="notice-bar">
             <div class="notice-content">
                 <a href="${contextPath}/board/list4?type=4">
-                    <img src="https://drive.google.com/uc?id=1Qa_8qymuVwaissFmndNUsXEIuHkOLq9H" style="width:20px">
+                    <img src="${contextPath }/resources/img/megaphone.png" style="width:20px">
                     <span style="padding-left: 10px;">
 						<b>${notice.noticeTitle}</b>&nbsp;
 						<c:if test="${fn:length(notice.noticeContent) > 20}">
@@ -202,7 +202,9 @@
                 <div class="col-sm">
                     <div class="main-board">
                         <h6 style="margin-left:10px; margin-bottom: 10px; display: inline-block;">질문</h6>
-                        <a class="more" href="${contextPath}/board/list2?type=2&area=${param.area}">더보기</a> <!--질문 게시판으로 이동-->
+                         <c:if test="${!empty qBoardList }">
+                         <a class="more" href="${contextPath}/board/list2?type=2&area=${param.area}">더보기</a>
+                         </c:if>
                     </div>
                     <ul class="list-group">
                     <c:if test="${!empty qBoardList }">
@@ -217,13 +219,18 @@
                     	</a></li>
                     	</c:forEach>
                     </c:if>
+                    <c:if test="${empty qBoardList }">
+                    	<li class="list-group-item">등록된 게시글이 없습니다.</li>
+                    </c:if>
                       </ul>
                 </div>
                 <div style="padding : 20px;"></div>
                 <div class="col-sm">
                     <div class="main-board">
                         <h6 style="margin-left:10px; margin-bottom: 10px; display: inline-block;">같이 떠나요</h6>
-                        <a class="more" href="${contextPath}/board/list3?type=3&area=${param.area}">더보기</a> 
+                         <c:if test="${!empty withBoardList }">
+                         <a class="more" href="${contextPath}/board/list3?type=3&area=${param.area}">더보기</a> 
+                         </c:if>
                     </div>
                     <ul class="list-group">
                     <c:if test="${!empty withBoardList }">
@@ -237,6 +244,9 @@
                     	</c:if>
 						</a></li>
                     	</c:forEach>
+                    </c:if>
+                    <c:if test="${empty withBoardList }">
+                    	<li class="list-group-item">등록된 게시글이 없습니다.</li>
                     </c:if>
                       </ul>
                 </div>

@@ -97,8 +97,13 @@ public class SelectBoardController extends HttpServlet {
 				path = "/WEB-INF/views/board/boardList4.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
 				
+			}else if (command.equals("view")){
+				int boardNo = Integer.parseInt(request.getParameter("no"));
+
+				Board board = service.selectBoard(boardNo);
+
+
 			}
-			
 			
 			
 			
