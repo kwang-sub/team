@@ -512,6 +512,7 @@ public class SelectBoardDAO {
 					board.setLikeCount(rs.getInt("LIKE_COUNT"));
 					board.setCategoryCode(rs.getInt("CATEGORY_CD"));
 					board.setMemberNo(rs.getInt("MEMBER_NO"));
+					board.setAreaCode(rs.getInt("AREA_CATEGORY_CD"));
 					
 					flag =false;
 				}
