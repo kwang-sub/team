@@ -86,8 +86,8 @@ public class Board2Controller extends HttpServlet {
 				
 				//게시글 수정에 사용되는 파라미터(게시글 번호, 제목, 내용, 카테고리, 이미지)
 				int boardNo = Integer.parseInt(mpRequest.getParameter("boardNo"));
-				String boardTitle = mpRequest.getParameter("boardTitle");
-				String boardContent = mpRequest.getParameter("boardContent");
+				String boardTitle = mpRequest.getParameter("title");
+				String boardContent = mpRequest.getParameter("content");
 				int categoryCode = Integer.parseInt(mpRequest.getParameter("category"));
 				int areaCode =  Integer.parseInt(mpRequest.getParameter("area"));
 				
