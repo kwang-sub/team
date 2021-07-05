@@ -142,7 +142,7 @@ p {
 
 			<!-- ajax 중복검사 시 필요없음 -->
 			<div class="col-md-5 offset-md-3">
-				<button type="submit" class="btn btn-sm btn-block btn-light"
+				<button type="button" class="btn btn-sm btn-block btn-light"
 					id="idDupCheck">아이디 중복검사</button>
 			</div>
 
@@ -271,7 +271,8 @@ p {
 				return false;
 			}
 		}
-	</script>
 
+	</script>
+	<script src="${contextPath}/resources/js/member.js"></script>
 </body>
 </html>
