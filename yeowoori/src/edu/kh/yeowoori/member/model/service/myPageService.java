@@ -60,4 +60,30 @@ public class myPageService {
 		return likeCount;
 	}
 
+	public List<Member> getLikeTrip(Member loginMember) throws Exception{
+		Connection conn = getConnection();
+		List<Member> myTrip = dao.getLikeTrip(conn, loginMember);
+		close(conn);
+		return myTrip;
+	}
+	/**내가 작성한 질문글 가져오기
+	 * @param loginMember
+	 * @return
+	 */
+	public List<Member> getLikeQuestion(Member loginMember) throws Exception {
+		Connection conn = getConnection();
+		List<Member> myQuestion = dao.getLikeQuestion(conn, loginMember);
+		close(conn);		
+		return myQuestion;
+	}
+	/**내가 작성한 같이떠나요 가져오기
+	 * @param loginMember
+	 * @return
+	 */
+	public List<Member> getLikeTogether(Member loginMember) throws Exception {
+		Connection conn = getConnection();
+		List<Member> myTogether = dao.getLikeTogether(conn, loginMember);
+		close(conn);
+		return myTogether;
+	}
 }

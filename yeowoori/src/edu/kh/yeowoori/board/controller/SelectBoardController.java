@@ -52,6 +52,7 @@ public class SelectBoardController extends HttpServlet {
 				request.setAttribute("boardList", boardList);
 				path = "/WEB-INF/views/board/boardList.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
+				
 			}
 			
 // 			질문 게시판

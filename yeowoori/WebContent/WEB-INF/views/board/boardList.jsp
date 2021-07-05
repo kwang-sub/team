@@ -247,6 +247,7 @@
 	                            
 	                            </th>
 	                            <th>
+	                            
 	                                    <div>${board.memberNickname }</div>
 	                                    <div style="font-weight: 400; font-size: 14px;">${board.memberContent }</div>
 	                                    

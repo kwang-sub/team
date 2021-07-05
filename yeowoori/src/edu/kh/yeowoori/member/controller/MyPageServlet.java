@@ -15,14 +15,19 @@ import edu.kh.yeowoori.member.model.service.myPageService;
 import edu.kh.yeowoori.member.model.vo.Member;
 
 
-@WebServlet("/member/myPage")
+@WebServlet("/member/myPage/*")
 public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
    
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String uri = request.getRequestURI();//요청주소
+		String contextPath = request.getContextPath();//최상위 주소
+		String command = uri.substring((contextPath+"/member/myPage/").length());
 		
+		String path = null;//응답화면 경로
+		RequestDispatcher view = null; // 요청 위임 객체 저장 참조변수
 		myPageService service = new myPageService();
 		HttpSession session = request.getSession();
 		
@@ -30,22 +35,41 @@ public class MyPageServlet extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember"); 
 		
 		try {
-			List<Member> myTrip =  service.getMyTrip(loginMember);
-			List<Member> myQuestion = service.getMyQuestion(loginMember);
-			List<Member> myTogether = service.getMyTogether(loginMember);
-			int likeCount = service.getLikeCount(loginMember);
-			request.setAttribute("myQuestion", myQuestion);
-			request.setAttribute("myTrip", myTrip);
-			request.setAttribute("myTogether", myTogether);
-			request.setAttribute("likeCount", likeCount);
+			if(command.equals("my")) {
+				
+				
+				List<Member> myTrip =  service.getMyTrip(loginMember);
+				List<Member> myQuestion = service.getMyQuestion(loginMember);
+				List<Member> myTogether = service.getMyTogether(loginMember);
+				int likeCount = service.getLikeCount(loginMember);
+				request.setAttribute("myQuestion", myQuestion);
+				request.setAttribute("myTrip", myTrip);
+				request.setAttribute("myTogether", myTogether);
+				request.setAttribute("likeCount", likeCount);
+				path = "/WEB-INF/views/member/myPage.jsp";
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}else if (command.equals("like")) {
+				List<Member> myTrip =  service.getLikeTrip(loginMember);
+				List<Member> myQuestion = service.getLikeQuestion(loginMember);
+				List<Member> myTogether = service.getLikeTogether(loginMember);
+				int likeCount = service.getLikeCount(loginMember);
+				request.setAttribute("myQuestion", myQuestion);
+				request.setAttribute("myTrip", myTrip);
+				request.setAttribute("myTogether", myTogether);
+				request.setAttribute("likeCount", likeCount);
+				request.setAttribute("like", "like");
+				path = "/WEB-INF/views/member/myPage.jsp";
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+				
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		String path = "/WEB-INF/views/member/myPage.jsp";
-		RequestDispatcher view = request.getRequestDispatcher(path);
-		view.forward(request, response);
 		
 		
 		
