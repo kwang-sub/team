@@ -93,7 +93,7 @@
       
 
     </style>
-
+	
 
     <div class="container">
         <form class="bg-white category-select" action="#" method="GET">
@@ -103,8 +103,8 @@
                     마이페이지
                 </button>
                 <div class="dropdown-menu">
-                    <a href="#">나의활동</a><br>
-                    <a href="#">좋아요</a><br>
+                    <a href="${contextPath}/member/myPage/my">나의활동</a><br>
+                    <a href="${contextPath}/member/myPage/like">좋아요</a><br>
                     <a href="#">설정</a><br>
                 </div>
               </div>
@@ -114,8 +114,8 @@
         <div class="category-btn" >
             <div style="padding:10px;"></div>
             <h6 style="display: inline-block; font-weight: 500;">마이페이지</h6>
-            <a class="btn btn-light category-selected" href="">나의활동</a>
-            <a class="btn btn-light category-unselected" href="" >좋아요</a>
+            <a class="btn btn-light category-selected" href="${contextPath}/member/myPage/my">나의활동</a>
+            <a class="btn btn-light category-unselected" href="${contextPath}/member/myPage/like" >좋아요</a>
             <a class="btn btn-light category-unselected" href="${contextPath}/member/updateMyPage">설정</a>
             <hr  align="center" style="border: solid #b6957c; border-width: 1px 0px 0px 0px; width:100%">
             <div style="padding : 20px"></div>
@@ -142,7 +142,12 @@
                     <div class="col-12 col-md-6 col-lg-6"> 
                         <div>
                             <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">여행</h6>
-                            <span style="color:#A66129">내가 작성한 수 : ${myTrip[0].count   == null ? 0 : myTrip[0].count }</span>
+                            <c:if test="${empty like }">
+                            	<span style="color:#A66129">내가 작성한 수 : ${myTrip[0].count   == null ? 0 : myTrip[0].count }</span>
+                            </c:if>
+                            <c:if test="${!empty like }">
+                            	<span style="color:#A66129">내가 종아요한 게시글  수 : ${myTrip[0].count   == null ? 0 : myTrip[0].count }</span>
+                            </c:if>
                             <div class="show-all"><a href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1">전체보기</a></div>
                         </div>
                        
@@ -165,7 +170,14 @@
                     <div class="col-12 col-md-6 col-lg-6">
                         <div>
                                 <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">질문</h6>
-                                <span style="color:#A66129">내가 작성한 수 : ${myQuestion[0].count  == null ? 0 : myQuestion[0].count }</span>
+                                <c:if test="${empty like }">
+                                
+                                	<span style="color:#A66129">내가 작성한 수 : ${myQuestion[0].count  == null ? 0 : myQuestion[0].count }</span>
+                                </c:if>
+                                <c:if test="${!empty like }">
+                                
+                                	<span style="color:#A66129">내가 종아요한 게시글 수 : ${myQuestion[0].count  == null ? 0 : myQuestion[0].count }</span>
+                                </c:if>
                                 <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
                         <ul class="list-group">
@@ -185,7 +197,14 @@
                     <div class="col-12 col-md-6 col-lg-6" >
                         <div>
                                 <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">같이 떠나요</h6>
-                                <span style="color:#A66129">내가 작성한 수 : ${myTogether[0].count == null ? 0 : myTogether[0].count }</span>
+                                <c:if test="${empty like }">
+                                
+	                                <span style="color:#A66129">내가 작성한 수 : ${myTogether[0].count == null ? 0 : myTogether[0].count }</span>
+                                </c:if>
+                                <c:if test="${!empty like }">
+                                
+	                                <span style="color:#A66129">내가 좋아요한 게시글 수 : ${myTogether[0].count == null ? 0 : myTogether[0].count }</span>
+                                </c:if>
                                 <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
                         <ul class="list-group">
