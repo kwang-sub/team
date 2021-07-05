@@ -77,6 +77,18 @@ public class Member {
 		this.memberGrade = memberGrade;
 		this.memberProfile = memberProfile;
 	}
+	
+
+
+	public Member(int memberNo,String memberNickname, String memberProfile, String memberContent ) {
+		super();
+		this.memberNo = memberNo;
+		this.memberNickname = memberNickname;
+		this.memberProfile = memberProfile;
+		this.memberContent = memberContent;
+	}
+
+	
 
 	public int getMemberNo() {
 		return memberNo;

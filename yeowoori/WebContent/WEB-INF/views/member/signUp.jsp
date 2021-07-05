@@ -42,7 +42,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 body {
 	font-weight: bold;
-	display : flex;
+	
 	
 }
 
@@ -250,6 +250,27 @@ p {
 			// 상대 경로 : idDupCheck
 
 		});
+		
+		
+		// 비밀번호 유효성 검사
+		function pwdValidate(){
+			const regExp = /^[a-zA-Z0-9~!@#$%^&*()\-\+]{8,12}$/;
+			
+			const newPwd1 = $("#newPwd1").val().trim();
+			const newPwd2 = $("#newPwd2").val().trim();
+
+			// 새비밀번호가 유효하지 않거나
+			// 새비밀번호, 새비밀번호 확인이 같지 않는 경우
+			if(!regExp.test(newPwd1) || (newPwd1 != newPwd2)){
+				
+				swal({
+					"icon" : "error",
+					"title" : "비밀번호가 유효하지 않습니다."
+				});
+				
+				return false;
+			}
+		}
 	</script>
 
 </body>

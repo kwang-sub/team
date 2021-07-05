@@ -4,6 +4,7 @@ package edu.kh.yeowoori.member.model.dao;
 import static edu.kh.yeowoori.common.JDBCTemplate.close;
 import static edu.kh.yeowoori.common.JDBCTemplate.close;
 import static edu.kh.yeowoori.common.JDBCTemplate.close;
+import static edu.kh.yeowoori.common.JDBCTemplate.close;
 import static edu.kh.yeowoori.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
@@ -170,4 +171,31 @@ int result = 0;
 		
 		return result;
 	}
+	/** 회원정보 수정 DAO
+	 * @param conn
+	 * @param member
+	 * @return result
+	 * @throws Exception
+	 */
+	public int memberUpdate(Connection conn, Member member)throws Exception {
+		int result = 0;
+		
+		String sql = prop.getProperty("memberUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getMemberNickname());
+			pstmt.setString(2, member.getMemberProfile() );
+			pstmt.setString(3, member.getMemberContent() );
+			pstmt.setInt(4, member.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
+
