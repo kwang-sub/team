@@ -6,7 +6,10 @@
     (SELECT *
 	FROM BOARD_LIST
     WHERE BOARD_TYPE_NO =?
-    AND (BOARD_TITLE LIKE '%' || ? || '%' OR BOARD_CONTENT LIKE '%' || ? || '%' OR CATEGORY_NM LIKE '%' || ? || '%')
+    AND (BOARD_TITLE LIKE '%' || ? || '%' 
+    	OR BOARD_CONTENT LIKE '%' || ? || '%' 
+    	OR CATEGORY_NM LIKE '%' || ? || '%' 
+    	OR MEMBER_NICKNAME LiKE '%' || ? || '%')
     AND BOARD_STATUS = 'Y'
 	ORDER BY BOARD_NO DESC)
     
@@ -20,7 +23,10 @@
 	FROM BOARD_LIST
     WHERE BOARD_TYPE_NO =?
     AND AREA_CATEGORY_CD = ?
-    AND (BOARD_TITLE LIKE '%' || ? || '%' OR BOARD_CONTENT LIKE '%' || ? || '%' OR CATEGORY_NM LIKE '%' || ? || '%')
+    AND (BOARD_TITLE LIKE '%' || ? || '%' 
+    	OR BOARD_CONTENT LIKE '%' || ? || '%' 
+    	OR CATEGORY_NM LIKE '%' || ? || '%' 
+    	OR MEMBER_NICKNAME LiKE '%' || ? || '%')
     AND BOARD_STATUS = 'Y'
 	ORDER BY BOARD_NO DESC)
 	
