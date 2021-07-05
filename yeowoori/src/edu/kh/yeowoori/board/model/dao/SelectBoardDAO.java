@@ -13,7 +13,9 @@ import java.util.Map;
 import java.util.Properties;
 import static edu.kh.yeowoori.common.JDBCTemplate.*;
 import edu.kh.yeowoori.board.model.dao.SelectBoardDAO;
+import edu.kh.yeowoori.board.model.vo.Attachment;
 import edu.kh.yeowoori.board.model.vo.Board;
+import edu.kh.yeowoori.board.model.vo.Category;
 import edu.kh.yeowoori.board.model.vo.Pagination;
 
 public class SelectBoardDAO {
@@ -46,6 +48,7 @@ public class SelectBoardDAO {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String sql = prop.getProperty("getListCount");
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardType);
 			rs = pstmt.executeQuery();
@@ -469,6 +472,169 @@ public class SelectBoardDAO {
 		
 		
 		return boardList;
+	}
+
+	/**
+	 * 게시글 상세조회 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return board
+	 * @throws Exception
+	 */
+	public Board selectBoard(Connection conn, int boardNo) throws Exception {
+		
+		Board board = null;
+		String sql = prop.getProperty("selectBoard");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			
+			board = new Board();
+			board.setAtList(new ArrayList<Attachment>());
+			
+			boolean flag = true;
+			
+			while(rs.next()) {
+				
+				if (flag) {
+					board.setBoardNo(rs.getInt("BOARD_NO"));
+					board.setBoardTitle(rs.getString("BOARD_TITLE"));
+					board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
+					board.setCategoryName(rs.getString("CATEGORY_NM"));
+					board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
+					board.setReadCount(rs.getInt("READ_COUNT"));
+					board.setCreateDate(rs.getTimestamp("CREATE_DT"));
+					board.setModifyDate(rs.getTimestamp("MODIFY_DT"));
+					board.setBoardContent(rs.getString("BOARD_CONTENT"));
+					board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+					board.setCommentCount(rs.getInt("COMMENT_COUNT"));
+					board.setLikeCount(rs.getInt("LIKE_COUNT"));
+					board.setCategoryCode(rs.getInt("CATEGORY_CD"));
+					board.setMemberNo(rs.getInt("MEMBER_NO"));
+					
+					flag =false;
+				}
+					Attachment at = new Attachment();
+					at.setFileLevel(rs.getInt("FILE_LEVEL"));
+					at.setFileNm(rs.getString("FILE_NM"));
+					at.setFilePath(rs.getString("FILE_PATH"));
+					
+					board.getAtList().add(at);
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return board;
+	}
+
+	/**notice 갯수  dao
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int getNoticePagination(Connection conn) throws Exception {
+		int listCount = 0;
+		String sql = prop.getProperty("getNoticePagination");
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				listCount = rs.getInt("COUNT(*)");
+				
+			}
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return listCount;
+	}
+
+	/**공지사항 리스트 DAO
+	 * @param pagination
+	 * @param conn
+	 * @param cp
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectNoticeBoardList(Pagination pagination, Connection conn, int cp) throws Exception {
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = prop.getProperty("selectNoticeBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pagination.getBoardType());
+			// 조회할 범위를 지정할 변수 선언
+			
+			int startRow = (pagination.getCurrentPage()-1)*pagination.getLimit()+1;
+			int endRow = startRow + pagination.getLimit() -1;
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				board.setBoardTitle(rs.getString("NOTICE_TITLE"));
+				board.setBoardContent(rs.getString("NOTICE_CONTENT"));
+				board.setCreateDate(rs.getTimestamp("CREATE_DT"));
+				boardList.add(board);
+				
+			}	
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return boardList;
+	}
+
+	/**
+	 * 게시글 조회수 증가 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int boardNo) throws Exception{
+		int result = 0;
+		String sql = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 카테고리 리스트 조회
+	 * @param conn
+	 * @return  categoryList
+	 * @throws Exception
+	 */
+	public List<Category> selectCategoryList(Connection conn) throws Exception{
+		
+		List<Category>  categoryList = new ArrayList<Category>();
+		String sql = prop.getProperty("selectCategoryList");
+		try {
+			stmt= conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Category ca = new Category();
+				ca.setCategoryCode(rs.getInt(1));
+				ca.setCategoryName(rs.getString(2));
+				categoryList.add(ca);
+			}
+		}finally {
+			close(stmt);
+			close(rs);
+		}
+		return  categoryList;
 	}
 
 	

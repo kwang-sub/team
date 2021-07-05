@@ -110,7 +110,14 @@
                     <div class="carousel-caption text-left">
                     <h3 style="color: black;">${boardList[0].boardTitle }</h3>
                     <c:set var="boardContent" value="${boardList[0].boardContent }"/>
-                    <p style="color: black;">${fn:substring(boardContent,0,100) }...</p>
+                    <p style="color: black;">
+                    <c:if test="${fn:length(boardContent) < 101 }">
+                    ${boardContent}
+                    </c:if>
+                    <c:if test="${fn:length(boardContent) > 100}">
+                    ${fn:substring(boardContent,0,100) }...
+                    </c:if>
+                    </p>
                     </div>
                </a>
           </div>
@@ -124,7 +131,14 @@
                     <div class="carousel-caption text-left">
                     <h3 style="color: black;">${boardList[1].boardTitle }</h3>
                     <c:set var="boardContent" value="${boardList[1].boardContent }"/>
-                    <p style="color: black;">${fn:substring(boardContent,0,100) }...</p>
+                    <p style="color: black;">
+                    <c:if test="${fn:length(boardContent) < 101 }">
+                    ${boardContent}
+                    </c:if>
+                    <c:if test="${fn:length(boardContent) > 100}">
+                    ${fn:substring(boardContent,0,100) }...
+                    </c:if>
+                    </p>
                     </div>
                </a>
           </div>
@@ -138,7 +152,14 @@
                     <div class="carousel-caption text-left">
                    <h3 style="color: black;">${boardList[2].boardTitle }</h3>
                     <c:set var="boardContent" value="${boardList[2].boardContent }"/>
-                    <p style="color: black;">${fn:substring(boardContent,0,100) }...</p>
+                    <p style="color: black;">
+                    <c:if test="${fn:length(boardContent) < 101 }">
+                    ${boardContent}
+                    </c:if>
+                    <c:if test="${fn:length(boardContent) > 100}">
+                    ${fn:substring(boardContent,0,100) }...
+                    </c:if>
+                    </p>
                     </div>
                 </a>
            </div>
@@ -158,11 +179,16 @@
 	<c:forEach items="${noticeList}" var="notice">
 		<div class="notice-bar">
             <div class="notice-content">
-                <a href="#">
-                    <img src="https://drive.google.com/uc?id=1Qa_8qymuVwaissFmndNUsXEIuHkOLq9H" style="width:20px">
+                <a href="${contextPath}/board/list4?type=4">
+                    <img src="${contextPath }/resources/img/megaphone.png" style="width:20px">
                     <span style="padding-left: 10px;">
 						<b>${notice.noticeTitle}</b>&nbsp;
+						<c:if test="${fn:length(notice.noticeContent) > 20}">
 						${fn:substring(notice.noticeContent,0,20) }...
+						</c:if>
+						<c:if test="${fn:length(notice.noticeContent) < 21}">
+						${notice.noticeContent}
+						</c:if>
                     </span>
                 </a>
             </div>
@@ -176,13 +202,25 @@
                 <div class="col-sm">
                     <div class="main-board">
                         <h6 style="margin-left:10px; margin-bottom: 10px; display: inline-block;">질문</h6>
-                        <a class="more" href="#">더보기</a> <!--질문 게시판으로 이동-->
+                         <c:if test="${!empty qBoardList }">
+                         <a class="more" href="${contextPath}/board/list2?type=2&area=${param.area}">더보기</a>
+                         </c:if>
                     </div>
                     <ul class="list-group">
                     <c:if test="${!empty qBoardList }">
                        	<c:forEach items="#{qBoardList}" var="qboard">
-                    	<li class="list-group-item"><a href="#">${fn:substring(qboard.boardTitle,0,20) }...</a></li>
+                    	<li class="list-group-item"><a href="#">
+                    	<c:if test="${fn:length(qboard.boardTitle) <21 }">
+                    	${qboard.boardTitle}
+                    	</c:if>
+                    	<c:if test="${fn:length(qboard.boardTitle) > 20}">
+                    	${fn:substring(qboard.boardTitle,0,20) }...
+                    	</c:if>
+                    	</a></li>
                     	</c:forEach>
+                    </c:if>
+                    <c:if test="${empty qBoardList }">
+                    	<li class="list-group-item">등록된 게시글이 없습니다.</li>
                     </c:if>
                       </ul>
                 </div>
@@ -190,13 +228,25 @@
                 <div class="col-sm">
                     <div class="main-board">
                         <h6 style="margin-left:10px; margin-bottom: 10px; display: inline-block;">같이 떠나요</h6>
-                        <a class="more" href="#">더보기</a> <!-- 같이 떠나요 게시판으로 이동-->
+                         <c:if test="${!empty withBoardList }">
+                         <a class="more" href="${contextPath}/board/list3?type=3&area=${param.area}">더보기</a> 
+                         </c:if>
                     </div>
                     <ul class="list-group">
                     <c:if test="${!empty withBoardList }">
-                        <c:forEach items="#{withBoardList}" var="withboard">
-                    	<li class="list-group-item"><a href="#">${fn:substring(withboard.boardTitle,0,20) }...</a></li>
+                        <c:forEach items="#{withBoardList}" var="withBoard">
+                    	<li class="list-group-item"><a href="#">
+						<c:if test="${fn:length(withBoard.boardTitle) <21 }">
+                    	${withBoard.boardTitle}
+                    	</c:if>
+                    	<c:if test="${fn:length(withBoard.boardTitle) > 20}">
+                    	${fn:substring(withBoard.boardTitle,0,20) }...
+                    	</c:if>
+						</a></li>
                     	</c:forEach>
+                    </c:if>
+                    <c:if test="${empty withBoardList }">
+                    	<li class="list-group-item">등록된 게시글이 없습니다.</li>
                     </c:if>
                       </ul>
                 </div>

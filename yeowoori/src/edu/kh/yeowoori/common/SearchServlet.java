@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import edu.kh.yeowoori.board.model.service.SearchService;
 import edu.kh.yeowoori.board.model.vo.Board;
 
-@WebServlet("/homeBoard/search")
+@WebServlet("/search")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,28 +37,28 @@ public class SearchServlet extends HttpServlet {
 			List<Board> withBoardList = null;
 			
 			if(area ==0) {
-				maxBoardNum = 6;
+				maxBoardNum = 7;
 				type = 1;
 				tripBoardList = service.searchBoard(type, maxBoardNum, search);
 				
-				maxBoardNum = 5;
+				maxBoardNum = 6;
 				type= 2;
 				qBoardList = service.searchBoard(type, maxBoardNum, search);
 				
-				maxBoardNum = 5;
+				maxBoardNum = 6;
 				type= 3;
 				withBoardList = service.searchBoard(type, maxBoardNum, search);
 				
 			}else {
-				maxBoardNum = 6;
+				maxBoardNum = 7;
 				type =1;
 				tripBoardList= service.searchAreaBoard(area, type, maxBoardNum, search);
 				
-				maxBoardNum = 5;
+				maxBoardNum = 6;
 				type =2;
 				qBoardList = service.searchAreaBoard(area, type, maxBoardNum, search);
 				
-				maxBoardNum = 5;
+				maxBoardNum = 6;
 				type =3;
 				withBoardList = service.searchAreaBoard(area, type, maxBoardNum, search);
 			}

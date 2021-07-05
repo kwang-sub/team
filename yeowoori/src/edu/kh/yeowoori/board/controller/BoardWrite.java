@@ -50,9 +50,7 @@ public class BoardWrite extends HttpServlet {
 //				type, title, category,area, img0, img1, img2, memberNo
 				int boardType = Integer.parseInt(request.getParameter("type"));
 				HttpSession session = request.getSession();
-//				int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
-//				완료하고수정필수!!!!!!!!!!!!!!!!!!!!!!!!!
-				int memberNo = 1;
+				int memberNo = ((Member)session.getAttribute("loginMember")).getMemberNo();
 				int maxSize = 1024*1024*20;
 				String root = session.getServletContext().getRealPath("/");
 				
@@ -90,14 +88,19 @@ public class BoardWrite extends HttpServlet {
 				
 				
 				
-				
 				Board board = new Board();
 				board.setAreaCode(area);
 				board.setCategoryCode(categoryCode);
 				board.setBoardContent(boardContent);
 				board.setBoardTitle(boardTitle);
 				board.setMemberNo(memberNo);
-				int result = service.insertBoard(board, atList, boardType);
+				int result = 0;
+				if(boardType==4) {
+					result = service.insertNoticeBoard(board);
+				}else {
+					
+					result = service.insertBoard(board, atList, boardType);
+				}
 				
 				
 				
@@ -106,7 +109,13 @@ public class BoardWrite extends HttpServlet {
 					icon = "success";
 					title = "게시글 등록성공";
 //				게시글 디테일 페이지 확정되면 수정필수!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					path = request.getContextPath()+"/board/list?type=1";
+					if(boardType==1) {
+						
+						path = request.getContextPath()+"/board/list?type="+boardType;
+					}else {
+						path = request.getContextPath()+"/board/list"+boardType+"?type="+boardType;
+						
+					}
 				}else {
 					
 					icon = "error";

@@ -7,7 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>html문서 제목</title>
+    <title>게시글 수정</title>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <style>
         .content>form>div {
             height: 50px;
@@ -175,35 +176,35 @@
 </head>
 
 <body>
-
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <div style="padding : 20px;"></div>
     <div class="container">
         <div class="row">
             <div class="col-xs-1">
-
             </div>
             <div class="col-12 col-lg-12">
             
-           
             	<c:choose>
             	
             		<c:when test="${param.type == '1' }">
-                		<form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
-            		</c:when>
-            		<c:when test="${param.type == '4' }">
-                		<form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck3();" enctype="multipart/form-data" method="post" >
+            			<c:if test="${empty param.area}">
+            			<form action="${contextPath}/board2/updateForm?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
+            			</c:if>
+            			<c:if test="${!empty param.area}">
+            			<form action="${contextPath}/board2/updateForm?cp=${param.cp }&type=${param.type}&area=${param.area}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
+            			</c:if>
             		</c:when>
             		
             		<c:otherwise>
-                		<form action="${contextPath}/boardwrite/write?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
+            			<c:if test="${empty param.area }">
+            			<form action="${contextPath}/board2/updateForm?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
+            			</c:if>
+                		
+            			<c:if test="${!empty param.area }">
+            			<form action="${contextPath}/board2/updateForm?cp=${param.cp }&type=${param.type}&area=${param.area}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
+            			</c:if>
             		</c:otherwise>
             		
             	</c:choose>
-            	
-            
-            
-
 							
                     <div >
 	                    <c:choose>
@@ -216,30 +217,18 @@
 	                    	<c:when test="${param.type==3 }">
 	                        <h3>같이 떠나요 게시판</h3>
 	                    	</c:when>
-	                    	<c:when test="${param.type==4 }">
-	                        <h3>공지사항 게시판</h3>
-	                    	</c:when>
 	                    </c:choose>
                     </div>
                     
                     <div style="padding : 10px;"></div>
                     <div>
-                        <input type="text" name="title" id="title" size="80" placeholder="제목"
+                        <input type="text" name="title" id="title" size="80" value="${board.boardTitle }"
                             style="height: 40px; width: 500px; max-width: 55%;">
-                        <button type="submit" class="btn" id="btn-label" style="float:right;">올리기</button>
+                        <button type="submit" class="btn" id="btn-label" style="float:right;">수정하기</button>
                     </div>
                     
                     <div style="padding :5px;"></div>
                     
-                    <c:if test="${loginMember.memberGrade == 'A' }">
-                    
-                    <div style=" visibility:hidden; height: 0px" >
-                    </c:if>
-                    
-                    <c:if test="${loginMember.memberGrade == 'G' }">
-                    
-                    <div  >
-                    </c:if>
                     	<div>
 	                        <div style="color: grey; display: inline-block; margin-right: 10px; margin-bottom: 10px; ">태그 선택
 	                        </div>
@@ -254,6 +243,7 @@
 	                            <label for="cafe">카페투어</label>
 	                            <input type="radio" id="etc" name="category" value="5" checked>
 	                            <label for="etc">기타</label>
+	                            <!-- checked 확인하기 -->
 	                        </div>
 	                    </div>
                     <div>
@@ -268,6 +258,7 @@
                             <label for="southeast">동남</label>
                             <input type="radio" id="northeast" name="area" value="4">
                             <label for="northeast"> 동북 </label>
+                            <!-- checked 확인하기 -->
                         </span>
                     </div>
                     <div style="padding :5px;"></div>
@@ -282,18 +273,13 @@
                                 <label for="thumbnail">대표</label>
                                 <input class="upload-name" value="파일선택" disabled="disabled">
 
-                                <input type="file" id="thumbnail" name="img0" class="upload-hidden">
+                                <input type="file" id="thumbnail" name="img0" class="upload-hidden" >
                             </span>
                         </span>
                         
                     </div>
                     
-                    
-                    <%-- <c:if test="${param.type == 1 }">
-                    
-                    </c:if> 해당구문 적용 확인 필요 타입에 따른 보이는거 처리 할시 파일 넘어가는게 제대로 작동안함--%>
-                    
-                        <div class="form-inline mb-2">
+						<div class="form-inline mb-2">
                             <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
                             <div class="mr-2 boardImg" id="contentImgArea">
                                 <img id="contentImg1">
@@ -326,7 +312,7 @@
                     
                     
                     
-                        <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote"></textarea>
+                        <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote" value="${board.boardContent }"></textarea>
                     
                 </form>
             </div>

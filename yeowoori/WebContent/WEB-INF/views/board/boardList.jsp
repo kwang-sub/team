@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -195,7 +196,7 @@
                     </c:if>
         		</c:if>
                     
-       	<c:if test="${!empty loginMember }">
+       	<c:if test="${!empty loginMember && loginMember.memberGrade == 'G' }">
        	
         <div class="" style="height: 35px;">
             <a href="${contextPath}/boardwrite?cp=${param.cp}&type=${param.type}" >
@@ -248,6 +249,7 @@
 	                            <th>
 	                                    <div>${board.memberNickname }</div>
 	                                    <div style="font-weight: 400; font-size: 14px;">${board.memberContent }</div>
+	                                    
 	                            </th>
 	                        </table>
 	                    </div>
@@ -259,7 +261,12 @@
 			                    </a>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<a href="#">
+	                    		<c:if test="${empty param.area }">
+	                    		<a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=${pagination.boardType}">
+	                    		</c:if>
+	                    		<c:if test="${!empty param.area }">
+	                    		<a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=${pagination.boardType}&area=${param.area}">
+	                    		</c:if>
 	                    		
 			                    <div class="bg-img card-img-top" style="background-image: url(${contextPath}/${board.filePath[0]}${board.fileName[0]});"></div>
 
@@ -283,7 +290,13 @@
 	                                </span>
 	                            </div>
 	                        </div>
-	                        <p class="card-text">${board.boardContent }</p>
+	                        <c:if test="${fn:length(board.boardContent)>=39}">
+	                        	<p class="card-text">${fn:substring(board.boardContent,0,39) }...</p>
+	                        </c:if>
+	                        <c:if test="${fn:length(board.boardContent)<=39}">
+	                        	<p class="card-text">${board.boardContent }</p>
+	                        </c:if>
+	                        
 	                    </div>
 	                </div>
 	            </div>
@@ -304,6 +317,9 @@
             <c:set var = "next" value="${pageURL }&&cp=${pagination.nextPage}"/>
             
             
+           		
+           			        			
+           		
             
             <!-- 페이지 버튼 누를시 쿼리스트링 값 유지 되는법 확인하기  -->
             
@@ -311,10 +327,40 @@
            <div class="pagination-box row" style=";">
            	<ul class="pagination">
            		<c:if test="${pagination.currentPage>pagination.pageSize }">
-					<li><a class="page-link" href="${prev }">&lt;&lt;</a></li>          		
+           			<c:if test="${!empty param.area && empty param.category  }">
+           			
+						<li><a class="page-link" href="${prev }&area=${param.area}">&lt;&lt;</a></li>          		
+           			</c:if>
+           			
+           			<c:if test="${empty param.area && !empty param.category  }">
+           			
+						<li><a class="page-link" href="${prev }&category=${param.category}">&lt;&lt;</a></li>          		
+           			</c:if>
+           			
+ 					<c:if test="${empty param.area && empty param.category }">
+ 					
+						<li><a class="page-link" href="${prev }">&lt;&lt;</a></li>          		
+ 					</c:if>          			
+ 					
+ 					<c:if test="${!empty param.area && !empty param.category }">
+ 					
+						<li><a class="page-link" href="${prev }&area=${param.area}&category=${param.category}">&lt;&lt;</a></li>          		
+ 					</c:if>  
+           		
            		</c:if>	
            		<c:if test="${pagination.currentPage>2 }">
-					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}">&lt;</a></li>                 		
+           			 <c:if test="${!empty param.category }">
+						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}&category=${param.category}">&lt;</a></li>                 		
+           			</c:if>
+           			<c:if test="${!empty param.area }">
+						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}&area=${param.area}">&lt;</a></li>                 		
+           			</c:if>
+ 					<c:if test="${empty param.area && empty param.category }">
+						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}">&lt;</a></li>                 		
+ 					</c:if>          			
+ 					<c:if test="${!empty param.area && !empty param.category }">
+						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}&area=${param.area}&category=${param.category}">&lt;</a></li>                 		
+ 					</c:if>           			
            		</c:if>	
            		
            		<c:forEach var="p" begin="${pagination.startPage }" end="${pagination.endPage }">
@@ -346,10 +392,48 @@
            		</c:forEach>
            		
            		<c:if test="${pagination.currentPage<pagination.maxPage }">
-					<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+           		
+           			<c:if test="${!empty param.area && empty param.category  }">
+						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}&area=${param.area}">&gt;</a> </li>                		
+           			</c:if>
+           			
+           			<c:if test="${empty param.area && !empty param.category  }">
+						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}&category=${param.category}">&gt;</a> </li>                		
+           			</c:if>
+           			
+ 					<c:if test="${empty param.area && empty param.category }">
+						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+ 					</c:if>          			
+ 					
+ 					<c:if test="${!empty param.area && !empty param.category }">
+						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}&category=${param.category}&area=${param.area}">&gt;</a> </li>                		
+ 					</c:if> 
+           		
+           		
            		</c:if>	
-           		<c:if test="${pagination.currentPage<pagination.maxPage }">
-					<li><a class="page-link" href="${next}">&gt;&gt;</a></li>              		
+           		<c:if test="${pagination.endPage<pagination.maxPage }">
+           		
+           			<c:if test="${!empty param.area && empty param.category  }">
+						<li><a class="page-link" href="${next}&area=${param.area}">&gt;&gt;</a></li>              		
+           			
+           			</c:if>
+           			
+           			<c:if test="${empty param.area && !empty param.category  }">
+           			
+						<li><a class="page-link" href="${next}&category=${param.category}">&gt;&gt;</a></li>              		
+           			</c:if>
+           			
+ 					<c:if test="${empty param.area && empty param.category }">
+ 					
+						<li><a class="page-link" href="${next}">&gt;&gt;</a></li>              		
+ 					</c:if>          			
+ 					
+ 					<c:if test="${!empty param.area && !empty param.category }">
+						<li><a class="page-link" href="${next}&category=${param.category}&area=${param.area}">&gt;&gt;</a></li>              		
+ 					
+ 					</c:if>    
+ 					
+ 					
            		</c:if>	
            	
            	</ul>

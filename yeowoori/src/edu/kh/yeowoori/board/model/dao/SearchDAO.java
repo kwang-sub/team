@@ -53,7 +53,8 @@ public class SearchDAO {
 			pstmt.setString(2, search);
 			pstmt.setString(3, search);
 			pstmt.setString(4, search);
-			pstmt.setInt(5, maxBoardNum);
+			pstmt.setString(5, search);
+			pstmt.setInt(6, maxBoardNum);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Board board = new Board();
@@ -108,7 +109,8 @@ public class SearchDAO {
 			pstmt.setString(3, search);
 			pstmt.setString(4, search);
 			pstmt.setString(5, search);
-			pstmt.setInt(6, maxBoardNum);
+			pstmt.setString(6, search);
+			pstmt.setInt(7, maxBoardNum);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Board board = new Board();

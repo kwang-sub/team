@@ -72,7 +72,6 @@ public class BoardDAO {
 			pstmt.setInt(6, boardType);
 			pstmt.setInt(7, board.getAreaCode());
 			result = pstmt.executeUpdate();
-			System.out.println(result);
 			
 		}finally {
 			close(pstmt);
@@ -97,7 +96,30 @@ public class BoardDAO {
 			pstmt.setInt(3,at.getFileLevel());
 			pstmt.setInt(4, at.getBoardNo());
 			result = pstmt.executeUpdate();
-			System.out.println(result);
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**공지사항 작성 DAO
+	 * @param board
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertNoticeBoard(Board board, Connection conn) throws Exception {
+		int result = 0;
+		String sql = prop.getProperty("insertNoticeBoard");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board.getBoardTitle());
+			pstmt.setString(2, board.getBoardContent());
+			pstmt.setInt(3, board.getMemberNo());
+			result =  pstmt.executeUpdate();
+					
+			
 		}finally {
 			close(pstmt);
 		}

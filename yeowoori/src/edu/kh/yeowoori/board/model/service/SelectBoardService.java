@@ -7,6 +7,7 @@ import java.util.Map;
 
 import edu.kh.yeowoori.board.model.dao.SelectBoardDAO;
 import edu.kh.yeowoori.board.model.vo.Board;
+import edu.kh.yeowoori.board.model.vo.Category;
 import edu.kh.yeowoori.board.model.vo.Pagination;
 
 public class SelectBoardService {
@@ -37,6 +38,7 @@ public class SelectBoardService {
 			map = dao.getListCount(cp, conn, boardType, category, area);
 		}else {
 			map = dao.getListCount(conn, cp, boardType);
+			
 		}
 		
 		close(conn);
@@ -106,6 +108,64 @@ public class SelectBoardService {
 		boardList = dao.selectBoardList(conn, pagination, memberNo);
 		close(conn);
 		return boardList;
+	}
+
+	/**
+	 * 게시글 상세조회 Service
+	 * @param boardNo
+	 * @return board
+	 * @throws Exception
+	 */
+	public Board selectBoard(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		Board board = dao.selectBoard(conn, boardNo);
+		if(board.getBoardTitle() !=null) {
+			int result = dao.increaseReadCount(conn, boardNo);
+			if(result>0) {
+				commit(conn);
+				board.setReadCount(board.getReadCount()+1);
+			}else {
+				rollback(conn);
+			}
+		}
+		close(conn);
+		
+		return board;
+	}
+
+	/**  공지사항 페이지네이션
+	 * @param cp
+	 * @return
+	 */
+	public Pagination getNoticePagination(int cp) throws Exception {
+		Connection conn = getConnection();
+		int listCount = dao.getNoticePagination(conn);
+	
+		return new Pagination(cp, listCount);
+	}
+
+	/**공지사항 리스트 가져오기
+	 * @param cp 
+	 * @param pagination
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectNoticeBoardList(int cp, Pagination pagination) throws Exception {
+		Connection conn = getConnection();
+		List<Board> boardList = dao.selectNoticeBoardList(pagination, conn, cp);
+		return boardList;
+	}
+
+	/**
+	 * 카테고리 리스트 조회
+	 * @return categoryList
+	 */
+	public List<Category> selectCategoryList() throws Exception{
+
+		Connection conn= getConnection();
+		List<Category>  categoryList = dao.selectCategoryList(conn);
+		close(conn);
+		return null;
 	}
 
 

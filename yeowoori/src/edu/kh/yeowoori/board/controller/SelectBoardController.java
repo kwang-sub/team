@@ -81,14 +81,32 @@ public class SelectBoardController extends HttpServlet {
 				path = "/WEB-INF/views/board/boardList.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
 				
+			}else if(command.equals("list4")) {
+				Pagination pagination = service.getNoticePagination(cp);
+				pagination.setLimit(7);
+				List<Board> boardList= null;
+				boardList = service.selectNoticeBoardList(cp,pagination);
+				request.setAttribute("pagination", pagination);
+				request.setAttribute("boardList", boardList);
+				//for(Board board : boardList) {
+				//		System.out.println(board);
+				//}
+				path = "/WEB-INF/views/board/boardList4.jsp";
+				request.getRequestDispatcher(path).forward(request, response);
+				
+			}else if (command.equals("view")){
+				int boardNo = Integer.parseInt(request.getParameter("no"));
+
+				Board board = service.selectBoard(boardNo);
+				
+				request.setAttribute("board", board);
+				path = "/WEB-INF/views/board/boardView.jsp";
+				request.getRequestDispatcher(path).forward(request, response);
 			}
-			
-			
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 

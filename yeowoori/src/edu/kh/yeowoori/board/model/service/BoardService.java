@@ -29,7 +29,6 @@ public class BoardService {
 			boardContent = boardContent.replaceAll("\r\n", "<br>");
 			board.setBoardContent(boardContent);
 			
-			System.out.println(board);
 			
 			result = dao.insertBoard(conn, board, boardType);
 			if(result > 0) {
@@ -66,5 +65,24 @@ public class BoardService {
 	      
 	      return result;
 	   }
+
+
+	/**공지사항 게시글 작성
+	 * @param board
+	 * @return
+	 */
+	public int insertNoticeBoard(Board board) throws Exception{
+		Connection conn = getConnection();
+		String boardContent = board.getBoardContent();
+		replaceParameter(boardContent);
+		board.setBoardTitle(replaceParameter(board.getBoardTitle()));
+		boardContent = boardContent.replaceAll("\r\n", "<br>");
+		board.setBoardContent(boardContent);
+		
+		int result = dao.insertNoticeBoard(board, conn);
+		if(result > 0 ) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 
 }
