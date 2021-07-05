@@ -105,7 +105,7 @@
                 <div class="dropdown-menu">
                     <a href="${contextPath}/member/myPage/my">나의활동</a><br>
                     <a href="${contextPath}/member/myPage/like">좋아요</a><br>
-                    <a href="#">설정</a><br>
+                    <a href="${contextPath}/member/updateMyPage">설정</a><br>
                 </div>
               </div>
               
@@ -114,7 +114,7 @@
         <div class="category-btn" >
             <div style="padding:10px;"></div>
             <h6 style="display: inline-block; font-weight: 500;">마이페이지</h6>
-            <a class="btn btn-light category-selected" href="${contextPath}/member/myPage/my">나의활동</a>
+            <a class="btn btn-light category-unselected" href="${contextPath}/member/myPage/my">나의활동</a>
             <a class="btn btn-light category-unselected" href="${contextPath}/member/myPage/like" >좋아요</a>
             <a class="btn btn-light category-unselected" href="${contextPath}/member/updateMyPage">설정</a>
             <hr  align="center" style="border: solid #b6957c; border-width: 1px 0px 0px 0px; width:100%">
@@ -148,7 +148,14 @@
                             <c:if test="${!empty like }">
                             	<span style="color:#A66129">내가 종아요한 게시글  수 : ${myTrip[0].count   == null ? 0 : myTrip[0].count }</span>
                             </c:if>
-                            <div class="show-all"><a href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1">전체보기</a></div>
+                            <c:if test="${empty like }">
+                            
+                         	   <div class="show-all"><a href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1">전체보기</a></div>
+                            </c:if>
+                            <c:if test="${!empty like }">
+                            
+                         	   <div class="show-all"><a href="${contextPath }/board/list/like?memberNo=${loginMember.memberNo}&type=1&like=${like}">전체보기</a></div>
+                            </c:if>
                         </div>
                        
                         <c:forEach items="${myTrip }" var="my">
