@@ -138,8 +138,8 @@ a {
 		function pwdValidate(){
 			const regExp = /^[a-zA-Z0-9~!@#$%^&*()\-\+]{8,12}$/;
 			
-			const newPwd1 = $("#newPwd1").val().trim();
-			const newPwd2 = $("#newPwd2").val().trim();
+			const Pwd1 = $("#Pwd1").val().trim();
+			const Pwd2 = $("#Pwd2").val().trim();
 
 			// 새비밀번호가 유효하지 않거나
 			// 새비밀번호, 새비밀번호 확인이 같지 않는 경우
