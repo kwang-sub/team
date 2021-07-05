@@ -313,9 +313,46 @@
             
         </div>
     </div>
-            <c:set var = "pageURL" value="list?type=${pagination.boardType}"/>
-            <c:set var = "prev" value="${pageURL }&&cp=${pagination.prevPage}"/>
-            <c:set var = "next" value="${pageURL }&&cp=${pagination.nextPage}"/>
+           			<c:if test="${!empty param.area && empty param.category  }">
+           				<c:set var = "areaCategory" value="&area=${param.area }" />
+           			</c:if>
+           			
+           			<c:if test="${empty param.area && !empty param.category  }">
+           				<c:set var = "areaCategory" value="&category=${param.category }" />
+           			</c:if>
+           			
+ 					<c:if test="${!empty param.area && !empty param.category }">
+           				<c:set var = "areaCategory" value="&category=${param.category }&area=${param.area }" />
+ 					</c:if>  
+            <c:set var = "pageURL" value="list?type=${pagination.boardType}${areaCategory}"/>
+            
+            
+            
+            <c:if test="${!empty param.memberNo && empty param.like }">
+       			        
+            	<c:set var = "prev" value="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1&&cp=${pagination.prevPage}"/>
+       		</c:if>
+            <c:if test="${empty param.memberNo }">
+           		 <c:set var = "prev" value="${pageURL }&&cp=${pagination.prevPage}"/>
+       			        
+       		</c:if>
+       		<c:if test="${!empty param.like }">
+            	<c:set var = "prev" value="${contextPath }/board/list/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=1&&cp=${pagination.prevPage}"/>
+           	</c:if>
+       		
+       		
+       		<c:if test="${!empty param.like }">
+	            <c:set var = "next" value="${contextPath }/board/list/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=1&&cp=${pagination.nextPage}"/>
+           	</c:if>
+       		
+            <c:if test="${!empty param.memberNo && empty param.like }">
+       			        
+	            <c:set var = "next" value="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1&&cp=${pagination.nextPage}"/>
+       		</c:if>
+            <c:if test="${empty param.memberNo }">
+	            <c:set var = "next" value="${pageURL }&&cp=${pagination.nextPage}"/>
+       			        
+       		</c:if>
             
             
            		
@@ -328,40 +365,25 @@
            <div class="pagination-box row" style=";">
            	<ul class="pagination">
            		<c:if test="${pagination.currentPage>pagination.pageSize }">
-           			<c:if test="${!empty param.area && empty param.category  }">
-           			
-						<li><a class="page-link" href="${prev }&area=${param.area}">&lt;&lt;</a></li>          		
-           			</c:if>
-           			
-           			<c:if test="${empty param.area && !empty param.category  }">
-           			
-						<li><a class="page-link" href="${prev }&category=${param.category}">&lt;&lt;</a></li>          		
-           			</c:if>
-           			
- 					<c:if test="${empty param.area && empty param.category }">
- 					
 						<li><a class="page-link" href="${prev }">&lt;&lt;</a></li>          		
- 					</c:if>          			
- 					
- 					<c:if test="${!empty param.area && !empty param.category }">
- 					
-						<li><a class="page-link" href="${prev }&area=${param.area}&category=${param.category}">&lt;&lt;</a></li>          		
- 					</c:if>  
-           		
+ 					 
            		</c:if>	
+           		
            		<c:if test="${pagination.currentPage>2 }">
-           			 <c:if test="${!empty param.category }">
-						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}&category=${param.category}">&lt;</a></li>                 		
-           			</c:if>
-           			<c:if test="${!empty param.area }">
-						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}&area=${param.area}">&lt;</a></li>                 		
-           			</c:if>
- 					<c:if test="${empty param.area && empty param.category }">
-						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}">&lt;</a></li>                 		
- 					</c:if>          			
- 					<c:if test="${!empty param.area && !empty param.category }">
-						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}&area=${param.area}&category=${param.category}">&lt;</a></li>                 		
- 					</c:if>           			
+						
+						<c:if test="${empty param.memberNo &&empty like }">
+							<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage-1}">&lt;</a></li>
+           						
+           				</c:if>                 		
+						<c:if test="${!empty param.memberNo&& empty param.like }">
+							<li><a class="page-link" href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1&cp=${pagination.currentPage-1}">&lt;</a></li>
+           						
+           				</c:if>
+           				<c:if test="${!empty param.like }">
+							<li><a class="page-link" href="${contextPath }/board/list/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=1&cp=${pagination.currentPage-1}">&lt;</a></li>
+           						
+           				</c:if>
+           				                 		
            		</c:if>	
            		
            		<c:forEach var="p" begin="${pagination.startPage }" end="${pagination.endPage }">
@@ -371,70 +393,48 @@
            						<a class="page-link">${p}</a>
            					</c:when>
            					<c:otherwise>
-           						<c:if test="${!empty param.area && empty param.memberNo }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&area=${param.area}">${p}</a>
-           						</c:if>
-           						<c:if test="${!empty param.category && empty param.memberNo }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}">${p}</a>
-           						</c:if>
-           						<c:if test="${!empty param.category && !empty param.area && empty param.memberNo }">
-	           						<a class="page-link" href="${pageURL}&cp=${p}&category=${param.category}&area=${param.area}">${p}</a>
-           						</c:if>
-           						<c:if test="${empty param.category && empty param.area && empty param.memberNo }">
+           						
+           						<c:if test="${empty param.memberNo &&empty like }">
 	           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
            						</c:if>
-           						<c:if test="${empty param.category && empty param.area && !empty param.memberNo }">
-           							<a class="page-link" href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1&cp=${p}">${p}</a>
+           						<c:if test="${!empty param.memberNo && empty param.like }">
+	           						<a class="page-link" href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1&cp=${p}">${p}</a>
            						</c:if>
+           						<c:if test="${!empty param.like }">
+           						
+	           						<a class="page-link" href="${contextPath }/board/list/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=1&cp=${p}">${p}</a>
+           						</c:if>
+           						
            					</c:otherwise>
+
            				</c:choose>
            			
            			</li>
            		</c:forEach>
            		
+           		
+           		
            		<c:if test="${pagination.currentPage<pagination.maxPage }">
-           		
-           			<c:if test="${!empty param.area && empty param.category  }">
-						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}&area=${param.area}">&gt;</a> </li>                		
-           			</c:if>
-           			
-           			<c:if test="${empty param.area && !empty param.category  }">
-						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}&category=${param.category}">&gt;</a> </li>                		
-           			</c:if>
-           			
- 					<c:if test="${empty param.area && empty param.category }">
-						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
- 					</c:if>          			
- 					
- 					<c:if test="${!empty param.area && !empty param.category }">
-						<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}&category=${param.category}&area=${param.area}">&gt;</a> </li>                		
- 					</c:if> 
-           		
-           		
+       			        <c:if test="${empty param.memberNo &&empty like }">
+       			        
+							<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+       					</c:if>
+       					<c:if test="${!empty param.memberNo&& empty param.like }">
+							<li><a class="page-link" href="${contextPath }/board/list/my?memberNo=${loginMember.memberNo}&type=1&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+       			        
+       					</c:if>
+       					
+       					<c:if test="${!empty param.like }">
+							<li><a class="page-link" href="${contextPath }/board/list/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=1&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+           						
+           				</c:if>
+ 					   
            		</c:if>	
            		<c:if test="${pagination.endPage<pagination.maxPage }">
-           		
-           			<c:if test="${!empty param.area && empty param.category  }">
-						<li><a class="page-link" href="${next}&area=${param.area}">&gt;&gt;</a></li>              		
-           			
-           			</c:if>
-           			
-           			<c:if test="${empty param.area && !empty param.category  }">
-           			
-						<li><a class="page-link" href="${next}&category=${param.category}">&gt;&gt;</a></li>              		
-           			</c:if>
-           			
- 					<c:if test="${empty param.area && empty param.category }">
- 					
+           			<c:if test="${empty param.memberNo &&empty like }">
 						<li><a class="page-link" href="${next}">&gt;&gt;</a></li>              		
- 					</c:if>          			
- 					
- 					<c:if test="${!empty param.area && !empty param.category }">
-						<li><a class="page-link" href="${next}&category=${param.category}&area=${param.area}">&gt;&gt;</a></li>              		
- 					
- 					</c:if>    
- 					
- 					
+       				</c:if>
+           			
            		</c:if>	
            	
            	</ul>
