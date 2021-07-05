@@ -108,6 +108,33 @@ p {
  : left; 
 }
 
+#fileArea{
+		display : none;
+	}
+	
+
+   
+  .boardImg{
+  	cursor : pointer;
+		width: 200px;
+		height: 200px;
+		border : 1px solid #ced4da;
+		position : relative;
+	}
+	
+
+	
+	.boardImg > img{
+		max-width : 100%;
+		max-height : 100%;
+		position: absolute;
+		top: 0;
+		bottom : 0;
+		left : 0;
+		right : 0;
+		margin : auto;
+	}
+	
 
 
 </style>
@@ -141,7 +168,7 @@ p {
 								<h6>아이디</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="password" class="form-control" placeholder="userid" id="userid" name="userid">
+								<h5 id="id">${loginMember.memberId }</h5>
 							</div>
 						</div>
 
@@ -151,7 +178,7 @@ p {
 								<p>*필수항목</p>
 							</div>
 							<div class="col-md-6">
-								<input type="password" class="form-control" placeholder="유저닉네임" id="nickname" name="nickname">
+								<input type="text " class="form-control" placeholder="유저닉네임" id="nickname" name="nickname">
 							</div>
 
 
@@ -162,7 +189,7 @@ p {
 								<p>*필수항목</p>
 							</div>
 							<div class="col-md-6">
-								<input type="email" class="form-control input-email" id="email-id" name="email" placeholder="이메일" autocomplete="off" required> <span id="email-at">@</span> <input type="email" class="form-control input-email" id="email-address" name="email" autocomplete="off" required>
+								<h5 id="email">${loginMember.memberEmail }</h5>
 							</div>
 						</div>
 
@@ -171,18 +198,20 @@ p {
 							<div class="col-md-2 offset-md-2">
 								<h6>프로필 이미지</h6>
 							</div>
-							<div class="col-md-6">
-								<input type="password" class="form-control" id="newPwd2" name="newPwd2">
-							</div>
+							<div class="mr-2 boardImg" id="contentImgArea1">
+						<img id="contentImg1">
+					</div>
 						</div>
-
+							<div id="fileArea">
+					<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)"> 
+				</div>
 
 						<div class="row my-6 form-row">
 							<div class="col-md-2 offset-md-2">
 								<h6>한줄 소개</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="password" class="form-control" id="newPwd2" name="newPwd2">
+								<input type="text " class="form-control" id="intro" name="intro">
 							</div>
 						</div>
 						<div class="row my-6 form-row">
@@ -194,6 +223,40 @@ p {
 			</div>
 		</div>
 	</div>
+	<script>
+	
+	$(function() {
+		$(".boardImg").on("click", function() {
+			var index = $(".boardImg").index(this);
+			$("#img" + index).click();
+		});
+
+	});
+	
+	function LoadImg(value, num) {
+		if (value.files && value.files[0]) {
+			var reader = new FileReader();
+			// 자바스크립트 FileReader
+			// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+
+			reader.readAsDataURL(value.files[0]);
+			// FileReader.readAsDataURL()
+			// 지정된의 내용을 읽기 시작합니다. Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.
+
+			// FileReader.onload
+			// load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.
+			reader.onload = function(e) {
+				//console.log(e.target.result);
+				// e.target.result
+				// -> 파일 읽기 동작을 성공한 객체에(fileTag) 올라간 결과(이미지 또는 파일)
+
+				$(".boardImg").eq(num).children("img").attr("src",
+						e.target.result);
+			}
+
+		}
+	}
+	</script>
 </body>
 
 </html>
