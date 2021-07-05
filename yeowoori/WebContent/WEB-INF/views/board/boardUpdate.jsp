@@ -187,20 +187,20 @@
             	
             		<c:when test="${param.type == '1' }">
             			<c:if test="${empty param.area}">
-            			<form action="${contextPath}/board2/updateForm?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
+            			<form action="${contextPath}/board2/update?type=${param.type}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
             			</c:if>
             			<c:if test="${!empty param.area}">
-            			<form action="${contextPath}/board2/updateForm?cp=${param.cp }&type=${param.type}&area=${param.area}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
+            			<form action="${contextPath}/board2/update?type=${param.type}&area=${param.area}" role="form" onsubmit="return boardcheck2();" enctype="multipart/form-data" method="post" >
             			</c:if>
             		</c:when>
             		
             		<c:otherwise>
             			<c:if test="${empty param.area }">
-            			<form action="${contextPath}/board2/updateForm?cp=${param.cp }&type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
+            			<form action="${contextPath}/board2/update?type=${param.type}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
             			</c:if>
                 		
             			<c:if test="${!empty param.area }">
-            			<form action="${contextPath}/board2/updateForm?cp=${param.cp }&type=${param.type}&area=${param.area}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
+            			<form action="${contextPath}/board2/update?type=${param.type}&area=${param.area}" role="form" onsubmit="return boardcheck();" enctype="multipart/form-data" method="post" >
             			</c:if>
             		</c:otherwise>
             		
@@ -241,7 +241,7 @@
 	                            <label for="couple">커플데이트</label>
 	                            <input type="radio" id="cafe" name="category" value="4">
 	                            <label for="cafe">카페투어</label>
-	                            <input type="radio" id="etc" name="category" value="5" checked>
+	                            <input type="radio" id="etc" name="category" value="5">
 	                            <label for="etc">기타</label>
 	                            <!-- checked 확인하기 -->
 	                        </div>
@@ -250,7 +250,7 @@
                         <div style="color: grey; display: inline-block; margin-right: 10px; margin-bottom: 10px;">지역 선택
                         </div>
                         <span class="area">
-                            <input type="radio" id="northwest" name="area" value="1" checked>
+                            <input type="radio" id="northwest" name="area" value="1">
                             <label for="northwest">서북</label>
                             <input type="radio" id="southwest" name="area" value="2" >
                             <label for="southwest">서남</label>
@@ -268,10 +268,29 @@
                                 style="height: 30px;">
                         </span>
 
+
+						<c:forEach items="${board.atList }" var="at">
+						<c:choose>
+							<c:when test="${at.fileLevel == 0 && !empty at.fileNm}">
+							<c:set var="img0" value="${contextPath}/${at.filePath}${at.fileNm}"/>
+							</c:when>		
+							<c:when test="${at.fileLevel == 1 && !empty at.fileNm}">
+							<c:set var="img1" value="${contextPath}/${at.filePath}${at.fileNm}"/>
+							</c:when>		
+							<c:when test="${at.fileLevel == 2 && !empty at.fileNm}">
+							<c:set var="img2" value="${contextPath}/${at.filePath}${at.fileNm}"/>
+							</c:when>		
+							<c:when test="${at.fileLevel == 3 && !empty at.fileNm}">
+							<c:set var="img3" value="${contextPath}/${at.filePath}${at.fileNm}"/>
+							</c:when>		
+						</c:choose>
+						</c:forEach>
+
+
                         <span>
                             <span class="filebox bs3-primary">
                                 <label for="thumbnail">대표</label>
-                                <input class="upload-name" value="파일선택" disabled="disabled">
+                                <input class="upload-name" value="${board.atList[0].fileNm}" disabled="disabled" style="width: 300px;">
 
                                 <input type="file" id="thumbnail" name="img0" class="upload-hidden" >
                             </span>
@@ -282,15 +301,15 @@
 						<div class="form-inline mb-2">
                             <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
                             <div class="mr-2 boardImg" id="contentImgArea">
-                                <img id="contentImg1">
+                                <img id="contentImg1" src="${img1}">
                             </div>
         
                             <div class="mr-2 boardImg" id="contentImgArea1">
-                                <img id="contentImg2">
+                                <img id="contentImg2" src="${img2}">
                             </div>
         
                             <div class="mr-2 boardImg" id="contentImgArea2">
-                                <img id="contentImg3">
+                                <img id="contentImg3" src="${img3}">
                             </div>
                         </div>
         
@@ -307,13 +326,13 @@
                         </div>
                     </div>
                     
+                        <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote">${board.boardContent}</textarea>
                     	
-                    
-                    
-                    
-                    
-                        <textarea  style="width : 100%; height: 400px; resize: none;"id="summernote" name="content" class="summernote" value="${board.boardContent }"></textarea>
-                    
+                    	<input type="hidden" name="cp" value="${param.cp }">
+                    	<input type="hidden" name="boardNo" value="${board.boardNo }">
+                    	
+                    	
+                    	
                 </form>
             </div>
 
@@ -343,28 +362,9 @@
                 alert("내용을 입력해주세요");
                 return false;
             }
-            if(!$(".upload-hidden").val() ){
-            	alert("대표사진을 등록 해주세요");
-                return false;
-            }
+           
         } 
-        function boardcheck3(){
-            if($("#title").val().trim().length == 0){
-                alert("제목을 입력해주세요");
-                return false;
-            }
-            if($("#summernote").val().trim().length == 0){
-                alert("내용을 입력해주세요");
-                return false;
-            }
-            
-            if(${loginMember.memberGrade == 'G' }){
-            	
-            	alert("관리자만 작성할 수 있습니다");
-                return false;
-            }
-        } 
-        
+
         $(document).ready(function () {
             var fileTarget = $('.filebox .upload-hidden');
             var photoTarget = $('.photobox .upload-hidden');
@@ -403,11 +403,27 @@
 				reader.onload = function(e) {
                     
                     $(".boardImg").eq(num).children("img").attr("src",
-                    e.target.result);
+                            e.target.result);
 				}            
                 
 			}    
 		}    
+		
+		//카테고리 이전 게시글 입력된 값으로 세팅
+		
+		const category = "${board.categoryCode}"; 
+		$("input[name='category']").each(function(index, item){
+			if($(item).val() == category){
+				$(item).prop("checked", true);
+			}
+		});
+		
+		const area = "${board.areaCode}";
+		$("input[name='area']").each(function(index, item){
+			if($(item).val()==area){
+				$(item).prop("checked", true);
+			}
+		});
 
         
         </script>

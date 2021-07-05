@@ -41,7 +41,7 @@ public class SelectBoardController extends HttpServlet {
 				int area = request.getParameter("area") == null ? 0 : Integer.parseInt(request.getParameter("area"));
 				int category = request.getParameter("category") == null ? 0 : Integer.parseInt(request.getParameter("category"));
 				
-				
+				System.out.println(category);
 				int boardType = Integer.parseInt(request.getParameter("type"));
 				
 				Pagination pagination = service.getPagination(cp,boardType,area,category);
@@ -52,6 +52,7 @@ public class SelectBoardController extends HttpServlet {
 				request.setAttribute("boardList", boardList);
 				path = "/WEB-INF/views/board/boardList.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
+				
 			}
 			
 // 			질문 게시판
@@ -102,6 +103,19 @@ public class SelectBoardController extends HttpServlet {
 				request.setAttribute("board", board);
 				path = "/WEB-INF/views/board/boardView.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
+			}else if(command.equals("list/like")) {
+				String like = request.getParameter("like");
+				int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+				int boardType = Integer.parseInt(request.getParameter("type"));
+				Pagination pagination = service.getLikePagination(cp,boardType,memberNo);
+				pagination.setLimit(6);
+				List<Board> boardList= service.selectBoardList(pagination,memberNo,like);
+				request.setAttribute("like", like);
+				request.setAttribute("pagination", pagination);
+				request.setAttribute("boardList", boardList);
+				path = "/WEB-INF/views/board/boardList.jsp";
+				request.getRequestDispatcher(path).forward(request, response);
+				
 			}
 			
 		}catch (Exception e) {

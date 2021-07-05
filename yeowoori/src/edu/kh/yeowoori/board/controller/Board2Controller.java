@@ -17,8 +17,11 @@ import com.oreilly.servlet.MultipartRequest;
 
 import edu.kh.yeowoori.board.model.service.BoardService;
 import edu.kh.yeowoori.board.model.service.SelectBoardService;
+import edu.kh.yeowoori.board.model.service.UpdateBoardService;
+import edu.kh.yeowoori.board.model.vo.Attachment;
 import edu.kh.yeowoori.board.model.vo.Board;
 import edu.kh.yeowoori.board.model.vo.Category;
+import edu.kh.yeowoori.common.MyFileRenamePolicy;
 
 
 @WebServlet("/board2/*")
@@ -46,9 +49,6 @@ public class Board2Controller extends HttpServlet {
 	
 			int cp = request.getParameter("cp") == null ? 1 : Integer.parseInt(request.getParameter("cp"));
 			int type = request.getParameter("type") == null ? 1 : Integer.parseInt(request.getParameter("type"));
-			if(request.getParameter("area")!=null) {
-				int area = Integer.parseInt(request.getParameter("area"));
-			}
 		
 			// 게시글 수정 화면 전환 Controller
 			if(command.equals("updateForm")) {
@@ -69,9 +69,73 @@ public class Board2Controller extends HttpServlet {
 				
 			}
 			
-			
-			
-			
+			//게시글 수정 Controller
+			else if(command.equals("update")) {
+				
+				//MultipartRequest 
+				int maxSize = 1024 * 1024 * 20;
+				HttpSession session = request.getSession();
+				String root = session.getServletContext().getRealPath("/");
+				String filePath = "resources/img/";
+				
+				switch(type){
+					case 1: filePath += "tripboard/"; break;
+					case 2: filePath += "qboard/"; break;
+				}
+				MultipartRequest mpRequest = new MultipartRequest(request, root+filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+				
+				//게시글 수정에 사용되는 파라미터(게시글 번호, 제목, 내용, 카테고리, 이미지)
+				int boardNo = Integer.parseInt(mpRequest.getParameter("boardNo"));
+				String boardTitle = mpRequest.getParameter("title");
+				String boardContent = mpRequest.getParameter("content");
+				int categoryCode = Integer.parseInt(mpRequest.getParameter("category"));
+				int areaCode =  Integer.parseInt(mpRequest.getParameter("area"));
+				
+				Board board = new Board();
+				board.setBoardNo(boardNo);
+				board.setBoardTitle(boardTitle);
+				board.setBoardContent(boardContent);
+				board.setCategoryCode(categoryCode);
+				board.setAreaCode(areaCode);
+				
+				List<Attachment> atList = new ArrayList<Attachment>();
+				
+				Enumeration<String> images = mpRequest.getFileNames();
+				while(images.hasMoreElements()) {
+					String name = images.nextElement();
+					if(mpRequest.getFilesystemName(name)!= null) {
+						Attachment at = new Attachment();
+						at.setFilePath(filePath);
+						at.setFileNm(mpRequest.getFilesystemName(name));
+						at.setFileLevel(Integer.parseInt(name.substring(3)));
+						at.setBoardNo(boardNo);
+						atList.add(at);
+					}
+				}
+				
+//				System.out.println(board);
+//				for(Attachment at : atList) {
+//					System.out.println(at);
+//				}
+				
+				UpdateBoardService serv = new UpdateBoardService();
+				int result = serv.updateBoard(board, atList);
+				cp = Integer.parseInt(mpRequest.getParameter("cp"));
+				
+				if(result>0) {
+					icon = "success";
+					title = "게시글 수정 성공";
+					path="../board/view?no="+boardNo+"&cp="+cp+"&type="+type+"&area="+board.getAreaCode();
+				}else {
+					icon = "error";
+					title = "게시글 수정 실패";
+					path = request.getHeader("referer");
+				}
+				
+				session.setAttribute("icon", icon);
+				session.setAttribute("title", title);
+				response.sendRedirect(path);
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

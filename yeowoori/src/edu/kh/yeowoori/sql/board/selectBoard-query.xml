@@ -150,6 +150,29 @@
 	<entry key="selectCategoryList">
 	SELECT*FROM CATEGORY
 	</entry>
+	<!-- 내가 좋아요한 게시글 개수 -->
+	<entry key="GetLikeListCount">
 	
+		SELECT COUNT(*),BOARD_NM
+		FROM BOARD
+		JOIN BOARD_TYPE USING(BOARD_TYPE_NO)
+		JOIN (SELECT BOARD_NO
+		        FROM BOARD_LIKE
+		        WHERE MEMBER_NO =?) USING (BOARD_NO)
+		WHERE BOARD_TYPE_NO = ? 
+		GROUP BY BOARD_NM
+	</entry>
+	<entry key="selectLikeBoardList">
+		SELECT*FROM
+			(SELECT ROWNUM RNUM, A.* FROM
+			    (SELECT * FROM BOARD_LIST
+                JOIN (SELECT BOARD_NO
+                        FROM BOARD_LIKE
+                        WHERE MEMBER_NO =?) USING (BOARD_NO)
+			    WHERE board_status = 'Y' 
+			    AND board_type_no = ?
+			    ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 </properties>

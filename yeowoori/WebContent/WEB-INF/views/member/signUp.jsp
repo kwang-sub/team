@@ -271,8 +271,7 @@ p {
 				return false;
 			}
 		}
-		
-		
+
 	</script>
 	<script src="${contextPath}/resources/js/member.js"></script>
 </body>
