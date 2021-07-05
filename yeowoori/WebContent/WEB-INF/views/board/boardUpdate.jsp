@@ -292,7 +292,7 @@
                                 <label for="thumbnail">대표</label>
                                 <input class="upload-name" value="${board.atList[0].fileNm}" disabled="disabled" style="width: 300px;">
 
-                                <input type="file" id="thumbnail" name="img0" class="upload-hidden" value="${img0}" >
+                                <input type="file" id="thumbnail" name="img0" class="upload-hidden" >
                             </span>
                         </span>
                         
@@ -362,10 +362,7 @@
                 alert("내용을 입력해주세요");
                 return false;
             }
-            if(!$(".upload-hidden").val() ){
-            	alert("대표사진을 등록 해주세요");
-                return false;
-            }
+           
         } 
 
         $(document).ready(function () {
