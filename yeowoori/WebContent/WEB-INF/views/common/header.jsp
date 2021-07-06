@@ -74,8 +74,9 @@
 					</div>
             	</c:otherwise>
             </c:choose>
-            
-            <a href="#" class="icon" id="heart-icon"><img src="${contextPath}/resources/img/like.png" height="20px"></a>
+            <c:if test="${!empty loginMember }">
+            <a href="${contextPath}/member/myPage/like" class="icon" id="heart-icon"><img src="${contextPath}/resources/img/like.png" height="20px"></a>
+            </c:if>
             
             <div class="icon" id="search-icon">
                 <img id="search-btn" src="${contextPath}/resources/img/search.png" height="20px">
