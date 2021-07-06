@@ -103,6 +103,8 @@
            border: 1px solid grey;
            border-radius: 5px;
            resize:none;
+           display:inline-block;
+           margin:0px;
 		}
 </style>
     
@@ -282,20 +284,60 @@
     		
     		var textarea = $("<textarea>").addClass("CommentUpdateContent").val(beforeContent);
     		$(el).parent().parent().before(textarea);
-    		$(el).parent().parent().remove();
     		
-    		var updateBtn = $("<button>").addClass("btn btn-dh").text("댓글 수정").attr("onclick", "updateComment(" + replyNo + ", this)");
+    		
+    		var updateBtn = $("<button>").addClass("btn btn-dh").text("댓글 수정").attr("onclick", "updateComment(" + commentNo + ", this)");
     		var cancelBtn = $("<button>").addClass("btn btn-dh").text("취소").attr("onclick", "updateCancel(this)");
-    		var div = $("<div>").css("position","absolute").css("right", "100px");
+    		var div = $("<div>").css("display", "inline-block").addClass("ml-2");
     		div.append(updateBtn).append(cancelBtn);
     		
-    		$(el).parent().parent().append(div);		
+    		$(el).parent().parent().before(div);		
+    		$(el).parent().parent().remove();
+    	
     	}
     	
     	function updateCancel(el){
     		$(el).parent().parent().html( beforeReplyRow );
     	}
     	
+    	function updateComment(commentNo, el){
+    		const commentContent = $(el).parent().prev().val();
+    		$.ajax({
+    			url : "${contextPath}/comment/updateComment",
+    			type :"POST",
+    			data : { "commentNo" : commentNo,
+    					"commentContent" : commentContent },
+    			success : function(result){
+    				if(result>0){
+    					swal({"icon" : "success" , "title" : "댓글 수정 성공"});
+    					selectCommentList();
+    				}
+    			},
+    			error : function(){
+    				console.log("댓글 수정 실패");
+    			}
+    		})
+    	}
+    	
+    	function deleteComment(commentNo){
+    		if(confirm("정말로 삭제하시겠습니까?")){
+    			var url = "${contextPath}/comment/deleteComment";
+    		}
+    		
+    		$.ajax({
+    			url : url,
+    			data : {"commentNo" : commentNo},
+    			success : function(result){
+    				if(result>0){
+    					selectCommentList(commentNo);
+    					swal({"icon" : "success" , "title" : "댓글 삭제 성공"})
+    				}
+    			},
+    			error :  function(){
+    				console.log("댓글 삭제 실패");
+    			}
+    		})
+    	}
     	
 
 	//
