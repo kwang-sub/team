@@ -224,14 +224,17 @@
         		
         		 <div style="padding : 5px;">
 		            <div class="width65">
-		                <h6 style="display:inline-block;">${board.boardTitle }</h6>
+		                
+		                <a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=2${area}"><h6 style="display:inline-block;">${board.boardTitle }</h6></a>
 		                <span class="btn btn-light category-selected" 
 		                	style="font-size:12px; padding-top:2px; height: 20px; padding-left:7px; padding-right:7px;  margin-left:10px; color:white; ">
 		                ${board.categoryName }
 		                </span>
-		                <p style="font-size: 12px; line-height: 1.4;">
-		                    ${board.boardContent } 
-		                </p>
+		                <a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=2${area}">
+			                <p style="font-size: 12px; line-height: 1.4;">
+			                    ${board.boardContent } 
+			                </p>
+		                </a>
 		                <div class="user-profile" style="background-image: url(${contextPath}/${board.memberProfile});"></div>
 		                <div class="user-name">${board.memberNickname}</div>
 		                <div class="time">${board.createDate }</div>
