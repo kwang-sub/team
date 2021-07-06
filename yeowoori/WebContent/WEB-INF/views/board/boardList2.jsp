@@ -171,8 +171,9 @@
         <div id="q-search">
             <h4>질문게시판</h4>
             <div style="padding: 10px;"></div>
-            <form style="width: 100%;">
-                <input type="search" placeholder="궁금한 것을 물어보세요."></input>
+            <form style="width: 100%; " method="GET" action="${contextPath }/board/list2">
+            	<input type="hidden" name="type" value="${pagination.boardType }">
+                <input type="search" name = "search"placeholder="궁금한 것을 물어보세요."></input>
             </form>
             <div style="padding : 10px;"></div>
             <div style="width: 80%; max-width: 600px; text-align: left; line-height: 2.3;">

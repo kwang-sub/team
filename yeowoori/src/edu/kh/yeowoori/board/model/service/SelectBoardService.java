@@ -198,6 +198,44 @@ public class SelectBoardService {
 		return boardList;
 	}
 
+	/** 검색어에 따른 페이지네이션
+	 * @param cp
+	 * @param boardType
+	 * @param search
+	 * @return
+	 */
+	public Pagination getPagination(int cp, int boardType, String search) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition = createCondition(search);
+		
+		int listCount = dao.getPagination(conn, condition, boardType);
+		close(conn);
+		return new Pagination(cp, listCount,boardType);
+	}
+	
+	private String createCondition(String search) {
+		String condition = " AND (BOARD_TITLE LIKE '%"+search+"%' "+
+				" OR BOARD_CONTENT LIKE '%"+search+"%') ";;
+		
+		return condition;
+		
+	}
+
+	/**검색에 따른 보드리스트 구하기
+	 * @param pagination
+	 * @param search
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectBoardList(Pagination pagination, String search) throws Exception {
+		Connection conn = getConnection();
+		String condition = createCondition(search);
+		List<Board> boardList = dao.selectSearchBoardList(conn, pagination, search, condition );
+		
+		return boardList;
+	}
+
 	
 
 
