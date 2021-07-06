@@ -136,6 +136,14 @@ public class Board2Controller extends HttpServlet {
 				session.setAttribute("title", title);
 				response.sendRedirect(path);
 			}
+			
+			else if (command.equals("delete")) {
+				
+				
+				
+				
+				
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
