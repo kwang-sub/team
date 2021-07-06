@@ -39,7 +39,7 @@ public class CommentService {
 		// 개행 문자 변경
 		comment.setCommentContent( comment.getCommentContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>")  );
 		
-		int result = dao.insertReply(conn, comment);
+		int result = dao.insertComment(conn, comment);
 		
 		if(result > 0) 	commit(conn);
 		else			rollback(conn);
@@ -54,7 +54,7 @@ public class CommentService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateReply(Comment comment) throws Exception{
+	public int updateComment(Comment comment) throws Exception{
 		
 		Connection conn = getConnection();
 		
@@ -63,7 +63,7 @@ public class CommentService {
 		// 개행 문자 변경
 		comment.setCommentContent( comment.getCommentContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>")  );
 		
-		int result = dao.updateReply(conn, comment);
+		int result = dao.updateComment(conn, comment);
 		
 		if(result > 0) 	commit(conn);
 		else			rollback(conn);

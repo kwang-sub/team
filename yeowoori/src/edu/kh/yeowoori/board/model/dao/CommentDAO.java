@@ -64,25 +64,23 @@ public class CommentDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Comment reply = new Comment();
+				Comment comment = new Comment();
 				
-				reply.setCommentNo(rs.getInt("COMMENT_NO"));
-				reply.setCommentContent(rs.getString("COMMENT_CONTENT"));
-				reply.setCommentDate(rs.getTimestamp("COMMENT_DT"));
-				reply.setMemberNo(rs.getInt("MEMBER_NO"));
-				reply.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
-				reply.setBoardNo(rs.getInt("BOARD_NO"));
+				comment.setCommentNo(rs.getInt("COMMENT_NO"));
+				comment.setCommentContent(rs.getString("COMMENT_CONTENT"));
+				comment.setCommentDate(rs.getTimestamp("COMMENT_DT"));
+				comment.setMemberNo(rs.getInt("MEMBER_NO"));
+				comment.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
+				comment.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+				comment.setBoardNo(rs.getInt("BOARD_NO"));
 				
-				list.add(reply);
+				list.add(comment);
 			}
-			
 			
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		
-		
 		return list;
 	}
 
@@ -93,7 +91,7 @@ public class CommentDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int insertReply(Connection conn, Comment comment) throws Exception{
+	public int insertComment(Connection conn, Comment comment) throws Exception{
 		
 		int result = 0;
 
@@ -104,8 +102,9 @@ public class CommentDAO {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, comment.getCommentContent());
-			pstmt.setInt(2, comment.getMemberNo());
-			pstmt.setInt(3, comment.getBoardNo());
+			pstmt.setInt(2, comment.getBoardNo());
+			pstmt.setInt(3, comment.getMemberNo());
+
 			
 			result = pstmt.executeUpdate();
 					
@@ -123,7 +122,7 @@ public class CommentDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateReply(Connection conn, Comment comment) throws Exception {
+	public int updateComment(Connection conn, Comment comment) throws Exception {
 		int result = 0;
 
 		String sql = prop.getProperty("updateComment");

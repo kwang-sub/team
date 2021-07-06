@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.kh.yeowoori.board.model.service.CommentService;
 import edu.kh.yeowoori.board.model.service.SelectBoardService;
 import edu.kh.yeowoori.board.model.vo.Board;
+import edu.kh.yeowoori.board.model.vo.Comment;
 import edu.kh.yeowoori.board.model.vo.Pagination;
 
 @WebServlet("/board/*")
@@ -87,6 +89,26 @@ public class SelectBoardController extends HttpServlet {
 				path = "/WEB-INF/views/board/boardList3.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
 			}
+
+			//게시글 상세 조회
+			else if(command.equals("view")) {
+				
+				int boardNo = Integer.parseInt(request.getParameter("no"));
+				Board board = service.selectBoard(boardNo);
+				
+				// 해당 게시글 댓글 목록 조회
+				List<Comment> commentList = new CommentService().selectList(boardNo);				
+				
+				//System.out.println(commentList);
+				
+				request.setAttribute("board", board);
+				request.setAttribute("commentList", commentList);
+				
+				path = "/WEB-INF/views/board/boardView.jsp";
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
+			
 			else if(command.equals("list/my")) {
 				int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 				int boardType = Integer.parseInt(request.getParameter("type"));
@@ -111,14 +133,6 @@ public class SelectBoardController extends HttpServlet {
 				path = "/WEB-INF/views/board/boardList4.jsp";
 				request.getRequestDispatcher(path).forward(request, response);
 				
-			}else if (command.equals("view")){
-				int boardNo = Integer.parseInt(request.getParameter("no"));
-
-				Board board = service.selectBoard(boardNo);
-				
-				request.setAttribute("board", board);
-				path = "/WEB-INF/views/board/boardView.jsp";
-				request.getRequestDispatcher(path).forward(request, response);
 			}else if(command.equals("list/like")) {
 				String like = request.getParameter("like");
 				int memberNo = Integer.parseInt(request.getParameter("memberNo"));

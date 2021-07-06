@@ -217,33 +217,9 @@
         <div class="comments">${board.commentCount }</div>
         <a href="#" class="report">신고</a>
         <div style="padding: 20px;"></div>
-        <hr>
-        <div style="padding: 20px;"></div>
-        <h6>댓글 ${board.commentCount }</h6>
-        <div style="padding: 5px;"></div>
         
-        <c:if test="${!empty loginMember }">
-        <div class="user-profile-big" style="background-image: url(${loginMember.memberProfile});"></div>
-        <form class="text-container">
-            <input type="text" class="input-comment" placeholder="댓글을 입력해주세요.">
-            <button type="submit" class="btn-submit">등록</button>
-        </form>
-        </c:if>
         
-        <div style="padding: 10px;"></div>
-        <div class="user-profile-big" style="background-image: url('${loginMember.memberProfile}'); margin-bottom: 30px;"></div>
-        <div style="display: inline-block;">
-            <div class="user-name" style="font-size: 14px; margin-left: 0px;">${loginMember.memberNickname }</div>
-            <div style="display: inline-block; margin-left: 10px; font-size: 14px;">댓글 내용</div>
-            <div>
-                <div class="time" style="margin-left: 0px; margin-right: 20px;">1시간 전</div>
-                <a href="#">
-                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
-                    <div class="comments">좋아요</div>
-                </a>
-                <a href="#" class="report">신고</a>
-            </div>
-        </div>
+		<jsp:include page="comment.jsp"></jsp:include>
         
         <hr>
         <c:if test="${empty param.area }">
@@ -252,6 +228,9 @@
         <c:if test="${!empty param.area }">
         <a href="list?type=${param.type}&area=${param.area}&cp=${param.cp}" class="btn btn-brown float-right" style="color:white;">목록으로</a>
         </c:if>
+        
+        
+        
         
         
         <div id="to-top"><a href="#top" style="color: grey;">▲<br>TOP</a></div>

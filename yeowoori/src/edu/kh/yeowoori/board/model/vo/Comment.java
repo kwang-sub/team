@@ -9,9 +9,18 @@ public class Comment {
 	private int boardNo;			// 댓글이 작성된 게시글 번호
 	private int memberNo;				// 댓글 작성 회원 번호
 	private String memberNickname;			// 댓글 작성 회원 이름
+	private String memberProfile;
 	
 	public Comment() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getMemberProfile() {
+		return memberProfile;
+	}
+
+	public void setMemberProfile(String memberProfile) {
+		this.memberProfile = memberProfile;
 	}
 
 	public int getCommentNo() {
@@ -65,8 +74,10 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment [commentNo=" + commentNo + ", commentContent=" + commentContent + ", commentDate=" + commentDate
-				+ ", boardNo=" + boardNo + ", memberNo=" + memberNo + ", memberNickname=" + memberNickname + "]";
+				+ ", boardNo=" + boardNo + ", memberNo=" + memberNo + ", memberNickname=" + memberNickname
+				+ ", memberProfile=" + memberProfile + "]";
 	}
+
 
 	
 	
