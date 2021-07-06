@@ -292,7 +292,7 @@
 		              
 		                <h6 style="display:inline-block;">${board.boardTitle }</h6>
 		                <a href="#" class="btn btn-light category-selected" 
-		                	style="font-size:12px; padding-top:2px; height: 20px; padding-left:7px; padding-right:7px;  margin-left:10px; ">
+		                	style="font-size:12px; padding-top:2px; height: 20px; padding-left:7px; padding-right:7px;  margin-left:10px; color:white; ">
 		                ${board.categoryName }
 		                </a>
 		                <p style="font-size: 12px; line-height: 1.4;">
