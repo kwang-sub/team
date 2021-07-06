@@ -2,12 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" scope="application"
+	value="${pageContext.servletContext.contextPath }"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>질문게시판</title>
+    <title>같이떠나요 게시판</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -158,28 +160,99 @@
 			margin-left: auto; 
 			margin-right: auto;
 	   }
-	   
+	    
+	    @media(max-width: 770px) { 
+            .category-btn{
+                width: 100%;
+                margin: auto;
+            }
+        }
+ 
+       @media(min-width: 780px) { 
+           .category-select { 
+               display: none; 
+            } 
+        }
+       @media(max-width: 780px) { 
+           .category-btn { 
+               display: none; 
+            } 
+        }
+        .category-btn{
+        text-align: center;
+       }
+       
 </style>
 
-
-    <div class="container">
-        <div id="q-search">
-            <h4>질문게시판</h4>
-            <div style="padding: 10px;"></div>
-            <form style="width: 100%;">
-                <input type="search" placeholder="궁금한 것을 물어보세요."></input>
-            </form>
-            <div style="padding : 10px;"></div>
-            <div style="width: 80%; max-width: 600px; text-align: left; line-height: 2.3;">
-                <a class="btn btn-light category-selected" name="category" value="전체">전체</a>
-                <a class="btn btn-light category-unselected" name="category" value="분위기맛집">분위기맛집</a>
-                <a class="btn btn-light category-unselected" name="category" value="산책코스">산책코스</a>
-                <a class="btn btn-light category-unselected" name="category" value="커플데이트">커플데이트</a>
-                <a class="btn btn-light category-unselected" name="category" value="카페투어">카페투어</a>
-                <a class="btn btn-light category-unselected" name="category" value="기타">기타</a>
-            </div>
-        </div>
-
+	<div class="container">
+	
+	        		<c:if test="${empty param.memberNo }">
+        			<c:if test="${empty param.area }">
+                    	<form class="bg-white category-select" action="#" method="GET">
+            
+				            <div class="btn-group category-sm-btn">
+				                <button class="btn btn-li btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				                  현재 카테고리
+				                </button>
+				                <div class="dropdown-menu">
+				                    <a href="/yeowoori/board/list3?type=3">전체</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=1">분위기맛집</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=2">산책코스</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=3">커플데이트</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=4">카페투어</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=5" >기타</a><br>
+				                </div>
+				              </div>
+				              
+				              
+				        </form>
+				        <form class="category-btn" action="#" method="GET">
+				            <div style="padding:10px;"></div>
+				            <a class="btn btn-light category-selected" href="/yeowoori/board/list3?type=3" style="color:white;">전체</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=1">분위기맛집</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=2">산책코스</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=3">커플데이트</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=4">카페투어</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=5">기타</a>
+				            <div style="padding : 20px"></div>
+				        </form>
+                    </c:if>
+                    <c:if test="${!empty param.area }">
+                    	<form class="bg-white category-select" action="#" method="GET">
+            
+				            <div class="btn-group category-sm-btn">
+				                <button class="btn btn-li btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				                  현재 카테고리
+				                </button>
+				                <div class="dropdown-menu">
+				                    <a href="/yeowoori/board/list3?type=3">전체</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=1">분위기맛집</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=2">산책코스</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=3">커플데이트</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=4">카페투어</a><br>
+				                    <a href="/yeowoori/board/list3?type=3&category=5" >기타</a><br>
+				                </div>
+				              </div>
+				              
+				        </form>
+				        <form class="category-btn" action="#" method="GET">
+				            <div style="padding:10px;"></div>
+				            <a class="btn btn-light category-selected" href="/yeowoori/board/list3?type=3&area=${param.area }" style="color:white;">전체</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=1&area=${param.area }">분위기맛집</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=2&area=${param.area }">산책코스</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=3&area=${param.area }">커플데이트</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=4&area=${param.area }">카페투어</a>
+				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list3?type=3&category=5&area=${param.area }">기타</a>
+				            <div style="padding : 20px"></div>
+				        </form>
+                    
+                    </c:if>
+        		</c:if>
+	
+	
+	
+	
+	
         <div>
             <div style="display: inline-block; margin-top: 40px; width: fit-content;">
                 <div style="font-size: 12px; margin-left: 14px; color:grey; font-weight: 300; width: fit-content; ">
@@ -198,9 +271,9 @@
             </div>
             <div style="float: right; margin-top: 60px;">
                 
-                <a href="#" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
-                    질문하기
-                </a>
+                <button type="button" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
+                    글 올리기
+                </button>
             </div>
         </div>
 
@@ -216,12 +289,17 @@
         		 <div style="padding : 5px;">
 		            <div class="width65">
 		                
-		                <h6>${board.boardTitle }</h6>
+		              
+		                <h6 style="display:inline-block;">${board.boardTitle }</h6>
+		                <a href="#" class="btn btn-light category-selected" 
+		                	style="font-size:12px; padding-top:2px; height: 20px; padding-left:7px; padding-right:7px;  margin-left:10px; ">
+		                ${board.categoryName }
+		                </a>
 		                <p style="font-size: 12px; line-height: 1.4;">
 		                    ${board.boardContent } 
 		                </p>
-		                <div class="user-profile" style="background-image: url('${loginMember.memberProfile}');"></div>
-		                <div class="user-name">${loginMember.memberNickname}</div>
+		                <div class="user-profile" style="background-image: url(${contextPath}/${board.memberProfile});"></div>
+		                <div class="user-name">${board.memberNickname}</div>
 		                <div class="time">${board.createDate }</div>
 		                <div class="comments">댓글</div>
 		                <div class="count-comments">${board.commentCount }</div>
@@ -258,28 +336,28 @@
            	<c:set var = "areaCategory" value="&category=${param.category }&area=${param.area }" />
  			</c:if>  
  			
-            <c:set var = "pageURL" value="list2?type=${pagination.boardType}${areaCategory}"/>
+            <c:set var = "pageURL" value="list3?type=${pagination.boardType}${areaCategory}"/>
             
             <c:if test="${!empty param.memberNo && empty param.like }">
        			        
-            	<c:set var = "prev" value="${contextPath }/board/list2/my?memberNo=${loginMember.memberNo}&type=2&&cp=${pagination.prevPage}"/>
+            	<c:set var = "prev" value="${contextPath }/board/list3/my?memberNo=${loginMember.memberNo}&type=3&&cp=${pagination.prevPage}"/>
        		</c:if>
             <c:if test="${empty param.memberNo }">
            		 <c:set var = "prev" value="${pageURL }&&cp=${pagination.prevPage}"/>
        			        
        		</c:if>
        		<c:if test="${!empty param.like }">
-            	<c:set var = "prev" value="${contextPath }/board/list2/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=2&&cp=${pagination.prevPage}"/>
+            	<c:set var = "prev" value="${contextPath }/board/list3/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=3&&cp=${pagination.prevPage}"/>
            	</c:if>
        		
        		
        		<c:if test="${!empty param.like }">
-	            <c:set var = "next" value="${contextPath }/board/list2/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=2&&cp=${pagination.nextPage}"/>
+	            <c:set var = "next" value="${contextPath }/board/list3/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=3&&cp=${pagination.nextPage}"/>
            	</c:if>
        		
             <c:if test="${!empty param.memberNo && empty param.like }">
        			        
-	            <c:set var = "next" value="${contextPath }/board/list2/my?memberNo=${loginMember.memberNo}&type=2&&cp=${pagination.nextPage}"/>
+	            <c:set var = "next" value="${contextPath }/board/list3/my?memberNo=${loginMember.memberNo}&type=3&&cp=${pagination.nextPage}"/>
        		</c:if>
             <c:if test="${empty param.memberNo }">
 	            <c:set var = "next" value="${pageURL }&&cp=${pagination.nextPage}"/>
@@ -303,11 +381,11 @@
            						
            				</c:if>                 		
 						<c:if test="${!empty param.memberNo&& empty param.like }">
-							<li><a class="page-link" href="${contextPath }/board/list2/my?memberNo=${loginMember.memberNo}&type=2&cp=${pagination.currentPage-1}">&lt;</a></li>
+							<li><a class="page-link" href="${contextPath }/board/list3/my?memberNo=${loginMember.memberNo}&type=3&cp=${pagination.currentPage-1}">&lt;</a></li>
            						
            				</c:if>
            				<c:if test="${!empty param.like }">
-							<li><a class="page-link" href="${contextPath }/board/list2/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=2&cp=${pagination.currentPage-1}">&lt;</a></li>
+							<li><a class="page-link" href="${contextPath }/board/list3/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=3&cp=${pagination.currentPage-1}">&lt;</a></li>
            						
            				</c:if>
            				                 		
@@ -325,11 +403,11 @@
 	           						<a class="page-link" href="${pageURL}&cp=${p}">${p}</a>
            						</c:if>
            						<c:if test="${!empty param.memberNo && empty param.like }">
-	           						<a class="page-link" href="${contextPath }/board/list2/my?memberNo=${loginMember.memberNo}&type=2&cp=${p}">${p}</a>
+	           						<a class="page-link" href="${contextPath }/board/list3/my?memberNo=${loginMember.memberNo}&type=3&cp=${p}">${p}</a>
            						</c:if>
            						<c:if test="${!empty param.like }">
            						
-	           						<a class="page-link" href="${contextPath }/board/list2/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=2&cp=${p}">${p}</a>
+	           						<a class="page-link" href="${contextPath }/board/list3/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=3&cp=${p}">${p}</a>
            						</c:if>
            						
            					</c:otherwise>
@@ -347,12 +425,12 @@
 							<li><a class="page-link" href="${pageURL}&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
        					</c:if>
        					<c:if test="${!empty param.memberNo&& empty param.like }">
-							<li><a class="page-link" href="${contextPath }/board/list2/my?memberNo=${loginMember.memberNo}&type=2&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+							<li><a class="page-link" href="${contextPath }/board/list3/my?memberNo=${loginMember.memberNo}&type=3&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
        			        
        					</c:if>
        					
        					<c:if test="${!empty param.like }">
-							<li><a class="page-link" href="${contextPath }/board/list2/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=2&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
+							<li><a class="page-link" href="${contextPath }/board/list3/like?like=${param.like}&memberNo=${loginMember.memberNo}&type=3&cp=${pagination.currentPage+1}">&gt;</a> </li>                		
            						
            				</c:if>
  					   

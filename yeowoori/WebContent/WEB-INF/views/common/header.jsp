@@ -68,31 +68,54 @@
 					    <span class="icon" id="user-icon"><img src="${contextPath}/resources/img/user.png" height="20px"></span>
 					  </button>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					    <a class="dropdown-item" href="${contextPath}/member/myPage">마이페이지</a>
+					    <a class="dropdown-item" href="${contextPath}/member/myPage/my">마이페이지</a>
 					    <a class="dropdown-item" href="${contextPath}/logout">로그아웃</a>
 					  </div>
 					</div>
             	</c:otherwise>
             </c:choose>
             
-            
-            
-            
             <a href="#" class="icon" id="heart-icon"><img src="${contextPath}/resources/img/like.png" height="20px"></a>
+            
             <div class="icon" id="search-icon">
                 <img id="search-btn" src="${contextPath}/resources/img/search.png" height="20px">
-                <form id="search-form">
-                    <input  type="search" id="search-bar" name="search" placeholder="search"><button id="search-bar-btn" style="background-color: white; border: white;" ><img src="${contextPath}/resources/img/search.png" height="20px" ></button>
+                <form id="search-form" action="${contextPath }/search" method="GET" onsubmit="return checkSearch();">
+                    <input  type="search" id="search-bar" name="search" placeholder="search">
+                    <button id="search-bar-btn" style="background-color: white; border: white;"><img src="${contextPath}/resources/img/search.png" height="20px" ></button>
                 </form>
             </div>
-  			<c:if test="${!empty area }">
-  			<a href="#">
-	            <div class="icon" id="area-icon" style="padding:0px;" >
+            
+  			<c:if test="${!empty param.area }">
+  				<c:if test="${param.area ==1 }">
+  			   	<div class="icon" id="area-icon" style="padding:0px;" >
+	                <div style="background-color: black; width: 40px; text-align: center; border-radius: 5px; color: white; font-weight: 500; display: inline-block; font-size: 13px;">
+	                    <span style="position: relative; top: 1px;">서북</span>
+	                </div>
+	            </div>
+  				</c:if>
+  				<c:if test="${param.area ==2 }">
+  			   	<div class="icon" id="area-icon" style="padding:0px;" >
+	                <div style="background-color: black; width: 40px; text-align: center; border-radius: 5px; color: white; font-weight: 500; display: inline-block; font-size: 13px;">
+	                    <span style="position: relative; top: 1px;">서남</span>
+	                </div>
+	            </div>
+  				</c:if>
+  				<c:if test="${param.area ==3 }">
+  			   	<div class="icon" id="area-icon" style="padding:0px;" >
 	                <div style="background-color: black; width: 40px; text-align: center; border-radius: 5px; color: white; font-weight: 500; display: inline-block; font-size: 13px;">
 	                    <span style="position: relative; top: 1px;">동남</span>
 	                </div>
 	            </div>
-            </a>
+  				</c:if>
+  				<c:if test="${param.area ==4 }">
+  			   	<div class="icon" id="area-icon" style="padding:0px;" >
+	                <div style="background-color: black; width: 40px; text-align: center; border-radius: 5px; color: white; font-weight: 500; display: inline-block; font-size: 13px;">
+	                    <span style="position: relative; top: 1px;">동북</span>
+	                </div>
+	            </div>
+  				</c:if>
+  			
+	            
   			</c:if>
         </div>
         
@@ -104,10 +127,19 @@
                 </button>
                 <ul class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list4?type=4">공지</a></li>
+                    	<c:if test="${!empty param.area}">
+                    	<li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list4?type=4">공지</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list?type=1&area=${param.area}">여행</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list2?type=2&area=${param.area}">질문</a></li>
+                        <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list3?type=3&area=${param.area}">같이 떠나요</a></li>
+                    	</c:if>
+                    	<c:if test="${empty param.area}">
+                    	<li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list4?type=4">공지</a></li>
                         <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list?type=1">여행</a></li>
                         <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list2?type=2">질문</a></li>
                         <li class="nav-item active menu"><a class="nav-link" href="/yeowoori/board/list3?type=3">같이 떠나요</a></li>
+                    	</c:if>
+                        
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
@@ -115,11 +147,14 @@
                               다른 지역 보기
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item color-grey" href="">전체</a>
-                              <a class="dropdown-item color-grey" href="">동남</a>
-                              <a class="dropdown-item color-grey" href="">동북</a>
-                              <a class="dropdown-item color-grey" href="#">서남</a>
-                              <a class="dropdown-item color-grey" href="#">서북</a>
+                              <a class="dropdown-item color-grey" href="${contextPath}/homeBoard">전체</a>
+                              
+                              <a class="dropdown-item color-grey" href="${contextPath}/homeBoard?area=1">서북</a>
+                              <a class="dropdown-item color-grey" href="${contextPath}/homeBoard?area=2">서남</a>
+                              <a class="dropdown-item color-grey" href="${contextPath}/homeBoard?area=3">동남</a>
+                              <a class="dropdown-item color-grey" href="${contextPath}/homeBoard?area=4">동북</a>
+                              
+       
                             </div>
                           </li>
                     </ul>
@@ -170,7 +205,23 @@
 			<c:remove var="icon"/>
 			<c:remove var="title"/>
 		</c:if>
+        <script>
+        function checkSearch(){
+        	
+        	if($("#search-bar").val().trim()==""){
+        		swal({
+        			"icon" : "warning",
+        			"title" : "검색할 내용이 없습니다."
+        		})
+        		$(this).val("");
+        		return false;
+        	}
+        	
+        	
+        }
         
+        
+        </script>
 
 </body>
 </html>
