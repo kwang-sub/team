@@ -49,7 +49,7 @@ public class SecessionServlet extends HttpServlet {
 			} else {
 				icon = "error";
 				title = "회원 탈퇴 실패";
-				text = "비밀번호가 일치하지 않습니다.";
+				text = "";
 				
 				path = "secession"; // 회원 탈퇴 페이지 요청 주소
 			}

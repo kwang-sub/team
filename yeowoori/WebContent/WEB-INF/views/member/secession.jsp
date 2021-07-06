@@ -56,10 +56,8 @@ color : black;}
 			<div class="col-sm-offset-2 col-sm-8" id="classform">
 				<h4>회원 탈퇴 신청</h4>
 				<p>회원 탈퇴 신청에 앞서 아래 내용을 반드시 확인해주세요.</p>
-				<div class="bg-white rounded shadow-sm container p-3">
-					<form method="POST" action="secession" onsubmit="return secessionValidate();" class="form-horizontal" role="form">
-
-
+				<form method="POST" action="secession" onsubmit="return secessionValidate();" class="form-horizontal" role="form">
+					<div class="bg-white rounded shadow-sm container p-3">
 
 						<div class="panel panel-default">
 
@@ -115,17 +113,17 @@ color : black;}
 						<div class="panel-body">
 							<div class="form-group pull-left">
 
-								<form class="col-xs-12">
-									&nbsp;<input type="checkbox" id="reason1" name="reaseon" > <label for="reason1" >이유1</label> <br> 
-								  	&nbsp;<input type="checkbox" id="reason2" name="reaseon"> <label for="reason2">이유2</label> <br>
-									 &nbsp;<input type="checkbox" id="reason3" name="reaseon"> <label for="reason3">이유3</label> <br> 
-									 &nbsp;<input type="checkbox" id="reason4" name="reaseon"> <label for="reason4">이유4</label> <br> 
-									 &nbsp;<input type="checkbox" id="reason5" name="reaseon"> <label for="reason5">이유5</label> <br> 
-									 &nbsp;<input type="checkbox" id="reason6" name="reaseon"> <label for="reason6">이유6</label> <br> 
-									 &nbsp;<input type="checkbox" id="reason7" name="reaseon"> <label for="reason7">이유7</label> <br>
+								<div class="col-xs-12">
+								 	&nbsp;<input type="checkbox" id="reason1" name="reason"> <label for="reason1" >이유1</label> <br> 
+								    &nbsp;<input type="checkbox" id="reason2" name="reason"> <label for="reason2">이유2</label> <br>
+									&nbsp;<input type="checkbox" id="reason3" name="reason"> <label for="reason3">이유3</label> <br> 
+									&nbsp;<input type="checkbox" id="reason4" name="reason"> <label for="reason4">이유4</label> <br> 
+									&nbsp;<input type="checkbox" id="reason5" name="reason"> <label for="reason5">이유5</label> <br> 
+									&nbsp;<input type="checkbox" id="reason6" name="reason"> <label for="reason6">이유6</label> <br> 
+									&nbsp;<input type="checkbox" id="reason7" name="reason"> <label for="reason7">이유7</label> <br>
 
 
-								</form>
+								</div>
 								<div class="checkbox pull-right">
 									<div class="custom-checkbox">
 										<div class="form-check"></div>
@@ -139,57 +137,24 @@ color : black;}
 				<br>
 
 				<button class="btn btn-sm btn-block" id="secession-btn" type="submit">탈퇴 신청</button>
-				<button class="btn btn-sm btn-block" id="cancel-btn" ><a href="${contextPath }/member/updateMyPage"  >취소하기</a></button>
+				<%-- <button class="btn btn-sm btn-block" id="cancel-btn" ><a href="${contextPath }/member/updateMyPage"  >취소하기</a></button> --%>
+				<a class="btn btn-sm btn-block" href="${contextPath }/member/updateMyPage" id="cancel-btn" >취소하기</a>
+			</form>
 
 			</div>
 		</div>
 		</div>
-</form>
 
-<script>
+	<script>
+		function secessionValidate(){
 
-<script>
-// 약관 동의가 체크 되었을 때에만 탈퇴 진행
-function secessionValidate(){
-	// script, filter, wrapper, servlet, service, dao, sql
-	// 응답화면 제어
-// 방법 1) 체크된 체크박스를 선택하는 : checked 선택자 사용 방법
-// $("#agree:checked") -> 아이디가 agree인 요소 중 check된 요소만을 선택
-// 체크된 요소가 있으면 length == 1, 없으면 0
-if ($("#agree:checked").length == 0){
-	swal({"icon" : "info", "title" : "약관 동의를 체크해주세요."})
-	return false;
-// 방법 2) jQuery의 .prop("checked") 메소드를 이용
-// $("#agree").prop("checked")
-// -> 아이디가 agree인 요소에 체크가 되어있으면 true, 아니면 false
-/*if( !$("#agree").prop("checked")){
-	swal({"icon" : "info", "title" : "약관 동의를 체크해주세요."})
-	return false;
-}*/
-
-}
+		   if( $("input[name='reason']:checked").length == 0){
+		      alert("이유를 선택해주세요");
+		      return false;
+		   }
+		}
 	
-}
-</script>
-//전체 갯수
-$("input:checkbox[name=reason]").length
- 
-// 선택된 갯수
-$("input:checkbox[name=reason]:checked").length
- 
-// 전체 체크
-$("input[name=reason]:checkbox").prop("checked", true);
- 
-// 전체 체크 순회
-$("input:checkbox[name=reason]").each(function() {
- this.checked = true;
-});
- 
-// 체크여부 확인
+	</script>
 
-if($("input:checkbox[name=reason]").is(":checked") == true) {
-  //작업
-}
-</script>
 </body>
 </html>
