@@ -73,7 +73,7 @@ public class UpdateMyPageServlet extends HttpServlet {
 			
 			
 			
-			response.sendRedirect("myPage");
+			response.sendRedirect("myPage/my");
 			
 			
 			

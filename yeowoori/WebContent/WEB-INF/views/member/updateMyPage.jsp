@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,10 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>updateMyPage</title>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
 * {
 	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
@@ -105,7 +102,9 @@ p {
 }
 
 .session-btn{
- : left; 
+	float : right;
+	color : gray; 
+	opacity : 0.7;
 }
 
 #fileArea{
@@ -158,9 +157,9 @@ p {
 
 			<div class="col-md-8 offset-md-2">
 				<h4 id="update" style="margin-left : 18%;">내 정보 수정</h4>
-				<a class="session-btn" href="">탈퇴하기</a>
+				<a class="session-btn" href="${contextPath}/member/secession">탈퇴하기</a>
 				<div class="bg-white rounded shadow-sm container p-3">
-					<form method="POST" action="" onsubmit="return pwdValidate();" class="form-horizontal" role="form" id="updateForm">
+					<form method="POST" action="" onsubmit="return updateMyPageValidate();" class="form-horizontal" role="form" id="updateForm">
 
 
 						<div class="row my-6 form-row">
@@ -178,7 +177,7 @@ p {
 								<p>*필수항목</p>
 							</div>
 							<div class="col-md-6">
-								<input type="text " class="form-control" placeholder="유저닉네임" id="nickname" name="nickname">
+								<input type="text " class="form-control" placeholder="${loginMember.memberNickname }" id="nickname" name="nickname">
 							</div>
 
 
@@ -211,7 +210,7 @@ p {
 								<h6>한줄 소개</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="text " class="form-control" id="intro" name="intro">
+								<input type="text " class="form-control" id="intro" name="intro" placeholder="${loginMember.memberContent }">
 							</div>
 						</div>
 						<div class="row my-6 form-row">
@@ -225,37 +224,33 @@ p {
 	</div>
 	<script>
 	
-	$(function() {
-		$(".boardImg").on("click", function() {
-			var index = $(".boardImg").index(this);
-			$("#img" + index).click();
-		});
+	//닉네임 유효성 검사
+	function updateMyPageValidate(){
+		 const regExp =  /^[가-힣]{2,15}$/;
 
-	});
-	
-	function LoadImg(value, num) {
-		if (value.files && value.files[0]) {
-			var reader = new FileReader();
-			// 자바스크립트 FileReader
-			// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+		    const nickname = $("#nickname").val().trim();
 
-			reader.readAsDataURL(value.files[0]);
-			// FileReader.readAsDataURL()
-			// 지정된의 내용을 읽기 시작합니다. Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.
+		    if(!regExp.test(nickname)){
+		       swal({ "icon"  : "warning" ,
+		    	   	  "title" : "닉네임이 유효하지 않습니다.",
+		    	   	  "text"  : "한글 2~15자리이내로 작성해주세요."});
+		       return false;
+		    }
+	// 한줄 소개 검사  
+		    const regExp1 =  /^[가-힣]{1,20}$/;
 
-			// FileReader.onload
-			// load 이벤트의 핸들러. 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.
-			reader.onload = function(e) {
-				//console.log(e.target.result);
-				// e.target.result
-				// -> 파일 읽기 동작을 성공한 객체에(fileTag) 올라간 결과(이미지 또는 파일)
+		    const intro = $("#intro").val().trim();
 
-				$(".boardImg").eq(num).children("img").attr("src",
-						e.target.result);
-			}
-
-		}
+		    if(!regExp1.test(intro)){
+		       swal({ "icon"  : "warning" ,
+		    	   	  "title" : "한줄소개가 유효하지 않습니다.",
+		    	   	  "text"  : "한글 1~20자리이내로 작성해주세요."});
+		       return false;
+		    
+	    }
 	}
+	
+	
 	</script>
 </body>
 
