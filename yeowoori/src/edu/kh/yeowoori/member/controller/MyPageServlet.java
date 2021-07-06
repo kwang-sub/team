@@ -63,6 +63,16 @@ public class MyPageServlet extends HttpServlet {
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 				
+			}else if(command.equals("logout")) {
+				session.removeAttribute("loginMember");
+				path = request.getHeader("referer");
+				
+				String icon = "success";
+				String title = "로그아웃 하셨습니다";
+				
+				session.setAttribute("icon", icon);
+				session.setAttribute("title", title);
+				response.sendRedirect(path);
 			}
 			
 		} catch (Exception e) {

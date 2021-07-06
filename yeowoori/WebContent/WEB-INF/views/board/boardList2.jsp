@@ -213,9 +213,9 @@
         
     	<c:if test="${!empty boardList }">
         		<c:forEach items="${boardList }" var="board">
+        		
         		 <div style="padding : 5px;">
 		            <div class="width65">
-		                
 		                <h6>${board.boardTitle }</h6>
 		                <p style="font-size: 12px; line-height: 1.4;">
 		                    ${board.boardContent } 
@@ -229,7 +229,7 @@
 		                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
 		                    <div class="comments">좋아요</div>
 		                </a>
-		                <a class="report" href="#">신고</a>
+		                <a class="report" href="${contextPath }/report/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}">신고</a>
 		         	</div>
 		            <c:if test="${!empty board.fileName[0] }">
 		            	<div class="q-img" style="background-image: url('${contextPath}/${board.filePath[0]}${board.fileName[0]}'); float:right;"></div>

@@ -291,14 +291,18 @@
 	                                </span>
 	                            </div>
 	                        </div>
-	                        <c:if test="${fn:length(board.boardContent)>=39}">
-	                        	<p class="card-text">${fn:substring(board.boardContent,0,39) }...</p>
-	                        </c:if>
-	                        <c:if test="${fn:length(board.boardContent)<=39}">
-	                        	<p class="card-text">${board.boardContent }</p>
-	                        </c:if>
-	                        
-	                    </div>
+									<div
+										style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; height: 70px; width: 100%">
+
+										<c:if test="${fn:length(board.boardContent)>=39}">
+											${fn:substring(board.boardContent,0,39) }...
+										</c:if>
+										<c:if test="${fn:length(board.boardContent)<=39}">
+											${board.boardContent }
+										</c:if>
+									</div>
+
+								</div>
 	                </div>
 	            </div>
         		</c:forEach>
