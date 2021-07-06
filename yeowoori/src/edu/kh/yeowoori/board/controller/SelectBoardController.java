@@ -64,10 +64,20 @@ public class SelectBoardController extends HttpServlet {
 				
 				int boardType = Integer.parseInt(request.getParameter("type"));
 				
-				Pagination pagination = service.getPagination(cp,boardType,area,category);
-				pagination.setLimit(5);
+				String search = request.getParameter("search");
+				
+				Pagination pagination = null;
 				List<Board> boardList= null;
-				boardList = service.selectBoardList(pagination,area,category);
+				if(search==null) {
+					
+					pagination = service.getPagination(cp,boardType,area,category);
+					pagination.setLimit(5);
+					boardList = service.selectBoardList(pagination,area,category);
+				}else if( search !=null) {
+					pagination = service.getPagination(cp, boardType, search);
+					pagination.setLimit(5);
+					boardList = service.selectBoardList(pagination,search);
+				}
 				request.setAttribute("pagination", pagination);
 				request.setAttribute("boardList", boardList);
 				path = "/WEB-INF/views/board/boardList2.jsp";

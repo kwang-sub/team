@@ -727,6 +727,89 @@ public class SelectBoardDAO {
 		return boardList;
 	}
 
+	/**검색어에 따른 페이지네이션 얻기
+	 * @param conn
+	 * @param search
+	 * @param boardType 
+	 * @return
+	 */
+	public int getPagination(Connection conn, String condition, int boardType) throws Exception {
+		int listCount = 0;
+		String sql = prop.getProperty("getSearchPagination")+condition;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardType);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+					
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	/**검색에 따른 DAO
+	 * @param conn
+	 * @param pagination
+	 * @param search
+	 * @param condition 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Board> selectSearchBoardList(Connection conn, Pagination pagination, String search, String condition) throws Exception {
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = prop.getProperty("selectSearchBoardList1")+condition +prop.getProperty("selectSearchBoardList2");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pagination.getBoardType());
+			// 조회할 범위를 지정할 변수 선언
+			
+			int startRow = (pagination.getCurrentPage()-1)*pagination.getLimit()+1;
+			int endRow = startRow + pagination.getLimit() -1;
+			
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setMemberNickname(rs.getString("MEMBER_NICKNAME"));
+				board.setCategoryName(rs.getString("CATEGORY_NM"));
+				board.setAreaCategory(rs.getString("AREA_CATEGORY_NM"));
+				board.setReadCount(rs.getInt("READ_COUNT"));
+				board.setCreateDate(rs.getTimestamp("CREATE_DT"));
+				board.setBoardContent(rs.getString("BOARD_CONTENT"));
+				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
+				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+				
+				List<String> filePath = new ArrayList<String>();
+				List<String> fileName = new ArrayList<String>();
+				
+				filePath.add(rs.getString("FILE_PATH"));
+				fileName.add(rs.getString("FILE_NM"));
+				board.setFilePath(filePath);
+				board.setFileName(fileName);
+				boardList.add(board);
+				
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return boardList;
+	}
+
 	
 
 	

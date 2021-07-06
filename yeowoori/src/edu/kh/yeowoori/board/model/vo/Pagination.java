@@ -1,5 +1,9 @@
 package edu.kh.yeowoori.board.model.vo;
 
+/**
+ * @author 82108
+ *
+ */
 public class Pagination {
 	private int currentPage;  //목록상 현재 페이지
 	private int listCount; //게시글 전체수
@@ -25,6 +29,14 @@ public class Pagination {
 		this.boardType = boardType;
 		this.boardName = boardName;
 		makePagination();
+	}
+
+	
+	public Pagination(int currentPage, int listCount, int boardType) {
+		super();
+		this.currentPage = currentPage;
+		this.listCount = listCount;
+		this.boardType = boardType;
 	}
 
 

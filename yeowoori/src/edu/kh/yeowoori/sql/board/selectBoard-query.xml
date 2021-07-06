@@ -175,4 +175,23 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<entry key="getSearchPagination">
+		SELECT COUNT(*)
+			FROM BOARD
+			WHERE BOARD_TYPE_NO = ?
+			AND BOARD_STATUS = 'Y'
+			
+	</entry>
+	<entry key="selectSearchBoardList1">
+		SELECT*FROM
+			(SELECT ROWNUM RNUM, A.* FROM
+			    (SELECT * FROM BOARD_LIST
+			    WHERE board_status = 'Y' 
+			    AND board_type_no = ?
+	</entry>
+	<entry key="selectSearchBoardList2">
+		ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ? 
+	</entry>
+	
 </properties>
