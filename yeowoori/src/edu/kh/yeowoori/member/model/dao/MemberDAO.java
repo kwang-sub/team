@@ -220,5 +220,36 @@ int result = 0;
 		}
 		return result;
 	}
+	/** 닉네임 중복 검사 DAO
+	 * @param conn
+	 * @param nickname
+	 * @return result
+	 * @throws Exception
+	 */
+	public int nickDupCheck(Connection conn, String nickname) throws Exception{
+		int result = 0;
+		
+		String sql = prop.getProperty("nickDupCheck");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, nickname);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
 

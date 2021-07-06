@@ -50,4 +50,12 @@
 		WHERE MEMBER_NO=? 
 	</entry>
 	
+	<!-- 이메일 중복검사 SQL  -->
+	
+	<entry key="nickDupCheck">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_STATUS = 'Y'
+		AND MEMBER_NICKNAME = ?
+	</entry>
+	
 </properties>
