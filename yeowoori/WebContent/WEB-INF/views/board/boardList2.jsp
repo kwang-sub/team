@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" scope="application"
+	value="${pageContext.servletContext.contextPath }"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -158,7 +160,10 @@
 			margin-left: auto; 
 			margin-right: auto;
 	   }
-	   
+	   .select:active{
+	   	     background-color: #A66129;
+            color:white;
+	   }
 </style>
 
 
@@ -171,12 +176,15 @@
             </form>
             <div style="padding : 10px;"></div>
             <div style="width: 80%; max-width: 600px; text-align: left; line-height: 2.3;">
-                <a class="btn btn-light category-selected" name="category" value="전체">전체</a>
-                <a class="btn btn-light category-unselected" name="category" value="분위기맛집">분위기맛집</a>
-                <a class="btn btn-light category-unselected" name="category" value="산책코스">산책코스</a>
-                <a class="btn btn-light category-unselected" name="category" value="커플데이트">커플데이트</a>
-                <a class="btn btn-light category-unselected" name="category" value="카페투어">카페투어</a>
-                <a class="btn btn-light category-unselected" name="category" value="기타">기타</a>
+            <c:if test="${!empty param.area }">
+            <c:set var="area" value="&area=${param.area}"/>
+            </c:if>
+                <a class="btn btn-light category-selected select" href="/yeowoori/board/list2?type=2${area}">전체</a>
+                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=1${area}" >분위기맛집</a>
+                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=2${area}"  >산책코스</a>
+                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=3${area}"  >커플데이트</a>
+                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=4${area}"  >카페투어</a>
+                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=5${area}"  >기타</a>
             </div>
         </div>
 
@@ -198,7 +206,7 @@
             </div>
             <div style="float: right; margin-top: 60px;">
                 
-                <a href="#" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
+                <a href="${contextPath }/boardwrite?cp=&type=2" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
                     질문하기
                 </a>
             </div>
@@ -216,12 +224,16 @@
         		
         		 <div style="padding : 5px;">
 		            <div class="width65">
-		                <h6>${board.boardTitle }</h6>
+		                <h6 style="display:inline-block;">${board.boardTitle }</h6>
+		                <span class="btn btn-light category-selected" 
+		                	style="font-size:12px; padding-top:2px; height: 20px; padding-left:7px; padding-right:7px;  margin-left:10px; color:white; ">
+		                ${board.categoryName }
+		                </span>
 		                <p style="font-size: 12px; line-height: 1.4;">
 		                    ${board.boardContent } 
 		                </p>
-		                <div class="user-profile" style="background-image: url('${loginMember.memberProfile}');"></div>
-		                <div class="user-name">${loginMember.memberNickname}</div>
+		                <div class="user-profile" style="background-image: url(${contextPath}/${board.memberProfile});"></div>
+		                <div class="user-name">${board.memberNickname}</div>
 		                <div class="time">${board.createDate }</div>
 		                <div class="comments">댓글</div>
 		                <div class="count-comments">${board.commentCount }</div>
@@ -232,7 +244,7 @@
 		                <a class="report" href="${contextPath }/report/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}">신고</a>
 		         	</div>
 		            <c:if test="${!empty board.fileName[0] }">
-		            	<div class="q-img" style="background-image: url('${contextPath}/${board.filePath[0]}${board.fileName[0]}'); float:right;"></div>
+		            	<div class="q-img" style="background-image: url(${contextPath}/${board.filePath[0]}${board.fileName[0]}); float:right;"></div>
 		            </c:if>
 		            <div class="padding"></div>
 		            <hr>
