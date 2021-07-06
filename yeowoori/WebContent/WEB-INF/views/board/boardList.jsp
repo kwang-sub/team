@@ -123,6 +123,10 @@
             background-repeat: no-repeat;
             background-size: cover;
 		}
+		.category-btn1{
+			 background-color: #A66129;
+           	 color:white;
+		}
 
     </style>
 </head>
@@ -153,9 +157,12 @@
 				              
 				              
 				        </form>
+				        <c:set var="category" value="btn-dark" />
+				        
 				        <form class="category-btn" action="#" method="GET">
 				            <div style="padding:10px;"></div>
-				            <a class="btn btn-light category-selected" href="/yeowoori/board/list?type=1">전체</a>
+				            
+				            <a class="btn btn-light category-selected " href="/yeowoori/board/list?type=1">전체</a>
 				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=1">분위기맛집</a>
 				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=2">산책코스</a>
 				            <a class="btn btn-light category-unselected" href="/yeowoori/board/list?type=1&category=3">커플데이트</a>
@@ -172,7 +179,7 @@
 				                  현재 카테고리
 				                </button>
 				                <div class="dropdown-menu">
-				                    <a href="/yeowoori/board/list?type=1">전체</a><br>
+				                    <a href="/yeowoori/board/list?type=1" >전체</a><br>
 				                    <a href="/yeowoori/board/list?type=1&category=1">분위기맛집</a><br>
 				                    <a href="/yeowoori/board/list?type=1&category=2">산책코스</a><br>
 				                    <a href="/yeowoori/board/list?type=1&category=3">커플데이트</a><br>
@@ -295,10 +302,10 @@
 										style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; height: 70px; width: 100%">
 
 										<c:if test="${fn:length(board.boardContent)>=39}">
-											${fn:substring(board.boardContent,0,39) }...
+											<p>${fn:substring(board.boardContent,0,39) }...</p>
 										</c:if>
 										<c:if test="${fn:length(board.boardContent)<=39}">
-											${board.boardContent }
+											<p>${board.boardContent }</p>
 										</c:if>
 									</div>
 
@@ -447,4 +454,5 @@
             
 
 </body>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </html>
