@@ -195,7 +195,10 @@
         </div>
 	</c:forEach>
 	</c:if>
-        
+	<c:if test="${!empty param.area }">
+	<c:set var="area" value="&area=${param.area}"/>    
+	</c:if>
+    
         <div style="padding: 30px;"></div>
         <div class="container">
             <div class="row">
@@ -203,7 +206,7 @@
                     <div class="main-board">
                         <h6 style="margin-left:10px; margin-bottom: 10px; display: inline-block;">질문</h6>
                          <c:if test="${!empty qBoardList }">
-                         <a class="more" href="${contextPath}/board/list2?type=2&area=${param.area}">더보기</a>
+                         <a class="more" href="${contextPath}/board/list2?type=2${area}">더보기</a>
                          </c:if>
                     </div>
                     <ul class="list-group">
@@ -229,7 +232,7 @@
                     <div class="main-board">
                         <h6 style="margin-left:10px; margin-bottom: 10px; display: inline-block;">같이 떠나요</h6>
                          <c:if test="${!empty withBoardList }">
-                         <a class="more" href="${contextPath}/board/list3?type=3&area=${param.area}">더보기</a> 
+                         <a class="more" href="${contextPath}/board/list3?type=3${area}">더보기</a> 
                          </c:if>
                     </div>
                     <ul class="list-group">
