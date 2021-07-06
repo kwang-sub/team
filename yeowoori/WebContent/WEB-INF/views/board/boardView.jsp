@@ -128,7 +128,7 @@
     <div class="container">
         <h5>${board.boardTitle }</h5>
         <div style="padding : 3px;"></div>
-        <a class="btn btn-light category-selected" name="category" href="#">${board.categoryName }</a>
+        <span class="btn btn-light category-selected" name="category" href="#">${board.categoryName }</span>
         <div style="padding : 5px;"></div>
         <div style="display: inline-block; margin-top: 8px;">
             <div class="user-profile" style="background-image: url(${contextPath }/${board.memberProfile});"></div>
@@ -154,7 +154,7 @@
                 </button>
                 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
                   <button class="dropdown-item " onclick="fnRequest('updateForm');" >수정하기</button>
-                  <button class="dropdown-item" >삭제하기</button>
+                  <button class="dropdown-item" onclick="fnRequest('delete');" >삭제하기</button>
                 </div>
              </div>
             </c:if>
@@ -222,15 +222,18 @@
 		<jsp:include page="comment.jsp"></jsp:include>
         
         <hr>
-        <c:if test="${empty param.area }">
-        <a href="list?type=${param.type}&cp=${param.cp}" class="btn btn-brown float-right" style="color:white;">목록으로</a>
-        </c:if>
         <c:if test="${!empty param.area }">
-        <a href="list?type=${param.type}&area=${param.area}&cp=${param.cp}" class="btn btn-brown float-right" style="color:white;">목록으로</a>
+        	<c:set var = "area" value ="&area=${param.area}" />
         </c:if>
-        
-        
-        
+       <c:if test="${param.type ==1 }">
+       <a href="list?type=${param.type}${area}&cp=${param.cp}" class="btn btn-brown float-right" style="color:white;">목록으로</a>
+       </c:if>
+       <c:if test="${param.type ==2 }">
+       <a href="list2?type=${param.type}${area}&cp=${param.cp}" class="btn btn-brown float-right" style="color:white;">목록으로</a>
+       </c:if>
+       <c:if test="${param.type ==3 }">
+       <a href="list3?type=${param.type}${area}&cp=${param.cp}" class="btn btn-brown float-right" style="color:white;">목록으로</a>
+       </c:if>
         
         
         <div id="to-top"><a href="#top" style="color: grey;">▲<br>TOP</a></div>

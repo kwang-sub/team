@@ -63,6 +63,9 @@
         .notice-content{
             line-height: 2;
             text-align: center;
+            white-space: no-wrap;
+        	overflow : hidden;
+        	height: 30px;
         }
         .notice-content > a{
             color: black;
@@ -90,8 +93,18 @@
                 line-height: 1.4;
             }
         }
+        .overflow{
+        	height: 150px;
+        	white-space: no-wrap;
+        	overflow : hidden;
+        }
         
     </style>
+    
+    <c:if test="${!empty param.area }">
+	<c:set var="area" value="&area=${param.area}"/>    
+	</c:if>
+	
     <div style="padding: 10px;"></div>
     <h6 style="padding-left: 8%; margin-bottom: 20px;">여행 인기 게시글</h6>
 
@@ -105,19 +118,21 @@
         <div class="carousel-item active">
           <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false"><title> </title><rect width="100%" height="100%" fill="#f8f8f8"/><text x="50%" y="50%" fill="#777" dy=".3em"> </text></svg>
           <div class="container">
-              <a href="#">
+              <a href="board/view?no=${boardList[0].boardNo}&cp=1&type=1${area}">
                     <div class="bg-img" style="background-image: url(${contextPath}/${boardList[0].filePath[0]}${boardList[0].fileName[0]});"></div>
-                    <div class="carousel-caption text-left">
-                    <h3 style="color: black;">${boardList[0].boardTitle }</h3>
-                    <c:set var="boardContent" value="${boardList[0].boardContent }"/>
-                    <p style="color: black;">
-                    <c:if test="${fn:length(boardContent) < 101 }">
-                    ${boardContent}
-                    </c:if>
-                    <c:if test="${fn:length(boardContent) > 100}">
-                    ${fn:substring(boardContent,0,100) }...
-                    </c:if>
-                    </p>
+                    <div class="carousel-caption text-left overflow">
+	                    <h3 style="color: black;">${boardList[0].boardTitle }</h3>
+	                    <c:set var="boardContent" value="${boardList[0].boardContent }"/>
+	                    <p style="color: black;">
+	                    
+	                    <c:if test="${fn:length(boardContent) < 101 }">
+	                    ${boardContent}
+	                    </c:if>
+	                    <c:if test="${fn:length(boardContent) > 100}">
+	                    ${fn:substring(boardContent,0,100) }...
+	                    </c:if>
+	                    
+	                    </p>
                     </div>
                </a>
           </div>
@@ -126,9 +141,9 @@
           <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false"><title> </title><rect width="100%" height="100%" fill="#f8f8f8"/><text x="50%" y="50%" fill="#777" dy=".3em"> </text></svg>
           
           <div class="container">
-                <a href="#">
+                <a href="board/view?no=${boardList[1].boardNo}&cp=1&type=1${area}">
                     <div class="bg-img" style="background-image: url(${contextPath}/${boardList[1].filePath[0]}${boardList[1].fileName[0]});"></div>
-                    <div class="carousel-caption text-left">
+                    <div class="carousel-caption text-left overflow">
                     <h3 style="color: black;">${boardList[1].boardTitle }</h3>
                     <c:set var="boardContent" value="${boardList[1].boardContent }"/>
                     <p style="color: black;">
@@ -147,9 +162,9 @@
           <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false"><title> </title><rect width="100%" height="100%" fill="#f8f8f8"/><text x="50%" y="50%" fill="#777" dy=".3em"> </text></svg>
           
           <div class="container">
-                <a href="#">
+                <a href="board/view?no=${boardList[2].boardNo}&cp=1&type=1${area}">
                     <div class="bg-img" style="background-image: url(${contextPath}/${boardList[2].filePath[0]}${boardList[2].fileName[0]});"></div>
-                    <div class="carousel-caption text-left">
+                    <div class="carousel-caption text-left overflow">
                    <h3 style="color: black;">${boardList[2].boardTitle }</h3>
                     <c:set var="boardContent" value="${boardList[2].boardContent }"/>
                     <p style="color: black;">
@@ -195,9 +210,7 @@
         </div>
 	</c:forEach>
 	</c:if>
-	<c:if test="${!empty param.area }">
-	<c:set var="area" value="&area=${param.area}"/>    
-	</c:if>
+
     
         <div style="padding: 30px;"></div>
         <div class="container">
@@ -212,7 +225,8 @@
                     <ul class="list-group">
                     <c:if test="${!empty qBoardList }">
                        	<c:forEach items="#{qBoardList}" var="qboard">
-                    	<li class="list-group-item"><a href="#">
+                       	
+                    	<li class="list-group-item"><a href="board/view?no=${qboard.boardNo}&cp=1&type=2${area}">
                     	<c:if test="${fn:length(qboard.boardTitle) <21 }">
                     	${qboard.boardTitle}
                     	</c:if>
@@ -220,6 +234,7 @@
                     	${fn:substring(qboard.boardTitle,0,20) }...
                     	</c:if>
                     	</a></li>
+                    	
                     	</c:forEach>
                     </c:if>
                     <c:if test="${empty qBoardList }">
@@ -238,7 +253,8 @@
                     <ul class="list-group">
                     <c:if test="${!empty withBoardList }">
                         <c:forEach items="#{withBoardList}" var="withBoard">
-                    	<li class="list-group-item"><a href="#">
+                        
+                    	<li class="list-group-item"><a href="board/view?no=${withBoard.boardNo}&cp=1&type=3${area}">
 						<c:if test="${fn:length(withBoard.boardTitle) <21 }">
                     	${withBoard.boardTitle}
                     	</c:if>
@@ -246,6 +262,7 @@
                     	${fn:substring(withBoard.boardTitle,0,20) }...
                     	</c:if>
 						</a></li>
+						
                     	</c:forEach>
                     </c:if>
                     <c:if test="${empty withBoardList }">
