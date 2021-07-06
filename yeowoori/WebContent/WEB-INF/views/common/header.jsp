@@ -69,7 +69,7 @@
 					  </button>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					    <a class="dropdown-item" href="${contextPath}/member/myPage/my">마이페이지</a>
-					    <a class="dropdown-item" href="${contextPath}/logout">로그아웃</a>
+					    <a class="dropdown-item" href="${contextPath}/member/myPage/logout">로그아웃</a>
 					  </div>
 					</div>
             	</c:otherwise>
