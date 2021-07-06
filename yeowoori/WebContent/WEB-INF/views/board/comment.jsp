@@ -9,11 +9,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${board.boardTitle }</title>
+    <title>comment</title>
 </head>
 <body>
-<div id="top"></div>
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
      
         .user-profile{
@@ -34,12 +32,13 @@
             display: inline-block;
             vertical-align:middle;
             margin-right: 20px;
+            margin-bottom: 30px;
        }
        .user-name{
            width:fit-content;
            display: inline-block;
-           font-size: 12px;
-           margin-left: 5px;
+           font-size: 14px;
+           margin-left: 0px;
            font-weight: 500;
        }
        .time{
@@ -88,41 +87,80 @@
            margin-right: 10px;
            line-height: 2.3;
        }
-       
-		
+       .btn-dh{
+       		background-color : #eee;
+       		border : 0px;
+       		padding-left: 5px; padding-right:5px;
+       		padding-top:3px; padding-bottom:3px;
+       		font-size : 12px;
+       		margin-right:10px;
+       }
+		.comment-content{
+		display: inline-block; margin-left: 10px; font-size: 14px;
+		}
+		.CommentUpdateContent {
+		   width: 80%; height: 32px;
+           border: 1px solid grey;
+           border-radius: 5px;
+           resize:none;
+		}
 </style>
     
     <div class="container">
-        
-       
-        <div style="padding: 20px;"></div>
+      
+   
+      	<hr>
+      	<div style="padding: 20px;"></div>
         <h6>댓글 ${board.commentCount }</h6>
         <div style="padding: 5px;"></div>
-        
+         
         <c:if test="${!empty loginMember }">
-        <div class="user-profile-big" style="background-image: url(${loginMember.memberProfile});"></div>
+        <div class="user-profile-big" style="background-image: url(${contextPath}/${loginMember.memberProfile});"></div>
         <div class="text-container">
             <input type="text" class="input-comment" id="commentContent" name="commentContent" placeholder="댓글을 입력해주세요.">
             <button type="button" class="btn-submit" id="addComment" onclick="addComment();">등록</button>
         </div>
         </c:if>
         
-        <div style="padding: 10px;"></div>
-        <div class="user-profile-big" style="background-image: url('${board.memberProfile}'); margin-bottom: 30px;"></div>
-        <div style="display: inline-block;">
-            <div class="user-name" style="font-size: 14px; margin-left: 0px;">${board.memberNickname }</div>
-            <div style="display: inline-block; margin-left: 10px; font-size: 14px;">${comment.commentContent }</div>
-            <div>
-                <div class="time" style="margin-left: 0px; margin-right: 20px;">${comment.commentDate}</div>
-                <a href="#">
-                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
-                    <div class="comments">좋아요</div>
-                </a>
-                <a href="#" class="report">신고</a>
-            </div>
-        </div>
+     
+        <div id="comment-list-area">
+        <c:if test="${!empty commentList}">
+        <c:forEach items="${commentList}" var="comment">
+	        <div style="padding: 10px;"></div>
+	        <div class="user-profile-big" style="background-image: url(${contextPath}/${comment.memberProfile});"></div>
+	        <div style="display: inline-block;">
+	            <div class="user-name">${comment.memberNickname }</div>
+	            <div class="comment-content">${comment.commentContent }</div>
+				
+				<c:if test="${loginMember.memberNo == comment.memberNo}">
+				<div class="ml-2" style="position:absolute; right:100px;">
+		             <button type="button" class="btn btn-dh" onclick="showUpdateComment(${comment.commentNo}, this)">수정</button>
+		             <button type="button" class="btn btn-dh" onclick="deleteComment(${comment.commentNo})">삭제</button>
+	           	</div>
+				</c:if>
+				
+				
+	            <div>
+	                <div class="time" style="margin-left: 0px; margin-right: 20px;">${comment.commentDate}</div>
+	                <a href="#">
+	                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
+	                    <div class="comments">좋아요</div>
+	                </a>
+	                <a href="#" class="report">신고</a>
+	
+	            </div>
+	            
+	
+	        </div>
+	    </c:forEach>
         
-        <hr>
+     	</c:if>
+        </div>
+
+       
+        
+        
+        
     
     <form action="#" method="POST" name="requestForm">
     	<input type="hidden" name="boardNo" value="${board.boardNo}">
@@ -155,7 +193,9 @@
         						"title" : "댓글 등록 성공"
         					})
         					$("#commentContent").val("");
+    						selectCommentList();
     					}
+    					
     				},
     				error : function(){
     					console.log("댓글 삽입 실패");
@@ -164,6 +204,101 @@
     		}
     	}
     	
+    	//댓글 조회
+    	function selectCommentList(){
+ 			
+			$.ajax({
+				url : "${contextPath}/comment/list",
+				data : {"boardNo" : boardNo},
+				type : "POST",
+				dataType : "JSON", 
+				success : function(commentList){
+					
+			        $("#comment-list-area").html("");
+			         
+			        $.each(commentList, function(index, item){
+					
+			        	var div1 = $("<div>").css("padding", "10px");
+			        	var div2 = $("<div>").addClass("user-profile-big").css("background-image", "url(${contextPath}/"+item.memberProfile+")");
+			        	
+			        	var div3 = $("<div>").css("display", "inline-block");
+			        	
+			        	var div31 = $("<div>").addClass("user-name").text(item.memberNickname);
+			        	var div32 = $("<div>").addClass("comment-content").html(item.commentContent);
+			        	var div33 = $("<div>").addClass("ml-2").css("position", "absolute").css("right", "100px");
+			        	
+			        	
+			        	if(item.memberNo == loginMemberNo){
+			        		   
+				               var showUpdate = $("<button>").addClass("btn btn-dh").text("수정").attr("onclick", "showUpdateComment("+item.commentNo+", this)");
+				               var deleteComment = $("<button>").addClass("btn btn-dh").text("삭제").attr("onclick", "deleteComment("+item.commentNo+")");
+				               
+				               div33.append(showUpdate).append(deleteComment);
+				        }
+
+			        	div3.append(div31).append(div32).append(div33);
+			        	
+			        	var div4 = $("<div>");
+			        	
+			        	var div41 = $("<div>").addClass("time").css("margin-left", "0px").css("margin-right", "20px").text(item.commentDate);
+			        	
+			        	var a42 = $("<a>").prop("href", "#");
+			        	var img421 = $("<img>").attr("src", "https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc").css("height", "15px");
+			        	var div422 = $("<div>").addClass("comments").text("좋아요");
+			        	a42.append(img421).append(div422);
+			        	
+			        	var a43 = $("<a>").prop("href", "#").addClass("report").text("신고");
+			        	
+			        	div4.append(div41).append(a42).append(a43);
+			        	
+			        	div3.append(div4);
+			        	
+			            $("#comment-list-area").append(div1).append(div2).append(div3);
+			         }); 
+					
+				},
+				error : function(){
+					console.log("댓글 목록 조회 실패")
+				}
+			});
+		}
+    	
+    	//댓글 수정 열리기
+    	function showUpdateComment(commentNo, el){
+    		
+    		if($(".replyUpdateContent").length > 0){
+    			$(".replyUpdateContent").eq(0).parent().html(beforeReplyRow);
+    		}
+    		
+    		beforeReplyRow = $(el).parent().parent().html();
+    		
+    		var beforeContent = $(el).parent().prev().html();
+    		
+    		beforeContent = beforeContent.replace(/&amp;/g, "&");	
+    		beforeContent = beforeContent.replace(/&lt;/g, "<");	
+    		beforeContent = beforeContent.replace(/&gt;/g, ">");	
+    		beforeContent = beforeContent.replace(/&quot;/g, "\"");	
+    		beforeContent = beforeContent.replace(/<br>/g, "\n");	
+    		
+    		var textarea = $("<textarea>").addClass("CommentUpdateContent").val(beforeContent);
+    		$(el).parent().parent().before(textarea);
+    		$(el).parent().parent().remove();
+    		
+    		var updateBtn = $("<button>").addClass("btn btn-dh").text("댓글 수정").attr("onclick", "updateComment(" + replyNo + ", this)");
+    		var cancelBtn = $("<button>").addClass("btn btn-dh").text("취소").attr("onclick", "updateCancel(this)");
+    		var div = $("<div>").css("position","absolute").css("right", "100px");
+    		div.append(updateBtn).append(cancelBtn);
+    		
+    		$(el).parent().parent().append(div);		
+    	}
+    	
+    	function updateCancel(el){
+    		$(el).parent().parent().html( beforeReplyRow );
+    	}
+    	
+    	
+
+	//
     </script>
     
 </body>

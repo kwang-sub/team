@@ -69,7 +69,7 @@ public class CommentController extends HttpServlet {
 				comment.setCommentContent(commentContent);
 				
 
-				int result = service.updateReply(comment);
+				int result = service.updateComment(comment);
 				
 				response.getWriter().print(result);
 			}
