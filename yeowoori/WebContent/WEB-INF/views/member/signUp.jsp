@@ -208,8 +208,7 @@ p {
 
 
 			<div class="col-md-5 offset-md-3">
-				<button type="button" class="btn btn-sm btn-block btn-light"
-					id="idDupCheck">이메일 인증</button>
+				<button type="button" class="btn btn-sm btn-block btn-light">이메일 인증</button>
 			</div>
 
 			<div class="col-md-5 offset-md-3">
@@ -236,13 +235,14 @@ p {
 			<div class="col-md-5 offset-md-3">
 				<button class="btn btn-lg btn-block" id="signUp-btn" type="submit">회원가입
 					완료</button>
+					 
 			</div>
 		</form>
 	</div>
 
 
 	<script>
-		// 아이디 중복 검사용 팝업창 오픈
+		 // 아이디 중복 검사용 팝업창 오픈
 		$("#idDupCheck").on("click", function() {
 			// window.open("주소/경로", "창 이름", "스타일 설정");
 			window.open("idDupCheck", "idDupForm", "width=450, height=250");
@@ -251,13 +251,13 @@ p {
 
 		});
 		
-		
+		/*
 		// 비밀번호 유효성 검사
 		function pwdValidate(){
 			const regExp = /^[a-zA-Z0-9~!@#$%^&*()\-\+]{8,12}$/;
 			
-			const newPwd1 = $("#newPwd1").val().trim();
-			const newPwd2 = $("#newPwd2").val().trim();
+			const newPwd1 = $("#pwd1").val().trim();
+			const newPwd2 = $("#Pwd2").val().trim();
 
 			// 새비밀번호가 유효하지 않거나
 			// 새비밀번호, 새비밀번호 확인이 같지 않는 경우
@@ -271,7 +271,8 @@ p {
 				return false;
 			}
 		}
-
+		 */
+		
 	</script>
 	<script src="${contextPath}/resources/js/member.js"></script>
 </body>

@@ -66,7 +66,7 @@ public class SignUpServlet extends HttpServlet {
 			session.setAttribute("title", title);
 			session.setAttribute("text", text);
 			
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+"/homeBoard");
 		
 		
 		
