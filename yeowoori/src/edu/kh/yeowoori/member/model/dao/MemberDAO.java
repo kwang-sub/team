@@ -2,9 +2,6 @@ package edu.kh.yeowoori.member.model.dao;
 
 
 import static edu.kh.yeowoori.common.JDBCTemplate.close;
-import static edu.kh.yeowoori.common.JDBCTemplate.close;
-import static edu.kh.yeowoori.common.JDBCTemplate.close;
-import static edu.kh.yeowoori.common.JDBCTemplate.close;
 import static edu.kh.yeowoori.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
@@ -193,6 +190,32 @@ int result = 0;
 			result = pstmt.executeUpdate();
 			
 		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	/** 회원 탈퇴 DAO
+	 * @param conn
+	 * @param currentPwd
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int secession(Connection conn, int memberNo) throws Exception{
+		int result = 0;
+		
+		String sql = prop.getProperty("secession");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
 			close(pstmt);
 		}
 		return result;

@@ -43,4 +43,11 @@
 		WHERE MEMBER_NO = ?
 	</entry>
 	
+	<!-- 회원 탈퇴 SQL -->
+	<entry key="secession">
+		UPDATE MEMBER SET 
+			MEMBER_STATUS = 'N'
+		WHERE MEMBER_NO=? 
+	</entry>
+	
 </properties>
