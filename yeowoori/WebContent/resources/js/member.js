@@ -35,7 +35,7 @@ $("#id").on("input", function(){
 // 조건 : 한글 두 글자 이상 5글자 이하 ->  /^[가-힣]{2,5}$/;
 $("#nickName").on("input",function(){
 
-    const regExp =  /^[가-힣]{2,6}$/;
+    const regExp =  /^[가-힣]{2,15}$/;
 
     // 이벤트 핸들러 내부에 작성된 this == 이벤트가 발생한 요소 == $("#name")
     const inputName = $(this).val().trim();
@@ -45,7 +45,7 @@ $("#nickName").on("input",function(){
         checkObj.nickName = true;
 
     }else{
-        $("#checkName").text("한글 2~6자리").css("color","red");
+        $("#checkName").text("한글 2~15자리").css("color","red");
         checkObj.nickName = false;
 
     }
