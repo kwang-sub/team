@@ -146,7 +146,7 @@
                             	<span style="color:#A66129">내가 작성한 수 : ${myTrip[0].count   == null ? 0 : myTrip[0].count }</span>
                             </c:if>
                             <c:if test="${!empty like }">
-                            	<span style="color:#A66129">내가 종아요한 게시글  수 : ${myTrip[0].count   == null ? 0 : myTrip[0].count }</span>
+                            	<span style="color:#A66129">내가 좋아요한 게시글  수 : ${myTrip[0].count   == null ? 0 : myTrip[0].count }</span>
                             </c:if>
                             <c:if test="${empty like }">
                             
@@ -183,7 +183,7 @@
                                 </c:if>
                                 <c:if test="${!empty like }">
                                 
-                                	<span style="color:#A66129">내가 종아요한 게시글 수 : ${myQuestion[0].count  == null ? 0 : myQuestion[0].count }</span>
+                                	<span style="color:#A66129">내가 좋아요한 게시글 수 : ${myQuestion[0].count  == null ? 0 : myQuestion[0].count }</span>
                                 </c:if>
                                 <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
