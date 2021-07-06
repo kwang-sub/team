@@ -50,7 +50,7 @@ body {
 height : 700px;
 }
 
-#idDupCheck {
+#idDupCheck, #nickDupCheck {
 	background-color: gray;
 	opacity: 0.7;
 	color: black;
@@ -227,6 +227,11 @@ p {
 				<input type="text" class="form-control" id="nickName"
 					name="nickName" placeholder="닉네임(2-15자)" required>
 			</div>
+			
+			<div class="col-md-5 offset-md-3">
+				<button type="button" class="btn btn-sm btn-block btn-light"
+					id="nickDupCheck">닉네임 중복검사</button>
+			</div>
 
 			<div class="col-md-5 offset-md-3">
 				<span id="checkName">&nbsp;</span>
@@ -250,28 +255,14 @@ p {
 			// 상대 경로 : idDupCheck
 
 		});
-		
-		/*
-		// 비밀번호 유효성 검사
-		function pwdValidate(){
-			const regExp = /^[a-zA-Z0-9~!@#$%^&*()\-\+]{8,12}$/;
-			
-			const newPwd1 = $("#pwd1").val().trim();
-			const newPwd2 = $("#Pwd2").val().trim();
+		 
+		$("#nickDupCheck").on("click", function() {
+			// window.open("주소/경로", "창 이름", "스타일 설정");
+			window.open("nickDupCheck", "nickDupForm", "width=450, height=250");
+			// 절대 경로 : ${contextPath}/member/idDupCheck
+			// 상대 경로 : idDupCheck
 
-			// 새비밀번호가 유효하지 않거나
-			// 새비밀번호, 새비밀번호 확인이 같지 않는 경우
-			if(!regExp.test(newPwd1) || (newPwd1 != newPwd2)){
-				
-				swal({
-					"icon" : "error",
-					"title" : "비밀번호가 유효하지 않습니다."
-				});
-				
-				return false;
-			}
-		}
-		 */
+		});
 		
 	</script>
 	<script src="${contextPath}/resources/js/member.js"></script>
