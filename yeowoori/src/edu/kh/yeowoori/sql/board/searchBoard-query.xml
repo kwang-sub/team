@@ -35,6 +35,35 @@
 	
 	</entry>
 	
+	<entry key="searchBoardList">
+		SELECT*FROM
+			(SELECT ROWNUM RNUM, A.* FROM
+			    (SELECT * FROM BOARD_LIST
+			    WHERE board_status = 'Y' 
+			    AND board_type_no = ?
+			    AND (BOARD_TITLE LIKE '%' || ? || '%' 
+			    	OR BOARD_CONTENT LIKE '%' || ? || '%' 
+			    	OR CATEGORY_NM LIKE '%' || ? || '%' 
+			    	OR MEMBER_NICKNAME LiKE '%' || ? || '%')
+				ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
+	
+	<!-- 지역 카테고리 적용된 게시글 조회  -->
+	<entry key="areaSearchBoardList">
+		SELECT*FROM
+			(SELECT ROWNUM RNUM, A.* FROM
+			    (SELECT * FROM BOARD_LIST
+			    WHERE board_status = 'Y' 
+			    AND board_type_no = ?
+			    AND (BOARD_TITLE LIKE '%' || ? || '%' 
+			    	OR BOARD_CONTENT LIKE '%' || ? || '%' 
+			    	OR CATEGORY_NM LIKE '%' || ? || '%' 
+			    	OR MEMBER_NICKNAME LiKE '%' || ? || '%')
+				AND AREA_CATEGORY_CD = ?
+			    ORDER BY BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 </properties>

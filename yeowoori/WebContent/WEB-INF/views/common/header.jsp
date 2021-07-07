@@ -78,9 +78,10 @@
             <a href="${contextPath}/member/myPage/like" class="icon" id="heart-icon"><img src="${contextPath}/resources/img/like.png" height="20px"></a>
             </c:if>
             
+            
             <div class="icon" id="search-icon">
                 <img id="search-btn" src="${contextPath}/resources/img/search.png" height="20px">
-                <form id="search-form" action="${contextPath }/search" method="GET" onsubmit="return checkSearch();">
+                <form id="search-form" action="${contextPath }/search/all" method="GET" onsubmit="return checkSearch();">
                     <input  type="search" id="search-bar" name="search" placeholder="search">
                     <button id="search-bar-btn" style="background-color: white; border: white;"><img src="${contextPath}/resources/img/search.png" height="20px" ></button>
                 </form>
