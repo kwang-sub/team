@@ -148,7 +148,11 @@
 	                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
 	                    <div class="comments">좋아요</div>
 	                </a>
-	                <a href="${contextPath }/report/comment?commentNo=${comment.commentNo}&memberNo=${loginMember.memberNo}" class="report">신고</a>
+	                
+	                <c:if test="${loginMember.memberNo != comment.memberNo }">
+	                 <a href="${contextPath }/report/comment?commentNo=${comment.commentNo}&memberNo=${loginMember.memberNo}" class="report">신고</a>
+	                </c:if>
+	               
 	
 	            </div>
 	            
@@ -249,9 +253,13 @@
 			        	var div422 = $("<div>").addClass("comments").text("좋아요");
 			        	a42.append(img421).append(div422);
 			        	
-			        	var a43 = $("<a>").prop("href", "#").addClass("report").text("신고");
+			        	div4.append(div41).append(a42);
 			        	
-			        	div4.append(div41).append(a42).append(a43);
+			        	if (item.memberNo != loginMemberNo){
+			        		var a43 = $("<a>").prop("href", "#").addClass("report").text("신고");
+			        		div4.append(a43);
+			        	
+			        	}
 			        	
 			        	div3.append(div4);
 			        	

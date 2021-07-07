@@ -141,9 +141,9 @@
         
         </div>
         <div id="etc-board">
-            <a href="#" style="padding-right : 10px;">
+            <button type="button" class="btn" style="padding-right : 10px;" onclick="fnRequest('like')">
                 <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
-            </a>
+            </button>
             <span style="font-size: 12px; color: grey;">${board.likeCount }</span>
             
             <c:if test="${loginMember.memberNo == board.memberNo }">
@@ -218,7 +218,11 @@
         <div class="comments">${board.readCount }</div>
         <div class="comments">댓글</div>
         <div class="comments">${board.commentCount }</div>
+        
+        <c:if test="${loginMember.memberNo != board.memberNo }">
         <a href="${contextPath }/report/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}" class="report">신고</a>
+        </c:if>
+        
         <div style="padding: 20px;"></div>
         
         
@@ -250,6 +254,8 @@
     	<input type="hidden" name="cp" value="${param.cp }">
     	<input type="hidden" name="type" value="${param.type }">
    		<input type="hidden" name="area" value="${param.area }">
+   		<input type="hidden" name="loginMemberNo" value="${loginMember.memberNo }">
+   		
     </form>
     
     <script>
