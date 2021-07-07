@@ -48,6 +48,7 @@ public class myPageDAO {
 				mem.setFilePath(rs.getString("FILE_PATH"));
 				mem.setFileNm(rs.getString("FILE_NM"));
 				mem.setCount(rs.getInt("COUNT"));
+				mem.setBoardNo(rs.getInt("BOARD_NO"));
 				myTrip.add(mem);
 			}
 			
@@ -76,6 +77,7 @@ public class myPageDAO {
 				Member mem = new Member();
 				mem.setBoardTitle(rs.getString("BOARD_TITLE"));
 				mem.setCount(rs.getInt("COUNT"));
+				mem.setBoardNo(rs.getInt("BOARD_NO"));
 				myQuestion.add(mem);
 			}
 		}finally {
@@ -103,6 +105,7 @@ public class myPageDAO {
 				Member mem = new Member();
 				mem.setBoardTitle(rs.getString("BOARD_TITLE"));
 				mem.setCount(rs.getInt("COUNT"));
+				mem.setBoardNo(rs.getInt("BOARD_NO"));
 				myTogether.add(mem);
 			}	
 		}finally {

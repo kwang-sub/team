@@ -159,11 +159,12 @@
                         </div>
                        
                         <c:forEach items="${myTrip }" var="my">
-                        
-                        <div class="board-img img-left" class="col-sm-6 col-lg-1" 
-                            style="background-image: url(${contextPath}/${my.filePath }${my.fileNm });">
-                        </div>
-                        
+	                        <a href="${contextPath }/board/view?no=${my.boardNo}&cp=1&type=1">
+		                        <div class="board-img img-left" class="col-sm-6 col-lg-1" 
+		                            style="background-image: url(${contextPath}/${my.filePath }${my.fileNm });">
+		                        </div>
+	                        
+	                        </a>
                         </c:forEach>
                         
                         <div style="padding: 3px;"></div>
@@ -190,7 +191,10 @@
                         <ul class="list-group">
                         	<c:forEach items="${myQuestion }" var="my">
                         	
-                                <li class="list-group-item">${my.boardTitle }</li>
+                        		<a href="${contextPath }/board/view?no=${my.boardNo}&cp=1&type=1">
+                        		
+	                                <li class="list-group-item">${my.boardTitle }</li>
+                        		</a>
                         	</c:forEach>
                                 
                             </ul>
@@ -217,7 +221,12 @@
                         <ul class="list-group">
                             <c:forEach items="${myTogether }" var="my">
                         	
-                                <li class="list-group-item">${my.boardTitle }</li>
+                                <li class="list-group-item">
+                               	 	<a href="${contextPath }/board/view?no=${my.boardNo}&cp=1&type=1">
+	                        			${my.boardTitle }
+	                        		</a>
+	                        		
+                                </li>
                         	</c:forEach>
                         </ul>
                         <div style="padding: 10px;"></div>
