@@ -218,7 +218,8 @@ p {
 
 
 			<!-- 닉네임 -->
-
+			<!-- 팝업창 중복체크 여부 판단을 위한 hidden 타입 요소 -->
+			<input type="hidden" name="nickDup" id="nickDup" value="false">
 			<div class="col-md-6 offset-md-3">
 				<label for="nickName">닉네임</label>
 				<p>다른 유저와 겹치지 않는 닉네임을 입력해주세요.</p>

@@ -19,7 +19,7 @@
 	<br>
 	
 	<form action="${contextPath }/member/nickDupCheck" id="nickCheckForm" method="post">
-		<input type="text" id="nick" name="nick" >
+		<input type="text" id="nick" name="nickname" >
 		<input type="submit" value="중복확인">
 	</form>
 	<br>
@@ -50,9 +50,10 @@
 		$(function(){
 			
 			if(result == ""){ 
-				nick = opener.document.signUpForm.nick.value;
+				nick = opener.document.signUpForm.nickName.value;
 				
 			} else{
+				nick = "${nickname}";
 			}
 			
 			$("#nick").val(nick);
@@ -69,8 +70,7 @@
 				opener.document.signUpForm.nickDup.value = false;	
 			}
 			
-			// 팝업창에 작성된 아이디를 부모창으로 전달
-			opener.document.signUpForm.nick.value = $("#nick").val();
+			opener.document.signUpForm.nickName.value = $("#nick").val();
 			
 			if(opener != null){
 				self.close();
@@ -94,7 +94,7 @@
 	</script>
 	
 	
-	<c:remove var="nick"/>
+	<c:remove var="id"/>
 	<c:remove var="result"/>
 </body>
 </html>

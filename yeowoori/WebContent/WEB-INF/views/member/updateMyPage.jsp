@@ -177,7 +177,7 @@ p {
 								<p>*필수항목</p>
 							</div>
 							<div class="col-md-6">
-								<input type="text " class="form-control" placeholder="${loginMember.memberNickname }" id="nickname" name="nickname">
+								<input type="text " class="form-control" value="${loginMember.memberNickname }" id="nickname" name="nickname">
 							</div>
 
 
@@ -210,7 +210,7 @@ p {
 								<h6>한줄 소개</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="text " class="form-control" id="intro" name="intro" placeholder="${loginMember.memberContent }">
+								<input type="text " class="form-control" id="intro" name="intro" value="${loginMember.memberContent }">
 							</div>
 						</div>
 						<div class="row my-6 form-row">
@@ -234,17 +234,18 @@ p {
 		       swal({ "icon"  : "warning" ,
 		    	   	  "title" : "닉네임이 유효하지 않습니다.",
 		    	   	  "text"  : "한글 2~15자리이내로 작성해주세요."});
-		       return false;
+		       return false; 
 		    }
 	// 한줄 소개 검사  
-		    const regExp1 =  /^[가-힣]{1,20}$/;
+		    //const regExp1 =  /^[\w]{1,20}$/;
 
 		    const intro = $("#intro").val().trim();
 
-		    if(!regExp1.test(intro)){
+		    //if(!regExp1.test(intro)){
+		    if(intro.length > 20){
 		       swal({ "icon"  : "warning" ,
 		    	   	  "title" : "한줄소개가 유효하지 않습니다.",
-		    	   	  "text"  : "한글 1~20자리이내로 작성해주세요."});
+		    	   	  "text"  : "1~20자리이내로 작성해주세요."});
 		       return false;
 		    
 	    }
