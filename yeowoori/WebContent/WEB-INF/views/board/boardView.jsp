@@ -246,7 +246,7 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     
     <form action="#" method="POST" name="requestForm">
-    	<input type="hidden" name="no" value="${board.boardNo}">
+    	<input type="hidden" name="no" value="${param.no}">
     	<input type="hidden" name="cp" value="${param.cp }">
     	<input type="hidden" name="type" value="${param.type }">
    		<input type="hidden" name="area" value="${param.area }">

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<c:set var="contextPath" scope="application"
+	value="${pageContext.servletContext.contextPath }"/>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -224,7 +226,7 @@
         <c:if test="${!empty tripBoardList}">
         <h5 style="display:inline-block;">여행 게시판</h5>
         <c:if test="${fn:length(tripboardList)> 6}">
-        	<a href="#" style="float:right; color:grey;">검색결과 더보기</a>
+        	<a href="${contextPath}/search" style="float:right; color:grey;">검색결과 더보기</a>
         </c:if> 
         <div style="padding:10px; display:block;"></div>
         <div class="row main">
