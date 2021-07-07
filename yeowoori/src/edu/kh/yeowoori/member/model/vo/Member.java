@@ -14,11 +14,21 @@ public class Member {
     private String memberGrade;
     private String memberProfile;
     
+    
     private String filePath;
     private String fileNm;
     private String boardTitle;
     private int count;
+    private int boardNo;
 	    
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
 	public int getCount() {
 		return count;
 	}
