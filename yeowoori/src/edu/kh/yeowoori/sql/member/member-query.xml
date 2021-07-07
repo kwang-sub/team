@@ -50,7 +50,7 @@
 		WHERE MEMBER_NO=? 
 	</entry>
 	
-	<!-- 이메일 중복검사 SQL  -->
+	<!-- 닉네임 중복검사 SQL  -->
 	
 	<entry key="nickDupCheck">
 		SELECT COUNT(*) FROM MEMBER

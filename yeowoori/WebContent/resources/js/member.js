@@ -156,6 +156,15 @@ function validate(){
         return false; // submit 이벤트 제거
     }
 
+   // 닉네임 중복 검사를 진행했는지 확인
+    // * input 태그 값을 모두 String으로 반환됨!
+    if( $("#nickDup").val() != "true" ){ // 중복 검사를 안한 경우
+        swal("닉네임 중복 검사를 진행해 주세요.").then(function(){
+            $("#nickDupCheck").focus(); // 중복 검사 버튼으로 포커스 이동
+        });
+
+        return false; // submit 이벤트 제거
+    }
     // checkObj에 작성된 속성들이 모두 true인지 확인
 
 	console.log(checkObj)
