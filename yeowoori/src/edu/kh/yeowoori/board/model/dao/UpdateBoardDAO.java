@@ -103,6 +103,21 @@ public class UpdateBoardDAO {
 		return result;
 	}
 
+	public int deleteBoard(Connection conn, int boardNo)throws Exception {
+		int result = 0 ;
+		String sql = prop.getProperty("deleteBoard");
+		try{
+			pstmt =conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
 
 
 }
