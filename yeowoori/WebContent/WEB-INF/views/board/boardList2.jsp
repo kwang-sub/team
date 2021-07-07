@@ -191,21 +191,13 @@
 
         <div>
             <div style="display: inline-block; margin-top: 40px; width: fit-content;">
-                <div style="font-size: 12px; margin-left: 14px; color:grey; font-weight: 300; width: fit-content; ">
+                <div style="font-size: 12px; color:grey; font-weight: 300; width: fit-content; ">
                     정렬
                 </div>
-                <div class="dropdown" style="display: inline-block;">
-                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                      <span style="font-weight: 500; font-size: 18px;">최신순</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#" >최신순</a>
-                        <a class="dropdown-item" href="#">조회순</a>
-                      <a class="dropdown-item" href="#">최근 답변순</a>
-                    </div>
-                </div>
+                <div style="font-weight: 500; font-size: 18px;">최신순</div>
+                
             </div>
-            <div style="float: right; margin-top: 60px;">
+            <div style="float: right; margin-top: 40px;">
                 
                 <a href="${contextPath }/boardwrite?cp=&type=2" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
                     질문하기
