@@ -200,9 +200,6 @@
 					"text" : "${text}"
 				})
 			</script>
-			
-			<%-- 특정 스코프에 있는 속성(변수)를 제거 할 수있음 --%>
-			<%-- 서버로부터 전달 받은 메세지를 1회 출력후 제거 (반복 출력되지 않는다.) --%>
 			<c:remove var="text"/>
 			<c:remove var="icon"/>
 			<c:remove var="title"/>

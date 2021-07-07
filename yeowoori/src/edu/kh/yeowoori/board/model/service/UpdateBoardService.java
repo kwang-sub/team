@@ -73,5 +73,23 @@ public class UpdateBoardService {
 		close(conn);
 		return result;
 	}
+
+	public int updateLike(int boardNo, int memberNo) throws Exception {
+		Connection conn = getConnection();
+		int result = dao.updateLike(conn, boardNo, memberNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int checkLike(int boardNo, int memberNo)throws Exception {
+		Connection conn = getConnection();
+		int result = dao.checkLike(conn, boardNo, memberNo);
+		
+		return result;
+	}
 	
 }

@@ -117,6 +117,42 @@ public class UpdateBoardDAO {
 		return result;
 	}
 
+	public int updateLike(Connection conn, int boardNo, int memberNo) throws Exception{
+		int result = 0;
+		String sql =prop.getProperty("updateLike");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,memberNo);
+			pstmt.setInt(2,boardNo);
+		
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int checkLike(Connection conn, int boardNo, int memberNo) throws Exception {
+
+		int result = 0;
+		String sql = prop.getProperty("checkLike");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,memberNo);
+			pstmt.setInt(2,boardNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = 1;
+			}else {
+				result = 0;
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 

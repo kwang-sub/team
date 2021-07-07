@@ -177,6 +177,40 @@ public class Board2Controller extends HttpServlet {
 
 			}
 			
+			else if(command.equals("like")) {
+				int boardNo = Integer.parseInt(request.getParameter("no"));
+				int memberNo = 0;
+				if(request.getParameter("loginMemberNo").equals("")) {
+					icon ="error";
+					title="로그인 후 이용해주세요.";
+					
+				}else {
+					memberNo = Integer.parseInt(request.getParameter("loginMemberNo"));
+					int result = serv.checkLike(boardNo, memberNo);
+					if(result==0) {
+						result = serv.updateLike(boardNo, memberNo);
+						if(result>0) {
+							icon ="success";
+							title="게시글 좋아요 성공";
+							text = "마이페이지에서 좋아하는 게시글을 확인해보세요.";
+						}
+					}else {
+						icon ="warning";
+						title="이미 좋아요한 게시글입니다.";
+						text = "마이페이지에서 좋아하는 게시글을 확인해보세요.";
+					}
+				}
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("icon", icon);
+				session.setAttribute("title", title);
+				session.setAttribute("text", text);
+				
+				path = request.getHeader("referer");
+				response.sendRedirect(path);
+				
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
