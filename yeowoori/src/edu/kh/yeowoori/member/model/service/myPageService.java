@@ -19,6 +19,7 @@ public class myPageService {
 		List<Member> myTrip = dao.getMyTrip(conn, loginMember);
 		close(conn);
 		return myTrip;
+		
 	}
 	/**내가 작성한 질문글 가져오기
 	 * @param loginMember

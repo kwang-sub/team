@@ -14,6 +14,7 @@ public class Member {
     private String memberGrade;
     private String memberProfile;
     
+    
     private String filePath;
     private String fileNm;
     private String boardTitle;

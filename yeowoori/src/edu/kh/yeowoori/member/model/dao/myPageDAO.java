@@ -83,6 +83,7 @@ public class myPageDAO {
 		}finally {
 			close(rs);
 			close(pstmt);
+			
 		}
 		
 		return myQuestion;

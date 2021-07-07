@@ -38,6 +38,7 @@ public class MyPageServlet extends HttpServlet {
 			if(command.equals("my")) {
 				
 				
+				
 				List<Member> myTrip =  service.getMyTrip(loginMember);
 				List<Member> myQuestion = service.getMyQuestion(loginMember);
 				List<Member> myTogether = service.getMyTogether(loginMember);

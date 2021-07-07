@@ -162,7 +162,7 @@
 	                        <a href="${contextPath }/board/view?no=${my.boardNo}&cp=1&type=1">
 		                        <div class="board-img img-left" class="col-sm-6 col-lg-1" 
 		                            style="background-image: url(${contextPath}/${my.filePath }${my.fileNm });">
-		                        </div>
+		                        </div> 
 	                        
 	                        </a>
                         </c:forEach>

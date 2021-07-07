@@ -33,6 +33,7 @@
 		AND BOARD_TYPE_NO=2
 		AND  ROWNUM &lt; 7
 		ORDER BY BOARD_NO DESC
+		
 	
 	</entry>
 	<entry key="getMyTogether">
