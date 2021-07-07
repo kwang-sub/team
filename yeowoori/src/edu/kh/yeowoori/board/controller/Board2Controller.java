@@ -44,6 +44,7 @@ public class Board2Controller extends HttpServlet {
 		String text = null;
 		
 		SelectBoardService service = new SelectBoardService();
+		UpdateBoardService serv = new UpdateBoardService();
 		
 		try {
 	
@@ -81,6 +82,7 @@ public class Board2Controller extends HttpServlet {
 				switch(type){
 					case 1: filePath += "tripboard/"; break;
 					case 2: filePath += "qboard/"; break;
+					case 3: filePath += "withboard/"; break;
 				}
 				MultipartRequest mpRequest = new MultipartRequest(request, root+filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 				
@@ -118,7 +120,7 @@ public class Board2Controller extends HttpServlet {
 //					System.out.println(at);
 //				}
 				
-				UpdateBoardService serv = new UpdateBoardService();
+				
 				int result = serv.updateBoard(board, atList);
 				cp = Integer.parseInt(mpRequest.getParameter("cp"));
 				
@@ -139,11 +141,39 @@ public class Board2Controller extends HttpServlet {
 			
 			else if (command.equals("delete")) {
 				
+				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 				
-				
-				
-				
+				int result = serv.deleteBoard(boardNo);
+				if(result>0) {
+					icon = "success";
+					title = "게시글 삭제 성공";
+					if(request.getParameter("area") == null) {
+						if(type==1) {
+							path = "../board/list?type=1";
+						}else {
+							path = "../board/list"+type+"?type="+type;
+						}
+					}else {
+						int area = Integer.parseInt(request.getParameter("area"));
+						if(type==1) {
+							path = "../board/list?type=1&area="+area;
+						}else {
+							path = "../board/list"+type+"?type="+type+"&area="+area;
+						}
+					}
+					
+				}else {
+					icon="error";
+					title ="게시글 삭제 실패";
+					path = "/yeowoori/homeBoard";
+				}
+				HttpSession session = request.getSession();
+				session.setAttribute("icon", icon);
+				session.setAttribute("title", title);
+				response.sendRedirect(path);
+
 			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -153,8 +153,11 @@
                     <img src="https://drive.google.com/uc?id=1CBODLkaPUc8Zt4MCTz-uAIBiRgmYjepI" height="15px">
                 </button>
                 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                  <button class="dropdown-item " onclick="fnRequest('updateForm');" >수정하기</button>
-                  <button class="dropdown-item" onclick="fnRequest('delete');" >삭제하기</button>
+               
+                	<button class="dropdown-item " onclick="fnRequest('updateForm');" >수정하기</button>
+                 	<button class="dropdown-item" onclick="if(confirm('정말 삭제하시겠습니까?')){fnRequest('delete');}" >삭제하기</button>
+                
+                  
                 </div>
              </div>
             </c:if>
@@ -243,10 +246,10 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     
     <form action="#" method="POST" name="requestForm">
-    	<input type="hidden" name="boardNo" value="${board.boardNo}">
+    	<input type="hidden" name="no" value="${board.boardNo}">
     	<input type="hidden" name="cp" value="${param.cp }">
     	<input type="hidden" name="type" value="${param.type }">
-    	<input type="hidden" name="area" value="${param.area }">
+   		<input type="hidden" name="area" value="${param.area }">
     </form>
     
     <script>
