@@ -215,7 +215,7 @@
         <div class="comments">${board.readCount }</div>
         <div class="comments">댓글</div>
         <div class="comments">${board.commentCount }</div>
-        <a href="#" class="report">신고</a>
+        <a href="${contextPath }/report/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}" class="report">신고</a>
         <div style="padding: 20px;"></div>
         
         

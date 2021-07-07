@@ -57,11 +57,12 @@ public class ReportDAO {
 	 */
 	public int reportComment(Connection conn, int commentNo, int memberNo) throws Exception {
 		int result = 0;
-		String sql = prop.getProperty("reportBoard");
+		String sql = prop.getProperty("reportComment");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, commentNo);
-			pstmt.setInt(2, memberNo);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, commentNo);
 			result = pstmt.executeUpdate();
 			
 		}finally {
