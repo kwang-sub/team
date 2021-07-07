@@ -106,7 +106,8 @@
 	</c:if>
 	
     <div style="padding: 10px;"></div>
-    <h6 style="padding-left: 8%; margin-bottom: 20px;">여행 인기 게시글</h6>
+    <h6 style="padding-left: 8%; margin-bottom: 20px; display:inline-block;">여행 인기 게시글</h6>
+    <a href="${contextPath }/board/list?type=1${area}" style="color:grey; float:right; margin-right:100px;">여행 게시글 더보기</a>
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
