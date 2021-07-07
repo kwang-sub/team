@@ -245,7 +245,7 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     
-    <form action="#" method="POST" name="requestForm">
+    <form action="#" method="POST" name="requestForm2">
     	<input type="hidden" name="no" value="${param.no}">
     	<input type="hidden" name="cp" value="${param.cp }">
     	<input type="hidden" name="type" value="${param.type }">
@@ -254,8 +254,9 @@
     
     <script>
     	function fnRequest(addr){
-    		document.requestForm.action = "../board2/"+addr;
-    		document.requestForm.submit();
+    		console.log(document.requestForm);
+    		document.requestForm2.action = "../board2/"+addr;
+    		document.requestForm2.submit();
     	}
     
     </script>

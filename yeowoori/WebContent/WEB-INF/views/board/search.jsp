@@ -4,6 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <c:set var="contextPath" scope="application"
 	value="${pageContext.servletContext.contextPath }"/>
+<c:if test="${!empty param.area }">
+     <c:set var="area" value="&area=${param.area}"/>
+</c:if>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -219,14 +222,14 @@
                padding: 0px;
            }
        }
-
+	  
     </style>
     <div class="container">
     <div style="padding:10px"></div>
         <c:if test="${!empty tripBoardList}">
         <h5 style="display:inline-block;">여행 게시판</h5>
         <c:if test="${fn:length(tripboardList)> 6}">
-        	<a href="${contextPath}/search" style="float:right; color:grey;">검색결과 더보기</a>
+        	<a href="${contextPath}/search/tripBoardList" style="float:right; color:grey;">검색결과 더보기</a>
         </c:if> 
         <div style="padding:10px; display:block;"></div>
         <div class="row main">
@@ -291,17 +294,24 @@
         <c:if test="${!empty qBoardList}">
         <h5 style="display: inline-block;">질문 게시판</h5>
         <c:if test="${fn:length(qboardList)> 5}">
-        	<a href="#" style="float:right; color:grey;">검색결과 더보기</a>
+        	<a href="${contextPath}/search/qBoardList" style="float:right; color:grey;">검색결과 더보기</a>
         </c:if> 
         <div style="padding:5px "></div>
         <c:forEach items="${qBoardList }" var="board" begin = "0" end="4">
        			<div style="padding : 5px;">
 		            <div class="width65">
 		                
-		                <h6>${board.boardTitle }</h6>
-		                <p style="font-size: 12px; line-height: 1.4;">
-		                    ${board.boardContent } 
-		                </p>
+		                 <a href="view?no=${board.boardNo}&cp=1&type=2${area}"><h6 style="display:inline-block;">${board.boardTitle }</h6></a>
+		                <span class="btn btn-light category-selected" 
+		                	style="font-size:12px; padding-top:2px; height: 20px; padding-left:7px; padding-right:7px;  margin-left:10px; color:white; ">
+		                ${board.categoryName }
+		                </span>
+		                <a href="view?no=${board.boardNo}&cp=1&type=2${area}">
+			                <p style="font-size: 12px; line-height: 1.4;">
+			                    ${board.boardContent } 
+			                </p>
+		                </a>
+		                
 		                <div class="user-profile" style="background-image: url('${board.memberProfile}');"></div>
 		                <div class="user-name">${board.memberNickname}</div>
 		                <div class="time">${board.createDate }</div>
@@ -328,17 +338,24 @@
         <c:if test="${!empty withBoardList }">
         <h5 style="display:inline-block;">같이 떠나요 게시판</h5>
          <c:if test="${fn:length(withBoardList)> 5}">
-        	<a href="#" style="float:right; color:grey;">검색결과 더보기</a>
+        	<a href="${contextPath}/search/withboardList" style="float:right; color:grey;">검색결과 더보기</a>
         </c:if> 
         <div style="padding:5px"></div>
         <c:forEach items="${withBoardList }" var="board" begin = "0" end="4">
         		<div style="padding : 5px;">
 		            <div class="width65">
 		                
-		                <h6>${board.boardTitle }</h6>
-		                <p style="font-size: 12px; line-height: 1.4;">
-		                    ${board.boardContent } 
-		                </p>
+		                <a href="view?no=${board.boardNo}&cp=1&type=3${area}"><h6 style="display:inline-block;">${board.boardTitle }</h6></a>
+		                <span class="btn btn-light category-selected" 
+		                	style="font-size:12px; padding-top:2px; height: 20px; padding-left:7px; padding-right:7px;  margin-left:10px; color:white; ">
+		                ${board.categoryName }
+		                </span>
+		                <a href="view?no=${board.boardNo}&cp=1&type=3${area}">
+			                <p style="font-size: 12px; line-height: 1.4;">
+			                    ${board.boardContent } 
+			                </p>
+		                </a>
+		                
 		                <div class="user-profile" style="background-image: url('${board.memberProfile}');"></div>
 		                <div class="user-name">${board.memberNickname}</div>
 		                <div class="time">${board.createDate }</div>
@@ -359,7 +376,13 @@
         
         </c:forEach>
         </c:if>
-        
+        <c:if test="${empty tripBoardList  && empty qBoardList && empty withBoardList}">
+        <h3 style="text-align:center;">검색 결과가 없습니다.</h3>
+        <div style="padding:10px;"></div>
+        <div style="text-align:center;">
+        	<a href="${contextPath}" class="btn" style="background-color: #A66129; color:white;">메인 페이지로 이동하기</a>
+        </div>
+        </c:if>
         		
         
     </div>
