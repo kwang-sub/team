@@ -37,41 +37,49 @@ public class ReportController extends HttpServlet {
 			if(command.equals("board")) {
 				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 				int memberNo = request.getParameter("memberNo")=="" ? 0 : Integer.parseInt(request.getParameter("memberNo"));
-				
 				int result = 0;
-				if(result>0) {
+				if(boardNo>0 && memberNo>0) {
 					
 					result = service.reportBoard(boardNo, memberNo);
-				}
-				
-				if(result>0) {
-					icon = "success";
-					title = "신고 성공";
-					path = request.getHeader("referer");
+					if(result>0) {
+						icon = "success";
+						title = "신고 성공";
+						path = request.getHeader("referer");
+					}else {
+						icon = "error";
+						title = "신고 실패";
+						path = request.getHeader("referer");
+					}
 				}else {
 					icon = "error";
-					title = "신고 실패";
+					title = "신고 실패 로그인 해주세요";
 					path = request.getHeader("referer");
 				}
+				
 				session.setAttribute("icon", icon);
 				session.setAttribute("title", title);
 				response.sendRedirect(path);
 			}
 			if(command.equals("comment")) {
 				int commentNo = Integer.parseInt(request.getParameter("commentNo"));
-				int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-				
+				int memberNo = request.getParameter("memberNo")=="" ? 0 :Integer.parseInt(request.getParameter("memberNo"));
 				int result = 0;
-				if(result>0) {
+				System.out.println("commentNo");
+				System.out.println("memberNo");
+				if(commentNo>0 && memberNo>0) {
 					result = service.reportComment(commentNo, memberNo);
-				}
-				if(result>0) {
-					icon = "success";
-					title = "신고 성공하셨습니다";
-					path = request.getHeader("referer");
+					if(result>0) {
+						icon = "success";
+						title = "신고 성공하셨습니다";
+						path = request.getHeader("referer");
+					}else {
+						icon = "error";
+						title = "신고 실패하셨습니다";
+						path = request.getHeader("referer");
+					}
 				}else {
 					icon = "error";
-					title = "신고 실패하셨습니다";
+					title = "신고 실패 로그인 해주세요";
 					path = request.getHeader("referer");
 				}
 				session.setAttribute("icon", icon);

@@ -5,7 +5,7 @@
 	<entry key="reportBoard">
 		INSERT INTO BOARD_REPORT VALUES(SEQ_RBNO.NEXTVAL, 1, 1, DEFAULT, DEFAULT, ?, ?)
 	</entry>
-	<entry key="reportBoard">
+	<entry key="reportComment">
 		INSERT INTO COMMENT_REPORT VALUES(SEQ_RCNO.NEXTVAL, 1, 1, DEFAULT, DEFAULT, ?, ?)
 	</entry>
 	

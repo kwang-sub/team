@@ -148,7 +148,7 @@
 	                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
 	                    <div class="comments">좋아요</div>
 	                </a>
-	                <a href="#" class="report">신고</a>
+	                <a href="${contextPath }/report/comment?commentNo=${comment.commentNo}&memberNo=${loginMember.memberNo}" class="report">신고</a>
 	
 	            </div>
 	            

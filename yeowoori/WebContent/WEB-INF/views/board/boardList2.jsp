@@ -237,7 +237,10 @@
 		                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
 		                    <div class="comments">좋아요</div>
 		                </a>
-		                <a class="report" href="${contextPath }/report/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}">신고</a>
+		                <c:if test="${board.memberNickname ne loginMember.memberNickname }">
+		                
+		              	  <a class="report" href="${contextPath }/report/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}">신고</a>
+		                </c:if>
 		         	</div>
 		            <c:if test="${!empty board.fileName[0] }">
 		            	<div class="q-img" style="background-image: url(${contextPath}/${board.filePath[0]}${board.fileName[0]}); float:right;"></div>
