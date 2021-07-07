@@ -158,6 +158,8 @@
                             </c:if>
                         </div>
                        
+                       
+                       
                         <c:forEach items="${myTrip }" var="my">
 	                        <a href="${contextPath }/board/view?no=${my.boardNo}&cp=1&type=1">
 		                        <div class="board-img img-left" class="col-sm-6 col-lg-1" 
@@ -188,13 +190,17 @@
                                 </c:if>
                                 <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
+                   
+                   
                         <ul class="list-group">
                         	<c:forEach items="${myQuestion }" var="my">
                         	
-                        		<a href="${contextPath }/board/view?no=${my.boardNo}&cp=1&type=1">
                         		
-	                                <li class="list-group-item">${my.boardTitle }</li>
-                        		</a>
+                        		
+	                                <li class="list-group-item">
+	                                 	<a href="${contextPath }/board/view?no=${my.boardNo}&cp=1&type=1">${my.boardTitle }</a>
+	                                </li>
+                        		
                         	</c:forEach>
                                 
                             </ul>
@@ -218,6 +224,8 @@
                                 </c:if>
                                 <div class="show-all"><a href="#">전체보기</a></div>
                         </div>
+                    
+                    
                         <ul class="list-group">
                             <c:forEach items="${myTogether }" var="my">
                         	
