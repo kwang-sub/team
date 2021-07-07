@@ -43,7 +43,8 @@ public class ReportController extends HttpServlet {
 					result = service.reportBoard(boardNo, memberNo);
 					if(result>0) {
 						icon = "success";
-						title = "신고 성공";
+						title = "신고가 접수되었습니다";
+						text = "자세한 사항은 관리자에게 문의해주세요";
 						path = request.getHeader("referer");
 					}else {
 						icon = "error";
@@ -64,13 +65,12 @@ public class ReportController extends HttpServlet {
 				int commentNo = Integer.parseInt(request.getParameter("commentNo"));
 				int memberNo = request.getParameter("memberNo")=="" ? 0 :Integer.parseInt(request.getParameter("memberNo"));
 				int result = 0;
-				System.out.println("commentNo");
-				System.out.println("memberNo");
 				if(commentNo>0 && memberNo>0) {
 					result = service.reportComment(commentNo, memberNo);
 					if(result>0) {
 						icon = "success";
-						title = "신고 성공하셨습니다";
+						title = "신고가 접수되었습니다";
+						text = "자세한 사항은 관리자에게 문의해주세요";
 						path = request.getHeader("referer");
 					}else {
 						icon = "error";
@@ -84,6 +84,7 @@ public class ReportController extends HttpServlet {
 				}
 				session.setAttribute("icon", icon);
 				session.setAttribute("title", title);
+				session.setAttribute("text", text);
 				response.sendRedirect(path);
 			}
 			
