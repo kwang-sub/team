@@ -233,7 +233,7 @@
 		                <div class="time">${board.createDate }</div>
 		                <div class="comments">댓글</div>
 		                <div class="count-comments">${board.commentCount }</div>
-		                <a href="#">
+		                <a href="${contextPath }/board2/like/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}">
 		                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
 		                    <div class="comments">좋아요</div>
 		                </a>
@@ -248,6 +248,7 @@
 		            <div class="padding"></div>
 		            <hr>
 		        </div>
+		      	<c:set var="boardNo" value="${board.boardNo }"/>
         		</c:forEach>
         </c:if>
 
@@ -383,5 +384,6 @@
     </div>
     <div style="padding : 20px;"></div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    
 </body>
 </html>

@@ -126,7 +126,7 @@
                 <img src="${contextPath}${loginMember.memberProfile}">
                 <h5 style="font-weight: 600;">${loginMember.memberNickname }</h5>
                 <div style="padding: 10px;"></div>
-                <button class="btn btn-light" onclick="">설정</button>
+                <a href="${contextPath}/member/updateMyPage" class="btn btn-light">설정</a>
                 <hr align="center"style="width:80%">
                 <div style="padding-top: 15px; padding-bottom: 10px;">
                     <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" width="30px;">

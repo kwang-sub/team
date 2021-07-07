@@ -304,11 +304,11 @@
 		                <div class="time">${board.createDate }</div>
 		                <div class="comments">댓글</div>
 		                <div class="count-comments">${board.commentCount }</div>
-		                <a href="#">
+		                <a href="${contextPath }/board2/like/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}">
 		                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
 		                    <div class="comments">좋아요</div>
 		                </a>
-		                <a class="report" href="#">신고</a>
+		                <a class="report" href="${contextPath }/report/board?boardNo=${board.boardNo}&memberNo=${loginMember.memberNo}">신고</a>
 		         	</div>
 		            <c:if test="${!empty board.fileName[0] }">
 		            	<div class="q-img" style="background-image: url('${contextPath}/${board.filePath[0]}${board.fileName[0]}'); float:right;"></div>
@@ -316,7 +316,9 @@
 		            <div class="padding"></div>
 		            <hr>
 		        </div>
+		        <c:set var="boardNo" value="${board.boardNo }"/>
         		</c:forEach>
+        		
         </c:if>
 
 		<div style="padding : 10px;"></div>
@@ -451,5 +453,22 @@
     </div>
     <div style="padding : 20px;"></div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    
+    <form action="#" method="POST" name="requestForm2">
+    	<input type="hidden" name="no" value="${boardNo}">
+   		<input type="hidden" name="loginMemberNo" value="${loginMember.memberNo }">
+   		
+    </form>
+    
+    <script>
+    	function fnRequest(addr){
+    		console.log(document.requestForm);
+    		document.requestForm2.action = "../board2/"+addr;
+    		document.requestForm2.submit();
+    	}
+    
+    </script>
+    
+    
 </body>
 </html>
