@@ -128,6 +128,7 @@
         <div id="comment-list-area">
         <c:if test="${!empty commentList}">
         <c:forEach items="${commentList}" var="comment">
+        <c:set var="commentNo" value="${comment.commentNo }"/>
 	        <div style="padding: 10px;"></div>
 	        <div class="user-profile-big" style="background-image: url(${contextPath}/${comment.memberProfile});"></div>
 	        <div style="display: inline-block;">
@@ -144,7 +145,7 @@
 				
 	            <div>
 	                <div class="time" style="margin-left: 0px; margin-right: 20px;">${comment.commentDate}</div>
-	                <a href="#">
+	                <a href="${contextPath }/board2/like/comment?commentNo=${comment.commentNo}&memberNo=${loginMember.memberNo}" >
 	                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
 	                    <div class="comments">좋아요</div>
 	                </a>
@@ -158,24 +159,17 @@
 	            
 	
 	        </div>
+	        
+
+		
 	    </c:forEach>
         
      	</c:if>
         </div>
 
-       
-        
-        
-        
-    
-    <form action="#" method="POST" name="requestForm">
-    	<input type="hidden" name="boardNo" value="${board.boardNo}">
-    	<input type="hidden" name="cp" value="${param.cp }">
-    	<input type="hidden" name="type" value="${param.type }">
-    	<input type="hidden" name="area" value="${param.area }">
-    </form>
     
     <script>
+	
     	const loginMemberNo = "${loginMember.memberNo}";
     	const boardNo = ${board.boardNo};
     	let beforCommentRow;
@@ -248,7 +242,7 @@
 			        	
 			        	var div41 = $("<div>").addClass("time").css("margin-left", "0px").css("margin-right", "20px").text(item.commentDate);
 			        	
-			        	var a42 = $("<a>").prop("href", "#");
+			        	var a42 = $("<a>").prop("href", "${contextPath }/board2/like/comment?commentNo="+item.commentNo+"&memberNo=${loginMember.memberNo}");
 			        	var img421 = $("<img>").attr("src", "https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc").css("height", "15px");
 			        	var div422 = $("<div>").addClass("comments").text("좋아요");
 			        	a42.append(img421).append(div422);
@@ -256,7 +250,7 @@
 			        	div4.append(div41).append(a42);
 			        	
 			        	if (item.memberNo != loginMemberNo){
-			        		var a43 = $("<a>").prop("href", "#").addClass("report").text("신고");
+			        		var a43 = $("<a>").prop("href", "${contextPath }/report/comment?commentNo="+item.commentNo+"&memberNo=${loginMember.memberNo}").addClass("report").text("신고");
 			        		div4.append(a43);
 			        	
 			        	}

@@ -153,6 +153,40 @@ public class UpdateBoardDAO {
 		return result;
 	}
 
+	public int checkLikeComment(Connection conn, int commentNo, int memberNo) throws Exception{
+		int result = 0;
+		String sql = prop.getProperty("checkLikeComment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,memberNo);
+			pstmt.setInt(2,commentNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = 1;
+			}else {
+				result = 0;
+			}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateLikeComment(Connection conn, int commentNo, int memberNo) throws Exception {
+		int result = 0;
+		String sql =prop.getProperty("updateLikeComment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,commentNo);
+			pstmt.setInt(2,memberNo);
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 

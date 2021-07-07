@@ -88,6 +88,24 @@ public class UpdateBoardService {
 	public int checkLike(int boardNo, int memberNo)throws Exception {
 		Connection conn = getConnection();
 		int result = dao.checkLike(conn, boardNo, memberNo);
+		close(conn);
+		return result;
+	}
+
+	public int checkLikeComment(int commentNo, int memberNo) throws Exception {
+		Connection conn = getConnection();
+		int result = dao.checkLikeComment(conn, commentNo, memberNo);
+		close(conn);
+		return result;
+	}
+
+	public int updateLikeComment(int commentNo, int memberNo) throws Exception {
+		Connection conn = getConnection();
+		int result = dao.updateLikeComment(conn, commentNo, memberNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
 		
 		return result;
 	}

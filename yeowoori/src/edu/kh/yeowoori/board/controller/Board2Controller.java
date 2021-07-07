@@ -177,15 +177,15 @@ public class Board2Controller extends HttpServlet {
 
 			}
 			
-			else if(command.equals("like")) {
-				int boardNo = Integer.parseInt(request.getParameter("no"));
+			else if(command.equals("like/board")) {
+				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 				int memberNo = 0;
-				if(request.getParameter("loginMemberNo").equals("")) {
+				if(request.getParameter("memberNo").equals("")) {
 					icon ="error";
 					title="로그인 후 이용해주세요.";
 					
 				}else {
-					memberNo = Integer.parseInt(request.getParameter("loginMemberNo"));
+					memberNo = Integer.parseInt(request.getParameter("memberNo"));
 					int result = serv.checkLike(boardNo, memberNo);
 					if(result==0) {
 						result = serv.updateLike(boardNo, memberNo);
@@ -208,6 +208,39 @@ public class Board2Controller extends HttpServlet {
 				
 				path = request.getHeader("referer");
 				response.sendRedirect(path);
+				
+			}
+			else if(command.equals("like/comment")) {
+				
+				int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+				
+				int memberNo = 0;
+				if(request.getParameter("memberNo").equals("")) {
+					icon ="error";
+					title="로그인 후 이용해주세요.";
+					
+				}else {
+					memberNo = Integer.parseInt(request.getParameter("memberNo"));
+					int result = serv.checkLikeComment(commentNo, memberNo);
+					if(result==0) {
+						result = serv.updateLikeComment(commentNo, memberNo);
+						if(result>0) {
+							icon ="success";
+							title="댓글 좋아요 성공";
+						}
+					}else {
+						icon ="warning";
+						title="이미 좋아요한 댓글입니다.";
+					}
+				}
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("icon", icon);
+				session.setAttribute("title", title);
+				
+				path = request.getHeader("referer");
+				response.sendRedirect(path);
+				
 				
 			}
 			

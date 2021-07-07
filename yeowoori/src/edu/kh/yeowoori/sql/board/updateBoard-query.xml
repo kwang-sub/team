@@ -30,11 +30,20 @@
 	INSERT INTO BOARD_LIKE VALUES(?,?)
 	</entry>
 	
+	<entry key="updateLikeComment">
+	INSERT INTO COMMENT_LIKE VALUES(?,?)
+	</entry>
 	
 	<entry key="checkLike">
 	SELECT *FROM BOARD_LIKE
 	WHERE MEMBER_NO = ?
 	AND BOARD_NO = ?
+	</entry>
+	
+	<entry key="checkLikeComment">
+	SELECT *FROM COMMENT_LIKE
+	WHERE MEMBER_NO = ?
+	AND COMMENT_NO = ?
 	</entry>
 	
 </properties>

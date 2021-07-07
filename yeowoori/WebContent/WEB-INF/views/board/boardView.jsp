@@ -141,7 +141,7 @@
         
         </div>
         <div id="etc-board">
-            <button type="button" class="btn" style="padding-right : 10px;" onclick="fnRequest('like')">
+            <button type="button" class="btn" style="padding-right : 10px;" onclick="fnRequest('like/board')">
                 <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
             </button>
             <span style="font-size: 12px; color: grey;">${board.likeCount }</span>
@@ -250,11 +250,8 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     
     <form action="#" method="POST" name="requestForm2">
-    	<input type="hidden" name="no" value="${param.no}">
-    	<input type="hidden" name="cp" value="${param.cp }">
-    	<input type="hidden" name="type" value="${param.type }">
-   		<input type="hidden" name="area" value="${param.area }">
-   		<input type="hidden" name="loginMemberNo" value="${loginMember.memberNo }">
+    	<input type="hidden" name="boardNo" value="${param.no}">
+   		<input type="hidden" name="memberNo" value="${loginMember.memberNo }">
    		
     </form>
     
