@@ -285,7 +285,7 @@
         		 <div style="padding : 5px;">
 		            <div class="width65">
 		                
-		              	<a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=3${area}">
+		              	<a href="../board/view?no=${board.boardNo}&cp=${pagination.currentPage}&type=3${area}">
 		              		<h6 style="display:inline-block;">${board.boardTitle }</h6>
 		              	</a>
 		                
@@ -294,9 +294,9 @@
 		                ${board.categoryName }
 		                </span>
 		                <a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=3${area}">
-		                 	<p style="font-size: 12px; line-height: 1.4;">
+		                 	<div style="font-size: 12px; line-height: 1.4; height:30px; over-flow:hidden; text-overflow: ellipsis; white-space: nowrap;">
 		                    	${board.boardContent } 
-		                	</p>
+		                	</div>
 		                </a>
 		               
 		                <div class="user-profile" style="background-image: url(${contextPath}/${board.memberProfile});"></div>

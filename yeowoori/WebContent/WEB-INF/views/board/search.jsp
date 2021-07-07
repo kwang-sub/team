@@ -228,8 +228,9 @@
     <div style="padding:10px"></div>
         <c:if test="${!empty tripBoardList}">
         <h5 style="display:inline-block;">여행 게시판</h5>
-        <c:if test="${fn:length(tripboardList)> 6}">
-        	<a href="${contextPath}/search/tripBoardList" style="float:right; color:grey;">검색결과 더보기</a>
+        <c:if test="${fn:length(tripBoardList)> 6}">
+        	<button class="btn" type="button" onclick="fnRequest('trip');"
+        		style="padding:0px; float:right; color:grey;">검색결과 더보기</button>
         </c:if> 
         <div style="padding:10px; display:block;"></div>
         <div class="row main">
@@ -277,7 +278,15 @@
 	                                </span>
 	                            </div>
 	                        </div>
-	                        <p class="card-text">${fn:substring(board.boardContent,0,40) }...</p>
+	                        <div style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; height: 70px; width: 100%">
+
+										<c:if test="${fn:length(board.boardContent)>=39}">
+											<p>${fn:substring(board.boardContent,0,39) }...</p>
+										</c:if>
+										<c:if test="${fn:length(board.boardContent)<=39}">
+											<p>${board.boardContent }</p>
+										</c:if>
+									</div>
 	                    </div>
 	                </div>
            		</div>
@@ -293,8 +302,9 @@
         
         <c:if test="${!empty qBoardList}">
         <h5 style="display: inline-block;">질문 게시판</h5>
-        <c:if test="${fn:length(qboardList)> 5}">
-        	<a href="${contextPath}/search/qBoardList" style="float:right; color:grey;">검색결과 더보기</a>
+        <c:if test="${fn:length(qBoardList)> 5}">
+        	<button class="btn" type="button" onclick="fnRequest('question');"
+        		style="padding:0px; float:right; color:grey;">검색결과 더보기</button>
         </c:if> 
         <div style="padding:5px "></div>
         <c:forEach items="${qBoardList }" var="board" begin = "0" end="4">
@@ -306,10 +316,10 @@
 		                	style="font-size:12px; padding-top:2px; height: 20px; padding-left:7px; padding-right:7px;  margin-left:10px; color:white; ">
 		                ${board.categoryName }
 		                </span>
-		                <a href="view?no=${board.boardNo}&cp=1&type=2${area}">
-			                <p style="font-size: 12px; line-height: 1.4;">
+		                <a href="view?no=${board.boardNo}&cp=$1&type=2${area}">
+			                <div style="font-size: 12px; line-height: 1.4; height:30px; over-flow:hidden; text-overflow: ellipsis; white-space: nowrap;">
 			                    ${board.boardContent } 
-			                </p>
+			                </div>
 		                </a>
 		                
 		                <div class="user-profile" style="background-image: url('${board.memberProfile}');"></div>
@@ -338,7 +348,8 @@
         <c:if test="${!empty withBoardList }">
         <h5 style="display:inline-block;">같이 떠나요 게시판</h5>
          <c:if test="${fn:length(withBoardList)> 5}">
-        	<a href="${contextPath}/search/withboardList" style="float:right; color:grey;">검색결과 더보기</a>
+        	<button class="btn" type="button" onclick="fnRequest('with');"
+        		style="padding:0px; float:right; color:grey;">검색결과 더보기</button>
         </c:if> 
         <div style="padding:5px"></div>
         <c:forEach items="${withBoardList }" var="board" begin = "0" end="4">
@@ -351,9 +362,9 @@
 		                ${board.categoryName }
 		                </span>
 		                <a href="view?no=${board.boardNo}&cp=1&type=3${area}">
-			                <p style="font-size: 12px; line-height: 1.4;">
+			                <div style="font-size: 12px; line-height: 1.4; height:30px; over-flow:hidden; text-overflow: ellipsis; white-space: nowrap;">
 			                    ${board.boardContent } 
-			                </p>
+			                </div>
 		                </a>
 		                
 		                <div class="user-profile" style="background-image: url('${board.memberProfile}');"></div>
@@ -389,6 +400,21 @@
             
 	<div style="padding : 40px;"></div>
 	
+	<form action="#" method="GET" name="requestForm3">
+		<input type="hidden" name="search" value="${search}">
+	</form>
+	
+	
+	<script>
+		function fnRequest(addr){
+			document.requestForm3.action = "../search/"+addr;
+    		document.requestForm3.submit();
+		}
+	</script>
+	
+	
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
 </body>
 </html>
