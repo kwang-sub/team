@@ -102,7 +102,7 @@ public class BoardWrite extends HttpServlet {
 					result = service.insertBoard(board, atList, boardType);
 				}
 				
-				
+				System.out.println("result : " + result);
 				
 				if(result > 0) {
 					
@@ -124,11 +124,14 @@ public class BoardWrite extends HttpServlet {
 				}
 				session.setAttribute("icon", icon);
 				session.setAttribute("title", title);
+				
+				System.out.println(path);
+				
 				response.sendRedirect(path);
 				
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	
