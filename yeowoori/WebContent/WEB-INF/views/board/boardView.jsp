@@ -142,7 +142,7 @@
         </div>
         <div id="etc-board">
             <button type="button" class="btn" style="padding-right : 10px;" onclick="fnRequest('like/board')">
-                <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
+                <img id="like-icon" src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
             </button>
             <span style="font-size: 12px; color: grey;">${board.likeCount }</span>
             
@@ -251,6 +251,9 @@
     
     <form action="#" method="POST" name="requestForm2">
     	<input type="hidden" name="boardNo" value="${param.no}">
+    	<input type="hidden" name="cp" value="${param.cp}">
+    	<input type="hidden" name="type" value="${param.type}">
+    	<input type="hidden" name="area" value="${param.area}">
    		<input type="hidden" name="memberNo" value="${loginMember.memberNo }">
    		
     </form>
@@ -260,6 +263,10 @@
     		console.log(document.requestForm);
     		document.requestForm2.action = "../board2/"+addr;
     		document.requestForm2.submit();
+    		if(addr=='like/board'){
+    			$("#like-icon").attr("src", "${contextPath}/resources/img/like.png");
+    		}
+    		
     	}
     
     </script>
