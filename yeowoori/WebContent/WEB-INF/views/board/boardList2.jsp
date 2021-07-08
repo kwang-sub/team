@@ -198,10 +198,12 @@
                 
             </div>
             <div style="float: right; margin-top: 40px;">
-                
-                <a href="${contextPath }/boardwrite?cp=&type=2" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
+              <c:if test="${!empty loginMember }">
+              	<a href="${contextPath }/boardwrite?cp=&type=2" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
                     질문하기
                 </a>
+              </c:if>
+                
             </div>
         </div>
 
@@ -224,7 +226,7 @@
 		                ${board.categoryName }
 		                </span>
 		                <a href="view?no=${board.boardNo}&cp=${pagination.currentPage}&type=2${area}">
-			                <div style="font-size: 12px; line-height: 1.4; height:30px; over-flow:hidden; text-overflow: ellipsis; white-space: nowrap;">
+			                <div style="font-size: 12px; line-height: 1.4; height:15px; margin-bottom:7px; overflow:hidden;">
 			                    ${board.boardContent } 
 			                </div>
 		                </a>

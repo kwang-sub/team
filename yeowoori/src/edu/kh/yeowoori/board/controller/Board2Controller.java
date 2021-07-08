@@ -143,7 +143,7 @@ public class Board2Controller extends HttpServlet {
 				
 				//System.out.println(request.getParameter("area"));
 				
-				int boardNo = Integer.parseInt(request.getParameter("no"));
+				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 				
 				int result = serv.deleteBoard(boardNo);
 				if(result>0) {
