@@ -338,6 +338,18 @@
 	                                </span>
 	                            </div>
 	                        </div>
+	                        
+	                        		<div
+										style="text-overflow: ellipsis; white-space: no-wrap; overflow: hidden; height: 25px; width: 100%;">
+
+										<c:if test="${fn:length(board.boardTitle)>=17}">
+											<b>${fn:substring(board.boardTitle,0,39) }...</b>
+										</c:if>
+										<c:if test="${fn:length(board.boardTitle)<17}">
+											<b>${board.board.boardTitle }</b>
+										</c:if>
+									</div>
+									
 									<div
 										style="text-overflow: ellipsis; white-space: no-wrap; overflow: hidden; height: 50px; width: 100%;">
 
