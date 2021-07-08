@@ -90,7 +90,19 @@
                display: none; 
             } 
         }
-      
+      #profile-img{
+      	background-image:url(${contextPath}${loginMember.memberProfile}); 
+      	width:100px; height:100px; 
+      	border-radius:1000px;
+      	background-size: cover;
+      	background-position: center;
+      	background-repeat: no-repeat;
+      	margin:10px;
+      	margin-bottom:20px;
+      	position:relative;
+      	top: 0px; bottom:0px; left:0px; right: 0px;
+      	margin : auto;
+      }
 
     </style>
 	
@@ -123,7 +135,9 @@
 
         <div class="row board">
             <div class="col-sm-12 col-lg-3" id="profile-container">
-                <img src="${contextPath}${loginMember.memberProfile}">
+            	<div style="padding:10px;"></div>
+                <div id="profile-img"></div>
+                <div style="padding:15px;"></div>
                 <h5 style="font-weight: 600;">${loginMember.memberNickname }</h5>
                 <div style="padding: 10px;"></div>
                 <a href="${contextPath}/member/updateMyPage" class="btn btn-light">설정</a>

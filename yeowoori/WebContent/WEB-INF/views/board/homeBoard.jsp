@@ -94,7 +94,7 @@
             }
         }
         .overflow{
-        	height: 150px;
+        	height: 140px;
         	white-space: no-wrap;
         	overflow : hidden;
         }
