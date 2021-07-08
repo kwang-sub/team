@@ -14,9 +14,6 @@
         .card{
             border: none;
         }
-        a{
-            color : black;
-        }
         .main{
             margin-top: 10px;
         }
@@ -363,10 +360,12 @@
         </c:choose>
 
             
-  
+  		
             
         </div>
     </div>
+    
+    <div style="padding:20px;"></div>
            			<c:if test="${!empty param.area && empty param.category  }">
            				<c:set var = "areaCategory" value="&area=${param.area }" />
            			</c:if>
@@ -495,7 +494,7 @@
            
            </div>
             
-
+<div style="padding:20px;"></div>
 </body>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </html>
