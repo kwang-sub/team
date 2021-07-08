@@ -7,7 +7,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>html문서 제목</title>
+        <title>여행게시판</title>
         <style>
         .card{
             border: none;
@@ -300,7 +300,7 @@
 	                            </div>
 	                        </div>
 									<div
-										style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; height: 70px; width: 100%">
+										style="text-overflow: ellipsis; white-space: no-wrap; overflow: hidden; height: 50px; width: 100%;">
 
 										<c:if test="${fn:length(board.boardContent)>=39}">
 											<p>${fn:substring(board.boardContent,0,39) }...</p>
