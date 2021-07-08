@@ -266,10 +266,11 @@
                 
             </div>
             <div style="float: right; margin-top: 40px;">
-                
-                <a href=" ${contextPath }/boardwrite?cp=&type=3" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
+                <c:if test="${!empty loginMember }">
+                <a href=" ${contextPath }/boardwrite?cp=1&type=3" class="btn btn-light" style="background-color:#A66129; color:white; width: 100px; ">
                     글 올리기
                 </a>
+                </c:if>
             </div>
         </div>
 
