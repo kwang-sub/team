@@ -312,6 +312,8 @@ public class SelectBoardDAO {
 				board.setBoardContent(rs.getString("BOARD_CONTENT"));
 				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
 				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+				board.setCommentCount(rs.getInt("COMMENT_COUNT"));
+				board.setLikeCount(rs.getInt("LIKE_COUNT"));
 				
 				List<String> filePath = new ArrayList<String>();
 				List<String> fileName = new ArrayList<String>();
@@ -367,6 +369,8 @@ public class SelectBoardDAO {
 				board.setBoardContent(rs.getString("BOARD_CONTENT"));
 				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
 				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+				board.setCommentCount(rs.getInt("COMMENT_COUNT"));
+				board.setLikeCount(rs.getInt("LIKE_COUNT"));
 				
 				List<String> filePath = new ArrayList<String>();
 				List<String> fileName = new ArrayList<String>();
@@ -424,6 +428,8 @@ public class SelectBoardDAO {
 				board.setBoardContent(rs.getString("BOARD_CONTENT"));
 				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
 				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+				board.setCommentCount(rs.getInt("COMMENT_COUNT"));
+				board.setLikeCount(rs.getInt("LIKE_COUNT"));
 				
 				List<String> filePath = new ArrayList<String>();
 				List<String> fileName = new ArrayList<String>();
@@ -479,6 +485,8 @@ public class SelectBoardDAO {
 				board.setBoardContent(rs.getString("BOARD_CONTENT"));
 				board.setMemberContent(rs.getString("MEMBER_CONTENT"));
 				board.setMemberProfile(rs.getString("MEMBER_PROFILE"));
+				board.setCommentCount(rs.getInt("COMMENT_COUNT"));
+				board.setLikeCount(rs.getInt("LIKE_COUNT"));
 				board.setCommentCount(rs.getInt("COMMENT_COUNT"));
 				board.setLikeCount(rs.getInt("LIKE_COUNT"));
 				
