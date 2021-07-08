@@ -55,7 +55,7 @@ public class Board2Controller extends HttpServlet {
 			if(command.equals("updateForm")) {
 				
 				List<Category> category = service.selectCategoryList();
-				int boardNo = Integer.parseInt(request.getParameter("no")); //상세 조회할 게시글 번호
+				int boardNo = Integer.parseInt(request.getParameter("boardNo")); //상세 조회할 게시글 번호
 				Board board =service.selectBoard(boardNo);
 				
 				// 게시글 내용에 있는 <br> -> /r/n으로 변경 (원래는 service에 작성하는게 좋음!)
