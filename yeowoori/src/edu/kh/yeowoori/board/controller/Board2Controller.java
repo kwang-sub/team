@@ -81,8 +81,8 @@ public class Board2Controller extends HttpServlet {
 				
 				switch(type){
 					case 1: filePath += "tripboard/"; break;
-					case 2: filePath += "qboard/"; break;
-					case 3: filePath += "withboard/"; break;
+					case 2: filePath += "questionboard/"; break;
+					case 3: filePath += "togetherboard/"; break;
 				}
 				MultipartRequest mpRequest = new MultipartRequest(request, root+filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 				
