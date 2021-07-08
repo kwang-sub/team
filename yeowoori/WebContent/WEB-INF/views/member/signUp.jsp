@@ -222,7 +222,7 @@ p {
 			<input type="hidden" name="nickDup" id="nickDup" value="false">
 			<div class="col-md-6 offset-md-3">
 				<label for="nickName">닉네임</label>
-				<p>다른 유저와 겹치지 않는 닉네임을 입력해주세요.</p>
+				<p>한글 2~15자리로 입력해주세요.</p>
 			</div>
 			<div class="col-md-5 offset-md-3">
 				<input type="text" class="form-control" id="nickName"
