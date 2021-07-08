@@ -56,7 +56,7 @@
         }
 
         .notice-bar{
-            background-color: rgb(245, 245, 245);   
+            background-color:#f8f8f8;   
             height: 30px;
             margin-bottom: 10px;
         }
