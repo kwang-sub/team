@@ -37,25 +37,19 @@
             padding-left: 40px;
             font-size: 14px;
      }
-     .category-selected{
-            height: 30px;
-            padding-top: 4px;
+       .category-selected{
             background-color: #A66129;
             color:white;
             font-weight: 500;
-            font-size: 14px;
-            border-radius: 10px;
-            margin-right: 5px ;
+            margin-right:5px;
+             border-radius : 15px;
         }
        .category-unselected{
-        height: 30px;
-            padding-top: 4px;
-            background-color: #EDEDED;
+      		background-color : #eee;
             color: #A66129;
             font-weight: 500;
-            font-size: 14px;
-            border-radius: 10px;
-            margin-right: 5px ;
+            margin-right:5px;
+            border-radius : 15px;
        }
        .category-btn>button{
            margin-left: 25px;
@@ -65,11 +59,12 @@
            display: inline-block;
        }
        .user-profile{
-            width: 20px; height: 20px;
+            width: 30px; height: 30px;
             border: 1px solid gainsboro;
             border-radius: 100px;
             background-repeat: no-repeat;
             background-size: cover;
+            background-position:center;
             display: inline-block;
             vertical-align:middle;
        }
@@ -180,12 +175,54 @@
             <c:if test="${!empty param.area }">
             <c:set var="area" value="&area=${param.area}"/>
             </c:if>
-                <a class="btn btn-light category-selected select" href="/yeowoori/board/list2?type=2${area}">전체</a>
-                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=1${area}" >분위기맛집</a>
-                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=2${area}"  >산책코스</a>
-                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=3${area}"  >커플데이트</a>
-                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=4${area}"  >카페투어</a>
-                <a class="btn btn-light category-unselected select" href="/yeowoori/board/list2?type=2&category=5${area}"  >기타</a>
+            <c:if test="${empty param.category }">
+                <a class="btn category-selected" href="/yeowoori/board/list2?type=2${area}" style="color:white;">전체</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=1${area}" style="color:#A66129;" >분위기맛집</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=2${area}" style="color:#A66129;" >산책코스</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=3${area}" style="color:#A66129;">커플데이트</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=4${area}" style="color:#A66129;" >카페투어</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=5${area}" style="color:#A66129;" >기타</a>
+            </c:if>
+            <c:if test="${param.category ==1}">
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2${area}"  style="color:#A66129;">전체</a>
+                <a class="btn category-selected" href="/yeowoori/board/list2?type=2&category=1${area}" style="color:white;" >분위기맛집</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=2${area}" style="color:#A66129;" >산책코스</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=3${area}" style="color:#A66129;">커플데이트</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=4${area}" style="color:#A66129;" >카페투어</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=5${area}" style="color:#A66129;" >기타</a>
+            </c:if>
+            <c:if test="${param.category ==2}">
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2${area}"  style="color:#A66129;">전체</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=1${area}" style="color:#AA66129;" >분위기맛집</a>
+                <a class="btn category-selected" href="/yeowoori/board/list2?type=2&category=2${area}" style="color:white;" >산책코스</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=3${area}" style="color:#A66129;">커플데이트</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=4${area}" style="color:#A66129;" >카페투어</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=5${area}" style="color:#A66129;" >기타</a>
+            </c:if>
+            <c:if test="${param.category ==3}">
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2${area}"  style="color:#A66129;">전체</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=1${area}" style="color:#A66129;" >분위기맛집</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=2${area}" style="color:#A66129;" >산책코스</a>
+                <a class="btn category-selected" href="/yeowoori/board/list2?type=2&category=3${area}" style="color:white;">커플데이트</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=4${area}" style="color:#A66129;" >카페투어</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=5${area}" style="color:#A66129;" >기타</a>
+            </c:if>
+            <c:if test="${param.category ==4}">
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2${area}"  style="color:#A66129;">전체</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=1${area}" style="color:#A66129;" >분위기맛집</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=2${area}" style="color:#A66129;" >산책코스</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=3${area}" style="color:#A66129;">커플데이트</a>
+                <a class="btn category-selected" href="/yeowoori/board/list2?type=2&category=4${area}" style="color:white;" >카페투어</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=5${area}" style="color:#A66129;" >기타</a>
+            </c:if>
+            <c:if test="${param.category ==5}">
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2${area}"  style="color:#A66129;">전체</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=1${area}" style="color:#A66129;" >분위기맛집</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=2${area}" style="color:#A66129;" >산책코스</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=3${area}" style="color:#A66129;">커플데이트</a>
+                <a class="btn category-unselected" href="/yeowoori/board/list2?type=2&category=4${area}" style="color:#A66129;" >카페투어</a>
+                <a class="btn category-selected" href="/yeowoori/board/list2?type=2&category=5${area}" style="color:white;" >기타</a>
+            </c:if>
             </div>
         </div>
 
@@ -230,7 +267,7 @@
 			                    ${board.boardContent } 
 			                </div>
 		                </a>
-		                <div class="user-profile" style="background-image: url(${contextPath}/${board.memberProfile});"></div>
+		                <div class="user-profile" style="background-image: url(${contextPath}${board.memberProfile});"></div>
 		                <div class="user-name">${board.memberNickname}</div>
 		                <div class="time">${board.createDate }</div>
 		                <div class="comments">댓글</div>
