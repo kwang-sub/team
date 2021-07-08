@@ -17,7 +17,7 @@ import edu.kh.yeowoori.member.model.service.MemberService;
 public class NickDupCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	// 아이디 중복 검사 팝업창으로 요청 위임
+	// 닉네임 중복 검사 팝업창으로 요청 위임
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		RequestDispatcher view 
@@ -26,7 +26,7 @@ public class NickDupCheckServlet extends HttpServlet {
 		view.forward(request, response);
 	}
 
-	// DB에 같은 아이디가 있는지 중복 검사 후 결과 반환
+	// DB에 같은 닉네임 있는지 중복 검사 후 결과 반환
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// POST 방식 전달됨 -> 문자 인코딩을 UTF-8로 변환

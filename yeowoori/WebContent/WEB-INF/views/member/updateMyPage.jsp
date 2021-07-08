@@ -126,6 +126,13 @@ p {
 	right: 0;
 	margin: auto;
 }
+
+.btn-block{
+display: block;
+    width: 122%;
+    margin-left: 20%;
+    margin-top: -10px;
+}
 </style>
 
 </head>
@@ -149,7 +156,7 @@ p {
 				<a class="session-btn" href="${contextPath}/member/secession">탈퇴하기</a>
 				<div class="bg-white rounded shadow-sm container p-3">
 					<form method="POST" action="updateMyPage" onsubmit="return updateMyPageValidate();" 
-					 	enctype="multipart/form-data" class="form-horizontal" role="form" id="updateForm">
+					 	name="signUpForm" enctype="multipart/form-data" class="form-horizontal" role="form" id="updateForm">
 
 
 						<div class="row my-6 form-row">
@@ -160,16 +167,23 @@ p {
 								<h5 id="id">${loginMember.memberId }</h5>
 							</div>
 						</div>
-
+						<input type="hidden" name="nickDup" id="nickDup" value="true">
 						<div class="row my-6 form-row">
 							<div class="col-md-2 offset-md-2">
 								<h6>닉네임</h6>
 								<p>*필수항목</p>
 							</div>
 							<div class="col-md-6">
-								<input type="text" class="form-control" value="${loginMember.memberNickname }" id="nickname" name="nickname">
+								<input type="text" class="form-control" value="${loginMember.memberNickname }" id="nickName" name="nickName" readonly>
 							</div>
-
+							
+			<div class="col-md-5 offset-md-3">
+				<button type="button" class="btn btn-sm btn-block btn-light"
+					id="nickDupCheck">닉네임 중복검사</button>
+			</div>
+				<div class="col-md-5 offset-md-3">
+					<span id="checkName">&nbsp;</span>
+				</div>
 
 						</div>
 						<div class="row my-6 form-row">
@@ -215,9 +229,21 @@ p {
 	<script>
 		//닉네임 유효성 검사
 		function updateMyPageValidate() {
+			
+			 // 닉네임 중복 검사를 진행했는지 확인
+		    // * input 태그 값을 모두 String으로 반환됨!
+		    if( $("#nickDup").val() != "true" ){ // 중복 검사를 안한 경우
+		        swal("닉네임 중복 검사를 진행해 주세요.").then(function(){
+		            $("#nickDupCheck").focus(); // 중복 검사 버튼으로 포커스 이동
+		        });
+
+		        return false; // submit 이벤트 제거
+		    }
+			
+		
 			const regExp = /^[가-힣]{2,15}$/;
 
-			const nickname = $("#nickname").val().trim();
+			const nickname = $("#nickName").val().trim();
 
 			if (!regExp.test(nickname)) {
 				swal({
@@ -242,6 +268,8 @@ p {
 				return false;
 
 			}
+			
+			
 		}
 			
 			
@@ -251,6 +279,14 @@ p {
 				var index = $(".boardImg").index(this);
 				$("#img" + index).click();
 			});
+
+		});
+		
+		$("#nickDupCheck").on("click", function() {
+			// window.open("주소/경로", "창 이름", "스타일 설정");
+			window.open("nickDupCheck", "nickDupForm", "width=450, height=250");
+			// 절대 경로 : ${contextPath}/member/idDupCheck
+			// 상대 경로 : idDupCheck
 
 		});
 		

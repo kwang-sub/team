@@ -52,7 +52,7 @@ public class UpdateMyPageServlet extends HttpServlet {
 		
 		
 		int memberNo = loginMember.getMemberNo(); // 회원 번호 
-		String memberNickname = mpRequest.getParameter("nickname");
+		String memberNickname = mpRequest.getParameter("nickName");
 		String memberContent = mpRequest.getParameter("intro");
 		String memberProfile = loginMember.getMemberProfile(); // 이전 프로필 이미지 경로
 		

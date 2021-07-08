@@ -44,7 +44,7 @@
 	</div>
 	
 	<script>
-		let nick; // 입력된 아이디를 저장하기 위한 변수	
+		let nick; // 입력된 닉네임 저장하기 위한 변수	
 		const result = "${result}"; 
 		
 		$(function(){
@@ -61,6 +61,18 @@
 		
 		// 확인버튼 클릭 시 동작
 		function confirmNick(){
+			
+			const regExp = /^[가-힣]{2,15}$/;
+			
+			if (!regExp.test( $("#nick").val())) {
+				alert("닉네임 형식이 유효하지 않습니다.");
+				/* swal({
+					"icon" : "warning",
+					"title" : "닉네임이 유효하지 않습니다.",
+					"text" : "한글 2~15자리이내로 작성해주세요."
+				}); */
+				return false;
+			}
 			
 			
 			if(result === "0"){ 
@@ -93,7 +105,7 @@
 		
 	</script>
 	
-	
+	<script src="${contextPath}/resources/js/member.js"></script>
 	<c:remove var="id"/>
 	<c:remove var="result"/>
 </body>
