@@ -207,9 +207,6 @@ p {
 
 
 
-			<div class="col-md-5 offset-md-3">
-				<button type="button" class="btn btn-sm btn-block btn-light">이메일 인증</button>
-			</div>
 
 			<div class="col-md-5 offset-md-3">
 				<span id="checkEmail">&nbsp;</span>

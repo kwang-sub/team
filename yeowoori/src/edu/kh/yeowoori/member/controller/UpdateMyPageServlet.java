@@ -27,10 +27,8 @@ public class UpdateMyPageServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/updateMyPage.jsp");
 		view.forward(request, response);
 		request.setCharacterEncoding("UTF-8");
-
 				
 	}
-	
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,17 +46,13 @@ public class UpdateMyPageServlet extends HttpServlet {
 			= new MultipartRequest(request, root + filePath, maxSize, 
 								"UTF-8", new MyFileRenamePolicy() );
 		// MultipartRequest 생성과 동시에 업로드된 파일 일 지정된 경로에 저장된다
-		
-		
-		
+	
 		int memberNo = loginMember.getMemberNo(); // 회원 번호 
 		String memberNickname = mpRequest.getParameter("nickName");
 		String memberContent = mpRequest.getParameter("intro");
 		String memberProfile = loginMember.getMemberProfile(); // 이전 프로필 이미지 경로
 		
 		
-		
-	
 		Member member = new Member();
 		member.setMemberNo(memberNo);
 		member.setMemberNickname(memberNickname);
@@ -84,13 +78,12 @@ public class UpdateMyPageServlet extends HttpServlet {
 		try {
 			int result = new MemberService().memberUpdate(member) ;
 			
-			
 			String icon = null;
 			String title = null;
 			String text = null;
 			
 			
-			if(result > 0) { // 회원 가입 성공
+			if(result > 0) { 
 				icon = "success";
 				title = "회원 정보 수정 성공";
 				text = "회원 정보가 수정되었습니다.";
