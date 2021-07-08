@@ -128,11 +128,11 @@
                 <div style="padding: 10px;"></div>
                 <a href="${contextPath}/member/updateMyPage" class="btn btn-light">설정</a>
                 <hr align="center"style="width:80%">
-                <div style="padding-top: 15px; padding-bottom: 10px;">
-                    <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" width="30px;">
+                <a style="padding-top: 15px; padding-bottom: 10px; display:block;" href="${contextPath}/member/myPage/like">
+                    <img src="${contextPath}/resources/img/like.png" width="30px;">
                     <div style="padding-top: 15px; font-size: 14px; font-weight: 400;">좋아요</div>
                     <div>${likeCount }</div>
-                </div>
+                </a>
             </div>
 
             <div style="padding :10px;"></div>
@@ -243,23 +243,6 @@
                     </div>
                </div>
 
-      <!--  <div class="col-12 col-md-6 col-lg-6 ">
-                <div>
-                        <h6 style="display: inline-block; margin-right: 10%; margin-bottom: 10px;">신고한 게시글</h6>
-                        <span style="color:#A66129">5</span>
-                        <div class="show-all">전체보기</div>
-                </div>
-                <ul class="list-group">
-                        <li class="list-group-item">게시글 1</li>
-                        <li class="list-group-item">게시글 2 </li>
-                        <li class="list-group-item">게시글 3</li>
-                        <li class="list-group-item">게시글 4</li>
-                        <li class="list-group-item">게시글이 삭제되었습니다.</li>
-                        <li class="list-group-item">게시글이 삭제되었습니다.</li>
-                        <li class="list-group-item">게시글이 삭제되었습니다.</li>
-                </ul>
-                <div style="padding-bottom:40px;"></div>
-            </div> -->
        </div>
                 
                 <div style="padding : 20px;" ></div>
