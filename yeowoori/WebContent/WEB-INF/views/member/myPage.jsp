@@ -184,7 +184,7 @@
                         </c:forEach>
                         
                         <div style="padding: 3px;"></div>
-                        <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=1">여행 게시글 올리기</a>
+                        <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=1" style="color:white;">여행 게시글 올리기</a>
                         <div style="padding-bottom:40px;"></div>
                     
                     </div>
@@ -219,7 +219,7 @@
                                 
                             </ul>
                             <div style="padding: 10px;"></div>
-                            <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=2">질문 올리기</a>
+                            <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=2" style="color:white;">질문 올리기</a>
                             <div style="padding-bottom:40px;"></div>
                         </div>
 
@@ -252,7 +252,7 @@
                         	</c:forEach>
                         </ul>
                         <div style="padding: 10px;"></div>
-                        <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=3">게시글 올리기</a>
+                        <a type="button" class="btn btn-brown" href="${contextPath}/boardwrite?type=3" style="color:white;">게시글 올리기</a>
                         <div style="padding-bottom:40px;"></div>
                     </div>
                </div>

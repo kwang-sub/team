@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>html문서 제목</title>
+    <title>게시글 작성</title>
     <style>
         .content>form>div {
             height: 50px;

@@ -35,7 +35,7 @@
         }
         /* Since positioning the image, we need to help out the caption */
         .carousel-caption {
-        bottom: 1rem;
+        bottom: 3rem;
         z-index: 10;
         }
         /* Declare heights because of positioning of img element */
@@ -94,9 +94,10 @@
             }
         }
         .overflow{
-        	height: 140px;
+        	height: 120px;
         	white-space: no-wrap;
         	overflow : hidden;
+        	
         }
         
     </style>
